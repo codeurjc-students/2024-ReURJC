@@ -1,0 +1,15 @@
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/DemoApplication.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/News.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/Notification.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/SportReservation.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/Subject.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/Subject_Mark.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/Subject_Schedule.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/User.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/NewsRepository.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/NotificationRepository.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/SportReservationrepository.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/Subject_MarkRepository.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/Subject_scheduleRepository.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/UserRepository.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/subjectRepository.java
