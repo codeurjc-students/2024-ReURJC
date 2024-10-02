@@ -1,0 +1,90 @@
+<ion-tabs>
+  <ion-tab tab="services">
+    <div id="services-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Servicios</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <app-card [tab] = "1" ></app-card>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="alerts">
+    <div id="alerts-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Alertas</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">Radio content</div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="news">
+    <div id="news-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Noticias</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="example-content">Library content</div>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="schedules">
+    <div id="profile-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Tiempos</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <app-card [tab] = 2></app-card>
+      </ion-content>
+    </div>
+  </ion-tab>
+  <ion-tab tab="profile">
+    <div id="schedules-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Perfil</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <app-card [tab] = 3></app-card>
+      </ion-content>
+    </div>
+  </ion-tab>
+  
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="services">
+      <ion-icon name="briefcase-outline"></ion-icon>
+      Servicios
+    </ion-tab-button>
+    <ion-tab-button tab="alerts">
+      <ion-icon name="notifications-outline"></ion-icon>
+      Alertas
+    </ion-tab-button>
+    <ion-tab-button tab="news">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      Noticias
+    </ion-tab-button>
+    
+    <ion-tab-button tab="schedules">
+      <ion-icon name="time-outline"></ion-icon>
+      Tiempos
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon name="person-outline"></ion-icon>
+      Perfil
+    </ion-tab-button>
+
+  </ion-tab-bar>
+  
+</ion-tabs>

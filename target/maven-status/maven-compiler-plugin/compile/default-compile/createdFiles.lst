@@ -1,0 +1,15 @@
+com/example/model/Notification.class
+com/example/model/News.class
+com/example/repository/UserRepository.class
+com/example/DemoApplication.class
+com/example/repository/Subject_MarkRepository.class
+com/example/repository/NotificationRepository.class
+com/example/repository/SportReservationrepository.class
+com/example/model/Subject.class
+com/example/model/Subject_Mark.class
+com/example/model/User.class
+com/example/model/Subject_Schedule.class
+com/example/repository/NewsRepository.class
+com/example/repository/Subject_scheduleRepository.class
+com/example/repository/subjectRepository.class
+com/example/model/SportReservation.class
