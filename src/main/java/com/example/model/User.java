@@ -1,9 +1,13 @@
 package com.example.model;
 
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -20,6 +24,9 @@ public class User {
     private boolean isCandidate;
     private int votes;
 
+    @OneToMany(mappedBy = "subjectId")
+    private ArrayList<Subject> subjects = new ArrayList<Subject>();
+
     public User(int studentId, String name, String surname1, String surname2, String dni) {
         this.name= name;
         this.surname1=surname1;
@@ -29,6 +36,7 @@ public class User {
         this.photo=null;
         votes = 0;
         isCandidate = false;
+        
     }
 
     public User(int studentId, String name, String surname1, String surname2, String dni, Blob photo) {
