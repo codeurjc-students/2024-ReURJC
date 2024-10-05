@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.ArrayList;
+
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
 
 import jakarta.persistence.Entity;
@@ -12,6 +14,8 @@ public class Subject {
     private Long subjectId;
 
     private String title;
+
+    private ArrayList<ConvocatoryInfo> convocatories = new ArrayList<ConvocatoryInfo> ();
 
     public Subject(Long subjectId, String title) {
         this.subjectId = subjectId;
