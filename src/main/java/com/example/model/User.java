@@ -2,12 +2,16 @@ package com.example.model;
 
 import java.sql.Blob;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import java.util.List;
 
 @Entity
 public class User {
@@ -19,35 +23,40 @@ public class User {
     private String surname1;
     private String surname2;
     private String dni;
-    private int level;
+    @ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
     private Blob photo;
     private boolean isCandidate;
     private int votes;
+    private String email;
+	private String password;
 
-    @OneToMany(mappedBy = "subjectId")
-    private ArrayList<Subject> subjects = new ArrayList<Subject>();
+    @ManyToMany
+    @JoinTable(
+        name = "user_subject",
+        joinColumns = @JoinColumn(name = "userId"),
+        inverseJoinColumns = @JoinColumn(name = "subjectId"))
+    private Collection<Subject> subjects = new ArrayList<Subject>();
 
-    public User(int studentId, String name, String surname1, String surname2, String dni) {
+    public User() {}
+    public User(Long studentId, String name, String surname1, String surname2, String dni, String email, String password) {
+        this.studentId = studentId;
         this.name= name;
         this.surname1=surname1;
         this.surname2=surname2;
         this.dni=dni;
-        this.level=0;
         this.photo=null;
         votes = 0;
         isCandidate = false;
-        
+        this.email = email;
+        this.password = password;
     }
 
-    public User(int studentId, String name, String surname1, String surname2, String dni, Blob photo) {
-        this(studentId, name, surname1, surname2, dni);
+    public User(Long studentId, String name, String surname1, String surname2, String dni, Blob photo, String email) {
+        this(studentId, name, surname1, surname2, dni,email,"123456");
         this.photo=photo;
     }
-    public User(int studentId, String name, String surname1, String surname2, String dni, int rank, Blob photo) {
-        this(studentId, name, surname1, surname2, dni);
-        this.level=rank;
-        this.photo=photo;
-    }
+
 
     public Long getStudentId() {
         return studentId;
@@ -85,10 +94,6 @@ public class User {
         this.dni = dni;
     }
 
-    public int getRank() {
-        return level;
-    }
-
     public Blob getPhoto() {
         return photo;
     }
@@ -116,6 +121,32 @@ public class User {
     public Long getId() {
         return this.studentId;
     }
+
+    public Collection<Subject> getSubjects() {
+        return subjects;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public List<String> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+    
+
+    
+
+    
 
     
 
