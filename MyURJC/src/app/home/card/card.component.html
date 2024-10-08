@@ -1,5 +1,5 @@
 <ion-item *ngFor="let service of services" style="display: flex; justify-content: center; align-items: stretch;">
-  <ion-card style="flex-grow: 1; min-width: 0;">
+  <ion-card style="flex-grow: 1; min-width: 0;" (click)="navigate(service.apiCaller)">
     <ion-card-header>
       <ion-card-subtitle>{{service.subtitle}}</ion-card-subtitle>
       <ion-card-title>{{service.title}}</ion-card-title>
