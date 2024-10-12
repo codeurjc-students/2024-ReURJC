@@ -34,7 +34,7 @@ public class DataLoader {
         Subject subject2 = new Subject(20L, "Matemáticas");
         Subject subject3 = new Subject(30L, "Historia de la filología moderna");
 
-        Convocatoria conv1 = new Convocatoria("10/11/2024", 1, "Aulario I, 2002");
+        Convocatoria conv1 = new Convocatoria("10/11/2024", 1, "Aulario I, 2002"); //INGLÉS AMORE
         Convocatoria conv2 = new Convocatoria("10/9/2024", 2, "Aulario II, 2002");
 
         subject1.getConvocatories().add(conv1);
