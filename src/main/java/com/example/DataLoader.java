@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.model.Convocatoria;
+import com.example.model.Convocatory;
+import com.example.model.Festive;
 import com.example.model.Subject;
 import com.example.model.User;
+import com.example.repository.FestiveRepository;
 import com.example.repository.SubjectRepository;
 import com.example.repository.UserRepository;
 
@@ -25,6 +27,9 @@ public class DataLoader {
     private SubjectRepository subjectRepository;
 
     @Autowired
+    private FestiveRepository festives;
+
+    @Autowired
 	private PasswordEncoder passwordEncoder;
 
     @PostConstruct
@@ -34,8 +39,8 @@ public class DataLoader {
         Subject subject2 = new Subject(20L, "Matemáticas");
         Subject subject3 = new Subject(30L, "Historia de la filología moderna");
 
-        Convocatoria conv1 = new Convocatoria("10/11/2024", 1, "Aulario I, 2002"); //INGLÉS AMORE
-        Convocatoria conv2 = new Convocatoria("10/9/2024", 2, "Aulario II, 2002");
+        Convocatory conv1 = new Convocatory("10/11/2024", 1, "Aulario I, 2002"); //INGLÉS AMORE
+        Convocatory conv2 = new Convocatory("10/9/2024", 2, "Aulario II, 2002");
 
         subject1.getConvocatories().add(conv1);
         subject1.getConvocatories().add(conv2);
@@ -58,5 +63,14 @@ public class DataLoader {
 
         // Guardar usuarios
         userRepository.saveAll(List.of(user1, user2));
+
+        Festive f2 = new Festive(4, 5, 2024,"#F24726");
+        Festive f3 = new Festive(2, 1, 2024,"#33FF8C", "Alcorcón");
+        Festive f4 = new Festive(3, 1, 2024, "#F24726", "Alcorcón");
+        Festive f5 = new Festive(6, 1, 2025,"#33FF8C",14);
+        festives.save(f2);
+        festives.save(f3);
+        festives.save(f4);
+        festives.save(f5);
     }
 }

@@ -7,20 +7,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Convocatoria {
+public class Convocatory {
     @Id@GeneratedValue(strategy = GenerationType.AUTO)
     private Long convocatoriaId;
     private String date;
     private int convocatory;
     private String classroom;
 
-    public Convocatoria(String date, int convocatory, String classroom) {
+    public Convocatory(String date, int convocatory, String classroom) {
         this.date = date;
         this.convocatory = convocatory;
         this.classroom = classroom;
     }
 
-    public Convocatoria() {}
+    public Convocatory() {}
     
     public Long getConvocatoriaId() {
         return convocatoriaId;

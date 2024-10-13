@@ -23,7 +23,6 @@ com/example/repository/UserRepository.class
 com/example/DemoApplication.class
 com/example/services/securityServices/jwt/Token$TokenType.class
 com/example/controller/SubjectsController.class
-com/example/model/Convocatoria.class
 com/example/DataLoader.class
 com/example/services/securityServices/jwt/JwtCookieManager.class
 com/example/services/securityServices/CSRFHandlerConfiguration$SecurityWithCsrfCookieConfig.class

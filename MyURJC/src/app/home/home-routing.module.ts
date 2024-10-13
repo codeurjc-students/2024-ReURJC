@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { FinalsInfoComponent } from './finals-info/finals-info.component';
 import { AuthGuard } from '../services/AuthService/auth-guard.component';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
     component: FinalsInfoComponent,
     canActivate: [AuthGuard]
     }, 
+    {
+      path: 'calendar',
+      component: CalendarComponent
+    },
 ];
 
 @NgModule({

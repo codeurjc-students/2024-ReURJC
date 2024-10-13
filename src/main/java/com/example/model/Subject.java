@@ -21,7 +21,7 @@ public class Subject {
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Convocatoria> convocatories = new ArrayList<> ();
+    private List<Convocatory> convocatories = new ArrayList<> ();
 
     @ManyToMany(mappedBy = "subjects")
     private Collection<User> user = new ArrayList<User>();
@@ -39,7 +39,7 @@ public class Subject {
     public Long getId() {
         return this.subjectId;
     }
-    public List<Convocatoria> getConvocatories() {
+    public List<Convocatory> getConvocatories() {
         return convocatories;
     }
 

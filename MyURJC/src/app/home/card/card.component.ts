@@ -25,7 +25,7 @@ export class CardComponent  implements OnInit {
 
       }
       case 2 : {
-        this._services.push(new CardInfo("","Calendario","Consulta los días lectivos, vacaciones y festivos del curso académico actual",""))
+        this._services.push(new CardInfo("","Calendario","Consulta los días lectivos, vacaciones y festivos del curso académico actual","/calendar"))
         this._services.push(new CardInfo("","Horario", "Consulta tu horario académico diario y semanal",""))
         this._services.push(new CardInfo("","Exámenes finales","Consulta toda la información relacionada con los exámenes finales","/me/subjects"))
 
