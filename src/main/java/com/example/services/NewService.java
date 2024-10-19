@@ -1,7 +1,7 @@
 package com.example.services;
 
-import org.springdoc.core.converters.models.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.model.News;
@@ -16,8 +16,8 @@ public class NewService {
     private NewsRepository repository;
 
 
-    public List<News> getAll(int pageNumber) {
-        return repository.findAll(new Pageable(pageNumber, 5, null)).getContent();
+    public List<News> getAllNewer(int pageNumber) {
+        return repository.findAllNewer(PageRequest.of(pageNumber, 9)).getContent();
     }
     
 }

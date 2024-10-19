@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FestiveServiceService } from '../services/FestiveService/festive-service.service';
-import { FestiveInfo } from '../services/FestiveService/FestiveInfo';
-
+import { FestiveServiceService } from 'src/app/services/FestiveService/festive-service.service';
+import { FestiveInfo } from 'src/app/services/FestiveService/FestiveInfo';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
