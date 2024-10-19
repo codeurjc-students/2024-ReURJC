@@ -12,13 +12,15 @@ public class News {
     private Long newsId;
     private String title;
     private String description;
+    private String littleDescription;
     private String category;
 
 
-    public News(String title, String description, String category) {
+    public News(String title, String description, String category, String littleDescription) {
         this.title = title;
         this.description = description;
         this.category = category;
+        this.littleDescription = littleDescription;
     }
 
 
@@ -40,6 +42,13 @@ public class News {
     public String getCategory() {
         return category;
     }
+
+
+    public String getLittleDescription() {
+        return littleDescription;
+    }
+
+    
 
     
 
