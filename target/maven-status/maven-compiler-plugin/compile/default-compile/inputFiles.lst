@@ -1,6 +1,7 @@
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/DataLoader.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/DemoApplication.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/controller/FestivesController.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/controller/NewsController.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/controller/SubjectsController.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/controller/UserController.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/model/Convocatory.java
@@ -21,6 +22,7 @@
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/Subject_scheduleRepository.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/repository/UserRepository.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/services/FestiveService.java
+/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/services/NewService.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/services/UserService.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/services/securityServices/CSRFHandlerConfiguration.java
 /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/src/main/java/com/example/services/securityServices/RepositoryUserDetailsService.java

@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { FinalsInfoComponent } from './finals-info/finals-info.component';
 import { AuthGuard } from '../services/AuthService/auth-guard.component';
-import { CalendarComponent } from '../calendar/calendar.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { NewsComponent } from '../news/news/news.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
       path: 'calendar',
       component: CalendarComponent
+    },
+    {
+      path: 'news',
+      component: NewsComponent
     },
 ];
 

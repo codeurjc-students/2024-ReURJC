@@ -12,15 +12,14 @@ public class News {
     private Long newsId;
     private String title;
     private String description;
-    private String littleDescription;
-    private String category;
+    private String date;
 
 
-    public News(String title, String description, String category, String littleDescription) {
+    public News() {}
+    public News(String title, String description, String date ) {
         this.title = title;
         this.description = description;
-        this.category = category;
-        this.littleDescription = littleDescription;
+        this.date = date;
     }
 
 
@@ -39,14 +38,11 @@ public class News {
     }
 
 
-    public String getCategory() {
-        return category;
+    public String getDate() {
+        return date;
     }
 
 
-    public String getLittleDescription() {
-        return littleDescription;
-    }
 
     
 
