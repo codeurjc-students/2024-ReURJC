@@ -6,6 +6,7 @@ import { FinalsInfoComponent } from './finals-info/finals-info.component';
 import { AuthGuard } from '../services/AuthService/auth-guard.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NewsComponent } from '../news/news/news.component';
+import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     {
       path: 'news',
       component: NewsComponent
+    },
+
+    {
+      path: 'schedule',
+      component: SubjectScheduleComponent
     },
 ];
 

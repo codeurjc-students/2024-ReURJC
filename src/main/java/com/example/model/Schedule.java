@@ -4,35 +4,33 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Subject_Schedule {
+public class Schedule {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Subject_ScheduleId;
-
-    @ManyToOne
-    private Subject subjectId;
+    private Long ScheduleId;
 
     private int dayOfWeek;
     private int startHour;
     private int endHour;
+    private String classRoom;
 
-    public Subject_Schedule(Subject subjectId, int dayOfWeek, int startHour, int endHour) {
-        this.subjectId = subjectId;
+
+
+    public Schedule(int dayOfWeek, int startHour, int endHour, String classRoom) {
         this.dayOfWeek = dayOfWeek;
         this.startHour = startHour;
-        this. endHour = endHour;
+        this.endHour = endHour;
+        this.classRoom = classRoom;
     }
 
-    public Long getSubject_ScheduleId() {
-        return Subject_ScheduleId;
+    public Schedule() {
     }
 
-    public Subject getSubjectId() {
-        return subjectId;
+    public Long getScheduleId() {
+        return ScheduleId;
     }
 
     public int getDayOfWeek() {
@@ -47,5 +45,7 @@ public class Subject_Schedule {
         return endHour;
     }
 
-    
+    public String getClassRoom() {
+        return classRoom;
+    }
 }
