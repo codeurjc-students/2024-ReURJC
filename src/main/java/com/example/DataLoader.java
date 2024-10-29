@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.model.Convocatory;
 import com.example.model.Festive;
 import com.example.model.News;
+import com.example.model.Schedule;
 import com.example.model.Subject;
 import com.example.model.User;
 import com.example.repository.FestiveRepository;
@@ -44,14 +45,19 @@ public class DataLoader {
         Subject subject2 = new Subject(20L, "Matemáticas");
         Subject subject3 = new Subject(30L, "Historia de la filología moderna");
 
-        Convocatory conv1 = new Convocatory("10/11/2024", 1, "Aulario I, 2002"); //INGLÉS AMORE
+       Schedule schedule2 = new Schedule( 2, 9, 11, "Aulario II, 102");
+       Schedule schedule1 = new Schedule( 1, 9, 15, "Aulario II, 102");
+        Convocatory conv1 = new Convocatory("10/11/2024", 1, "Aulario I, 2002");
         Convocatory conv2 = new Convocatory("10/9/2024", 2, "Aulario II, 2002");
 
         subject1.getConvocatories().add(conv1);
         subject1.getConvocatories().add(conv2);
+        subject1.getSchedule().add(schedule2);
+        subject1.getSchedule().add(schedule1);
 
         // Guardar asignaturas primero
         subjectRepository.saveAll(List.of(subject1, subject2, subject3));
+
 
         // Crear usuarios de ejemplo
         User user1 = new User(1L, "John", "Doe", "Smith", "12345678A","mariscalalonso16@icloud.com",passwordEncoder.encode("123"));

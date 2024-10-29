@@ -11,6 +11,7 @@ import { CardComponent } from './card/card.component';
 import { FinalsInfoComponent } from './finals-info/finals-info.component';
 import { NewsComponent } from '../news/news/news.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { CalendarComponent } from './calendar/calendar.component';
     IonicModule,
     HomePageRoutingModule,
   ],
-  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent,  NewsComponent]
+  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent,  NewsComponent, SubjectScheduleComponent]
 })
 export class HomePageModule {}
