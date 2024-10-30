@@ -79,9 +79,7 @@ public class UserController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-<<<<<<< Updated upstream
-=======
-
+/* 
 	@GetMapping("/me/carnet")
 	public ResponseEntity<?> getCarnet(HttpServletRequest request) throws IOException, SQLException {
 		Principal principal = request.getUserPrincipal();
@@ -173,11 +171,10 @@ g2d.dispose();
 
 	
 	
->>>>>>> Stashed changes
     
 
 
-
+*/
     
 
 
