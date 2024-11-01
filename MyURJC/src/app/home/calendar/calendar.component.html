@@ -35,7 +35,7 @@
             <!-- Sección para mostrar fiestas locales -->
             <div class="local-festives" *ngIf="hasLocalFestives(month)">
               <div *ngFor="let localFestive of getLocalFestives(month)">
-                <span class="local-festive">{{ localFestive.getLocal() }}: {{ localFestive.getDay() }} de {{ month.name }}</span>
+                <span class="local-festive">{{ localFestive.local }}: {{ localFestive.day }} de {{ month.name }}</span>
               </div>
             </div>
           </ion-card-content>

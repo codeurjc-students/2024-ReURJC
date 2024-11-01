@@ -15,15 +15,15 @@ export class FinalsInfoComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiUserService) {}
 
   ngOnInit() {
-    this.apiService.getAll().subscribe({
+    this.apiService.getAllUserSubjects().subscribe({
       next: (data: SubjectInfo[]) => {
         // Ordenar las convocatorias de cada asignatura antes de asignar los datos
         this.subjects = data.map(subject => {
-          const sortedConvocatories = subject.getConvocatory().sort((a, b) => {
+          const sortedConvocatories = subject.convocatory.sort((a, b) => {
             // Ordenar por el valor de convocatoria: 1 (septiembre), 2 (mayo), 3 (junio)
-            return a.getConvocatory() - b.getConvocatory();
+            return a.convocatory - b.convocatory;
           });
-          return new SubjectInfo(subject.getTitle(), sortedConvocatories);
+          return new SubjectInfo(subject.title, sortedConvocatories);
         });
       },
       error: (error) => {
