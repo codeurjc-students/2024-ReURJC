@@ -1,6 +1,10 @@
 package com.example.model;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,6 +16,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 @Entity
 public class User {
@@ -45,11 +51,23 @@ public class User {
         this.surname1=surname1;
         this.surname2=surname2;
         this.dni=dni;
-        this.photo=null;
         votes = 0;
         isCandidate = false;
         this.email = email;
         this.password = password;
+        try {
+            // Leer la imagen como bytes
+            File file = new File("src/main/java/com/example/model/image.png");
+            byte[] imageBytes = Files.readAllBytes(file.toPath());
+
+            // Crear un Blob a partir de los bytes
+            Blob imageBlob = new SerialBlob(imageBytes);
+
+            photo = imageBlob;
+
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public User(Long studentId, String name, String surname1, String surname2, String dni, Blob photo, String email) {
