@@ -2,6 +2,9 @@ package com.example.controller;
 
 import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
+import java.sql.SQLException;
+
+import javax.imageio.ImageIO;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -79,7 +93,6 @@ public class UserController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-/* 
 	@GetMapping("/me/carnet")
 	public ResponseEntity<?> getCarnet(HttpServletRequest request) throws IOException, SQLException {
 		Principal principal = request.getUserPrincipal();
@@ -110,7 +123,7 @@ int targetHeight = (targetWidth * profilePic.getHeight()) / profilePic.getWidth(
 g2d.drawImage(profilePic, 10, 10, targetWidth, targetHeight, null);
 
 // Cargar la segunda imagen
-BufferedImage image = ImageIO.read(new File("src/main/java/com/example/model/image copy.png"));
+BufferedImage image = ImageIO.read(new File("src/main/java/com/example/model/logo.png"));
 
 // Obtener dimensiones originales de la segunda imagen
 int imageWidth = image.getWidth();
@@ -169,12 +182,7 @@ g2d.dispose();
 		return null;
 	}
 
-	
-	
-    
 
-
-*/
     
 
 
