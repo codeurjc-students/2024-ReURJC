@@ -12,18 +12,11 @@ export class ApiUserService {
   constructor(private http: HttpClient) {}
 
   // Obtener todos los elementos
-  getAll(): Observable<SubjectInfo[]> {
+  getAllUserSubjects(): Observable<SubjectInfo[]> {
     return this.http.get<SubjectInfo[]>(`/api/users/me/subjects`,{ withCredentials: true }).pipe(
       map(response => this.transformToSubjectInfo(response)),
-      tap({
-        next: subjects => {
-          // Aquí se puede omitir cualquier log si no es necesario
-        },
-        error: err => {
-          console.error('Error al obtener las asignaturas:', err); // Mostrar solo errores
-        }
-      })
-    );
+      )
+  
   }
   
 

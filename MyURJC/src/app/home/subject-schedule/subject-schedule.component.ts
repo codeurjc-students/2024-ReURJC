@@ -40,12 +40,6 @@ getSubjectsForDay(day: string): { title: string; startHour: number; endHour: num
   days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
   hours = Array.from({ length: 16 }, (_, i) => `${7 + i}:00`);
 
-  isMobile: boolean = window.innerWidth <= 768;
-
-@HostListener('window:resize', ['$event'])
-onResize(event: Event) {
-    this.isMobile = window.innerWidth <= 768;
-}
 
 
   constructor(private subjectService: SubjectServiceService) {

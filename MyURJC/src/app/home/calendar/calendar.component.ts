@@ -20,22 +20,28 @@ export class CalendarComponent implements OnInit {
 
   // Cargar festivos desde el servicio
   loadFestives() {
-    this.apiService.getAll().subscribe((festivesData: FestiveInfo[]) => {
-      this.festives = festivesData;
-
-      const festiveRange: FestiveInfo[] = this.festives.reduce((acc: FestiveInfo[], festive: FestiveInfo) => {
-        if (festive.getstartedXDaysAgo() !== -1) {
-          return acc.concat(FestiveInfo.generateFestivesFromRange(festive));
-        }
-        return acc; // Retornar el acumulador si no se cumple la condición
-      }, []);
-
-      // Concatenar festivos originales con el rango generado
-      this.festives = this.festives.concat(festiveRange);
-      console.log("festivos en ngOnInit:");
-      console.log(this.festives);
-    });
+    this.apiService.getAllFestives().subscribe(
+      (data) => {
+        // Transformar los datos obtenidos en instancias de FestiveInfo
+        this.festives = data
+        console.log(this.festives)
+  
+        const festiveRange: FestiveInfo[] = this.festives.reduce((acc: FestiveInfo[], festive: FestiveInfo) => {
+          if (festive.startedXDaysAgo !== -1) {
+            return acc.concat(FestiveInfo.generateFestivesFromRange(festive));
+          }
+          return acc;
+        }, []);
+  
+        // Concatenar festivos originales con el rango generado
+        this.festives = this.festives.concat(festiveRange);
+      },
+      (error) => {
+        console.error('Error al recibir la respuesta:', error);
+      }
+    );
   }
+  
 
   // Genera el calendario para todo el año
   generateCalendar() {
@@ -101,30 +107,30 @@ export class CalendarComponent implements OnInit {
   // Verifica si el día es festivo
   isFestive(date: Date): boolean {
     return this.festives.some((festive: FestiveInfo) => 
-      festive.getDay() === date.getDate() &&
-      festive.getMonth() === date.getMonth() + 1 && 
-      festive.getYear() === date.getFullYear()
+      festive.day === date.getDate() &&
+      festive.month === date.getMonth() + 1 && 
+      festive.year === date.getFullYear()
     );
   } 
 
   // Aplica color personalizado a los días festivos
   applyCustomColor(date: Date): string {
     const festive = this.festives.find((festive: FestiveInfo) => 
-      festive.getDay() === date.getDate() &&
-      festive.getMonth() === date.getMonth() + 1 &&
-      festive.getYear() === date.getFullYear()
+      festive.day === date.getDate() &&
+      festive.month === date.getMonth() + 1 &&
+      festive.year === date.getFullYear()
     );
   
-    return festive ? festive.getColor() : ''; // Devuelve el color o vacío
+    return festive ? festive.color : ''; // Devuelve el color o vacío
   }
 
   // Verifica si hay fiestas locales en el mes actual
   hasLocalFestives(month: { name: string; days: Date[] }): boolean {
     return this.festives.some((festive: FestiveInfo) => 
       month.days.some(day => 
-        festive.getDay() === day.getDate() && 
-        festive.getMonth() === day.getMonth() + 1 && 
-        festive.getLocal() !== null
+        festive.day === day.getDate() && 
+        festive.month === day.getMonth() + 1 && 
+        festive.local !== null
       )
     );
   }
@@ -133,9 +139,9 @@ export class CalendarComponent implements OnInit {
   getLocalFestives(month: { name: string; days: Date[] }): FestiveInfo[] {
     return this.festives.filter((festive: FestiveInfo) => 
       month.days.some(day => 
-        festive.getDay() === day.getDate() && 
-        festive.getMonth() === day.getMonth() + 1 && 
-        festive.getLocal() !== null
+        festive.day === day.getDate() && 
+        festive.month === day.getMonth() + 1 && 
+        festive.local !== null
       )
     );
   }

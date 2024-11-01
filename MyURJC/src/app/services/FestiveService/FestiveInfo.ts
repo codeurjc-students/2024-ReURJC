@@ -1,10 +1,10 @@
 export class FestiveInfo {
-    private day: number;
-    private month: number;
-    private year: number;
-    private color: string;
-    private startedXDaysAgo: number;
-    private local: string
+     day: number;
+     month: number;
+     year: number;
+     color: string;
+     startedXDaysAgo: number;
+     local: string
 
     constructor(day: number, month: number, year: number, color: string, startedXDaysAgo: number, local: string) {
         this.day = day;
@@ -47,32 +47,6 @@ export class FestiveInfo {
         return festiveList;
     }
     
-
-    // Getter para day
-    getDay(): number {
-        return this.day;
-    }
-
-    // Getter para month
-    getMonth(): number {
-        return this.month;
-    }
-
-    // Getter para year
-    getYear(): number {
-        return this.year;
-    }
-
-    getColor(): string {
-        return this.color;
-    }
-
-    getstartedXDaysAgo(): number {
-        return this.startedXDaysAgo;
-    }
-
-    getLocal(): string {
-        return this.local;
-    }
     
 }
+
