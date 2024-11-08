@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Convocatory;
+import com.example.model.Event;
 import com.example.model.Festive;
 import com.example.model.News;
 import com.example.model.Schedule;
@@ -18,6 +19,7 @@ import com.example.repository.FestiveRepository;
 import com.example.repository.NewsRepository;
 import com.example.repository.SubjectRepository;
 import com.example.repository.UserRepository;
+import com.example.services.EventService;
 
 import jakarta.annotation.PostConstruct;
 
@@ -37,6 +39,9 @@ public class DataLoader {
 
     @Autowired
     private NewsRepository news;
+
+    @Autowired
+    private EventService eventService;
 
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
@@ -176,5 +181,11 @@ news.save(n13);
 news.save(n14);
 news.save(n15);
 
+eventService.save(new Event("Escolar", "Voto de delegados", "Vota a tus compañeros, porque Demo- de democracia no es una fase beta, sino que el poder está en tus manos", "/", "2024-11-07"));
+
     }
+
+   
+
+
 }
