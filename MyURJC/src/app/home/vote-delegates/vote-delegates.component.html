@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Votar Delegados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let candidate of candidates">
+      <ion-label>
+        <h2>{{ candidate.name }} {{ candidate.surname }}</h2>
+      </ion-label>
+      <ion-button color="primary" (click)="voteForCandidate(candidate.id)" [disabled]="getUserVoted()">
+        Votar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

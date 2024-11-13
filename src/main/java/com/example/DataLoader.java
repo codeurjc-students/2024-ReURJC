@@ -9,12 +9,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Convocatory;
-import com.example.model.Event;
 import com.example.model.Festive;
 import com.example.model.News;
 import com.example.model.Schedule;
 import com.example.model.Subject;
 import com.example.model.User;
+import com.example.model.Events.BecomeCandidateEvent;
+import com.example.model.Events.VoteDelegateEvent;
 import com.example.repository.FestiveRepository;
 import com.example.repository.NewsRepository;
 import com.example.repository.SubjectRepository;
@@ -181,7 +182,8 @@ news.save(n13);
 news.save(n14);
 news.save(n15);
 
-eventService.save(new Event("Escolar", "Voto de delegados", "Vota a tus compañeros, porque Demo- de democracia no es una fase beta, sino que el poder está en tus manos", "/", "2024-11-07"));
+eventService.save(new BecomeCandidateEvent("Escolar", "Voto de delegados", "Vota a tus compañeros, porque Demo- de democracia no es una fase beta, sino que el poder está en tus manos", "2025-11-07"));
+eventService.save(new VoteDelegateEvent("Escolar", "Voto a delegados", "Vota a tus compañeros, porque Demo- de democracia no es una fase beta, sino que el poder está en tus manos", "2025-11-07"));
 
     }
 
