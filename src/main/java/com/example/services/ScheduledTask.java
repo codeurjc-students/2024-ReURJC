@@ -9,11 +9,11 @@ public class ScheduledTask {
     @Autowired
     private  EventService eventService;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 1 0 * * ?")
     public void scheduleVotingEnd() {
         
         
-                if ( !eventService.isVoteDelegatesEvent())
+                if ( !eventService.isVoteDelegatesEvent() && !eventService.isBecomeCandidateEvent())
         eventService.endVotingEvent();
     }
 }
