@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.model.Events;
 
 import java.time.LocalDate;
 
@@ -10,9 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Event {
+public abstract class Event {
     @Id@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long EventId;
+    private Long eventId;
     private String subtitle;
     private String title;
     private String description;
@@ -35,6 +35,11 @@ public class Event {
     }
 
     // Getters
+
+    public Long getEventId() { // Nuevo getter
+        return eventId;
+    }
+
     public String getSubtitle() {
         return subtitle;
     }

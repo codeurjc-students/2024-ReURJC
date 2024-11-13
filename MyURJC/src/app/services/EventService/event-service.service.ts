@@ -8,6 +8,7 @@ import { CardEvent } from './cardEvent';
   providedIn: 'root'
 })
 export class EventServiceService {
+  
 
   constructor(private http: HttpClient) {}
 
@@ -21,9 +22,18 @@ export class EventServiceService {
             event.description, 
             event.apiCaller, 
             event.tabsDisplay, 
-            event.isValid
+            event.isValid,
+            event.eventId
           )
         ))
       );
+  }
+
+  isBecomeDelegateActivated() : Observable<boolean> {
+    return this.http.get<boolean>("/api/events/isDelegateActivated");
+  }
+
+  isVoteDelegateActivated() : Observable<boolean> {
+    return this.http.get<boolean>("/api/events/isVoteDelegateActivated");
   }
 }

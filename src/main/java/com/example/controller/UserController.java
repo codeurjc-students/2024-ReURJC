@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -28,8 +29,9 @@ import java.io.IOException;
 
 
 import com.example.model.User;
-
+import com.example.services.EventService;
 import com.example.services.UserService;
+import com.example.services.VotesService;
 import com.example.services.securityServices.jwt.AuthResponse;
 import com.example.services.securityServices.jwt.LoginRequest;
 import com.example.services.securityServices.jwt.UserLoginService;
@@ -52,6 +54,12 @@ public class UserController {
 
     @Autowired
 	private UserLoginService userLoginService;
+
+	@Autowired
+	private VotesService voteService;
+
+	@Autowired
+	private EventService eventService;
 
     @GetMapping("/me/subjects")
     public ResponseEntity<?> getMethodName(HttpServletRequest request) {
@@ -184,7 +192,64 @@ g2d.dispose();
 
 
     
+	@GetMapping("/me/isDelegate")
+public ResponseEntity<Boolean> getMeIsDelegate(HttpServletRequest request) throws IOException {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+        return ResponseEntity.ok(user.isCandidate());
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
 
+@PostMapping("/me/becomeDelegate")
+public ResponseEntity<?> becomeDelegate(HttpServletRequest request) throws IOException {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+		user.setCandidate(true);
+		userService.save(user);
+        return ResponseEntity.ok().build();
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
+@PostMapping("/me/cancelCandidacy")
+public ResponseEntity<?> cancelCandidacy(HttpServletRequest request) throws IOException {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+		user.setCandidate(false);
+		userService.save(user);
+        return ResponseEntity.ok().build();
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
+@GetMapping("/candidates")
+public ResponseEntity<List<User>> getCandidates(HttpServletRequest request) throws IOException {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        String principalEmail = principal.getName();
+        List<User> candidates = userService.getCandidatesExcludingUser(principalEmail);
+        return ResponseEntity.ok(candidates);
+    }
+    return ResponseEntity.notFound().build();
+}
+
+@GetMapping("/me/hasVoted")
+public ResponseEntity<Boolean> hasVoted(HttpServletRequest request) throws IOException {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+        return ResponseEntity.ok(voteService.hasUserAlreadyVoted(user, eventService.getVoteDelegatesEvent().getEventId()));
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
 
     
 

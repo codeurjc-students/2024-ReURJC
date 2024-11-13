@@ -23,7 +23,7 @@ export class CardComponent  implements OnInit {
       case 1 : {
         this._services.push(new CardInfo("Escolar","Asistencia Bluetooth","Este servicio permite confirmar tu asistencia a una clase",""))
         this._services.push(new CardInfo("Ocio","Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC",""))
-        this.chargeTemporalEvents(this.tab)
+        
         break;
 
       }
@@ -31,7 +31,7 @@ export class CardComponent  implements OnInit {
         this._services.push(new CardInfo("","Calendario","Consulta los días lectivos, vacaciones y festivos del curso académico actual","/calendar"))
         this._services.push(new CardInfo("","Horario", "Consulta tu horario académico diario y semanal","/schedule"))
         this._services.push(new CardInfo("","Exámenes finales","Consulta toda la información relacionada con los exámenes finales","/me/subjects"))
-        this.chargeTemporalEvents(this.tab)
+
         break;
 
       }
@@ -39,17 +39,19 @@ export class CardComponent  implements OnInit {
       case 3 : {
         this._services.push(new CardInfo("","Detalle tarjeta de estudiante","Consulta los detalle de tu tarjeta estudiantil",""))
         this._services.push(new CardInfo("","Calificaciones finales", "Consulta las notas finales de las asignaturas cursadas",""))
-        this.chargeTemporalEvents(this.tab)
+
         break;
 
       }
     }
+    this.chargeTemporalEvents(this.tab)
   }
   chargeTemporalEvents(tab: number) {
     this.eventService.getAllEvents().subscribe(eventArray => {
       eventArray.forEach(eventE => {
         if (eventE.tabDisplay === tab) {
           this._services.push(eventE);
+          console.log(this._services)
         }
       });
     });
