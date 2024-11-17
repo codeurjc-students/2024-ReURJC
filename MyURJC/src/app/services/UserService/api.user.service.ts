@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { SubjectInfo } from './SubjectInfo';
 import { ConvocatoryInfo } from './ConvocatoryInfo';
 import { User } from './user.model';
+import { SubjectMark } from './SubjectMark';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class ApiUserService {
           convocatory.classroom
         )
       );
-      return new SubjectInfo(item.title, convocatories);
+      return new SubjectInfo(item.id,item.title, convocatories);
     });
   }
 
@@ -57,10 +58,13 @@ export class ApiUserService {
     this.http.post<boolean>("/api/events/vote",candidate,{ withCredentials: true }).subscribe(data => {
       console.log(data);
     })
-    
   }
 
   hasVoted(): Observable<boolean> {
     return this.http.get<boolean>('/api/users/me/hasVoted', { withCredentials: true });
+  }
+
+  getGrades(): Observable<SubjectMark[]> {
+    return this.http.get<SubjectMark[]>('/api/users/me/grades', { withCredentials: true });
   }
 }

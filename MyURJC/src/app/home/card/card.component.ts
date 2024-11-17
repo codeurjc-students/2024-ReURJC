@@ -38,7 +38,7 @@ export class CardComponent  implements OnInit {
 
       case 3 : {
         this._services.push(new CardInfo("","Detalle tarjeta de estudiante","Consulta los detalle de tu tarjeta estudiantil",""))
-        this._services.push(new CardInfo("","Calificaciones finales", "Consulta las notas finales de las asignaturas cursadas",""))
+        this._services.push(new CardInfo("","Calificaciones finales", "Consulta las notas finales de las asignaturas cursadas","/me/finalMarks"))
 
         break;
 
@@ -51,7 +51,6 @@ export class CardComponent  implements OnInit {
       eventArray.forEach(eventE => {
         if (eventE.tabDisplay === tab) {
           this._services.push(eventE);
-          console.log(this._services)
         }
       });
     });

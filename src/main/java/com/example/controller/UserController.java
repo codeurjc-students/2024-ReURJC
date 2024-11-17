@@ -30,6 +30,7 @@ import java.io.IOException;
 
 import com.example.model.User;
 import com.example.services.EventService;
+import com.example.services.SubjectMarkService;
 import com.example.services.UserService;
 import com.example.services.VotesService;
 import com.example.services.securityServices.jwt.AuthResponse;
@@ -60,6 +61,9 @@ public class UserController {
 
 	@Autowired
 	private EventService eventService;
+
+    @Autowired
+    private SubjectMarkService subjectMarkService;
 
     @GetMapping("/me/subjects")
     public ResponseEntity<?> getMethodName(HttpServletRequest request) {
@@ -250,6 +254,17 @@ public ResponseEntity<Boolean> hasVoted(HttpServletRequest request) throws IOExc
         return ResponseEntity.notFound().build();
     }
 }
+
+@GetMapping("/me/grades")
+    public ResponseEntity<?> getGrades(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            return ResponseEntity.ok(subjectMarkService.findSubjectsByStudent(user));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 
     
 

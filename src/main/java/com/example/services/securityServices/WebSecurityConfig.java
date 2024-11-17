@@ -20,6 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.example.services.securityServices.jwt.ApiKeyAuthenticationFilter;
 import com.example.services.securityServices.jwt.JwtRequestFilter;
 import com.example.services.securityServices.jwt.UnauthorizedHandlerJwt;
 
@@ -31,10 +32,36 @@ public class WebSecurityConfig {
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
+    private ApiKeyAuthenticationFilter apiKeyAuthenticationFilter;
+
+    @Autowired
     public RepositoryUserDetailsService userDetailService;
 
     @Autowired
     private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
+
+    @Bean
+public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    return authenticationConfiguration.getAuthenticationManager();
+}
+
+
+    @Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http
+        .csrf().disable()
+        .authorizeHttpRequests(auth -> auth
+            // Permitir acceso sin autenticación a otras rutas que no sean "/api/moodle/**"
+            .requestMatchers("/public/**", "/api/**").permitAll()
+            .requestMatchers("/api/moodle/**").authenticated() // Requiere autenticación para rutas con "/api/moodle/"
+            .anyRequest().authenticated()
+        )
+        .addFilterBefore(apiKeyAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+    return http.build();
+}
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,56 +72,12 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        // Permitir el origen de tu aplicación Angular
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        
-        // Permitir todos los métodos HTTP
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        
-        // Permitir todos los headers
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        
-        // Permitir el envío de credenciales (cookies, tokens)
-        configuration.setAllowCredentials(true);
-        
-        // Configurar las rutas
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors() // Habilitar CORS
-            .and()
-            .authenticationProvider(authenticationProvider())
-            .securityMatcher("/api/**")
-            .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt))
-            .authorizeHttpRequests(authorize -> authorize
-
-             .requestMatchers(HttpMethod.GET, "/api/users/me/subjects").hasRole("USER")
-                .anyRequest().permitAll() // Permitir todas las solicitudes
-            )
-            .formLogin(formLogin -> formLogin.disable()) // Desactivar autenticación de formulario
-            .csrf(csrf -> csrf.disable()) // Desactivar protección CSRF
-            .httpBasic(httpBasic -> httpBasic.disable()) // Desactivar autenticación básica
-            .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sesiones sin estado
-            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Agregar filtro JWT
-
-        return http.build();
-    }
 }
+

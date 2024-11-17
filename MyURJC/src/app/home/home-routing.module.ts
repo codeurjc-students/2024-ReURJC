@@ -11,6 +11,7 @@ import { PostulateAsDelegateComponent } from './postulate-as-delegate/postulate-
 import { EventGuard } from '../services/EventService/event-guard.guard';
 import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
 import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
+import { FinalMarksComponent } from './final-marks/final-marks.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,12 @@ const routes: Routes = [
       path: 'voteDelegate',
       component: VoteDelegatesComponent,
       canActivate: [AuthGuard,voteDelegateGuard]
+    },
+
+    {
+      path: 'me/finalMarks',
+      component: FinalMarksComponent,
+      canActivate: [AuthGuard]
     },
 ];
 
