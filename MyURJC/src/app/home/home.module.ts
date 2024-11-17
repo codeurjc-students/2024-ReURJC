@@ -14,6 +14,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.component';
 import { PostulateAsDelegateComponent } from './postulate-as-delegate/postulate-as-delegate.component';
 import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
+import { FinalMarksComponent } from './final-marks/final-marks.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.componen
     IonicModule,
     HomePageRoutingModule,
   ],
-  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent,  NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent]
+  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent,  NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent]
 })
 export class HomePageModule {}

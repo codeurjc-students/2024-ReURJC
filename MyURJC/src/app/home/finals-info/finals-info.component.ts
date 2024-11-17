@@ -23,7 +23,7 @@ export class FinalsInfoComponent implements OnInit {
             // Ordenar por el valor de convocatoria: 1 (septiembre), 2 (mayo), 3 (junio)
             return a.convocatory - b.convocatory;
           });
-          return new SubjectInfo(subject.title, sortedConvocatories);
+          return new SubjectInfo(subject.id,subject.title, sortedConvocatories);
         });
       },
       error: (error) => {
