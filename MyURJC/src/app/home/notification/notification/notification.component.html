@@ -1,17 +1,26 @@
-
+<div *ngIf="notifications.length > 0" style="text-align: center; color: gray;">
+  &lt; ----- Nuevo ----- &gt;
+</div>
 
 <ion-list>
   <ion-card *ngFor="let notification of notifications">
     <ion-card-header>
-      <ion-card-title>Nueva nota en {{ notification.subjectId.title }}</ion-card-title>
+      <ion-card-title>
+        Nueva nota en {{ notification.notifications.subjectId.title }}
+        <ion-badge *ngIf="notification.nuevo" color="danger"></ion-badge> 
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>
-        Se ha evaluado:  {{ notification.nameMark }} con una nota de <b>{{ notification.mark }}</b>. Convocatoria: {{ notification.convocatory }}
+        Se ha evaluado:  {{ notification.notifications.nameMark }} con una nota de <b>{{ notification.notifications.mark }}</b>. Convocatoria: {{ notification.notifications.convocatory }}
       </p>
     </ion-card-content>
   </ion-card>
 </ion-list>
+
+<div *ngIf="notifications.length > 0" style="text-align: center; color: gray;">
+  &lt; ----- Nuevo ----- &gt;
+</div>
 
 
   <ion-list>

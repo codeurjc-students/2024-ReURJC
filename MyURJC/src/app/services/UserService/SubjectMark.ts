@@ -8,7 +8,6 @@ export class SubjectMark {
     mark: number;
     convocatory: string;
     nameMark: string;
-  
     constructor(
         subjectMarkId: number,
         studentId: User,

@@ -8,5 +8,5 @@ import com.example.model.Notification;
 import com.example.model.User;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long>{
-    List<Notification> findByStudentOrderByNotificationIdDesc(User student);
+    List<Notification> findFirst10ByStudentOrderByNotificationIdDesc(User student); 
 }
