@@ -42,7 +42,7 @@ public class User {
     @JsonIgnore
 	private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_subject",
         joinColumns = @JoinColumn(name = "userId"),
