@@ -17,10 +17,9 @@ public class MyWebSocketController {
     @Autowired
     private SubjectMarkService subjectMarkService;
 
-    // Método para enviar la última nota a través de WebSockets
     public ResponseEntity<Subject_Mark> sendUpdate() throws Exception {
         Subject_Mark lastSubjectMark = subjectMarkService.getLastSubjectMarkAdded();
-        template.convertAndSend("/newGrade", lastSubjectMark); 
+        template.convertAndSend("/topic/newGrade", lastSubjectMark); // Envía el mensaje al topic "/topic/newGrade"
         return ResponseEntity.ok(lastSubjectMark);
     }
 }

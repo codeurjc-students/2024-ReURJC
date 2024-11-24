@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.model.Subject;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
+import com.example.services.NotificationService;
 import com.example.services.SubjectMarkService;
 import com.example.services.SubjectService;
 import com.example.services.UserService;
@@ -19,6 +20,7 @@ import com.example.services.UserService;
 @RestController
 @RequestMapping("/api/moodle")
 public class MoodleController {
+
 
     @Autowired
     private UserService userService; 
@@ -31,6 +33,9 @@ public class MoodleController {
 
     @Autowired
     private MyWebSocketController webSocketController; // Inyecta MyWebSocketController
+
+    @Autowired
+    private NotificationService notificationService;
 
     @PostMapping("/updateGrade")
     public ResponseEntity<String> miEndpoint(@RequestBody Map<String, Object> datos) throws Exception {
@@ -56,7 +61,7 @@ public class MoodleController {
                 }
 
                 webSocketController.sendUpdate(); // Llama al método sendUpdate
-
+                notificationService.newNote(userId, subject.getTitle(), assignmentName, String.valueOf(mark), "Ordinaria");
                 return ResponseEntity.ok("Nota creada/actualizada correctamente");
             }
             return ResponseEntity.ok("ok");
@@ -65,7 +70,9 @@ public class MoodleController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
+    
+    
+}
 
     private void updateExistingMark(User student, Subject subject, int mark, String assignmentName) {
         Subject_Mark existingMark = subjectMarkService.findByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName).get();

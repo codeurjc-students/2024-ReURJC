@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 import { ApiUserService } from 'src/app/services/UserService/api.user.service';
 import { SubjectMark } from 'src/app/services/UserService/SubjectMark';
 
@@ -12,9 +13,14 @@ export class FinalMarksComponent  implements OnInit {
   grades:   
  { [subjectTitle: string]: { [convocatory: string]: SubjectMark[] } } = {};
 
-  constructor(private apiUserService: ApiUserService) { }
+  constructor(private apiUserService: ApiUserService) { 
+    
+    
+  }
 
   ngOnInit() {
+
+
     this.apiUserService.getGrades().subscribe(
       (grades: SubjectMark[]) => {
         this.processGrades(grades);

@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import com.example.services.securityServices.jwt.ApiKeyAuthenticationFilter;
 import com.example.services.securityServices.jwt.JwtRequestFilter;
@@ -46,14 +47,15 @@ public AuthenticationManager authenticationManager(AuthenticationConfiguration a
 }
 
 
-    @Bean
+@Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
+        .cors().and()  // Asegura que la configuración CORS esté habilitada
         .csrf().disable()
         .authorizeHttpRequests(auth -> auth
-            // Permitir acceso sin autenticación a otras rutas que no sean "/api/moodle/**"
             .requestMatchers("/public/**", "/api/**").permitAll()
-            .requestMatchers("/api/moodle/**").authenticated() // Requiere autenticación para rutas con "/api/moodle/"
+            .requestMatchers("/socket.io/**").permitAll() // Agrega esta línea
+            .requestMatchers("/api/moodle/**").authenticated()
             .anyRequest().authenticated()
         )
         .addFilterBefore(apiKeyAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -63,6 +65,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     return http.build();
 }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -70,14 +73,18 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
     // Configuración de CORS
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // URL del frontend
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+    configuration.setAllowCredentials(true); // Habilita credenciales
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+}
+
+
+        
 }
 
