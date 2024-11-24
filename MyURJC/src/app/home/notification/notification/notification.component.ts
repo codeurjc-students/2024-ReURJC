@@ -3,6 +3,7 @@ import { NotificationService } from 'src/app/services/NotificationService/notifi
 import { NotificationInfo } from 'src/app/services/NotificationService/NotificationInfo';
 import { SubjectMark } from 'src/app/services/UserService/SubjectMark';
 import { WebSocketService } from 'src/app/services/webSockets/web-socket.service';
+import { StatefulNotifications } from './StatefulNotifications';
 
 @Component({
   selector: 'app-notification',
@@ -10,7 +11,7 @@ import { WebSocketService } from 'src/app/services/webSockets/web-socket.service
   styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnInit {
-  notifications: SubjectMark[] = [];
+  notifications: StatefulNotifications[] = [];
   dbNotifications: NotificationInfo[] = [];
   @Output() notificationChange = new EventEmitter<boolean>();
 
@@ -22,7 +23,8 @@ export class NotificationComponent implements OnInit {
     // Suscribirse a notificaciones desde el WebSocket
     this.webSocketService.notifications$.subscribe((notification) => {
       console.log('Nueva notificación:', notification);
-      this.notifications.unshift(notification);
+      this.notifications.unshift(new StatefulNotifications(notification,true));
+      this.notificationChange.emit(true);
 
       
     });
@@ -33,4 +35,6 @@ export class NotificationComponent implements OnInit {
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
   }
+
+
 }

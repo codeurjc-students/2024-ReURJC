@@ -24,7 +24,7 @@ public class NotificationService {
     }
 
     public List<Notification> findAllByUserId(User user) {
-        return notificationRepository.findByStudentOrderByNotificationIdDesc(user);
+        return notificationRepository.findFirst10ByStudentOrderByNotificationIdDesc(user);
     }
     
 }

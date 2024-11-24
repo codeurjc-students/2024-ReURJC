@@ -18,7 +18,7 @@
           <ion-title>Alertas</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content [fullscreen]="true">
+      <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onScroll($event)"> 
         <app-notification (notificationChange)="showNotificationBadge = $event"></app-notification>
       </ion-content>
     </div>

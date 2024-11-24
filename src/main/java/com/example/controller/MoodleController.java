@@ -79,4 +79,13 @@ public class MoodleController {
         existingMark.setMark(mark);
         subjectMarkService.save(existingMark);
     }
+
+    @PostMapping("/newGradeItem")
+    public ResponseEntity<String> newgradedItem(@RequestBody Map<String, Object> datos) throws Exception {
+
+        
+            return ResponseEntity.badRequest().body("pussy");
+        }
+    
+    
 }
