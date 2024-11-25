@@ -8,67 +8,38 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class SportReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long SportReservationId;
+    private Long sportReservationId;
     
     @ManyToOne
     private User studentId;
-    private LocalDate date;
-    private int startHour;
-    private int endHour;
-    private boolean state;
+    private LocalDateTime date;
 
-    public SportReservation(User studentId, LocalDate day, int startHour, int endHour) {
+    public SportReservation(User studentId, LocalDateTime day) {
         this.studentId = studentId;
         this.date = day;
-        this.startHour = startHour;
-        this.endHour = endHour;
-        state = true;
     }
 
     public Long getSportReservationId() {
-        return SportReservationId;
+        return sportReservationId;
     }
 
     public User getStudentId() {
         return studentId;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public int getStartHour() {
-        return startHour;
-    }
-
-    public int getEndHour() {
-        return endHour;
-    }
-
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-
-    public void setStartHour(int startHour) {
-        this.startHour = startHour;
-    }
-
-    public void setEndHour(int endHour) {
-        this.endHour = endHour;
-    }
-
-    public boolean isState() {
-        return state;
-    }
-
-    public void setState(boolean state) {
-        this.state = state;
     }
 
     

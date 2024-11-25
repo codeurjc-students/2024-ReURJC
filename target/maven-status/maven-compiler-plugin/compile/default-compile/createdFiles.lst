@@ -26,6 +26,7 @@ com/example/services/securityServices/jwt/ApiKeyAuthenticationFilter.class
 com/example/services/securityServices/jwt/UserLoginService.class
 com/example/model/User.class
 com/example/repository/VotesRepository.class
+com/example/services/SportReservationService.class
 com/example/services/FestiveService.class
 com/example/services/securityServices/jwt/UnauthorizedHandlerJwt.class
 com/example/repository/SportReservationrepository.class

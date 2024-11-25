@@ -1,6 +1,7 @@
 package com.example.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class SportReservationService {
     @Autowired
     private SportReservationrepository sportReservationrepository;
 
-    public void newReserve( User studentId, LocalDate date, int startHour, int endHour,  boolean state) {
-        sportReservationrepository.save(new SportReservation(studentId, date, startHour, endHour));
+    public void newReserve( User studentId, LocalDateTime date) {
+        sportReservationrepository.save(new SportReservation(studentId, date));
 
     }
 
@@ -31,7 +32,11 @@ public class SportReservationService {
     }
 
     public boolean isreserveActive(User user) {
-        return getUserReserve(user).getDate().isAfter(LocalDate.now());
+        return getUserReserve(user).getDate().isAfter(LocalDateTime.now());
+    }
+
+    public List<SportReservation> getActivereservations() {
+        return sportReservationrepository.findByDateBeforeOrEqual(LocalDate.now());
     }
     
 }

@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -30,6 +33,7 @@ import java.io.IOException;
 
 import com.example.model.User;
 import com.example.services.EventService;
+import com.example.services.SportReservationService;
 import com.example.services.SubjectMarkService;
 import com.example.services.UserService;
 import com.example.services.VotesService;
@@ -37,11 +41,15 @@ import com.example.services.securityServices.jwt.AuthResponse;
 import com.example.services.securityServices.jwt.LoginRequest;
 import com.example.services.securityServices.jwt.UserLoginService;
 import com.example.services.securityServices.jwt.AuthResponse.Status;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -64,6 +72,9 @@ public class UserController {
 
     @Autowired
     private SubjectMarkService subjectMarkService;
+
+    @Autowired
+    private SportReservationService sportReservationService;
 
     @GetMapping("/me/subjects")
     public ResponseEntity<?> getMethodName(HttpServletRequest request) {
@@ -265,6 +276,44 @@ public ResponseEntity<Boolean> hasVoted(HttpServletRequest request) throws IOExc
 
         return ResponseEntity.notFound().build();
     }
+
+
+@PostMapping("/newReservation")
+public ResponseEntity<?> newSportReservation(HttpServletRequest request, @RequestBody Map<String, Object> SportRervationInfo) {
+    Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            LocalDateTime fechaHora = LocalDateTime.parse(SportRervationInfo.get("año").toString() + "-" + SportRervationInfo.get("mes").toString() + "-" + SportRervationInfo.get("fecha").toString() + " " + SportRervationInfo.get("hora").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            sportReservationService.newReserve(user, fechaHora );
+
+            return ResponseEntity.ok(true);
+        }
+
+        return ResponseEntity.notFound().build();
+
+    
+}
+
+@GetMapping("/getReservations")
+public ResponseEntity<?> getReservations() {
+       return  ResponseEntity.ok(sportReservationService.getActivereservations());
+
+    
+}
+
+@GetMapping("/hasReservation")
+public ResponseEntity<?> getReservations(HttpServletRequest request) {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+        return ResponseEntity.ok(sportReservationService.isreserveActive(user));
+    }
+
+    return ResponseEntity.notFound().build();
+
+    
+}
+
 
     
 
