@@ -1,4 +1,4 @@
-<ion-tabs>
+<ion-tabs (ionTabsDidChange)="onTabChange($event)">
   <ion-tab tab="services">
     <div id="services-page">
       <ion-header>
@@ -11,15 +11,15 @@
       </ion-content>
     </div>
   </ion-tab>
-  <ion-tab tab="alerts">
-    <div id="alerts-page">
+  <ion-tab tab="alerts" >
+    <div id="alerts-page" >
       <ion-header>
         <ion-toolbar>
           <ion-title>Alertas</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content>
-        <div class="example-content">Radio content</div>
+      <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onScroll($event)"> 
+        <app-notification (notificationChange)="showNotificationBadge = $event"></app-notification>
       </ion-content>
     </div>
   </ion-tab>
@@ -66,9 +66,10 @@
       <ion-icon name="briefcase-outline"></ion-icon>
       Servicios
     </ion-tab-button>
-    <ion-tab-button tab="alerts">
+    <ion-tab-button tab="alerts" (click)="hideNotificationBadge()">
       <ion-icon name="notifications-outline"></ion-icon>
       Alertas
+      <ion-badge *ngIf="showNotificationBadge" color="danger"></ion-badge>
     </ion-tab-button>
     <ion-tab-button tab="news">
       <ion-icon name="newspaper-outline"></ion-icon>

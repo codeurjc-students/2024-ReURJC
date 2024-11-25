@@ -7,6 +7,11 @@ import { AuthGuard } from '../services/AuthService/auth-guard.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NewsComponent } from '../news/news/news.component';
 import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.component';
+import { PostulateAsDelegateComponent } from './postulate-as-delegate/postulate-as-delegate.component';
+import { EventGuard } from '../services/EventService/event-guard.guard';
+import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
+import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
+import { FinalMarksComponent } from './final-marks/final-marks.component';
 
 const routes: Routes = [
   {
@@ -28,7 +33,24 @@ const routes: Routes = [
 
     {
       path: 'schedule',
-      component: SubjectScheduleComponent
+      component: SubjectScheduleComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'becomeDelegate',
+      component: PostulateAsDelegateComponent,
+      canActivate: [AuthGuard,EventGuard]
+    },
+    {
+      path: 'voteDelegate',
+      component: VoteDelegatesComponent,
+      canActivate: [AuthGuard,voteDelegateGuard]
+    },
+
+    {
+      path: 'me/finalMarks',
+      component: FinalMarksComponent,
+      canActivate: [AuthGuard]
     },
 ];
 

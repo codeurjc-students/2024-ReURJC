@@ -4,11 +4,15 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SubjectInfo } from './SubjectInfo';
 import { ConvocatoryInfo } from './ConvocatoryInfo';
+import { User } from './user.model';
+import { SubjectMark } from './SubjectMark';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiUserService {
+  
+  
   constructor(private http: HttpClient) {}
 
   // Obtener todos los elementos
@@ -30,7 +34,37 @@ export class ApiUserService {
           convocatory.classroom
         )
       );
-      return new SubjectInfo(item.title, convocatories);
+      return new SubjectInfo(item.id,item.title, convocatories);
     });
+  }
+
+  reqIsDelegateCandidate(): Observable<boolean> {
+    return this.http.get<boolean>("/api/users/me/isDelegate", { withCredentials: true });
+  }
+
+  becomeCandidate() {
+    return this.http.post("/api/users/me/becomeDelegate", { withCredentials: true });
+  }
+
+  cancelCandidacy() {
+    return this.http.post("/api/users/me/cancelCandidacy", { withCredentials: true });
+  }
+
+  getCandidates(): Observable<User[]> {
+    return this.http.get<User[]>("/api/users/candidates",{ withCredentials: false })
+  }
+
+  vote(candidate: number) {
+    this.http.post<boolean>("/api/events/vote",candidate,{ withCredentials: true }).subscribe(data => {
+      console.log(data);
+    })
+  }
+
+  hasVoted(): Observable<boolean> {
+    return this.http.get<boolean>('/api/users/me/hasVoted', { withCredentials: true });
+  }
+
+  getGrades(): Observable<SubjectMark[]> {
+    return this.http.get<SubjectMark[]>('/api/users/me/grades', { withCredentials: true });
   }
 }

@@ -14,10 +14,13 @@ import com.example.model.News;
 import com.example.model.Schedule;
 import com.example.model.Subject;
 import com.example.model.User;
+import com.example.model.Events.BecomeCandidateEvent;
+import com.example.model.Events.VoteDelegateEvent;
 import com.example.repository.FestiveRepository;
 import com.example.repository.NewsRepository;
 import com.example.repository.SubjectRepository;
 import com.example.repository.UserRepository;
+import com.example.services.EventService;
 
 import jakarta.annotation.PostConstruct;
 
@@ -38,11 +41,14 @@ public class DataLoader {
     @Autowired
     private NewsRepository news;
 
+    @Autowired
+    private EventService eventService;
+
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
         // Crear asignaturas de ejemplo
         Subject subject1 = new Subject(10L, "Historia");
-        Subject subject2 = new Subject(20L, "Matemáticas");
+        Subject subject2 = new Subject(23L, "Matemáticas");
         Subject subject3 = new Subject(30L, "Historia de la filología moderna");
 
        Schedule schedule2 = new Schedule( 2, 9, 11, "Aulario II, 102");
@@ -62,7 +68,8 @@ public class DataLoader {
         // Crear usuarios de ejemplo
         User user1 = new User(1L, "John", "Doe", "Smith", "12345678A","mariscalalonso16@icloud.com",passwordEncoder.encode("123"));
         User user2 = new User(2L, "Jane", "Doe", "Smith", "87654321B","yaovi@icloud.com",passwordEncoder.encode("123"));
-
+        User user3 = new User(3L, "lolazo", "Doe", "Smith", "87654321B","yaovi123@icloud.com",passwordEncoder.encode("123"));
+        User user4 = new User(4L, "lolazo123", "Doe", "Smith", "87654321B","yaovi1234@icloud.com",passwordEncoder.encode("123"));
         // Interconexión después de guardar las asignaturas
         user1.getSubjects().addAll(List.of(subject1, subject2));
         user2.getSubjects().add(subject3);
@@ -71,9 +78,11 @@ public class DataLoader {
         user1.setRoles(List.of("USER"));
 
         user2.setRoles(List.of("USER"));
+        user3.setRoles(List.of("USER"));
+        user4.setRoles(List.of("USER"));
 
         // Guardar usuarios
-        userRepository.saveAll(List.of(user1, user2));
+        userRepository.saveAll(List.of(user1, user2,user3,user4));
 
         Festive f2 = new Festive(4, 5, 2024,"#F24726");
         Festive f3 = new Festive(2, 1, 2024,"#33FF8C", "Alcorcón");
@@ -176,5 +185,12 @@ news.save(n13);
 news.save(n14);
 news.save(n15);
 
+eventService.save(new BecomeCandidateEvent("Escolar", "Voto de delegados", "Vota a tus compañeros, porque Demo- de democracia no es una fase beta, sino que el poder está en tus manos", "2025-11-07"));
+eventService.save(new VoteDelegateEvent("Escolar", "Voto a delegados", "Vota a tus compañeros, porque Demo- de democracia no es una fase beta, sino que el poder está en tus manos", "2025-11-07"));
+
     }
+
+   
+
+
 }
