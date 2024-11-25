@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
@@ -15,16 +16,16 @@ public class SportReservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long SportReservationId;
     
-    @OneToOne
+    @ManyToOne
     private User studentId;
     private LocalDate date;
     private int startHour;
     private int endHour;
     private boolean state;
 
-    public SportReservation(User studentId, int daysToAdd, int startHour, int endHour) {
+    public SportReservation(User studentId, LocalDate day, int startHour, int endHour) {
         this.studentId = studentId;
-        this.date = LocalDate.now().plusDays(daysToAdd);
+        this.date = day;
         this.startHour = startHour;
         this.endHour = endHour;
         state = true;
