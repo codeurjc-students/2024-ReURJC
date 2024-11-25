@@ -12,6 +12,7 @@ import { EventGuard } from '../services/EventService/event-guard.guard';
 import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
 import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
 import { FinalMarksComponent } from './final-marks/final-marks.component';
+import { CalendarWithClickComponent } from './calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,11 @@ const routes: Routes = [
     {
       path: 'me/finalMarks',
       component: FinalMarksComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'reservations',
+      component: CalendarWithClickComponent,
       canActivate: [AuthGuard]
     },
 ];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.demo.DemoApplicationTests" time="4.308" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.demo.DemoApplicationTests" time="4.203" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/23/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/surefire/surefirebooter-20241124092059918_3.jar /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/surefire 2024-11-24T09-20-59_873-jvmRun1 surefire-20241124092059918_1tmp surefire_0-20241124092059918_2tmp"/>
+    <property name="sun.java.command" value="/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/surefire/surefirebooter-20241125164113461_3.jar /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/surefire 2024-11-25T16-41-13_419-jvmRun1 surefire-20241125164113461_1tmp surefire_0-20241125164113461_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/test-classes:/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/classes:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-mustache/3.3.4/spring-boot-starter-mustache-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter/3.3.4/spring-boot-starter-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.3.4/spring-boot-starter-logging-3.3.4.jar:/Users/jesussmariscal/.m2/repository/ch/qos/logback/logback-classic/1.5.8/logback-classic-1.5.8.jar:/Users/jesussmariscal/.m2/repository/ch/qos/logback/logback-core/1.5.8/logback-core-1.5.8.jar:/Users/jesussmariscal/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.23.1/log4j-to-slf4j-2.23.1.jar:/Users/jesussmariscal/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/jesussmariscal/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/jesussmariscal/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/jesussmariscal/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/Users/jesussmariscal/.m2/repository/com/samskivert/jmustache/1.16/jmustache-1.16.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.3.4/spring-boot-starter-web-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.3.4/spring-boot-starter-json-3.3.4.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.17.2/jackson-datatype-jdk8-2.17.2.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.17.2/jackson-datatype-jsr310-2.17.2.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.17.2/jackson-module-parameter-names-2.17.2.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.3.4/spring-boot-starter-tomcat-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.30/tomcat-embed-core-10.1.30.jar:/Users/jesussmariscal/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.30/tomcat-embed-el-10.1.30.jar:/Users/jesussmariscal/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.30/tomcat-embed-websocket-10.1.30.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-web/6.1.13/spring-web-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-beans/6.1.13/spring-beans-6.1.13.jar:/Users/jesussmariscal/.m2/repository/io/micrometer/micrometer-observation/1.13.4/micrometer-observation-1.13.4.jar:/Users/jesussmariscal/.m2/repository/io/micrometer/micrometer-commons/1.13.4/micrometer-commons-1.13.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-webmvc/6.1.13/spring-webmvc-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-context/6.1.13/spring-context-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-expression/6.1.13/spring-expression-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.3.4/spring-boot-starter-test-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-test/3.3.4/spring-boot-test-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.3.4/spring-boot-test-autoconfigure-3.3.4.jar:/Users/jesussmariscal/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/jesussmariscal/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/jesussmariscal/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/jesussmariscal/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/jesussmariscal/.m2/repository/net/minidev/json-smart/2.5.1/json-smart-2.5.1.jar:/Users/jesussmariscal/.m2/repository/net/minidev/accessors-smart/2.5.1/accessors-smart-2.5.1.jar:/Users/jesussmariscal/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar:/Users/jesussmariscal/.m2/repository/org/assertj/assertj-core/3.25.3/assertj-core-3.25.3.jar:/Users/jesussmariscal/.m2/repository/net/bytebuddy/byte-buddy/1.14.19/byte-buddy-1.14.19.jar:/Users/jesussmariscal/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/jesussmariscal/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/jesussmariscal/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.3/junit-jupiter-5.10.3.jar:/Users/jesussmariscal/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.3/junit-jupiter-api-5.10.3.jar:/Users/jesussmariscal/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/jesussmariscal/.m2/repository/org/junit/platform/junit-platform-commons/1.10.3/junit-platform-commons-1.10.3.jar:/Users/jesussmariscal/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/jesussmariscal/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.3/junit-jupiter-params-5.10.3.jar:/Users/jesussmariscal/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.3/junit-jupiter-engine-5.10.3.jar:/Users/jesussmariscal/.m2/repository/org/junit/platform/junit-platform-engine/1.10.3/junit-platform-engine-1.10.3.jar:/Users/jesussmariscal/.m2/repository/org/mockito/mockito-core/5.11.0/mockito-core-5.11.0.jar:/Users/jesussmariscal/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar:/Users/jesussmariscal/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/jesussmariscal/.m2/repository/org/mockito/mockito-junit-jupiter/5.11.0/mockito-junit-jupiter-5.11.0.jar:/Users/jesussmariscal/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/jesussmariscal/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-core/6.1.13/spring-core-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-jcl/6.1.13/spring-jcl-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-test/6.1.13/spring-test-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.3.4/spring-boot-starter-data-jpa-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-aop/3.3.4/spring-boot-starter-aop-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.3.4/spring-boot-starter-jdbc-3.3.4.jar:/Users/jesussmariscal/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-jdbc/6.1.13/spring-jdbc-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/hibernate/orm/hibernate-core/6.5.3.Final/hibernate-core-6.5.3.Final.jar:/Users/jesussmariscal/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/jesussmariscal/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/jesussmariscal/.m2/repository/org/jboss/logging/jboss-logging/3.5.3.Final/jboss-logging-3.5.3.Final.jar:/Users/jesussmariscal/.m2/repository/org/hibernate/common/hibernate-commons-annotations/6.0.6.Final/hibernate-commons-annotations-6.0.6.Final.jar:/Users/jesussmariscal/.m2/repository/io/smallrye/jandex/3.1.2/jandex-3.1.2.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/jesussmariscal/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/jesussmariscal/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/jesussmariscal/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/jesussmariscal/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/jesussmariscal/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/jesussmariscal/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/jesussmariscal/.m2/repository/org/springframework/data/spring-data-jpa/3.3.4/spring-data-jpa-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/data/spring-data-commons/3.3.4/spring-data-commons-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-orm/6.1.13/spring-orm-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-tx/6.1.13/spring-tx-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-aspects/6.1.13/spring-aspects-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.3.4/spring-boot-starter-websocket-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-messaging/6.1.13/spring-messaging-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-websocket/6.1.13/spring-websocket-6.1.13.jar:/Users/jesussmariscal/.m2/repository/com/mysql/mysql-connector-j/8.0.31/mysql-connector-j-8.0.31.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.3.4/spring-boot-starter-security-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-aop/6.1.13/spring-aop-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/springframework/security/spring-security-config/6.3.3/spring-security-config-6.3.3.jar:/Users/jesussmariscal/.m2/repository/org/springframework/security/spring-security-core/6.3.3/spring-security-core-6.3.3.jar:/Users/jesussmariscal/.m2/repository/org/springframework/security/spring-security-crypto/6.3.3/spring-security-crypto-6.3.3.jar:/Users/jesussmariscal/.m2/repository/org/springframework/security/spring-security-web/6.3.3/spring-security-web-6.3.3.jar:/Users/jesussmariscal/.m2/repository/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.2/jackson-databind-2.17.2.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.2/jackson-annotations-2.17.2.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.2/jackson-core-2.17.2.jar:/Users/jesussmariscal/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar:/Users/jesussmariscal/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-devtools/3.3.4/spring-boot-devtools-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot/3.3.4/spring-boot-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.3.4/spring-boot-autoconfigure-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar:/Users/jesussmariscal/.m2/repository/org/springframework/boot/spring-boot-starter-mail/3.3.4/spring-boot-starter-mail-3.3.4.jar:/Users/jesussmariscal/.m2/repository/org/springframework/spring-context-support/6.1.13/spring-context-support-6.1.13.jar:/Users/jesussmariscal/.m2/repository/org/eclipse/angus/jakarta.mail/2.0.3/jakarta.mail-2.0.3.jar:/Users/jesussmariscal/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/jesussmariscal/.m2/repository/javax/mail/mail/1.5.0-b01/mail-1.5.0-b01.jar:/Users/jesussmariscal/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar:/Users/jesussmariscal/.m2/repository/com/github/librepdf/openpdf/2.0.0/openpdf-2.0.0.jar:/Users/jesussmariscal/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-ui/2.3.0/springdoc-openapi-starter-webmvc-ui-2.3.0.jar:/Users/jesussmariscal/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-api/2.3.0/springdoc-openapi-starter-webmvc-api-2.3.0.jar:/Users/jesussmariscal/.m2/repository/org/springdoc/springdoc-openapi-starter-common/2.3.0/springdoc-openapi-starter-common-2.3.0.jar:/Users/jesussmariscal/.m2/repository/io/swagger/core/v3/swagger-core-jakarta/2.2.19/swagger-core-jakarta-2.2.19.jar:/Users/jesussmariscal/.m2/repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/Users/jesussmariscal/.m2/repository/io/swagger/core/v3/swagger-annotations-jakarta/2.2.19/swagger-annotations-jakarta-2.2.19.jar:/Users/jesussmariscal/.m2/repository/io/swagger/core/v3/swagger-models-jakarta/2.2.19/swagger-models-jakarta-2.2.19.jar:/Users/jesussmariscal/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/jesussmariscal/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.17.2/jackson-dataformat-yaml-2.17.2.jar:/Users/jesussmariscal/.m2/repository/org/webjars/swagger-ui/5.10.3/swagger-ui-5.10.3.jar:/Users/jesussmariscal/.m2/repository/com/google/protobuf/protobuf-java/3.22.0/protobuf-java-3.22.0.jar:"/>
@@ -33,7 +33,7 @@
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/surefire/surefirebooter-20241124092059918_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC/target/surefire/surefirebooter-20241125164113461_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="23"/>
@@ -53,7 +53,7 @@
     <property name="user.dir" value="/Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC"/>
     <property name="os.arch" value="aarch64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="66505"/>
+    <property name="PID" value="38308"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/jesussmariscal/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
@@ -65,10 +65,10 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="contextLoads" classname="com.example.demo.DemoApplicationTests" time="0.37">
-    <system-out><![CDATA[09:21:00.372 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.demo.DemoApplicationTests]: DemoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-09:21:00.431 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.DemoApplication for test class com.example.demo.DemoApplicationTests
-09:21:00.503 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+  <testcase name="contextLoads" classname="com.example.demo.DemoApplicationTests" time="0.33">
+    <system-out><![CDATA[16:41:13.928 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.demo.DemoApplicationTests]: DemoApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:41:13.985 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.DemoApplication for test class com.example.demo.DemoApplicationTests
+16:41:14.054 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -79,25 +79,25 @@
 
  :: Spring Boot ::                (v3.3.4)
 
-2024-11-24T09:21:00.650+01:00  INFO 66505 --- [           main] com.example.demo.DemoApplicationTests    : Starting DemoApplicationTests using Java 23 with PID 66505 (started by jesussmariscal in /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC)
-2024-11-24T09:21:00.651+01:00  INFO 66505 --- [           main] com.example.demo.DemoApplicationTests    : No active profile set, falling back to 1 default profile: "default"
-2024-11-24T09:21:00.676+01:00 DEBUG 66505 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@619bd14c
-2024-11-24T09:21:00.952+01:00  INFO 66505 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-11-24T09:21:00.976+01:00  INFO 66505 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 10 JPA repository interfaces.
-2024-11-24T09:21:01.335+01:00  INFO 66505 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-11-24T09:21:01.364+01:00  INFO 66505 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2024-11-24T09:21:01.381+01:00  INFO 66505 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-11-24T09:21:01.526+01:00  INFO 66505 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-11-24T09:21:01.541+01:00  INFO 66505 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-11-24T09:21:01.786+01:00  INFO 66505 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2e0fdc83
-2024-11-24T09:21:01.787+01:00  INFO 66505 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-11-24T09:21:02.348+01:00  INFO 66505 --- [           main] o.h.m.i.EntityInstantiatorPojoStandard   : HHH000182: No default (no-argument) constructor for class: com.example.model.SportReservation (class must be instantiated by Interceptor)
-2024-11-24T09:21:02.484+01:00  INFO 66505 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-11-24T09:21:02.490+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:14.170+01:00  INFO 38308 --- [           main] com.example.demo.DemoApplicationTests    : Starting DemoApplicationTests using Java 23 with PID 38308 (started by jesussmariscal in /Users/jesussmariscal/Desktop/Universidad/Cuarto curso/TFG/MyURJC/2024-ReURJC)
+2024-11-25T16:41:14.170+01:00  INFO 38308 --- [           main] com.example.demo.DemoApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2024-11-25T16:41:14.189+01:00 DEBUG 38308 --- [           main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@619bd14c
+2024-11-25T16:41:14.478+01:00  INFO 38308 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-25T16:41:14.502+01:00  INFO 38308 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 10 JPA repository interfaces.
+2024-11-25T16:41:14.866+01:00  INFO 38308 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-25T16:41:14.894+01:00  INFO 38308 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-25T16:41:14.909+01:00  INFO 38308 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-11-25T16:41:15.059+01:00  INFO 38308 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-25T16:41:15.073+01:00  INFO 38308 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-11-25T16:41:15.350+01:00  INFO 38308 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@432a6a69
+2024-11-25T16:41:15.350+01:00  INFO 38308 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-11-25T16:41:15.812+01:00  INFO 38308 --- [           main] o.h.m.i.EntityInstantiatorPojoStandard   : HHH000182: No default (no-argument) constructor for class: com.example.model.SportReservation (class must be instantiated by Interceptor)
+2024-11-25T16:41:15.962+01:00  INFO 38308 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-25T16:41:15.967+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table notification 
        drop 
        foreign key FKija0dqnx5c9wj40xxg6fvlfke
-2024-11-24T09:21:02.527+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.005+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table notification 
        drop 
        foreign key FKija0dqnx5c9wj40xxg6fvlfke" via JDBC [Table 'tfgdb.notification' doesn't exist]
@@ -234,11 +234,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.notification' doesn't 
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.530+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.009+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table sport_reservation 
        drop 
        foreign key FKal01t2ygioyiekhwm8oduph3y
-2024-11-24T09:21:02.532+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.010+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table sport_reservation 
        drop 
        foreign key FKal01t2ygioyiekhwm8oduph3y" via JDBC [Table 'tfgdb.sport_reservation' doesn't exist]
@@ -375,11 +375,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.sport_reservation' doe
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.534+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.012+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_convocatories 
        drop 
        foreign key FKrolm27lfyrmk81cj8flcakwly
-2024-11-24T09:21:02.535+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.013+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table subject_convocatories 
        drop 
        foreign key FKrolm27lfyrmk81cj8flcakwly" via JDBC [Table 'tfgdb.subject_convocatories' doesn't exist]
@@ -516,11 +516,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.subject_convocatories'
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.537+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.015+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_convocatories 
        drop 
        foreign key FK1y0jf2c7vgh3b2vt1x3au8irm
-2024-11-24T09:21:02.538+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.016+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table subject_convocatories 
        drop 
        foreign key FK1y0jf2c7vgh3b2vt1x3au8irm" via JDBC [Table 'tfgdb.subject_convocatories' doesn't exist]
@@ -657,11 +657,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.subject_convocatories'
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.540+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.018+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_mark 
        drop 
        foreign key FK6t454gph29srjoklrt1ovd5ih
-2024-11-24T09:21:02.542+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.018+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table subject_mark 
        drop 
        foreign key FK6t454gph29srjoklrt1ovd5ih" via JDBC [Table 'tfgdb.subject_mark' doesn't exist]
@@ -798,11 +798,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.subject_mark' doesn't 
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.543+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.019+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_mark 
        drop 
        foreign key FK1i55npugucd1s4racx26kg6e1
-2024-11-24T09:21:02.544+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.020+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table subject_mark 
        drop 
        foreign key FK1i55npugucd1s4racx26kg6e1" via JDBC [Table 'tfgdb.subject_mark' doesn't exist]
@@ -939,11 +939,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.subject_mark' doesn't 
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.544+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.021+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_schedule 
        drop 
        foreign key FKckhboq6i47u0y5irk608naxk1
-2024-11-24T09:21:02.545+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.022+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table subject_schedule 
        drop 
        foreign key FKckhboq6i47u0y5irk608naxk1" via JDBC [Table 'tfgdb.subject_schedule' doesn't exist]
@@ -1080,11 +1080,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.subject_schedule' does
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.546+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.023+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_schedule 
        drop 
        foreign key FKacylrarfijvrffu5tfijapoyv
-2024-11-24T09:21:02.547+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.024+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table subject_schedule 
        drop 
        foreign key FKacylrarfijvrffu5tfijapoyv" via JDBC [Table 'tfgdb.subject_schedule' doesn't exist]
@@ -1221,11 +1221,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.subject_schedule' does
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.548+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.025+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table user_roles 
        drop 
        foreign key FKsiws3mh2m89qed2jpxcbvdrkh
-2024-11-24T09:21:02.550+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.027+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table user_roles 
        drop 
        foreign key FKsiws3mh2m89qed2jpxcbvdrkh" via JDBC [Table 'tfgdb.user_roles' doesn't exist]
@@ -1362,11 +1362,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.user_roles' doesn't ex
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.550+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.028+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table user_subject 
        drop 
        foreign key FK8xwdo7i5lavkapi3hf891raea
-2024-11-24T09:21:02.552+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.029+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table user_subject 
        drop 
        foreign key FK8xwdo7i5lavkapi3hf891raea" via JDBC [Table 'tfgdb.user_subject' doesn't exist]
@@ -1503,11 +1503,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.user_subject' doesn't 
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.554+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.030+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table user_subject 
        drop 
        foreign key FKgeg9ud2lpod26abh4x3wxc17k
-2024-11-24T09:21:02.555+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.031+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table user_subject 
        drop 
        foreign key FKgeg9ud2lpod26abh4x3wxc17k" via JDBC [Table 'tfgdb.user_subject' doesn't exist]
@@ -1644,11 +1644,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.user_subject' doesn't 
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.556+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.031+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table vote 
        drop 
        foreign key FK7hce2um5xaftlab6ymi4muvw9
-2024-11-24T09:21:02.559+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.033+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table vote 
        drop 
        foreign key FK7hce2um5xaftlab6ymi4muvw9" via JDBC [Table 'tfgdb.vote' doesn't exist]
@@ -1785,11 +1785,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.559+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.033+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table vote 
        drop 
        foreign key FKh59oeulsweuq6octrmqopeakw
-2024-11-24T09:21:02.560+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.034+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table vote 
        drop 
        foreign key FKh59oeulsweuq6octrmqopeakw" via JDBC [Table 'tfgdb.vote' doesn't exist]
@@ -1926,11 +1926,11 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.561+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.035+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table vote 
        drop 
        foreign key FKhtn2def3h3mw3ft6mtjtxatub
-2024-11-24T09:21:02.563+01:00  WARN 66505 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+2024-11-25T16:41:16.036+01:00  WARN 38308 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
     alter table vote 
        drop 
        foreign key FKhtn2def3h3mw3ft6mtjtxatub" via JDBC [Table 'tfgdb.vote' doesn't exist]
@@ -2067,53 +2067,53 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80) ~[hibernate-core-6.5.3.Final.jar:6.5.3.Final]
 	... 117 common frames omitted
 
-2024-11-24T09:21:02.564+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.037+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists convocatory
-2024-11-24T09:21:02.576+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.044+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists convocatory_seq
-2024-11-24T09:21:02.578+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.046+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists event
-2024-11-24T09:21:02.580+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.047+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists event_seq
-2024-11-24T09:21:02.582+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.048+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists festive
-2024-11-24T09:21:02.583+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.050+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists festive_seq
-2024-11-24T09:21:02.585+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.051+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists news
-2024-11-24T09:21:02.586+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.052+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists news_seq
-2024-11-24T09:21:02.587+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.053+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists notification
-2024-11-24T09:21:02.588+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.055+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists notification_seq
-2024-11-24T09:21:02.589+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.056+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists schedule
-2024-11-24T09:21:02.590+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.057+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists schedule_seq
-2024-11-24T09:21:02.591+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.059+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists sport_reservation_seq
-2024-11-24T09:21:02.592+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.061+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists sport_reservation
-2024-11-24T09:21:02.593+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.065+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists subject
-2024-11-24T09:21:02.594+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.068+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists subject_convocatories
-2024-11-24T09:21:02.595+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.069+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists subject_mark
-2024-11-24T09:21:02.597+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.070+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists subject_mark_seq
-2024-11-24T09:21:02.598+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.071+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists subject_schedule
-2024-11-24T09:21:02.599+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.072+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists user
-2024-11-24T09:21:02.600+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.073+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists user_roles
-2024-11-24T09:21:02.601+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.074+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists user_subject
-2024-11-24T09:21:02.601+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.076+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     drop table if exists vote
-2024-11-24T09:21:02.606+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.080+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table convocatory (
         convocatory integer not null,
         convocatoria_id bigint not null,
@@ -2121,13 +2121,13 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         date varchar(255),
         primary key (convocatoria_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.621+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.103+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table convocatory_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.623+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.105+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into convocatory_seq values ( 1 )
-2024-11-24T09:21:02.625+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.108+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table event (
         tab_display integer not null,
         event_id bigint not null,
@@ -2139,13 +2139,13 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         title varchar(255),
         primary key (event_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.633+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.111+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table event_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.635+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.113+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into event_seq values ( 1 )
-2024-11-24T09:21:02.636+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.113+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table festive (
         day integer not null,
         month integer not null,
@@ -2156,13 +2156,13 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         local varchar(255),
         primary key (festive_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.639+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.116+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table festive_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.642+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.118+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into festive_seq values ( 1 )
-2024-11-24T09:21:02.642+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.119+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table news (
         news_id bigint not null,
         date varchar(255),
@@ -2170,13 +2170,13 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         title varchar(255),
         primary key (news_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.645+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.122+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table news_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.650+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.125+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into news_seq values ( 1 )
-2024-11-24T09:21:02.652+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.125+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table notification (
         notification_id bigint not null,
         student_student_id bigint,
@@ -2184,13 +2184,13 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         title varchar(255),
         primary key (notification_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.656+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.128+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table notification_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.658+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.132+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into notification_seq values ( 1 )
-2024-11-24T09:21:02.659+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.133+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table schedule (
         day_of_week integer not null,
         end_hour integer not null,
@@ -2199,40 +2199,37 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         class_room varchar(255),
         primary key (schedule_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.661+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.135+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table schedule_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.663+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.138+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into schedule_seq values ( 1 )
-2024-11-24T09:21:02.664+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.139+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table sport_reservation_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.666+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.141+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into sport_reservation_seq values ( 1 )
-2024-11-24T09:21:02.667+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.142+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table sport_reservation (
-        date date,
-        end_hour integer not null,
-        start_hour integer not null,
-        state bit not null,
+        date datetime(6),
         sport_reservation_id bigint not null,
         student_id_student_id bigint,
         primary key (sport_reservation_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.669+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.144+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table subject (
         subject_id bigint not null,
         title varchar(255),
         primary key (subject_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.672+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.147+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table subject_convocatories (
         convocatories_convocatoria_id bigint not null,
         subject_subject_id bigint not null
     ) engine=InnoDB
-2024-11-24T09:21:02.674+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.150+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table subject_mark (
         mark integer not null,
         student_id_student_id bigint,
@@ -2242,18 +2239,18 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         name_mark varchar(255),
         primary key (subject_mark_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.676+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.152+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table subject_mark_seq (
         next_val bigint
     ) engine=InnoDB
-2024-11-24T09:21:02.678+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.154+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert into subject_mark_seq values ( 1 )
-2024-11-24T09:21:02.678+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.155+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table subject_schedule (
         schedule_schedule_id bigint not null,
         subject_subject_id bigint not null
     ) engine=InnoDB
-2024-11-24T09:21:02.682+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.157+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table user (
         is_candidate bit not null,
         votes integer not null,
@@ -2267,17 +2264,17 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         photo longblob,
         primary key (student_id)
     ) engine=InnoDB
-2024-11-24T09:21:02.684+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.160+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table user_roles (
         user_student_id bigint not null,
         roles varchar(255)
     ) engine=InnoDB
-2024-11-24T09:21:02.687+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.163+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table user_subject (
         subject_id bigint not null,
         user_id bigint not null
     ) engine=InnoDB
-2024-11-24T09:21:02.689+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.165+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     create table vote (
         event_id bigint not null,
         id bigint not null auto_increment,
@@ -2286,88 +2283,85 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
         voter_id bigint not null,
         primary key (id)
     ) engine=InnoDB
-2024-11-24T09:21:02.692+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
-    alter table sport_reservation 
-       add constraint UKh6aohx6blmgxi7n4jpq3dko4l unique (student_id_student_id)
-2024-11-24T09:21:02.697+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.168+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_convocatories 
        add constraint UK982dr91s43krq5qh47lm8rva5 unique (convocatories_convocatoria_id)
-2024-11-24T09:21:02.700+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.176+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_schedule 
        add constraint UK3lkp71n2skpgx2jk0p2hye88e unique (schedule_schedule_id)
-2024-11-24T09:21:02.705+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.182+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table notification 
        add constraint FKija0dqnx5c9wj40xxg6fvlfke 
        foreign key (student_student_id) 
        references user (student_id)
-2024-11-24T09:21:02.714+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.194+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table sport_reservation 
        add constraint FKal01t2ygioyiekhwm8oduph3y 
        foreign key (student_id_student_id) 
        references user (student_id)
-2024-11-24T09:21:02.720+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.201+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_convocatories 
        add constraint FKrolm27lfyrmk81cj8flcakwly 
        foreign key (convocatories_convocatoria_id) 
        references convocatory (convocatoria_id)
-2024-11-24T09:21:02.729+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.209+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_convocatories 
        add constraint FK1y0jf2c7vgh3b2vt1x3au8irm 
        foreign key (subject_subject_id) 
        references subject (subject_id)
-2024-11-24T09:21:02.736+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.219+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_mark 
        add constraint FK6t454gph29srjoklrt1ovd5ih 
        foreign key (student_id_student_id) 
        references user (student_id)
-2024-11-24T09:21:02.743+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.225+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_mark 
        add constraint FK1i55npugucd1s4racx26kg6e1 
        foreign key (subject_id_subject_id) 
        references subject (subject_id)
-2024-11-24T09:21:02.749+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.234+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_schedule 
        add constraint FKckhboq6i47u0y5irk608naxk1 
        foreign key (schedule_schedule_id) 
        references schedule (schedule_id)
-2024-11-24T09:21:02.754+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.239+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table subject_schedule 
        add constraint FKacylrarfijvrffu5tfijapoyv 
        foreign key (subject_subject_id) 
        references subject (subject_id)
-2024-11-24T09:21:02.759+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.245+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table user_roles 
        add constraint FKsiws3mh2m89qed2jpxcbvdrkh 
        foreign key (user_student_id) 
        references user (student_id)
-2024-11-24T09:21:02.765+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.253+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table user_subject 
        add constraint FK8xwdo7i5lavkapi3hf891raea 
        foreign key (subject_id) 
        references subject (subject_id)
-2024-11-24T09:21:02.770+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.259+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table user_subject 
        add constraint FKgeg9ud2lpod26abh4x3wxc17k 
        foreign key (user_id) 
        references user (student_id)
-2024-11-24T09:21:02.778+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.265+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table vote 
        add constraint FK7hce2um5xaftlab6ymi4muvw9 
        foreign key (event_id) 
        references event (event_id)
-2024-11-24T09:21:02.783+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.271+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table vote 
        add constraint FKh59oeulsweuq6octrmqopeakw 
        foreign key (voted_id) 
        references user (student_id)
-2024-11-24T09:21:02.789+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.278+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     alter table vote 
        add constraint FKhtn2def3h3mw3ft6mtjtxatub 
        foreign key (voter_id) 
        references user (student_id)
-2024-11-24T09:21:02.799+01:00  INFO 66505 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-11-24T09:21:02.952+01:00  INFO 66505 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2024-11-24T09:21:03.271+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.289+01:00  INFO 38308 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-25T16:41:16.452+01:00  INFO 38308 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-25T16:41:16.780+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_id,
         s1_0.title,
@@ -2386,55 +2380,55 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on c1_1.convocatoria_id=c1_0.convocatories_convocatoria_id 
     where
         s1_0.subject_id=?
-2024-11-24T09:21:03.292+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.793+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         convocatory_seq for update
-2024-11-24T09:21:03.293+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.793+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         convocatory_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.295+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.795+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         convocatory_seq for update
-2024-11-24T09:21:03.295+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.795+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         convocatory_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.297+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.796+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         schedule_seq for update
-2024-11-24T09:21:03.297+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.797+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         schedule_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.298+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.798+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         schedule_seq for update
-2024-11-24T09:21:03.298+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.798+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         schedule_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.299+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.799+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_id,
         s1_0.title,
@@ -2453,7 +2447,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on c1_1.convocatoria_id=c1_0.convocatories_convocatoria_id 
     where
         s1_0.subject_id=?
-2024-11-24T09:21:03.300+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.800+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_id,
         s1_0.title,
@@ -2472,84 +2466,84 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on c1_1.convocatoria_id=c1_0.convocatories_convocatoria_id 
     where
         s1_0.subject_id=?
-2024-11-24T09:21:03.306+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.807+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject
         (title, subject_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.308+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.809+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         convocatory
         (classroom, convocatory, date, convocatoria_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.309+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.809+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         convocatory
         (classroom, convocatory, date, convocatoria_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.309+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.810+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         schedule
         (class_room, day_of_week, end_hour, start_hour, schedule_id) 
     values
         (?, ?, ?, ?, ?)
-2024-11-24T09:21:03.310+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.810+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         schedule
         (class_room, day_of_week, end_hour, start_hour, schedule_id) 
     values
         (?, ?, ?, ?, ?)
-2024-11-24T09:21:03.311+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.811+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject
         (title, subject_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.311+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.811+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject
         (title, subject_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.313+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.813+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject_convocatories
         (subject_subject_id, convocatories_convocatoria_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.313+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.813+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject_convocatories
         (subject_subject_id, convocatories_convocatoria_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.314+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.814+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject_schedule
         (subject_subject_id, schedule_schedule_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.314+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:16.814+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         subject_schedule
         (subject_subject_id, schedule_schedule_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.619+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.114+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         u1_0.student_id,
         u1_0.dni,
@@ -2570,7 +2564,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on u1_0.student_id=r1_0.user_student_id 
     where
         u1_0.student_id=?
-2024-11-24T09:21:03.623+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.119+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_id,
         s1_0.title,
@@ -2589,7 +2583,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on c1_1.convocatoria_id=c1_0.convocatories_convocatoria_id 
     where
         s1_0.subject_id=?
-2024-11-24T09:21:03.629+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.124+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_subject_id,
         s1_1.schedule_id,
@@ -2604,7 +2598,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on s1_1.schedule_id=s1_0.schedule_schedule_id 
     where
         s1_0.subject_subject_id=?
-2024-11-24T09:21:03.631+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.125+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_id,
         s1_0.title,
@@ -2623,7 +2617,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on c1_1.convocatoria_id=c1_0.convocatories_convocatoria_id 
     where
         s1_0.subject_id=?
-2024-11-24T09:21:03.632+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.126+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_subject_id,
         s1_1.schedule_id,
@@ -2638,7 +2632,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on s1_1.schedule_id=s1_0.schedule_schedule_id 
     where
         s1_0.subject_subject_id=?
-2024-11-24T09:21:03.633+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.127+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         u1_0.student_id,
         u1_0.dni,
@@ -2659,7 +2653,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on u1_0.student_id=r1_0.user_student_id 
     where
         u1_0.student_id=?
-2024-11-24T09:21:03.633+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.127+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_id,
         s1_0.title,
@@ -2678,7 +2672,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on c1_1.convocatoria_id=c1_0.convocatories_convocatoria_id 
     where
         s1_0.subject_id=?
-2024-11-24T09:21:03.634+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.128+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         s1_0.subject_subject_id,
         s1_1.schedule_id,
@@ -2693,7 +2687,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on s1_1.schedule_id=s1_0.schedule_schedule_id 
     where
         s1_0.subject_subject_id=?
-2024-11-24T09:21:03.635+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.128+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         u1_0.student_id,
         u1_0.dni,
@@ -2714,7 +2708,7 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on u1_0.student_id=r1_0.user_student_id 
     where
         u1_0.student_id=?
-2024-11-24T09:21:03.636+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.129+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         u1_0.student_id,
         u1_0.dni,
@@ -2735,357 +2729,357 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'tfgdb.vote' doesn't exist
             on u1_0.student_id=r1_0.user_student_id 
     where
         u1_0.student_id=?
-2024-11-24T09:21:03.637+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.131+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user
         (dni, email, is_candidate, name, password, photo, surname1, surname2, votes, student_id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.645+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.137+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user
         (dni, email, is_candidate, name, password, photo, surname1, surname2, votes, student_id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.653+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.142+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user
         (dni, email, is_candidate, name, password, photo, surname1, surname2, votes, student_id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.662+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.146+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user
         (dni, email, is_candidate, name, password, photo, surname1, surname2, votes, student_id) 
     values
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.669+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.151+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_subject
         (user_id, subject_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.669+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.151+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_subject
         (user_id, subject_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.670+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.152+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_subject
         (user_id, subject_id) 
     values
         (?, ?)
-2024-11-24T09:21:03.670+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.152+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_roles
         (user_student_id, roles) 
     values
         (?, ?)
-2024-11-24T09:21:03.670+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.152+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_roles
         (user_student_id, roles) 
     values
         (?, ?)
-2024-11-24T09:21:03.671+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.153+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_roles
         (user_student_id, roles) 
     values
         (?, ?)
-2024-11-24T09:21:03.671+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.153+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         user_roles
         (user_student_id, roles) 
     values
         (?, ?)
-2024-11-24T09:21:03.673+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.155+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         festive_seq for update
-2024-11-24T09:21:03.674+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.156+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         festive_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.675+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.157+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         festive
         (color, day, local, month, startedxdays_ago, year, festive_id) 
     values
         (?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.678+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.160+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         festive_seq for update
-2024-11-24T09:21:03.679+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.160+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         festive_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.680+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.161+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         festive
         (color, day, local, month, startedxdays_ago, year, festive_id) 
     values
         (?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.681+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.163+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         festive
         (color, day, local, month, startedxdays_ago, year, festive_id) 
     values
         (?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.682+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.164+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         festive
         (color, day, local, month, startedxdays_ago, year, festive_id) 
     values
         (?, ?, ?, ?, ?, ?, ?)
-2024-11-24T09:21:03.683+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.165+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         news_seq for update
-2024-11-24T09:21:03.684+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.165+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         news_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.685+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.166+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.686+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.167+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         news_seq for update
-2024-11-24T09:21:03.686+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.167+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         news_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.687+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.168+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.688+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.169+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.689+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.170+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.690+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.171+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.691+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.172+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.692+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.172+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.693+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.173+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.694+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.174+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.695+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.175+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.696+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.176+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.697+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.176+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.698+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.177+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.699+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.178+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.700+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.179+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         news
         (date, description, title, news_id) 
     values
         (?, ?, ?, ?)
-2024-11-24T09:21:03.701+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.180+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         event_seq for update
-2024-11-24T09:21:03.701+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.180+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         event_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.702+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.181+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         event
         (api_caller, description, end_date, subtitle, tab_display, title, dtype, event_id) 
     values
         (?, ?, ?, ?, ?, ?, 'BecomeCandidateEvent', ?)
-2024-11-24T09:21:03.704+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.182+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     select
         next_val as id_val 
     from
         event_seq for update
-2024-11-24T09:21:03.704+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.182+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     update
         event_seq 
     set
         next_val= ? 
     where
         next_val=?
-2024-11-24T09:21:03.706+01:00 DEBUG 66505 --- [           main] org.hibernate.SQL                        : 
+2024-11-25T16:41:17.183+01:00 DEBUG 38308 --- [           main] org.hibernate.SQL                        : 
     insert 
     into
         event
         (api_caller, description, end_date, subtitle, tab_display, title, dtype, event_id) 
     values
         (?, ?, ?, ?, ?, ?, 'VoteDelegateEvent', ?)
-2024-11-24T09:21:03.805+01:00  INFO 66505 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name repositoryUserDetailsService
-2024-11-24T09:21:03.830+01:00 DEBUG 66505 --- [           main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/newGrade/**] in 'stompWebSocketHandlerMapping'
-2024-11-24T09:21:03.899+01:00  WARN 66505 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-11-24T09:21:03.929+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.278+01:00  INFO 38308 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name repositoryUserDetailsService
+2024-11-25T16:41:17.315+01:00 DEBUG 38308 --- [           main] o.s.w.s.s.s.WebSocketHandlerMapping      : Patterns [/newGrade/**] in 'stompWebSocketHandlerMapping'
+2024-11-25T16:41:17.401+01:00  WARN 38308 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-25T16:41:17.413+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.EventsController:
 	
-2024-11-24T09:21:03.929+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.413+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.FestivesController:
 	
-2024-11-24T09:21:03.930+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.413+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.MoodleController:
 	
-2024-11-24T09:21:03.930+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.413+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.MyWebSocketController:
 	
-2024-11-24T09:21:03.930+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.413+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.NewsController:
 	
-2024-11-24T09:21:03.930+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.413+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.NotificationController:
 	
-2024-11-24T09:21:03.930+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.414+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.SubjectsController:
 	
-2024-11-24T09:21:03.930+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.414+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	c.e.c.UserController:
 	
-2024-11-24T09:21:03.931+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.414+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-2024-11-24T09:21:03.933+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.416+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.a.OpenApiWebMvcResource:
 	
-2024-11-24T09:21:03.933+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.417+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.u.SwaggerWelcomeWebMvc:
 	
-2024-11-24T09:21:03.933+01:00 DEBUG 66505 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
+2024-11-25T16:41:17.417+01:00 DEBUG 38308 --- [           main] .WebSocketAnnotationMethodMessageHandler : 
 	o.s.w.u.SwaggerConfigResource:
 	
-2024-11-24T09:21:03.996+01:00 DEBUG 66505 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 25 mappings in 'requestMappingHandlerMapping'
-2024-11-24T09:21:04.024+01:00 DEBUG 66505 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
-2024-11-24T09:21:04.037+01:00 DEBUG 66505 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, ApiKeyAuthenticationFilter, JwtRequestFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2024-11-24T09:21:04.124+01:00 DEBUG 66505 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2024-11-24T09:21:04.139+01:00 DEBUG 66505 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2024-11-24T09:21:04.146+01:00  WARN 66505 --- [           main] o.s.b.a.m.MustacheAutoConfiguration      : Cannot find template location: classpath:/templates/ (please add some templates, check your Mustache configuration, or set spring.mustache.check-template-location=false)
-2024-11-24T09:21:04.205+01:00 DEBUG 66505 --- [           main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2024-11-24T09:21:04.205+01:00 DEBUG 66505 --- [           main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2024-11-24T09:21:04.205+01:00  INFO 66505 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2024-11-24T09:21:04.205+01:00 DEBUG 66505 --- [           main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5f1908c5]
-2024-11-24T09:21:04.205+01:00 DEBUG 66505 --- [           main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5f1908c5]
-2024-11-24T09:21:04.205+01:00  INFO 66505 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5f1908c5]]
-2024-11-24T09:21:04.206+01:00  INFO 66505 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2024-11-24T09:21:04.206+01:00 DEBUG 66505 --- [           main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2024-11-24T09:21:04.206+01:00 DEBUG 66505 --- [           main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2024-11-24T09:21:04.216+01:00  INFO 66505 --- [           main] com.example.demo.DemoApplicationTests    : Started DemoApplicationTests in 3.717 seconds (process running for 4.22)
+2024-11-25T16:41:17.480+01:00 DEBUG 38308 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : 29 mappings in 'requestMappingHandlerMapping'
+2024-11-25T16:41:17.510+01:00 DEBUG 38308 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2024-11-25T16:41:17.525+01:00 DEBUG 38308 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, ApiKeyAuthenticationFilter, JwtRequestFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-25T16:41:17.607+01:00 DEBUG 38308 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2024-11-25T16:41:17.622+01:00 DEBUG 38308 --- [           main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2024-11-25T16:41:17.628+01:00  WARN 38308 --- [           main] o.s.b.a.m.MustacheAutoConfiguration      : Cannot find template location: classpath:/templates/ (please add some templates, check your Mustache configuration, or set spring.mustache.check-template-location=false)
+2024-11-25T16:41:17.696+01:00 DEBUG 38308 --- [           main] org.springframework.web.SimpLogging      : clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2024-11-25T16:41:17.696+01:00 DEBUG 38308 --- [           main] org.springframework.web.SimpLogging      : clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2024-11-25T16:41:17.696+01:00  INFO 38308 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2024-11-25T16:41:17.696+01:00 DEBUG 38308 --- [           main] org.springframework.web.SimpLogging      : clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6f61698]
+2024-11-25T16:41:17.696+01:00 DEBUG 38308 --- [           main] org.springframework.web.SimpLogging      : brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6f61698]
+2024-11-25T16:41:17.696+01:00  INFO 38308 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6f61698]]
+2024-11-25T16:41:17.697+01:00  INFO 38308 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2024-11-25T16:41:17.697+01:00 DEBUG 38308 --- [           main] org.springframework.web.SimpLogging      : clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-11-25T16:41:17.697+01:00 DEBUG 38308 --- [           main] org.springframework.web.SimpLogging      : brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2024-11-25T16:41:17.704+01:00  INFO 38308 --- [           main] com.example.demo.DemoApplicationTests    : Started DemoApplicationTests in 3.655 seconds (process running for 4.129)
 ]]></system-out>
     <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/jesussmariscal/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
