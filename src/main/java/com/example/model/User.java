@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -31,13 +33,16 @@ public class User {
     private String dni;
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
+    @JsonIgnore
     private Blob photo;
     private boolean isCandidate;
     private int votes;
+    @JsonIgnore
     private String email;
+    @JsonIgnore
 	private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_subject",
         joinColumns = @JoinColumn(name = "userId"),

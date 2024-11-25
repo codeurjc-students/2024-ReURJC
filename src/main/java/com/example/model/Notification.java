@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long NotificationId;
+    private Long notificationId;
 
     @ManyToOne
 	private User student;
@@ -22,19 +22,16 @@ public class Notification {
 
     private String description;
 
-    private int category;
-
-    public Notification(User student, String title, String description, int category) {
+    public Notification(User student, String title, String description) {
         this.student = student;
         this.title = title;
         this.description = description;
-        this.category = category;
     }
 
     public Notification(){}
 
     public Long getNotificationId() {
-        return NotificationId;
+        return notificationId;
     }
 
     public User getStudentId() {
@@ -47,10 +44,6 @@ public class Notification {
 
     public String getDescription() {
         return description;
-    }
-
-    public int getCategory() {
-        return category;
     }
 
     

@@ -20,13 +20,33 @@ public class Subject_Mark {
     private Subject subjectId;
     private int mark;
     private String convocatory;
+    private String nameMark;
 
-    public Subject_Mark(User studentId, Subject subjectId, int mark, String convocatory) {
+    public Subject_Mark(User studentId, Subject subjectId, int mark, String convocatory, String nameMark) {
         this.mark = mark;
         this.studentId = studentId;
         this.convocatory = convocatory;
         this.subjectId = subjectId;
+        this.nameMark = nameMark;
     }
+
+    public Subject_Mark() {}
+
+    
+    public Long getSubjectMarkId() {
+        return subjectMarkId;
+    }
+    
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
+
+    public String getNameMark() {
+        return nameMark;
+    }
+
 
     public User getStudentId() {
         return studentId;
