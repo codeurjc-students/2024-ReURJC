@@ -22,7 +22,7 @@ export class CardComponent  implements OnInit {
       
       case 1 : {
         this._services.push(new CardInfo("Escolar","Asistencia Bluetooth","Este servicio permite confirmar tu asistencia a una clase",""))
-        this._services.push(new CardInfo("Ocio","Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC",""))
+        this._services.push(new CardInfo("Ocio","Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC","/reservations"))
         
         break;
 

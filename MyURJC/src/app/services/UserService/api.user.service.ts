@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { SubjectInfo } from './SubjectInfo';
 import { ConvocatoryInfo } from './ConvocatoryInfo';
 import { User } from './user.model';
 import { SubjectMark } from './SubjectMark';
+import { SportReservation } from './SportReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +67,44 @@ export class ApiUserService {
 
   getGrades(): Observable<SubjectMark[]> {
     return this.http.get<SubjectMark[]>('/api/users/me/grades', { withCredentials: true });
+  }
+
+  reqIsUserWithReservation(): Observable<boolean> {
+    return this.http.get<boolean>("/api/users/hasReservation", { withCredentials: true });
+  }
+
+  newSportReservation(reservationData: any): Observable<boolean> {
+    const url = `/api/users/newReservation`;
+    return this.http.post<boolean>(url, reservationData);
+  }
+
+  getSportReservations(pista: number, reservationInfo: any): Observable<SportReservation[]> {
+    const params = new HttpParams({
+      fromObject: { 
+        pista: pista.toString(),
+        año: reservationInfo.año.toString(), // Enviar 'año' como parámetro individual
+        mes: reservationInfo.mes.toString(), // Enviar 'mes' como parámetro individual
+        dia: reservationInfo.dia.toString()  // Enviar 'dia' como parámetro individual
+      }
+    });
+    return this.http.get<SportReservation[]>('/api/users/getReservations', { 
+      withCredentials: true, 
+      params: params
+    });
+  }
+  hasSportReservation(): Observable<boolean> {
+    return this.http.get<boolean>("/api/users/hasReservation", { withCredentials: true });
+  }
+
+  getMyReservation(): Observable<SportReservation> {
+    return this.http.get<SportReservation>('/api/users/me/getReservation', { withCredentials: true });
+  }
+
+  cancelReservation():Observable<boolean> {
+    return this.http.delete<boolean>('/api/users/me/deleteReservation', { withCredentials: true });
+
+  }
+  getUserCarnet(): Observable<Blob> {
+    return this.http.get(`/api/users/me/carnet`, { responseType: 'blob', withCredentials: true });
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../UserService/user.model';
 
@@ -12,16 +12,17 @@ export class ApiAuthService {
   
   private username: string = '';
   private user: User | undefined;
-  private isLogged: boolean;
+  private loggedIn = new BehaviorSubject<boolean>(false); 
+  public loggedIn$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {
     const storedUser = sessionStorage.getItem('user');
     if (storedUser) {
       this.user = JSON.parse(storedUser);
       this.username = this.user?.email as string;
-      this.isLogged = true;
+      this.loggedIn.next(true)
     } else {
-      this.isLogged = false;
+      this.loggedIn.next(false)
     }
   }
 
@@ -39,7 +40,7 @@ export class ApiAuthService {
     this.http.get('/api/users/me', { withCredentials: true }).subscribe({
       next: (response: any) => {
         this.user = response as User;
-        this.isLogged = true;
+        this.loggedIn.next(true)
         sessionStorage.setItem('user', JSON.stringify(this.user));
         this.router.navigate(['/']);
       },
@@ -52,11 +53,10 @@ export class ApiAuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.isLogged;
+    return this.loggedIn.getValue()
   }
 
   isAdmin() {
     return this.user && this.user.roles.indexOf('ADMIN') !== -1;
   }
-
 }

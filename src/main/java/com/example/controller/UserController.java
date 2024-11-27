@@ -7,16 +7,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.imageio.ImageIO;
 
@@ -29,8 +32,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
-
-
+import com.example.model.SportReservation;
 import com.example.model.User;
 import com.example.services.EventService;
 import com.example.services.SportReservationService;
@@ -283,8 +285,13 @@ public ResponseEntity<?> newSportReservation(HttpServletRequest request, @Reques
     Principal principal = request.getUserPrincipal();
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
-            LocalDateTime fechaHora = LocalDateTime.parse(SportRervationInfo.get("año").toString() + "-" + SportRervationInfo.get("mes").toString() + "-" + SportRervationInfo.get("fecha").toString() + " " + SportRervationInfo.get("hora").toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            sportReservationService.newReserve(user, fechaHora );
+            LocalDateTime fechaHora = LocalDateTime.parse(
+    SportRervationInfo.get("año").toString() + "-" + 
+    SportRervationInfo.get("mes").toString() + "-" + 
+    SportRervationInfo.get("fecha").toString() + " " + 
+    SportRervationInfo.get("hora").toString() + ":00:00.000000", 
+    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
+            sportReservationService.newReserve(user, fechaHora, (int) SportRervationInfo.get("pista")) ;
 
             return ResponseEntity.ok(true);
         }
@@ -293,16 +300,20 @@ public ResponseEntity<?> newSportReservation(HttpServletRequest request, @Reques
 
     
 }
-
 @GetMapping("/getReservations")
-public ResponseEntity<?> getReservations() {
-       return  ResponseEntity.ok(sportReservationService.getActivereservations());
+public ResponseEntity<?> getReservations(
+        @RequestParam("pista") int pista, 
+        @RequestParam("año") int año,
+        @RequestParam("mes") int mes,
+        @RequestParam("dia") int dia) {
 
-    
+    LocalDate date = LocalDate.of(año, mes, dia);
+
+    return ResponseEntity.ok(sportReservationService.getActivereservations(pista, date));
 }
 
 @GetMapping("/hasReservation")
-public ResponseEntity<?> getReservations(HttpServletRequest request) {
+public ResponseEntity<?> hasReservation(HttpServletRequest request) {
     Principal principal = request.getUserPrincipal();
     if (principal != null) {
         User user = userService.findByEmail(principal.getName());
@@ -313,6 +324,35 @@ public ResponseEntity<?> getReservations(HttpServletRequest request) {
 
     
 }
+
+@DeleteMapping("/me/deleteReservation")
+public ResponseEntity<?> deletereservation(HttpServletRequest request) {
+    Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+        sportReservationService.deleteReservation(user);
+        return ResponseEntity.ok(true);
+    }
+
+    return ResponseEntity.notFound().build();
+
+}
+
+@GetMapping("/me/getReservation") 
+    public ResponseEntity<?> getUserReservation(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+    if (principal != null) {
+        User user = userService.findByEmail(principal.getName());
+        Optional<SportReservation> reservation = sportReservationService.getMyReservation(user.getId());
+        if (reservation.isPresent()) {
+            return ResponseEntity.ok(reservation.get());
+        
+        } 
+    }
+            return ResponseEntity.notFound().build();
+
+
+    }
 
 
     

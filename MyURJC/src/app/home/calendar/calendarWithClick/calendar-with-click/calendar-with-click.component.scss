@@ -78,5 +78,21 @@
   .container {
     columns: 3;
   }
+
+  .faded {
+    opacity: 0.5; /* Opacidad inicial */
+    pointer-events: none; /* Deshabilita la interacción */
+  }
+  
+  .active {
+    opacity: 1; /* Opacidad cuando está activo */
+    pointer-events: auto; /* Habilita la interacción */
+  }
+
+  .left-col, .center-col, .right-col {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+  }
   
   

@@ -20,11 +20,15 @@ public class SportReservation {
     @ManyToOne
     private User studentId;
     private LocalDateTime date;
+    private int pista;
 
-    public SportReservation(User studentId, LocalDateTime day) {
+    public SportReservation(User studentId, LocalDateTime day, int pista) {
         this.studentId = studentId;
         this.date = day;
+        this.pista = pista;
     }
+
+    public SportReservation() {}
 
     public Long getSportReservationId() {
         return sportReservationId;
@@ -41,6 +45,13 @@ public class SportReservation {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
+
+    public int getPista() {
+        return pista;
+    }
+
+    
+    
 
     
 

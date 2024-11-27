@@ -3,6 +3,7 @@ package com.example.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class SportReservationService {
     @Autowired
     private SportReservationrepository sportReservationrepository;
 
-    public void newReserve( User studentId, LocalDateTime date) {
-        sportReservationrepository.save(new SportReservation(studentId, date));
+    public void newReserve( User studentId, LocalDateTime date, int pista) {
+        sportReservationrepository.save(new SportReservation(studentId, date, pista));
 
     }
 
@@ -28,15 +29,34 @@ public class SportReservationService {
 
     public SportReservation getUserReserve(User user) {
         List<SportReservation> reservations = getUserReservations(user);
-        return reservations.get(0);
+        if (!reservations.isEmpty()) {
+            return reservations.get(0);
+        } else {
+            return null; // o lanzar una excepción específica si lo prefieres
+        }
     }
 
     public boolean isreserveActive(User user) {
+        if (getUserReserve(user) == null) {
+            return false;
+        }
         return getUserReserve(user).getDate().isAfter(LocalDateTime.now());
     }
 
-    public List<SportReservation> getActivereservations() {
-        return sportReservationrepository.findByDateBeforeOrEqual(LocalDate.now());
+    public List<SportReservation> getActivereservations(int pista, LocalDate date) { 
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(23, 59, 59);
+        return sportReservationrepository.findByDateAndPista(startOfDay, endOfDay, pista);
     }
-    
+
+    public Optional<SportReservation> getMyReservation(Long userId) {
+        return sportReservationrepository.findByStudentId(userId);
+    }
+
+    public void deleteReservation(User user) {
+        SportReservation reserve = getMyReservation(user.getId()).get();
+        reserve.setDate(LocalDateTime.now().minusDays(1));
+        sportReservationrepository.save(reserve);
+
+    }
 }

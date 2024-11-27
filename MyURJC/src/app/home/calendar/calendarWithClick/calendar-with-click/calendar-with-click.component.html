@@ -1,7 +1,25 @@
 <ion-content class="container">
-  <ion-grid>
-    <ion-row class="month-container">
-      <ion-col size="12" size-md="4"> 
+  <ion-grid *ngIf="!tieneReserva; else reservaActiva"> 
+    <ion-row>
+      <ion-col size="4" size-md="4" [class.faded]="!pistaActiva" [class.active]="pistaActiva">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ tituloPista }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" fill="outline" (click)="activarCalendario('Tenis (Alcorcón)')"> 
+              Pista de tenis (Alcorcón) 
+            </ion-button>
+            <ion-button expand="block" fill="outline" (click)="activarCalendario('Baloncesto (Móstoles)')">
+              Pista de baloncesto (Móstoles)
+            </ion-button>
+            <ion-button expand="block" fill="outline" (click)="activarCalendario('Fútbol (Móstoles)')">
+              Pista de fútbol (Móstoles)
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" size-md="4" [class.faded]="!calendarioActivo" [class.active]="calendarioActivo">
         <div *ngIf="month"> 
           <ion-card>
             <ion-card-title class="card-header">{{ month.name }}</ion-card-title>
@@ -17,8 +35,9 @@
                     'background-color': applyCustomColor(day)
                   }"
                   [class.current-day]="isToday(day)"
-                  [class.weekend]="isWeekend(day)"
-                  [class.week]="!isWeekend(day) && !isFestive(day)"
+                  [class.weekend]="isPreviousDay(day)"
+                  [class.week]="!isPreviousDay(day) && !isFestive(day)"
+                  (click)="activarHoras(day)" 
                 >
                   {{ day.getDate() }}
                 </span>
@@ -27,26 +46,34 @@
           </ion-card>
         </div>
       </ion-col>
-      <ion-col size="12" size-md="4">
+      <ion-col size="4" size-md="4" [class.faded]="!horasActivo" [class.active]="horasActivo">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Segunda columna</ion-card-title>
+            <ion-card-title>Selección de horas {{continuacion}} </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>Este es el contenido de la segunda columna. Puedes añadir aquí el texto, imágenes o cualquier otro elemento que necesites.</p>
+            <div class="hour-buttons">
+              <ion-button 
+                *ngFor="let hour of horas"  (click)="reservar(hour)"
+              >
+                {{ hour }}:00 - {{ hour + 2 }}:00 
+              </ion-button>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="12" size-md="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Tercera columna</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Este es el contenido de la tercera columna. Aquí puedes poner más información o elementos relacionados con tu aplicación.</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    </ion-row> 
   </ion-grid>
-</ion-content>
+
+  <ng-template #reservaActiva>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Reserva Activa</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="reservation"> 
+        <p>Pista: {{ tituloPista }}</p> 
+        <p>Fecha: {{ reservation.date | date:'dd/MM/yyyy HH:mm' }}</p> 
+        <ion-button expand="block" fill="outline" (click)="cancelarReserva()">Cancelar Reserva</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
