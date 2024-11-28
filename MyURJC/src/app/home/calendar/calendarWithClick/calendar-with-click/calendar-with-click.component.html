@@ -1,7 +1,7 @@
 <ion-content class="container">
   <ion-grid *ngIf="!tieneReserva; else reservaActiva"> 
     <ion-row>
-      <ion-col size="4" size-md="4" [class.faded]="!pistaActiva" [class.active]="pistaActiva">
+      <ion-col size="12" size-md="4" [class.faded]="!pistaActiva" [class.active]="pistaActiva">
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{ tituloPista }}</ion-card-title>
@@ -19,7 +19,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="4" size-md="4" [class.faded]="!calendarioActivo" [class.active]="calendarioActivo">
+      <ion-col size="12" size-md="4" [class.faded]="!calendarioActivo" [class.active]="calendarioActivo">
         <div *ngIf="month"> 
           <ion-card>
             <ion-card-title class="card-header">{{ month.name }}</ion-card-title>
@@ -46,7 +46,7 @@
           </ion-card>
         </div>
       </ion-col>
-      <ion-col size="4" size-md="4" [class.faded]="!horasActivo" [class.active]="horasActivo">
+      <ion-col size="12" size-md="4" [class.faded]="!horasActivo" [class.active]="horasActivo">
         <ion-card>
           <ion-card-header>
             <ion-card-title>Selección de horas {{continuacion}} </ion-card-title>
@@ -77,3 +77,4 @@
       </ion-card-content>
     </ion-card>
   </ng-template>
+</ion-content>

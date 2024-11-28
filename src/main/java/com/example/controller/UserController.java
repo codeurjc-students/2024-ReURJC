@@ -343,11 +343,9 @@ public ResponseEntity<?> deletereservation(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
     if (principal != null) {
         User user = userService.findByEmail(principal.getName());
-        Optional<SportReservation> reservation = sportReservationService.getMyReservation(user.getId());
-        if (reservation.isPresent()) {
-            return ResponseEntity.ok(reservation.get());
+        SportReservation reservation = sportReservationService.getUserReserve(user);
+            return ResponseEntity.ok(reservation);
         
-        } 
     }
             return ResponseEntity.notFound().build();
 

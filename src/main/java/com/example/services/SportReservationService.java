@@ -49,13 +49,10 @@ public class SportReservationService {
         return sportReservationrepository.findByDateAndPista(startOfDay, endOfDay, pista);
     }
 
-    public Optional<SportReservation> getMyReservation(Long userId) {
-        return sportReservationrepository.findByStudentId(userId);
-    }
 
     public void deleteReservation(User user) {
-        SportReservation reserve = getMyReservation(user.getId()).get();
-        reserve.setDate(LocalDateTime.now().minusDays(1));
+        SportReservation reserve = getUserReserve(user);
+        reserve.setDate(LocalDateTime.now().minusDays(7));
         sportReservationrepository.save(reserve);
 
     }

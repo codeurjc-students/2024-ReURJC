@@ -187,6 +187,8 @@ export class CalendarWithClickComponent  implements OnInit {
   }
 
   cancelarReserva() {
+    this.apiUserservice.cancelReservation().subscribe(data => {this.hasAReservation();});
+
     
   }
 
