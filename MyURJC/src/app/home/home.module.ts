@@ -19,13 +19,13 @@ import { NotificationComponent } from './notification/notification/notification.
 import { CalendarWithClickComponent } from './calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
 import { CarnetComponent } from './carnet/carnet.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    
   ],
   declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent,  NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent,CarnetComponent]
 })

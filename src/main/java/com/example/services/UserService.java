@@ -38,4 +38,16 @@ public class UserService {
 	public List<User> getAll() {
 		return repository.findAll();
 	}
+
+	public void setToken(User user, String fcmToken) {
+		if (fcmToken != null && !fcmToken.isEmpty()) { 
+			System.out.println("El token es: "+ fcmToken );
+			user.setFcmToken(fcmToken);
+			repository.save(user);
+		}
+	}
+
+	public String getToken(User user) {
+		return user.getFcmToken();
+	}
 }

@@ -14,6 +14,7 @@ export class ApiAuthService {
   private user: User | undefined;
   private loggedIn = new BehaviorSubject<boolean>(false); 
   public loggedIn$ = this.loggedIn.asObservable();
+  public fcmToken: string = "";
 
   constructor(private http: HttpClient, private router: Router) {
     const storedUser = sessionStorage.getItem('user');
@@ -30,10 +31,23 @@ export class ApiAuthService {
   login(username: string, password: string) {
     this.username = username;
     const formData = { username: this.username, password: password };
-    this.http.post("/api/users/login", formData, { withCredentials: true }).subscribe({
-      next: (response: any) => { this.reqIsLogged() },
+    this.http.post("/api/users/login", formData, { 
+      withCredentials: true,
+
+    }).subscribe({
+      next: (response: any) => { this.fcmToken=="" ? this.reqIsLogged() : this.sendToken(this.fcmToken) },
       error: (error: any) => { alert("Wrong credentials") }
     });
+  }
+
+  sendToken(token: string) {
+    const url = `/api/users/setDeviceToken?fcmToken=${token}`; // Construye la URL con el parámetro
+  
+    this.http.post<any>(url, { withCredentials: true }) // Envía la solicitud POST con la URL modificada
+      .subscribe({
+        next: (response: any) => { this.reqIsLogged() },
+        error: (error: any) => { alert("Wrong credentials") }
+      });
   }
 
   reqIsLogged() {

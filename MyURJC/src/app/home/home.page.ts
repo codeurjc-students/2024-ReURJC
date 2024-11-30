@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, IonTab, IonTabs } from '@ionic/angular';
 import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from '@capacitor/push-notifications';
+import { ApiAuthService } from '../services/AuthService/api-auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomePage implements OnInit{
 
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration', (token: Token) => {
+      this.apiAuthService.fcmToken = token.value;
       alert('Push registration success, token: ' + token.value);
     });
 
@@ -58,7 +60,7 @@ onTabChange(event: any) {
 
 
 
-  constructor() { }
+  constructor(private apiAuthService: ApiAuthService) { }
 
   hideNotificationBadge() {
     this.showNotificationBadge = false;

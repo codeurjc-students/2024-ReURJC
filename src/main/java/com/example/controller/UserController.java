@@ -91,10 +91,29 @@ public class UserController {
         return ResponseEntity.notFound().build();
     } 
 
+    @PostMapping("/setDeviceToken")
+    public ResponseEntity postMethodName(HttpServletRequest request,
+    @RequestParam(name = "fcmToken", required = false) String fcmToken)
+     {
+        Principal principal = request.getUserPrincipal();
+        System.out.println("El token es: " + fcmToken);
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            userService.setToken(user, fcmToken);
+            return ResponseEntity.ok(null);
+        } else {
+            ResponseEntity.ok(new AuthResponse(Status.FAILURE, "You must login!", true));
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+    
+
     @PostMapping("/login")
 	public ResponseEntity<AuthResponse> login(@CookieValue(name = "accessToken", required = false) String accessToken,
 			@CookieValue(name = "refreshToken", required = false) String refreshToken, HttpServletRequest request,
-			@RequestBody LoginRequest loginRequest) {
+			@RequestBody LoginRequest loginRequest
+            ) {
 		if (request.getUserPrincipal() != null) {
 			return ResponseEntity
 					.ok(new AuthResponse(Status.FAILURE, "Cannot login when you are not logged out", true));
