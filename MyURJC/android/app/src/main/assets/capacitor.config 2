@@ -1,0 +1,9 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "MyURJC",
+	"webDir": "www",
+	"server": {
+		"cleartext": true,
+		"url": "http://192.168.1.17:8080"
+	}
+}
