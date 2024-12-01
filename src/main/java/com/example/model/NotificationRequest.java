@@ -6,10 +6,9 @@ public class NotificationRequest {
     private String topic;
     private String token;
 
-    public NotificationRequest(String t, String b, String to, String tok) {
+    public NotificationRequest(String t, String b, String tok) {
         title = t;
         body=b;
-        topic = to;
         token = tok;
     }
     public String getTitle() {

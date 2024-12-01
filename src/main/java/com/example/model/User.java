@@ -41,7 +41,7 @@ public class User {
     private String email;
     @JsonIgnore
 	private String password;
-    private String fcmToken="";
+    private List<String> fcmToken = new ArrayList<String>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -166,11 +166,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    public String getFcmToken() {
+    public List<String> getFcmToken() {
         return fcmToken;
     }
-    public void setFcmToken(String fcmToken) {
-        this.fcmToken = fcmToken;
+    public void addFcmToken(String fcmToken) {
+        this.fcmToken.add(fcmToken);
     }
 
     

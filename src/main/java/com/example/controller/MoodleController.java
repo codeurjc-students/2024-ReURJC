@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.model.NotificationRequest;
 import com.example.model.Subject;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
+import com.example.services.FCMService;
 import com.example.services.NotificationService;
 import com.example.services.SubjectMarkService;
 import com.example.services.SubjectService;
@@ -36,6 +38,9 @@ public class MoodleController {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private FCMService fcmService; 
 
     @PostMapping("/updateGrade")
     public ResponseEntity<String> miEndpoint(@RequestBody Map<String, Object> datos) throws Exception {
@@ -62,6 +67,11 @@ public class MoodleController {
 
                 webSocketController.sendUpdate(); // Llama al método sendUpdate
                 notificationService.newNote(userId, subject.getTitle(), assignmentName, String.valueOf(mark), "Ordinaria");
+                for (String token: student.getFcmToken()) {
+                NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(), "Se ha evaluado: "+ assignmentName + "con una nota de "+mark,token);
+                System.out.println("He pasado pro aqui " + token);
+                fcmService.sendMessageToToken(request);
+                }
                 return ResponseEntity.ok("Nota creada/actualizada correctamente");
             }
             return ResponseEntity.ok("ok");
