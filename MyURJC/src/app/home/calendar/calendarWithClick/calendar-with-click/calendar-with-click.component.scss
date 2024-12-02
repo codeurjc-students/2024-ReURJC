@@ -98,4 +98,21 @@
   body {
     min-width: 600px;
   }
+
+  .days span {
+    display: inline-block;
+    border-radius: 50%;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .days span:active {
+    transform: scale(0.95); /* Reduce ligeramente el tamaño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra para el efecto de pulsado */
+  }
+  
+  .days span.pressed {
+    transform: scale(0.95); /* Similar a :active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
   

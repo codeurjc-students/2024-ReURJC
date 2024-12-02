@@ -13,6 +13,7 @@ import com.example.model.Festive;
 import com.example.model.News;
 import com.example.model.Schedule;
 import com.example.model.Subject;
+import com.example.model.Subject_Mark;
 import com.example.model.User;
 import com.example.model.Events.BecomeCandidateEvent;
 import com.example.model.Events.VoteDelegateEvent;
@@ -21,6 +22,7 @@ import com.example.repository.NewsRepository;
 import com.example.repository.SubjectRepository;
 import com.example.repository.UserRepository;
 import com.example.services.EventService;
+import com.example.services.SubjectMarkService;
 
 import jakarta.annotation.PostConstruct;
 
@@ -43,6 +45,9 @@ public class DataLoader {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private SubjectMarkService subjectMarkService;
 
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
@@ -74,6 +79,8 @@ public class DataLoader {
         user1.getSubjects().addAll(List.of(subject1, subject2));
         user2.getSubjects().add(subject3);
 
+        
+
         //ROLES ASSIGN
         user1.setRoles(List.of("USER"));
 
@@ -83,6 +90,8 @@ public class DataLoader {
 
         // Guardar usuarios
         userRepository.saveAll(List.of(user1, user2,user3,user4));
+        Subject_Mark mark = new Subject_Mark(user1, subject3, 5, "Ordinaria", "test1");
+        subjectMarkService.save(mark);
 
         Festive f2 = new Festive(4, 5, 2024,"#F24726");
         Festive f3 = new Festive(2, 1, 2024,"#33FF8C", "Alcorcón");

@@ -37,7 +37,6 @@ export class CardComponent  implements OnInit {
       }
 
       case 3 : {
-        this._services.push(new CardInfo("","Detalle tarjeta de estudiante","Consulta los detalle de tu tarjeta estudiantil",""))
         this._services.push(new CardInfo("","Calificaciones finales", "Consulta las notas finales de las asignaturas cursadas","/me/finalMarks"))
 
         break;

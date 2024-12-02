@@ -257,4 +257,15 @@ export class CalendarWithClickComponent  implements OnInit {
     );
   }
 
+  onPress(event: Event): void {
+    const target = event.target as HTMLElement;
+    target.classList.add('pressed');
+  }
+  
+  onRelease(event: Event): void {
+    const target = event.target as HTMLElement;
+    target.classList.remove('pressed');
+  }
+  
+
 }
