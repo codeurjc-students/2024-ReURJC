@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiUserService } from 'src/app/services/UserService/api.user.service';
+import { CardInfo } from '../components/Card/card/CardInfo';
 
 @Component({
   selector: 'app-postulate-as-delegate',
@@ -10,6 +11,12 @@ import { ApiUserService } from 'src/app/services/UserService/api.user.service';
 export class PostulateAsDelegateComponent {
   private subscription: Subscription = new Subscription(); // Para gestionar la suscripción
   private isCandidate: boolean = false;
+  cardInfo: CardInfo = new CardInfo(
+    "Inscríbete", 
+    "Marca la diferencia.", 
+    "Al inscribirte entras en el listado donde tus compañeros podrán votarte.", 
+    "" // No necesitas apiCaller en este caso
+  );
 
   constructor(private apiUserService: ApiUserService) {}
 

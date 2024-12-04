@@ -47,7 +47,7 @@ export class CalendarComponent implements OnInit {
   generateCalendar() {
     let currentYear = new Date().getMonth() < 9 ? new Date().getFullYear() - 1 : new Date().getFullYear();
     
-    // Generar meses de septiembre a diciembre
+    // Generar meses de septiembre a septiembre
     for (let monthIndex = 8; monthIndex < 12; monthIndex++) {
       const daysInMonth = new Date(currentYear, monthIndex + 1, 0).getDate();
       const days: Date[] = [];
@@ -62,7 +62,7 @@ export class CalendarComponent implements OnInit {
 
     currentYear++; // Cambiar al siguiente año
 
-    // Generar meses de enero a agosto
+    // Generar meses de enero a septiembre
     for (let monthIndex = 0; monthIndex < 9; monthIndex++) {
       const daysInMonth = new Date(currentYear, monthIndex + 1, 0).getDate();
       const days: Date[] = [];
@@ -93,9 +93,7 @@ export class CalendarComponent implements OnInit {
   // Verifica si el día actual es hoy
   isToday(date: Date): boolean {
     const today = new Date();
-    return date.getDate() === today.getDate() &&
-           date.getMonth() === today.getMonth() &&
-           date.getFullYear() === today.getFullYear();
+    return date.toDateString() === today.toDateString();
   }
 
   // Verifica si es fin de semana (sábado o domingo)

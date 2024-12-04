@@ -52,4 +52,6 @@ export class FinalMarksComponent  implements OnInit {
     return Object.keys(this.grades[subjectTitle]);
   }
 
+  
+
 }

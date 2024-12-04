@@ -25,8 +25,8 @@ public class SubjectMarkService {
         subjectMarkRepository.save(obj);
     }
 
-    public boolean existsByStudentIdAndSubjectIdAndNameMark(User studentId, Subject subjectId, String nameMark){
-        return subjectMarkRepository.existsByStudentIdAndSubjectIdAndNameMark(studentId, subjectId, nameMark);
+    public boolean existsByStudentIdAndSubjectIdAndNameMark(User student, Subject subject, String nameMark){
+        return subjectMarkRepository.existsByStudentIdAndSubjectIdAndNameMark(student, subject, nameMark);
     }
 
     public Optional<Subject_Mark> findByStudentIdAndSubjectIdAndNameMark(User student, Subject subject, String nameMark) {

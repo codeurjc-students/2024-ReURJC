@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { FinalsInfoComponent } from './home/finals-info/finals-info.component';
+import { FinalsInfoComponent } from './homePage/finals-info/finals-info.component';
 import { AuthGuard } from './services/AuthService/auth-guard.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./homePage/home.module').then( m => m.HomePageModule)
   },
   
     

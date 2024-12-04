@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Votar delegados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let candidate of candidates" class="candidate-card"> 
+    <app-card 
+      [card]="getCardInfo(candidate)" 
+      [isSubtitleFirst]="false"> 
+    </app-card>
+    <ion-button 
+      expand="block" 
+      color="primary" 
+      (click)="voteForCandidate(candidate.id)" 
+      [disabled]="getUserVoted()">
+      Votar a {{ candidate.name }} {{ candidate.surname }}  
+    </ion-button>
+  </div>
+</ion-content>

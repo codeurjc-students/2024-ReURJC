@@ -1,4 +1,5 @@
-import { CardInfo } from "src/app/home/card/CardInfo";
+import { CardInfo } from "src/app/homePage/components/Card/card/CardInfo";
+
 
 export class CardEvent extends CardInfo {
     private _tabsDisplay: number;

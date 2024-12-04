@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Schedule } from 'src/app/services/SubjectService/ResponseInfo/Schedule';
 import { SubjectScheduleResponse } from 'src/app/services/SubjectService/ResponseInfo/SubjectScheduleResponse';
 import { SubjectServiceService } from 'src/app/services/SubjectService/subject-service.service';
+import { CardInfo } from '../components/Card/card/CardInfo';
 
 @Component({
   selector: 'app-subject-schedule',
@@ -84,6 +85,15 @@ getSubjectsForDay(day: string): { title: string; startHour: number; endHour: num
     }
 
     return ""; // Retorna vacío si no se encuentra ninguna asignatura
+}
+
+getCardInfo(schedule: { title: string; startHour: number; endHour: number; classRoom: String }): CardInfo {
+  return new CardInfo(
+    schedule.title, 
+    `${schedule.startHour}:00 - ${schedule.endHour}:00`, 
+    schedule.classRoom.toString(), // Convertir classRoom a string
+    "" // No necesitas apiCaller en este caso
+  );
 }
 
   

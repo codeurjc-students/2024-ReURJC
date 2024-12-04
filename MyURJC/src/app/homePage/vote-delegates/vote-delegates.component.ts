@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventServiceService } from 'src/app/services/EventService/event-service.service';
 import { ApiUserService } from 'src/app/services/UserService/api.user.service';
 import { User } from 'src/app/services/UserService/user.model';
+import { CardInfo } from '../components/Card/card/CardInfo';
 
 @Component({
   selector: 'app-vote-delegates',
@@ -23,6 +24,15 @@ export class VoteDelegatesComponent  implements OnInit {
     this.userService.hasVoted().subscribe(data => 
       { this.userVoted = data}
       )
+  }
+
+  getCardInfo(candidate: User): CardInfo {
+    return new CardInfo(
+      `${candidate.name} ${candidate.surname}`, 
+      "", // No necesitas subtítulo en este caso
+      "", // No necesitas descripción en este caso
+      ""  // No necesitas apiCaller en este caso
+    );
   }
 
   voteForCandidate(candidate: number) {

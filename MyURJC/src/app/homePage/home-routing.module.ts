@@ -4,15 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { FinalsInfoComponent } from './finals-info/finals-info.component';
 import { AuthGuard } from '../services/AuthService/auth-guard.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { NewsComponent } from '../news/news/news.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.component';
 import { PostulateAsDelegateComponent } from './postulate-as-delegate/postulate-as-delegate.component';
 import { EventGuard } from '../services/EventService/event-guard.guard';
 import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
 import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
 import { FinalMarksComponent } from './final-marks/final-marks.component';
-import { CalendarWithClickComponent } from './calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
+import { CalendarWithClickComponent } from './components/calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
+import { NewsComponent } from './news/news.component';
 
 const routes: Routes = [
   {

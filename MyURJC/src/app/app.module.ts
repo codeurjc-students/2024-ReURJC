@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HomePageModule } from './home/home.module';
+import { HomePageModule } from './homePage/home.module';
 
 @NgModule({
   declarations: [AppComponent],

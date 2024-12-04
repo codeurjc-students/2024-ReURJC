@@ -1,6 +1,4 @@
 package com.example.controller;
-
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +17,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.imageio.ImageIO;
 
@@ -43,8 +40,6 @@ import com.example.services.securityServices.jwt.AuthResponse;
 import com.example.services.securityServices.jwt.LoginRequest;
 import com.example.services.securityServices.jwt.UserLoginService;
 import com.example.services.securityServices.jwt.AuthResponse.Status;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jakarta.servlet.http.HttpServletRequest;
 

@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Postularte como candidato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-card 
+    [card]="cardInfo" 
+    [isSubtitleFirst]="false">
+  </app-card>
+
+  <ion-button
+    expand="block"
+    (click)="becomeCandidate()"
+    [color]="getIsCandidate() ? 'danger' : ''"  
+    [disabled]="getIsCandidate() && !getIsCandidate()"
+  >
+    {{ getIsCandidate() ? 'Inscribirse' : 'Ya estás inscrito, pulsa para cancelar' }}
+  </ion-button>
+</ion-content>

@@ -59,17 +59,16 @@ public class MoodleController {
 
                 // Crear una nueva nota o actualizarla si existe
                 if (!subjectMarkService.existsByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName)) {
-                    Subject_Mark newMark = new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName); 
-                    subjectMarkService.save(newMark);
+; 
+                    subjectMarkService.save( new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
                 } else {
                     updateExistingMark(student, subject, mark, assignmentName);
                 }
 
                 webSocketController.sendUpdate(); // Llama al método sendUpdate
-                notificationService.newNote(userId, subject.getTitle(), assignmentName, String.valueOf(mark), "Ordinaria");
+                notificationService.newNote(student, subject.getTitle(), assignmentName, String.valueOf(mark), "Ordinaria");
                 for (String token: student.getFcmToken()) {
                 NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(), "Se ha evaluado: "+ assignmentName + "con una nota de "+mark,token);
-                System.out.println("He pasado pro aqui " + token);
                 fcmService.sendMessageToToken(request);
                 }
                 return ResponseEntity.ok("Nota creada/actualizada correctamente");
@@ -89,13 +88,6 @@ public class MoodleController {
         existingMark.setMark(mark);
         subjectMarkService.save(existingMark);
     }
-
-    @PostMapping("/newGradeItem")
-    public ResponseEntity<String> newgradedItem(@RequestBody Map<String, Object> datos) throws Exception {
-
-        
-            return ResponseEntity.badRequest().body("pussy");
-        }
     
     
 }

@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Horario Semanal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <div class="schedule-list">
+      <ion-list *ngFor="let day of days">
+        <ion-item>
+          <ion-label>
+            <h2>{{ day }}</h2>
+          </ion-label>
+        </ion-item>
+        <ng-container *ngIf="getSubjectsForDay(day).length > 0; else emptyDay">
+          <app-card  
+            *ngFor="let schedule of getSubjectsForDay(day)"
+            [card]="getCardInfo(schedule)" 
+            [isSubtitleFirst]="false">
+          </app-card>
+        </ng-container>
+        <ng-template #emptyDay>
+          <ion-item>
+            <ion-label style="color: #ABABAF;">No hay asignaturas para este día</ion-label>
+          </ion-item>
+        </ng-template>
+      </ion-list>
+    </div>
+  </ion-content>

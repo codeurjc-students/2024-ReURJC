@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CardInfo } from 'src/app/homePage/components/Card/card/CardInfo';
 import { NewsServiceService } from 'src/app/services/NewsService/news-service.service';
 import { NewsInfo } from 'src/app/services/NewsService/NewsInfo';
 
@@ -27,6 +28,15 @@ export class NewsComponent implements OnInit {
       }
       ))
     });
+  }
+
+  getCardInfo(news: NewsInfo): CardInfo {
+    return new CardInfo(
+      news.title, 
+      news.date, 
+      `${news.description}`, 
+      "" // No necesitas apiCaller en este caso
+    );
   }
 
   nextPage() {

@@ -32,7 +32,7 @@ public class NotificationController {
          Principal principal = request.getUserPrincipal();
     if (principal != null) {
         User user = userService.findByEmail(principal.getName());
-        List<Notification> notifications = notificationService.findAllByUserId(user);
+        List<Notification> notifications = notificationService.findAllByUser(user);
         return new ResponseEntity<>(notifications, HttpStatus.OK);
 
     }
