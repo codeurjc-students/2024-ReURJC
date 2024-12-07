@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, IonTab, IonTabs } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { ActionPerformed, PushNotificationSchema, PushNotifications, Token } from '@capacitor/push-notifications';
 import { ApiAuthService } from '../services/AuthService/api-auth-service.service';
 import { CardInfo } from './components/Card/card/CardInfo';
@@ -10,33 +9,33 @@ import { EventServiceService } from '../services/EventService/event-service.serv
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
   showNotificationBadge = false
   previousTab: string | undefined;
   servicesTabCards: CardInfo[] = [
-    new CardInfo("Escolar","Asistencia Bluetooth","Este servicio permite confirmar tu asistencia a una clase",""),
-    new CardInfo("Ocio","Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC","/reservations")
+    new CardInfo("Escolar", "Asistencia Bluetooth", "Este servicio permite confirmar tu asistencia a una clase", ""),
+    new CardInfo("Ocio", "Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC", "/reservations")
   ];
 
   schedulesTabCards: CardInfo[] = [
-    new CardInfo("","Calendario","Consulta los días lectivos, vacaciones y festivos del curso académico actual","/calendar"),
-    new CardInfo("","Horario", "Consulta tu horario académico diario y semanal","/schedule"),
-    new CardInfo("","Exámenes finales","Consulta toda la información relacionada con los exámenes finales","/me/subjects")
+    new CardInfo("", "Calendario", "Consulta los días lectivos, vacaciones y festivos del curso académico actual", "/calendar"),
+    new CardInfo("", "Horario", "Consulta tu horario académico diario y semanal", "/schedule"),
+    new CardInfo("", "Exámenes finales", "Consulta toda la información relacionada con los exámenes finales", "/me/subjects")
   ];
 
   profileTabCards: CardInfo[] = [
-    new CardInfo("","Calificaciones finales", "Consulta las notas finales de las asignaturas cursadas","/me/finalMarks")
+    new CardInfo("", "Calificaciones finales", "Consulta las notas finales de las asignaturas cursadas", "/me/finalMarks")
   ];
 
   temporalEvents: { [tab: number]: CardInfo[] } = {  // Objeto para almacenar los eventos por pestaña
-    1: [], 
+    1: [],
     2: [],
     3: []
   };
 
   constructor(private apiAuthService: ApiAuthService, private eventService: EventServiceService) {
     this.chargeTemporalEvents();
-   }
+  }
 
   ngOnInit() {
     PushNotifications.requestPermissions().then((result) => {
@@ -44,7 +43,7 @@ export class HomePage implements OnInit{
         PushNotifications.register();
       } else {
       }
-       
+
     });
 
     PushNotifications.addListener('registration', (token: Token) => {
@@ -71,21 +70,21 @@ export class HomePage implements OnInit{
       });
     });
   }
-  
-onTabChange(event: any) {
-  if (this.previousTab === 'alerts' && event.tab !== 'alerts') {
-    // Se acaba de salir de la pestaña "alerts"
-    this.showNotificationBadge = false; 
+
+  onTabChange(event: any) {
+    if (this.previousTab === 'alerts' && event.tab !== 'alerts') {
+      // Se acaba de salir de la pestaña "alerts"
+      this.showNotificationBadge = false;
+    }
+    this.previousTab = event.tab;
   }
-  this.previousTab = event.tab; 
-}
 
   hideNotificationBadge() {
     this.showNotificationBadge = false;
   }
 
   onScroll(event: any) {
-    this.showNotificationBadge = false; 
+    this.showNotificationBadge = false;
   }
 
 

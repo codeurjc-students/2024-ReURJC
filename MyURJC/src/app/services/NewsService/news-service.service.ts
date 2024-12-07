@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NewsInfo } from './NewsInfo';
 
 @Injectable({
@@ -8,11 +8,11 @@ import { NewsInfo } from './NewsInfo';
 })
 export class NewsServiceService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getAll(pageNumber: number) : Observable<NewsInfo[]> {
-    return this.http.get<NewsInfo[]>(`/api/news?pageNumber=${pageNumber}`,{ withCredentials: false })
-  
+  getAll(pageNumber: number): Observable<NewsInfo[]> {
+    return this.http.get<NewsInfo[]>(`/api/news?pageNumber=${pageNumber}`, { withCredentials: false })
+
   }
 
 }

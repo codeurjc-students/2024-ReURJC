@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Schedule {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ScheduleId;
@@ -16,8 +16,6 @@ public class Schedule {
     private int startHour;
     private int endHour;
     private String classRoom;
-
-
 
     public Schedule(int dayOfWeek, int startHour, int endHour, String classRoom) {
         this.dayOfWeek = dayOfWeek;

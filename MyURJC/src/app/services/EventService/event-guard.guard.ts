@@ -8,7 +8,7 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class EventGuard implements CanActivate {
-  constructor(private eventService: EventServiceService, private router: Router) {}
+  constructor(private eventService: EventServiceService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,

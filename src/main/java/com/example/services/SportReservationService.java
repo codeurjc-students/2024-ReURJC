@@ -17,9 +17,14 @@ public class SportReservationService {
     @Autowired
     private SportReservationrepository sportReservationrepository;
 
-    public void newReserve( User studentId, LocalDateTime date, int pista) {
-        sportReservationrepository.save(new SportReservation(studentId, date, pista));
+    public Long newReserve(User studentId, LocalDateTime date, int pista) {
+        return this.save(new SportReservation(studentId, date, pista));
 
+    }
+
+    public Long save(SportReservation reserve) {
+        sportReservationrepository.save(reserve);
+        return reserve.getSportReservationId();
     }
 
     private List<SportReservation> getUserReservations(User user) {
@@ -42,12 +47,11 @@ public class SportReservationService {
         return getUserReserve(user).getDate().isAfter(LocalDateTime.now());
     }
 
-    public List<SportReservation> getActivereservations(int pista, LocalDate date) { 
+    public List<SportReservation> getActivereservations(int pista, LocalDate date) {
         LocalDateTime startOfDay = date.atStartOfDay();
         LocalDateTime endOfDay = date.atTime(23, 59, 59);
         return sportReservationrepository.findByDateAndPista(startOfDay, endOfDay, pista);
     }
-
 
     public void deleteReservation(User user) {
         SportReservation reserve = getUserReserve(user);

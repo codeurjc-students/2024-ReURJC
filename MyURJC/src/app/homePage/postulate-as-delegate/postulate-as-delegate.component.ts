@@ -12,13 +12,13 @@ export class PostulateAsDelegateComponent {
   private subscription: Subscription = new Subscription(); // Para gestionar la suscripción
   private isCandidate: boolean = false;
   cardInfo: CardInfo = new CardInfo(
-    "Inscríbete", 
-    "Marca la diferencia.", 
-    "Al inscribirte entras en el listado donde tus compañeros podrán votarte.", 
+    "Inscríbete",
+    "Marca la diferencia.",
+    "Al inscribirte entras en el listado donde tus compañeros podrán votarte.",
     "" // No necesitas apiCaller en este caso
   );
 
-  constructor(private apiUserService: ApiUserService) {}
+  constructor(private apiUserService: ApiUserService) { }
 
   // Método para comprobar si el usuario es candidato
   getIsCandidate(): boolean {
@@ -41,7 +41,6 @@ export class PostulateAsDelegateComponent {
     this.subscription.add(
       this.apiUserService.becomeCandidate().subscribe(
         (response) => {
-          console.log('Candidato registrado correctamente', response);
           this.isCandidate = true; // Actualizamos el estado a candidato
         },
         (error) => {
@@ -56,7 +55,6 @@ export class PostulateAsDelegateComponent {
     this.subscription.add(
       this.apiUserService.cancelCandidacy().subscribe(
         (response) => {
-          console.log('Candidatura cancelada correctamente', response);
           this.isCandidate = false; // Actualizamos el estado a no candidato
         },
         (error) => {

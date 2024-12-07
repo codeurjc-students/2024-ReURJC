@@ -33,9 +33,9 @@ public class Subject_Mark {
         this.nameMark = nameMark;
     }
 
-    public Subject_Mark() {}
+    public Subject_Mark() {
+    }
 
-    
     public Long getSubjectMarkId() {
         return subjectMarkId;
     }
@@ -45,11 +45,9 @@ public class Subject_Mark {
         this.mark = mark;
     }
 
-
     public String getNameMark() {
         return nameMark;
     }
-
 
     public User getStudentId() {
         return studentId;
@@ -67,6 +65,4 @@ public class Subject_Mark {
         return convocatory;
     }
 
-    
-    
 }

@@ -9,7 +9,7 @@ import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.co
 import { PostulateAsDelegateComponent } from './postulate-as-delegate/postulate-as-delegate.component';
 import { EventGuard } from '../services/EventService/event-guard.guard';
 import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
-import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
+import { voteDelegateGuardGuard } from '../services/EventService/vote-delegate-guard.guard';
 import { FinalMarksComponent } from './final-marks/final-marks.component';
 import { CalendarWithClickComponent } from './components/calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
 import { NewsComponent } from './news/news.component';
@@ -19,49 +19,50 @@ const routes: Routes = [
     path: '',
     component: HomePage
   },
-  {path: 'me/subjects',
+  {
+    path: 'me/subjects',
     component: FinalsInfoComponent,
     canActivate: [AuthGuard]
-    }, 
-    {
-      path: 'calendar',
-      component: CalendarComponent
-    },
-    {
-      path: 'news',
-      component: NewsComponent
-    },
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent
+  },
+  {
+    path: 'news',
+    component: NewsComponent
+  },
 
-    {
-      path: 'schedule',
-      component: SubjectScheduleComponent,
-      canActivate: [AuthGuard]
-    },
-    {
-      path: 'becomeDelegate',
-      component: PostulateAsDelegateComponent,
-      canActivate: [AuthGuard,EventGuard]
-    },
-    {
-      path: 'voteDelegate',
-      component: VoteDelegatesComponent,
-      canActivate: [AuthGuard,voteDelegateGuard]
-    },
+  {
+    path: 'schedule',
+    component: SubjectScheduleComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'becomeDelegate',
+    component: PostulateAsDelegateComponent,
+    canActivate: [AuthGuard, EventGuard]
+  },
+  {
+    path: 'voteDelegate',
+    component: VoteDelegatesComponent,
+    canActivate: [AuthGuard, voteDelegateGuardGuard]
+  },
 
-    {
-      path: 'me/finalMarks',
-      component: FinalMarksComponent,
-      canActivate: [AuthGuard]
-    },
-    {
-      path: 'reservations',
-      component: CalendarWithClickComponent,
-      canActivate: [AuthGuard]
-    },
+  {
+    path: 'me/finalMarks',
+    component: FinalMarksComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reservations',
+    component: CalendarWithClickComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomePageRoutingModule {}
+export class HomePageRoutingModule { }

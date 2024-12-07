@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.model.Notification;
 import com.example.model.User;
 
-public interface NotificationRepository extends JpaRepository<Notification, Long>{
-    List<Notification> findFirst10ByStudentOrderByNotificationIdDesc(User student); 
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
+    List<Notification> findFirst10ByStudentOrderByNotificationIdDesc(User student);
 }

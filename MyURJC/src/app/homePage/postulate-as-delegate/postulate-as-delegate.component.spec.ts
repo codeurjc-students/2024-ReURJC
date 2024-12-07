@@ -9,7 +9,7 @@ describe('PostulateAsDelegateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostulateAsDelegateComponent ],
+      declarations: [PostulateAsDelegateComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

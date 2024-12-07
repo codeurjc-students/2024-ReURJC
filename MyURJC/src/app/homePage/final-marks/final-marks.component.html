@@ -9,14 +9,14 @@
 
 <ion-content>
   <div *ngFor="let subjectTitle of getSubjectTitles()">
-    <ion-card> 
+    <ion-card>
       <ion-card-header>
-        <ion-card-title style="color: #CB0017;">{{ subjectTitle }}</ion-card-title> 
+        <ion-card-title style="color: #CB0017;">{{ subjectTitle }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <div class="convocatorias"> 
+        <div class="convocatorias">
           <div *ngFor="let convocatory of getConvocatories(subjectTitle)" class="convocatoria">
-            <h4 >{{ convocatory }}</h4>
+            <h4>{{ convocatory }}</h4>
             <ion-list>
               <ion-item *ngFor="let grade of grades[subjectTitle][convocatory]">
                 <ion-label>{{ grade.nameMark }}: {{ grade.mark }}</ion-label>

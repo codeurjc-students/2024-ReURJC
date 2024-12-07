@@ -21,15 +21,17 @@ public class SubjectMarkService {
         return subjectMarkRepository.save(subjectMark);
     }
 
-    public void save (Subject_Mark obj) {
+    public Long save(Subject_Mark obj) {
         subjectMarkRepository.save(obj);
+        return obj.getSubjectMarkId();
     }
 
-    public boolean existsByStudentIdAndSubjectIdAndNameMark(User student, Subject subject, String nameMark){
+    public boolean existsByStudentIdAndSubjectIdAndNameMark(User student, Subject subject, String nameMark) {
         return subjectMarkRepository.existsByStudentIdAndSubjectIdAndNameMark(student, subject, nameMark);
     }
 
-    public Optional<Subject_Mark> findByStudentIdAndSubjectIdAndNameMark(User student, Subject subject, String nameMark) {
+    public Optional<Subject_Mark> findByStudentIdAndSubjectIdAndNameMark(User student, Subject subject,
+            String nameMark) {
         return subjectMarkRepository.findByStudentIdAndSubjectIdAndNameMark(student, subject, nameMark);
     }
 

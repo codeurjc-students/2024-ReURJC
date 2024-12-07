@@ -25,39 +25,40 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
     @Id
+    @JsonIgnore
     private Long studentId;
-    
+
     private String name;
     private String surname1;
     private String surname2;
+    @JsonIgnore
     private String dni;
     @ElementCollection(fetch = FetchType.EAGER)
-	private List<String> roles;
+    private List<String> roles;
     @JsonIgnore
     private Blob photo;
     private boolean isCandidate;
-    private int votes;
     @JsonIgnore
     private String email;
     @JsonIgnore
-	private String password;
+    private String password;
+    @JsonIgnore
     private List<String> fcmToken = new ArrayList<String>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "user_subject",
-        joinColumns = @JoinColumn(name = "userId"),
-        inverseJoinColumns = @JoinColumn(name = "subjectId"))
+    @JoinTable(name = "user_subject", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "subjectId"))
     private Collection<Subject> subjects = new ArrayList<Subject>();
 
-    public User() {}
-    public User(Long studentId, String name, String surname1, String surname2, String dni, String email, String password) {
+    public User() {
+    }
+
+    public User(Long studentId, String name, String surname1, String surname2, String dni, String email,
+            String password) {
         this.studentId = studentId;
-        this.name= name;
-        this.surname1=surname1;
-        this.surname2=surname2;
-        this.dni=dni;
-        votes = 0;
+        this.name = name;
+        this.surname1 = surname1;
+        this.surname2 = surname2;
+        this.dni = dni;
         isCandidate = false;
         this.email = email;
         this.password = password;
@@ -77,10 +78,9 @@ public class User {
     }
 
     public User(Long studentId, String name, String surname1, String surname2, String dni, Blob photo, String email) {
-        this(studentId, name, surname1, surname2, dni,email,"123456");
-        this.photo=photo;
+        this(studentId, name, surname1, surname2, dni, email, "123456");
+        this.photo = photo;
     }
-
 
     public Long getStudentId() {
         return studentId;
@@ -134,14 +134,6 @@ public class User {
         this.isCandidate = isCandidate;
     }
 
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
     public Long getId() {
         return this.studentId;
     }
@@ -149,39 +141,33 @@ public class User {
     public Collection<Subject> getSubjects() {
         return subjects;
     }
+
     public String getEmail() {
         return email;
     }
+
     public List<String> getRoles() {
         return roles;
     }
+
     public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 
     public String getPassword() {
-		return password;
-	}
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public List<String> getFcmToken() {
         return fcmToken;
     }
+
     public void addFcmToken(String fcmToken) {
         this.fcmToken.add(fcmToken);
     }
 
-    
-    
-
-    
-
-    
-
-    
-
-    
-    
 }

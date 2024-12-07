@@ -44,20 +44,13 @@
               <span *ngFor="let day of weekdays">{{ day }}</span>
             </div>
             <div class="days">
-              <span
-                *ngFor="let day of month.days"
-                [ngStyle]="{
+              <span *ngFor="let day of month.days" [ngStyle]="{
                   'grid-column-start': getDayOfWeek(day) === 0 ? 7 : getDayOfWeek(day),
                   'background-color': applyCustomColor(day)
-                }"
-                [class.current-day]="isToday(day)"
-                [class.weekend]="isPreviousDay(day)"
-                [class.week]="!isPreviousDay(day) && !isFestive(day)"
-                (click)="activarHoras(day)"
+                }" [class.current-day]="isToday(day)" [class.weekend]="isPreviousDay(day)"
+                [class.week]="!isPreviousDay(day) && !isFestive(day)" (click)="activarHoras(day)"
                 [class.faded]="isPreviousDay(day) || isFestive(day)"
-                [class.active]="!isPreviousDay(day) && !isFestive(day)"
-                tappable
-              >
+                [class.active]="!isPreviousDay(day) && !isFestive(day)" tappable>
                 <ion-ripple-effect></ion-ripple-effect>
                 {{ day.getDate() }}
               </span>

@@ -13,7 +13,7 @@ public class SportReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long sportReservationId;
-    
+
     @ManyToOne
     private User studentId;
     private LocalDateTime date;
@@ -25,7 +25,8 @@ public class SportReservation {
         this.pista = pista;
     }
 
-    public SportReservation() {}
+    public SportReservation() {
+    }
 
     public Long getSportReservationId() {
         return sportReservationId;
@@ -47,11 +48,4 @@ public class SportReservation {
         return pista;
     }
 
-    
-    
-
-    
-
-    
-    
 }

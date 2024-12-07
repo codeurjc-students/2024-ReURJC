@@ -26,8 +26,8 @@ import { NewsComponent } from './news/news.component';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    
+
   ],
-  declarations: [HomePage, CardComponent , FinalsInfoComponent, CalendarComponent, NewsComponent , SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent,CarnetComponent]
+  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent, NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent, CarnetComponent]
 })
-export class HomePageModule {}
+export class HomePageModule { }

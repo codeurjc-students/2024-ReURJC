@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiAuthService } from 'src/app/services/AuthService/api-auth-service.service';
 import { ApiUserService } from 'src/app/services/UserService/api.user.service';
 
@@ -7,7 +7,7 @@ import { ApiUserService } from 'src/app/services/UserService/api.user.service';
   templateUrl: './carnet.component.html',
   styleUrls: ['./carnet.component.scss'],
 })
-export class CarnetComponent  implements OnInit {
+export class CarnetComponent implements OnInit {
 
   private carnetUrl: string | null = null;
 
@@ -17,7 +17,7 @@ export class CarnetComponent  implements OnInit {
   ngOnInit(): void {
     // Suscribirse al observable que indica si el usuario está autenticado
     this.apiAuthService.loggedIn$.subscribe(loggedIn => {
-  
+
       // Si el usuario está autenticado, obtener el carné
       if (this.getIsLoggedIn()) {
         this.userService.getUserCarnet().subscribe({
@@ -33,14 +33,14 @@ export class CarnetComponent  implements OnInit {
       }
     });
   }
-  
 
-public getIsLoggedIn(): boolean {
-  return this.apiAuthService.isLoggedIn();
-}
 
-public getCarnetUrl(): string | null {
-  return this.carnetUrl;
-}
+  public getIsLoggedIn(): boolean {
+    return this.apiAuthService.isLoggedIn();
+  }
+
+  public getCarnetUrl(): string | null {
+    return this.carnetUrl;
+  }
 
 }

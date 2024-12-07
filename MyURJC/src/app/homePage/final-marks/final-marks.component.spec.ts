@@ -9,7 +9,7 @@ describe('FinalMarksComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ FinalMarksComponent ],
+      declarations: [FinalMarksComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

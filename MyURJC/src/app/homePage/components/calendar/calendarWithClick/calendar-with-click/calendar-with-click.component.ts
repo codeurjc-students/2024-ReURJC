@@ -9,7 +9,7 @@ import { SportReservation } from 'src/app/services/UserService/SportReservation'
   templateUrl: './calendar-with-click.component.html',
   styleUrls: ['./calendar-with-click.component.scss'],
 })
-export class CalendarWithClickComponent  implements OnInit {
+export class CalendarWithClickComponent implements OnInit {
 
   month: { name: string; days: Date[] } = { name: '', days: [] }; // Objeto para el mes actual
   weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D']; // Días de la semana
@@ -40,15 +40,14 @@ export class CalendarWithClickComponent  implements OnInit {
       (data) => {
         // Transformar los datos obtenidos en instancias de FestiveInfo
         this.festives = data
-        console.log(this.festives)
-  
+
         const festiveRange: FestiveInfo[] = this.festives.reduce((acc: FestiveInfo[], festive: FestiveInfo) => {
           if (festive.startedXDaysAgo !== -1) {
             return acc.concat(FestiveInfo.generateFestivesFromRange(festive));
           }
           return acc;
         }, []);
-  
+
         // Concatenar festivos originales con el rango generado
         this.festives = this.festives.concat(festiveRange);
       },
@@ -60,8 +59,8 @@ export class CalendarWithClickComponent  implements OnInit {
   generateCalendar() {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
-  
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); 1 
+
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); 1
     const days: Date[] = [];
     for (let day = 1; day <= daysInMonth; day++) {
       days.push(new Date(currentYear, currentMonth, day));
@@ -87,97 +86,96 @@ export class CalendarWithClickComponent  implements OnInit {
     return hours;
   }
 
-    getMonthName(monthIndex: number): string {
-      const monthNames = [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-      ];
-      return monthNames[monthIndex];
-    }
+  getMonthName(monthIndex: number): string {
+    const monthNames = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+    return monthNames[monthIndex];
+  }
 
-    getDayOfWeek(day: Date) {
-      return day.getDay();
-    }
-  
-    // Verifica si el día actual es hoy
-    isToday(date: Date): boolean {
-      const today = new Date();
-      return date.getDate() === today.getDate() &&
-             date.getMonth() === today.getMonth() &&
-             date.getFullYear() === today.getFullYear();
-    }
-  
-    // Verifica si es fin de semana (sábado o domingo)
-    isPreviousDay(date: Date): boolean {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); // Establece la hora de "hoy" a medianoche para comparar solo las fechas
-      date.setHours(0, 0, 0, 0); // Lo mismo para la fecha que se recibe
-    
-      return date <= today; 
-    }
-  
-    // Verifica si el día es festivo
-    isFestive(date: Date): boolean {
-      return this.festives.some((festive: FestiveInfo) => 
-        festive.day === date.getDate() &&
-        festive.month === date.getMonth() + 1 && 
-        festive.year === date.getFullYear()
-      );
-    } 
-  
-    // Aplica color personalizado a los días festivos
-    applyCustomColor(date: Date): string {
-      const festive = this.festives.find((festive: FestiveInfo) => 
-        festive.day === date.getDate() &&
-        festive.month === date.getMonth() + 1 &&
-        festive.year === date.getFullYear()
-      );
-    
-      return festive ? festive.color : ''; // Devuelve el color o vacío
-    }
+  getDayOfWeek(day: Date) {
+    return day.getDay();
+  }
+
+  // Verifica si el día actual es hoy
+  isToday(date: Date): boolean {
+    const today = new Date();
+    return date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+  }
+
+  // Verifica si es fin de semana (sábado o domingo)
+  isPreviousDay(date: Date): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Establece la hora de "hoy" a medianoche para comparar solo las fechas
+    date.setHours(0, 0, 0, 0); // Lo mismo para la fecha que se recibe
+
+    return date <= today;
+  }
+
+  // Verifica si el día es festivo
+  isFestive(date: Date): boolean {
+    return this.festives.some((festive: FestiveInfo) =>
+      festive.day === date.getDate() &&
+      festive.month === date.getMonth() + 1 &&
+      festive.year === date.getFullYear()
+    );
+  }
+
+  // Aplica color personalizado a los días festivos
+  applyCustomColor(date: Date): string {
+    const festive = this.festives.find((festive: FestiveInfo) =>
+      festive.day === date.getDate() &&
+      festive.month === date.getMonth() + 1 &&
+      festive.year === date.getFullYear()
+    );
+
+    return festive ? festive.color : ''; // Devuelve el color o vacío
+  }
 
 
-    activarCalendario(pista: string) {
-      this.tituloPista = `Pista: ${pista}`; 
-      this.calendarioActivo = true;
-      this.horasActivo = false; // Reiniciar la selección de horas
-      this.dayChoosen = undefined; // Reiniciar el día seleccionado
-    }
+  activarCalendario(pista: string) {
+    this.tituloPista = `Pista: ${pista}`;
+    this.calendarioActivo = true;
+    this.horasActivo = false; // Reiniciar la selección de horas
+    this.dayChoosen = undefined; // Reiniciar el día seleccionado
+  }
 
-    activarHoras(day: Date) {
-      if (!this.isPreviousDay(day)) {
-        this.continuacion = "para el " + day.getDate().toString() + "/" + day.getMonth();
-        this.dayChoosen = day;
-  
-        // Obtener el número de pista
-        let pista = 0;
-        if (this.tituloPista.includes('Tenis')) {
-          pista = 0;
-        } else if (this.tituloPista.includes('Baloncesto')) {
-          pista = 1;
-        } else if (this.tituloPista.includes('Fútbol')) {
-          pista = 2;
-        }
-  
-        // Llamar al servicio para obtener las reservas
-        const reservationInfo = {
-          año: day.getFullYear(),
-          mes: day.getMonth() + 1, // Los meses en JavaScript van de 0 a 11
-          dia: day.getDate() 
-        };
-    
-        this.apiUserservice.getSportReservations(pista, reservationInfo).subscribe(
-          (reservas) => {
-            console.log(reservas)
-            this.horas = this.generateHourButtons(reservas); // Generar las horas disponibles
-            this.horasActivo = true; // Mostrar las horas
-          },
-          (error) => {
-            console.error('Error al obtener las reservas:', error);
-          }
-        );
+  activarHoras(day: Date) {
+    if (!this.isPreviousDay(day)) {
+      this.continuacion = "para el " + day.getDate().toString() + "/" + day.getMonth();
+      this.dayChoosen = day;
+
+      // Obtener el número de pista
+      let pista = 0;
+      if (this.tituloPista.includes('Tenis')) {
+        pista = 0;
+      } else if (this.tituloPista.includes('Baloncesto')) {
+        pista = 1;
+      } else if (this.tituloPista.includes('Fútbol')) {
+        pista = 2;
       }
+
+      // Llamar al servicio para obtener las reservas
+      const reservationInfo = {
+        año: day.getFullYear(),
+        mes: day.getMonth() + 1, // Los meses en JavaScript van de 0 a 11
+        dia: day.getDate()
+      };
+
+      this.apiUserservice.getSportReservations(pista, reservationInfo).subscribe(
+        (reservas) => {
+          this.horas = this.generateHourButtons(reservas); // Generar las horas disponibles
+          this.horasActivo = true; // Mostrar las horas
+        },
+        (error) => {
+          console.error('Error al obtener las reservas:', error);
+        }
+      );
     }
+  }
 
   hasAReservation() {
     this.apiUserservice.reqIsUserWithReservation().subscribe(data => {
@@ -187,9 +185,9 @@ export class CalendarWithClickComponent  implements OnInit {
   }
 
   cancelarReserva() {
-    this.apiUserservice.cancelReservation().subscribe(data => {this.hasAReservation();});
+    this.apiUserservice.cancelReservation().subscribe(data => { this.hasAReservation(); });
 
-    
+
   }
 
 
@@ -198,44 +196,28 @@ export class CalendarWithClickComponent  implements OnInit {
       const formattedHour = hour < 10 ? `0${hour}` : `${hour}`; // Añadir un cero a la izquierda si es necesario
       let pista = 0; // Valor por defecto
 
-    // Determinar el valor de 'pista' según this.tituloPista
-    if (this.tituloPista.includes('Tenis')) {
-      pista = 0; 
-    } else if (this.tituloPista.includes('Baloncesto')) {
-      pista = 1;
-    } else if (this.tituloPista.includes('Fútbol')) {
-      pista = 2;
-    }
+      // Determinar el valor de 'pista' según this.tituloPista
+      if (this.tituloPista.includes('Tenis')) {
+        pista = 0;
+      } else if (this.tituloPista.includes('Baloncesto')) {
+        pista = 1;
+      } else if (this.tituloPista.includes('Fútbol')) {
+        pista = 2;
+      }
       const reservationData = {
         año: this.dayChoosen.getFullYear(),
-        mes: this.dayChoosen.getMonth() + 1, 
+        mes: this.dayChoosen.getMonth() + 1,
         fecha: this.dayChoosen.getDate(),
         hora: formattedHour,
         pista: pista
       };
-  
+
       this.apiUserservice.newSportReservation(reservationData).subscribe(
         (response) => {
-          if (response) {
-            // La reserva se realizó con éxito
-            console.log('Reserva realizada con éxito');
             this.hasAReservation()
             this.obtenerReserva();
-            // Puedes mostrar un mensaje de éxito al usuario, redirigirlo a otra página, etc.
-          } else {
-            // Hubo un error al realizar la reserva
-            console.error('Error al realizar la reserva');
-            // Puedes mostrar un mensaje de error al usuario
-          }
-        },
-        (error) => {
-          console.error('Error en la solicitud:', error);
-          // Puedes mostrar un mensaje de error al usuario
         }
       );
-    } else {
-      console.error('No se ha seleccionado un día');
-      // Puedes mostrar un mensaje de error al usuario
     }
   }
 
@@ -261,11 +243,11 @@ export class CalendarWithClickComponent  implements OnInit {
     const target = event.target as HTMLElement;
     target.classList.add('pressed');
   }
-  
+
   onRelease(event: Event): void {
     const target = event.target as HTMLElement;
     target.classList.remove('pressed');
   }
-  
+
 
 }

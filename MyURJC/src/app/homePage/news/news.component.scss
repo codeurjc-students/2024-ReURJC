@@ -1,27 +1,31 @@
 .pagination-buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  ion-button {
-    margin: 0 10px;
-  }
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-  .news-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch; /* Asegura que las alturas sean iguales */
-  }
+ion-button {
+  margin: 0 10px;
+}
 
-  ion-footer {
-    background-color: transparent !important; /* Hace el fondo transparente */
-    backdrop-filter: blur(10px); /* Opción para añadir un efecto de desenfoque */
-    box-shadow: none; /* Opcional: quita la sombra si no la deseas */
-  }
-  
-  ion-toolbar {
-    --background: transparent; /* Hace el fondo del toolbar transparente */
-  }
-  
+.news-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  /* Asegura que las alturas sean iguales */
+}
+
+ion-footer {
+  background-color: transparent !important;
+  /* Hace el fondo transparente */
+  backdrop-filter: blur(10px);
+  /* Opción para añadir un efecto de desenfoque */
+  box-shadow: none;
+  /* Opcional: quita la sombra si no la deseas */
+}
+
+ion-toolbar {
+  --background: transparent;
+  /* Hace el fondo del toolbar transparente */
+}

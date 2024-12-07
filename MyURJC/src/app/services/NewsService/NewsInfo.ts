@@ -1,8 +1,8 @@
 export class NewsInfo {
-     newsId: number;
-     title: string;
-     description: string;
-     date: string;
+    newsId: number;
+    title: string;
+    description: string;
+    date: string;
 
     constructor(newsId: number, title: string, description: string, date: string) {
         this.newsId = newsId;

@@ -11,15 +11,14 @@ import com.example.repository.UserRepository;
 @Service
 public class UserService {
 
-    @Autowired
+	@Autowired
 	private UserRepository repository;
-    
 
-    public User findByEmail(String email) {
+	public User findByEmail(String email) {
 		return repository.findByEmail(email);
 	}
 
-    public boolean existsByEmail(String email) {
+	public boolean existsByEmail(String email) {
 		return repository.existsByEmail(email);
 	}
 
@@ -40,8 +39,8 @@ public class UserService {
 	}
 
 	public void setToken(User user, String fcmToken) {
-		if (fcmToken != null && !fcmToken.isEmpty()) { 
-			System.out.println("El token es: "+ fcmToken );
+		if (fcmToken != null && !fcmToken.isEmpty()) {
+			System.out.println("El token es: " + fcmToken);
 			user.addFcmToken(fcmToken);
 			repository.save(user);
 		}

@@ -8,21 +8,24 @@ public class NotificationRequest {
 
     public NotificationRequest(String t, String b, String tok) {
         title = t;
-        body=b;
+        body = b;
         token = tok;
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getBody() {
         return body;
     }
+
     public String getTopic() {
         return topic;
     }
+
     public String getToken() {
         return token;
     }
 
-    
 }

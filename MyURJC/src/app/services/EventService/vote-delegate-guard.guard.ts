@@ -7,8 +7,8 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class voteDelegateGuard implements CanActivate {
-  constructor(private eventService: EventServiceService, private router: Router) {}
+export class voteDelegateGuardGuard implements CanActivate {
+  constructor(private eventService: EventServiceService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,

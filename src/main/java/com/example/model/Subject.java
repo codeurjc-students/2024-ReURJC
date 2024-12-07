@@ -27,7 +27,8 @@ public class Subject {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Schedule> schedule = new ArrayList<>();
 
-    public Subject() {}
+    public Subject() {
+    }
 
     public Subject(Long i, String string) {
         this.subjectId = i;

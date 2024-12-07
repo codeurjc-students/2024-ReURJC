@@ -1,4 +1,5 @@
 package com.example.repository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +17,10 @@ public interface SportReservationrepository extends JpaRepository<SportReservati
 
     @Query("SELECT sr FROM SportReservation sr WHERE sr.date BETWEEN :startOfDay AND :endOfDay AND sr.pista = :pista")
     List<SportReservation> findByDateAndPista(
-        @Param("startOfDay") LocalDateTime startOfDay, 
-        @Param("endOfDay") LocalDateTime endOfDay, 
-        @Param("pista") int pista);
+            @Param("startOfDay") LocalDateTime startOfDay,
+            @Param("endOfDay") LocalDateTime endOfDay,
+            @Param("pista") int pista);
 
-        @Query("SELECT sr FROM SportReservation sr WHERE sr.studentId.studentId = :studentId")
-        Optional<SportReservation> findByStudentId(@Param("studentId") Long studentId);
-    }
+    @Query("SELECT sr FROM SportReservation sr WHERE sr.studentId.studentId = :studentId")
+    Optional<SportReservation> findByStudentId(@Param("studentId") Long studentId);
+}

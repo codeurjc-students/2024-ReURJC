@@ -9,7 +9,7 @@ describe('SubjectScheduleComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubjectScheduleComponent ],
+      declarations: [SubjectScheduleComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

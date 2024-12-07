@@ -7,14 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTask {
     @Autowired
-    private  EventService eventService;
+    private EventService eventService;
 
     @Scheduled(cron = "0 1 0 * * ?")
     public void scheduleVotingEnd() {
-        
-        
-                if ( !eventService.isVoteDelegatesEvent() && !eventService.isBecomeCandidateEvent())
-        eventService.endVotingEvent();
+
+        if (!eventService.isVoteDelegatesEvent() && !eventService.isBecomeCandidateEvent())
+            eventService.endVotingEvent();
     }
 }
-    

@@ -8,17 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let candidate of candidates" class="candidate-card"> 
-    <app-card 
-      [card]="getCardInfo(candidate)" 
-      [isSubtitleFirst]="false"> 
+  <div *ngFor="let candidate of candidates" class="candidate-card">
+    <app-card [card]="getCardInfo(candidate)" [isSubtitleFirst]="false">
     </app-card>
-    <ion-button 
-      expand="block" 
-      color="primary" 
-      (click)="voteForCandidate(candidate.id)" 
-      [disabled]="getUserVoted()">
-      Votar a {{ candidate.name }} {{ candidate.surname }}  
+    <ion-button expand="block" color="primary" (click)="voteForCandidate(candidate.id)" [disabled]="getUserVoted()">
+      Votar a {{ candidate.name }} {{ candidate.surname }}
     </ion-button>
   </div>
 </ion-content>

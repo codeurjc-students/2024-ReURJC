@@ -14,40 +14,29 @@ public class News {
     private String description;
     private String date;
 
+    public News() {
+    }
 
-    public News() {}
-    public News(String title, String description, String date ) {
+    public News(String title, String description, String date) {
         this.title = title;
         this.description = description;
         this.date = date;
     }
 
-
     public Long getNewsId() {
         return newsId;
     }
-
 
     public String getTitle() {
         return title;
     }
 
-
     public String getDescription() {
         return description;
     }
-
 
     public String getDate() {
         return date;
     }
 
-
-
-    
-
-    
-
-
 }
-

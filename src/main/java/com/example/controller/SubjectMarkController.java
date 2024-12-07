@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.model.Subject_Mark;
@@ -15,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 
 @RestController
 @RequestMapping("/api/marks")
@@ -30,14 +30,13 @@ public class SubjectMarkController {
     @GetMapping("/")
     public ResponseEntity<List<Subject_Mark>> getMethodName(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
-    if (principal != null) {
-        User user = userService.findByEmail(principal.getName());
-        List<Subject_Mark> record = subjectMarkService.findSubjectsByStudent(user);
-        return ResponseEntity.ok(record);
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            List<Subject_Mark> record = subjectMarkService.findSubjectsByStudent(user);
+            return ResponseEntity.ok(record);
 
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
-    return ResponseEntity.notFound().build();
-    }
-    
-    
+
 }

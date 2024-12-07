@@ -1,0 +1,30 @@
+version: "3"
+services:
+
+  myurjc-app:
+    container_name: myurjc
+    image: jesussmariscal/reurjc
+    ports:
+      - "8080:8080"
+    depends_on:
+      - myurjc-DB
+    command: ["/bin/sh", "-c", "./wait-for-it.sh myurjc-DB:3306 -- && java -jar /app/demo-0.0.1-SNAPSHOT.jar"]
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://myurjc-DB:3306/tfgdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - RUNNING_IN_DOCKER=true
+
+  myurjc-DB:
+    container_name: myurjc-DB
+    image: mysql:8.3.0
+    ports:
+      - "3307:3306"  # Cambiado aquí para utilizar un puerto diferente
+    environment:
+      - MYSQL_DATABASE=tfgdb
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+volumes:
+  mysql:

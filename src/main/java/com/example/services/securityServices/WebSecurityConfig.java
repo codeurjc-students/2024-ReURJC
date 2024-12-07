@@ -39,29 +39,21 @@ public class WebSecurityConfig {
     private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
 
     @Bean
-public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-    return authenticationConfiguration.getAuthenticationManager();
-}
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
-
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .cors().and()  // Asegura que la configuración CORS esté habilitada
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+        .cors().and() 
         .csrf().disable()
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/public/**", "/api/**").permitAll()
-            .requestMatchers("/socket.io/**").permitAll() // Agrega esta línea
-            .requestMatchers("/api/moodle/**").authenticated()
-            .anyRequest().authenticated()
-        )
-        .addFilterBefore(apiKeyAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-    return http.build();
-}
-
+        .authorizeRequests()
+            .anyRequest().permitAll()  // Permite acceso a TODO
+        ;
+return http.build();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -70,18 +62,17 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
     // Configuración de CORS
     @Bean
-CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://10.0.2.16:4200","http://192.168.1.17:8100")); // URL del frontend
-    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
-    configuration.setAllowCredentials(true); // Habilita credenciales
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(
+                Arrays.asList("http://localhost:4200", "http://10.0.2.16:4200", "http://192.168.1.17:8100")); // URL del
+                                                                                                              // frontend
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+        configuration.setAllowCredentials(true); // Habilita credenciales
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
 }
-
-
-        
-}
-

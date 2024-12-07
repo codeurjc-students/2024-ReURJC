@@ -1,10 +1,10 @@
 export class FestiveInfo {
-     day: number;
-     month: number;
-     year: number;
-     color: string;
-     startedXDaysAgo: number;
-     local: string
+    day: number;
+    month: number;
+    year: number;
+    color: string;
+    startedXDaysAgo: number;
+    local: string
 
     constructor(day: number, month: number, year: number, color: string, startedXDaysAgo: number, local: string) {
         this.day = day;
@@ -23,11 +23,11 @@ export class FestiveInfo {
 
         // Crear la fecha final (el día del festivo especificado)
         const endDate = new Date(festive.year, festive.month - 1, festive.day);
-        
+
         // Calcular la fecha de inicio restando los xdaysAgo
         const startDate = new Date(endDate);
         startDate.setDate(endDate.getDate() - festive.startedXDaysAgo);
-        
+
         // Iterar desde la fecha de inicio hasta la fecha final
         let currentDate = new Date(startDate);
         while (currentDate <= endDate) {
@@ -40,13 +40,13 @@ export class FestiveInfo {
                 festive.startedXDaysAgo,
                 festive.local // Usar la misma localidad
             ));
-            
+
             // Avanzar un día
             currentDate.setDate(currentDate.getDate() + 1);
         }
         return festiveList;
     }
-    
-    
+
+
 }
 

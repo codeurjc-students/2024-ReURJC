@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.net.URI;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +24,26 @@ import com.example.services.UserService;
 @RequestMapping("/api/moodle")
 public class MoodleController {
 
+    @Autowired
+    private UserService userService;
 
     @Autowired
-    private UserService userService; 
-
-    @Autowired
-    private SubjectMarkService subjectMarkService; 
+    private SubjectMarkService subjectMarkService;
 
     @Autowired
     private SubjectService subjectService;
 
     @Autowired
-    private MyWebSocketController webSocketController; // Inyecta MyWebSocketController
+    private MyWebSocketController webSocketController;
 
     @Autowired
     private NotificationService notificationService;
 
     @Autowired
-    private FCMService fcmService; 
+    private FCMService fcmService;
 
     @PostMapping("/updateGrade")
-    public ResponseEntity<String> miEndpoint(@RequestBody Map<String, Object> datos) throws Exception {
+    public ResponseEntity<URI> miEndpoint(@RequestBody Map<String, Object> datos) throws Exception {
 
         try {
             // Obtener los datos de la solicitud
@@ -58,36 +58,39 @@ public class MoodleController {
                 Subject subject = subjectService.getSubject(courseId);
 
                 // Crear una nueva nota o actualizarla si existe
+                Long idCreated = null;
                 if (!subjectMarkService.existsByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName)) {
-; 
-                    subjectMarkService.save( new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
+                    ;
+                    idCreated = subjectMarkService.save(new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
                 } else {
-                    updateExistingMark(student, subject, mark, assignmentName);
+                    idCreated = updateExistingMark(student, subject, mark, assignmentName);
                 }
 
                 webSocketController.sendUpdate(); // Llama al método sendUpdate
-                notificationService.newNote(student, subject.getTitle(), assignmentName, String.valueOf(mark), "Ordinaria");
-                for (String token: student.getFcmToken()) {
-                NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(), "Se ha evaluado: "+ assignmentName + "con una nota de "+mark,token);
-                fcmService.sendMessageToToken(request);
+                notificationService.newNote(student, subject.getTitle(), assignmentName, String.valueOf(mark),
+                        "Ordinaria");
+                for (String token : student.getFcmToken()) {
+                    NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(),
+                            "Se ha evaluado: " + assignmentName + "con una nota de " + mark, token);
+                    fcmService.sendMessageToToken(request);
                 }
-                return ResponseEntity.ok("Nota creada/actualizada correctamente");
+                    URI location = URI.create("/api/events/" + idCreated);
+                        return ResponseEntity.created(location).build();
             }
-            return ResponseEntity.ok("ok");
         } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().body("Error al convertir los datos");
+            return ResponseEntity.notFound().build();
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.notFound().build();
         }
-    
-    
-}
+        return ResponseEntity.notFound().build();
 
-    private void updateExistingMark(User student, Subject subject, int mark, String assignmentName) {
-        Subject_Mark existingMark = subjectMarkService.findByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName).get();
-        existingMark.setMark(mark);
-        subjectMarkService.save(existingMark);
     }
-    
-    
+
+    private Long updateExistingMark(User student, Subject subject, int mark, String assignmentName) {
+        Subject_Mark existingMark = subjectMarkService
+                .findByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName).get();
+        existingMark.setMark(mark);
+        return subjectMarkService.save(existingMark);
+    }
+
 }

@@ -1,13 +1,11 @@
 package com.example.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.ManyToOne;
-
-
-
 
 @Entity
 public class Notification {
@@ -16,7 +14,7 @@ public class Notification {
     private Long notificationId;
 
     @ManyToOne
-	private User student;
+    private User student;
 
     private String title;
 
@@ -28,7 +26,8 @@ public class Notification {
         this.description = description;
     }
 
-    public Notification(){}
+    public Notification() {
+    }
 
     public Long getNotificationId() {
         return notificationId;
@@ -45,7 +44,5 @@ public class Notification {
     public String getDescription() {
         return description;
     }
-
-    
 
 }

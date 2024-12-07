@@ -8,17 +8,11 @@
 </ion-header>
 
 <ion-content>
-  <app-card 
-    [card]="cardInfo" 
-    [isSubtitleFirst]="false">
+  <app-card [card]="cardInfo" [isSubtitleFirst]="false">
   </app-card>
 
-  <ion-button
-    expand="block"
-    (click)="becomeCandidate()"
-    [color]="getIsCandidate() ? 'danger' : ''"  
-    [disabled]="getIsCandidate() && !getIsCandidate()"
-  >
-    {{ getIsCandidate() ? 'Inscribirse' : 'Ya estás inscrito, pulsa para cancelar' }}
+  <ion-button expand="block" (click)="becomeCandidate()" [color]="getIsCandidate() ? 'danger' : ''"
+    [disabled]="getIsCandidate() && !getIsCandidate()">
+    {{ !getIsCandidate() ? 'Inscribirse' : 'Ya estás inscrito, pulsa para cancelar' }}
   </ion-button>
 </ion-content>

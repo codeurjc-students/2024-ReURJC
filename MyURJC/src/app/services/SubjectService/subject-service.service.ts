@@ -8,10 +8,10 @@ import { SubjectScheduleResponse } from './ResponseInfo/SubjectScheduleResponse'
 })
 export class SubjectServiceService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getSchedule(): Observable<SubjectScheduleResponse[]> {
-    return this.http.get<SubjectScheduleResponse[]>(`/api/subjects/schedule`,{ withCredentials: true });
+    return this.http.get<SubjectScheduleResponse[]>(`/api/subjects/schedule`, { withCredentials: true });
 
   }
 }

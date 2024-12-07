@@ -1,16 +1,13 @@
-
-  <ion-card 
-    style="flex-grow: 1; min-width: 0;" 
-    (click)="card.apiCaller ? navigate(card.apiCaller) : null"> 
-    <ion-card-header>
-      <ng-container *ngIf="isSubtitleFirst; else subtitleLast">
-        <ion-card-subtitle>{{card.subtitle}}</ion-card-subtitle>
-        <ion-card-title style="color: #CB0017;">{{card.title}}</ion-card-title> 
-      </ng-container>
-      <ng-template #subtitleLast>
-        <ion-card-title style="color: #CB0017;">{{card.title}}</ion-card-title>
-        <ion-card-subtitle>{{card.subtitle}}</ion-card-subtitle>
-      </ng-template>
-    </ion-card-header>
-    <ion-card-content>{{card.description}}</ion-card-content>
-  </ion-card>
+<ion-card style="flex-grow: 1; min-width: 0;" (click)="card.apiCaller ? navigate(card.apiCaller) : null">
+  <ion-card-header>
+    <ng-container *ngIf="isSubtitleFirst; else subtitleLast">
+      <ion-card-subtitle>{{card.subtitle}}</ion-card-subtitle>
+      <ion-card-title style="color: #CB0017;">{{card.title}}</ion-card-title>
+    </ng-container>
+    <ng-template #subtitleLast>
+      <ion-card-title style="color: #CB0017;">{{card.title}}</ion-card-title>
+      <ion-card-subtitle>{{card.subtitle}}</ion-card-subtitle>
+    </ng-template>
+  </ion-card-header>
+  <ion-card-content>{{card.description}}</ion-card-content>
+</ion-card>

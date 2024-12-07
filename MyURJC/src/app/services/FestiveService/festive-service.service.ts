@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FestiveInfo } from './FestiveInfo';
 
 @Injectable({
@@ -8,11 +8,11 @@ import { FestiveInfo } from './FestiveInfo';
 })
 export class FestiveServiceService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllFestives(): Observable<FestiveInfo[]> {
     return this.http.get<FestiveInfo[]>(`/api/festives`, { withCredentials: false })
-      
+
   }
 
 }

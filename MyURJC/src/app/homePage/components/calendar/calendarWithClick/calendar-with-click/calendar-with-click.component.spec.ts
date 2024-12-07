@@ -9,7 +9,7 @@ describe('CalendarWithClickComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarWithClickComponent ],
+      declarations: [CalendarWithClickComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

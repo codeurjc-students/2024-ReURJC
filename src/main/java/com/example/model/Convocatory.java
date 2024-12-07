@@ -1,4 +1,5 @@
 package com.example.model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -6,7 +7,8 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Convocatory {
-    @Id@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long convocatoriaId;
     private String date;
     private int convocatory;
@@ -18,8 +20,9 @@ public class Convocatory {
         this.classroom = classroom;
     }
 
-    public Convocatory() {}
-    
+    public Convocatory() {
+    }
+
     public Long getConvocatoriaId() {
         return convocatoriaId;
     }
@@ -36,5 +39,4 @@ public class Convocatory {
         return classroom;
     }
 
-    
 }

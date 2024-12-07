@@ -14,9 +14,8 @@ public class FestiveService {
     @Autowired
     private FestiveRepository repository;
 
-
     public List<Festive> getAll() {
         return repository.findAll();
     }
-    
+
 }

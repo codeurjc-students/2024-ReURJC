@@ -7,12 +7,13 @@
     <ion-card-header>
       <ion-card-title>
         Nueva nota en {{ notification.notifications.subjectId.title }}
-        <ion-badge *ngIf="notification.nuevo" color="danger"></ion-badge> 
+        <ion-badge *ngIf="notification.nuevo" color="danger"></ion-badge>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>
-        Se ha evaluado:  {{ notification.notifications.nameMark }} con una nota de <b>{{ notification.notifications.mark }}</b>. Convocatoria: {{ notification.notifications.convocatory }}
+        Se ha evaluado: {{ notification.notifications.nameMark }} con una nota de <b>{{ notification.notifications.mark
+          }}</b>. Convocatoria: {{ notification.notifications.convocatory }}
       </p>
     </ion-card-content>
   </ion-card>
@@ -23,14 +24,13 @@
 </div>
 
 
-  <ion-list>
-    <ion-card *ngFor="let notification of dbNotifications">
-      <ion-card-header>
-        <ion-card-title>{{ notification.title }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        {{ notification.description }}
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
-
+<ion-list>
+  <ion-card *ngFor="let notification of dbNotifications">
+    <ion-card-header>
+      <ion-card-title>{{ notification.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ notification.description }}
+    </ion-card-content>
+  </ion-card>
+</ion-list>

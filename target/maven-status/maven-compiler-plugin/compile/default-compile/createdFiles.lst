@@ -3,6 +3,7 @@ com/example/model/Events/interfaces/VoteDelegates.class
 com/example/model/Events/VoteDelegateEvent.class
 com/example/services/securityServices/jwt/Token.class
 com/example/repository/Subject_MarkRepository.class
+com/example/controller/SubjectMarkController.class
 com/example/repository/NotificationRepository.class
 com/example/model/Subject.class
 com/example/controller/MyWebSocketController.class
@@ -10,6 +11,7 @@ com/example/controller/Responses/SubjectScheduleResponse.class
 com/example/services/securityServices/jwt/LoginRequest.class
 com/example/services/securityServices/RepositoryUserDetailsService.class
 com/example/model/SportReservation.class
+com/example/services/FCMInitializer.class
 com/example/services/securityServices/CSRFHandlerInterceptor.class
 com/example/controller/MoodleController.class
 com/example/services/ScheduledTask.class
@@ -27,6 +29,7 @@ com/example/services/securityServices/jwt/UserLoginService.class
 com/example/model/User.class
 com/example/repository/VotesRepository.class
 com/example/services/SportReservationService.class
+com/example/controller/PushNotificationsController.class
 com/example/services/FestiveService.class
 com/example/services/securityServices/jwt/UnauthorizedHandlerJwt.class
 com/example/repository/SportReservationrepository.class
@@ -35,16 +38,19 @@ com/example/model/Festive.class
 com/example/model/Subject_Mark.class
 com/example/services/NewService.class
 com/example/repository/EventRepository.class
+com/example/services/FCMService.class
 com/example/services/VotesService.class
 com/example/services/securityServices/jwt/JwtRequestFilter.class
 com/example/model/Events/interfaces/BecomeDelegateEvent.class
 com/example/services/UserService.class
+com/example/model/NotificationResponse.class
 com/example/controller/UserController.class
 com/example/model/Vote.class
 com/example/controller/EventsController.class
 com/example/model/Schedule.class
 com/example/services/securityServices/jwt/SecurityCipher.class
 com/example/services/NotificationService.class
+com/example/model/NotificationRequest.class
 com/example/controller/NotificationController.class
 com/example/services/EventService.class
 com/example/DemoApplication.class

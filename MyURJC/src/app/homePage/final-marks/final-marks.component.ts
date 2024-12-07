@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
 import { ApiUserService } from 'src/app/services/UserService/api.user.service';
 import { SubjectMark } from 'src/app/services/UserService/SubjectMark';
 
@@ -8,14 +7,14 @@ import { SubjectMark } from 'src/app/services/UserService/SubjectMark';
   templateUrl: './final-marks.component.html',
   styleUrls: ['./final-marks.component.scss'],
 })
-export class FinalMarksComponent  implements OnInit {
+export class FinalMarksComponent implements OnInit {
 
-  grades:   
- { [subjectTitle: string]: { [convocatory: string]: SubjectMark[] } } = {};
+  grades:
+    { [subjectTitle: string]: { [convocatory: string]: SubjectMark[] } } = {};
 
-  constructor(private apiUserService: ApiUserService) { 
-    
-    
+  constructor(private apiUserService: ApiUserService) {
+
+
   }
 
   ngOnInit() {
@@ -52,6 +51,6 @@ export class FinalMarksComponent  implements OnInit {
     return Object.keys(this.grades[subjectTitle]);
   }
 
-  
+
 
 }
