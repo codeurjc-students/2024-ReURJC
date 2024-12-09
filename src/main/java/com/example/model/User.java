@@ -2,6 +2,7 @@ package com.example.model;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -31,7 +32,6 @@ public class User {
     private String name;
     private String surname1;
     private String surname2;
-    @JsonIgnore
     private String dni;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
@@ -63,15 +63,20 @@ public class User {
         this.email = email;
         this.password = password;
         try {
-            // Leer la imagen como bytes
-            File file = new File("src/main/java/com/example/model/image.png");
-            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            // Usar ClassLoader para cargar el archivo desde el classpath
+            InputStream imageStream = getClass().getClassLoader().getResourceAsStream("image.png");
+            if (imageStream != null) {
+                // Leer los bytes de la imagen
+                byte[] imageBytes = imageStream.readAllBytes();
+                imageStream.close();
 
-            // Crear un Blob a partir de los bytes
-            Blob imageBlob = new SerialBlob(imageBytes);
+                // Crear un Blob a partir de los bytes
+                Blob imageBlob = new SerialBlob(imageBytes);
 
-            photo = imageBlob;
-
+                photo = imageBlob;
+            } else {
+                System.err.println("No se encontró el archivo image.png en el classpath.");
+            }
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }

@@ -29,7 +29,7 @@ public class SubjectsController {
     private UserService userService;
 
     @GetMapping("/schedule")
-    public ResponseEntity<?> getSchedule(HttpServletRequest request) {
+    public ResponseEntity<List<SubjectScheduleResponse>> getSchedule(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
@@ -40,6 +40,20 @@ public class SubjectsController {
                 response.add(new SubjectScheduleResponse(subjectElem.getTitle(), subjectElem.getSchedule()));
             }
             return ResponseEntity.ok(response);
+
+        }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<Collection<Subject>> getSubjects(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+
+            return ResponseEntity.ok(user.getSubjects());
 
         }
 

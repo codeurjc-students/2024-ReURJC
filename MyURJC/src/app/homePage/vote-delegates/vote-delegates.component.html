@@ -12,7 +12,7 @@
     <app-card [card]="getCardInfo(candidate)" [isSubtitleFirst]="false">
     </app-card>
     <ion-button expand="block" color="primary" (click)="voteForCandidate(candidate.id)" [disabled]="getUserVoted()">
-      Votar a {{ candidate.name }} {{ candidate.surname }}
+      Votar a {{ candidate.name }} {{ candidate.surname1 }} {{ candidate.surname2 }}
     </ion-button>
   </div>
 </ion-content>

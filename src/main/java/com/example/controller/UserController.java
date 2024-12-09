@@ -29,12 +29,17 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 
+import com.example.model.Attendance;
 import com.example.model.SportReservation;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
+import com.example.model.UserAttendance;
+import com.example.services.AttendanceService;
 import com.example.services.EventService;
 import com.example.services.SportReservationService;
 import com.example.services.SubjectMarkService;
@@ -73,6 +78,9 @@ public class UserController {
     @Autowired
     private SportReservationService sportReservationService;
 
+    @Autowired
+    private AttendanceService attendanceService;
+
     @GetMapping("/me/subjects")
     public ResponseEntity<?> getMethodName(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
@@ -95,7 +103,7 @@ public class UserController {
             User user = userService.findByEmail(principal.getName());
             userService.setToken(user, fcmToken);
             URI location = URI.create(request.getRequestURI() + "/" + user.getId());
-            return ResponseEntity.ok(location);
+            return ResponseEntity.created(location).build();
         } else {
             ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No tienes permiso para realizar esta acción.");
@@ -163,7 +171,11 @@ public class UserController {
             g2d.drawImage(profilePic, 10, 10, targetWidth, targetHeight, null);
 
             // Cargar la segunda imagen
-            BufferedImage image = ImageIO.read(new File("src/main/java/com/example/model/logo.png"));
+            InputStream logoStream = getClass().getClassLoader().getResourceAsStream("logo.png");
+            if (logoStream == null) {
+                throw new FileNotFoundException("El archivo logo.png no se encontró en el classpath.");
+            }
+            BufferedImage image = ImageIO.read(logoStream);
 
             // Obtener dimensiones originales de la segunda imagen
             int imageWidth = image.getWidth();
@@ -389,6 +401,28 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
+    }
+
+    @PostMapping("/newAttendance")
+    public ResponseEntity<URI> newAttendance(HttpServletRequest request, @RequestParam String code) {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            Attendance attendance = attendanceService.getAttendanceEvent(code);
+            if (attendance != null) {
+                attendanceService.adduser(attendance, user);
+                URI location = URI.create(request.getRequestURI() + "/" + user.getId());
+                return ResponseEntity.created(location).build();
+                
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } else {
+            ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No tienes permiso para realizar esta acción.");
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
 }

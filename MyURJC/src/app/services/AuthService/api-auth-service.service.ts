@@ -73,4 +73,7 @@ export class ApiAuthService {
   isAdmin() {
     return this.user && this.user.roles.indexOf('ADMIN') !== -1;
   }
+  isTeacher() {
+    return this.user && this.user.roles.indexOf('TEACHER') !== -1;
+  }
 }

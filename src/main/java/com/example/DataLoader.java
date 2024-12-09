@@ -83,7 +83,7 @@ public class DataLoader {
         user2.getSubjects().add(subject3);
 
         // ROLES ASSIGN
-        user1.setRoles(List.of("USER"));
+        user1.setRoles(List.of("TEACHER"));
 
         user2.setRoles(List.of("USER"));
         user3.setRoles(List.of("USER"));

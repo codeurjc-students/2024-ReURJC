@@ -18,6 +18,7 @@ import { CalendarWithClickComponent } from './components/calendar/calendarWithCl
 import { CarnetComponent } from './components/carnet/carnet.component';
 import { CardComponent } from './components/Card/card/card.component';
 import { NewsComponent } from './news/news.component';
+import { AsistenciaComponent } from './bluetooth-page/asistencia.component';
 
 
 @NgModule({
@@ -28,6 +29,6 @@ import { NewsComponent } from './news/news.component';
     HomePageRoutingModule,
 
   ],
-  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent, NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent, CarnetComponent]
+  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent, NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent, CarnetComponent, AsistenciaComponent ]
 })
 export class HomePageModule { }

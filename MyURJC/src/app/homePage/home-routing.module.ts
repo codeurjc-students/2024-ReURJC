@@ -13,6 +13,7 @@ import { voteDelegateGuardGuard } from '../services/EventService/vote-delegate-g
 import { FinalMarksComponent } from './final-marks/final-marks.component';
 import { CalendarWithClickComponent } from './components/calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
 import { NewsComponent } from './news/news.component';
+import { AsistenciaComponent } from './bluetooth-page/asistencia.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,11 @@ const routes: Routes = [
   {
     path: 'reservations',
     component: CalendarWithClickComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'asistencia',
+    component: AsistenciaComponent,
     canActivate: [AuthGuard]
   },
 ];

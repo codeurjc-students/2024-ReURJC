@@ -13,7 +13,7 @@ export class HomePage implements OnInit {
   showNotificationBadge = false
   previousTab: string | undefined;
   servicesTabCards: CardInfo[] = [
-    new CardInfo("Escolar", "Asistencia Bluetooth", "Este servicio permite confirmar tu asistencia a una clase", ""),
+    new CardInfo("Escolar", "Asistencia Bluetooth", "Este servicio permite confirmar tu asistencia a una clase", "/asistencia"),
     new CardInfo("Ocio", "Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC", "/reservations")
   ];
 

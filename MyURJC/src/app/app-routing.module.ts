@@ -13,6 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./homePage/home.module').then(m => m.HomePageModule)
   },
 
+  
+
 
 
 ];

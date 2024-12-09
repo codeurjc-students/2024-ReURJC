@@ -104,4 +104,8 @@ export class ApiUserService {
   getUserCarnet(): Observable<Blob> {
     return this.http.get(`/api/users/me/carnet`, { responseType: 'blob', withCredentials: true });
   }
+
+  joinAttendance(code: string): Observable<any> {
+    return this.http.post(`/api/users/newAttendance?code=${code}`, { withCredentials: true });
+  }
 }

@@ -27,7 +27,7 @@ export class VoteDelegatesComponent implements OnInit {
 
   getCardInfo(candidate: User): CardInfo {
     return new CardInfo(
-      `${candidate.name} ${candidate.surname}`,
+      `${candidate.name} ${candidate.surname1} ${candidate.surname2}`,
       "", // No necesitas subtítulo en este caso
       "", // No necesitas descripción en este caso
       ""  // No necesitas apiCaller en este caso
