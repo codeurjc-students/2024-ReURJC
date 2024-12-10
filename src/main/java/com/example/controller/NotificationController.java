@@ -29,14 +29,14 @@ public class NotificationController {
 
     @GetMapping("/")
     public ResponseEntity<List<Notification>> getAllNotifications(HttpServletRequest request) {
-         Principal principal = request.getUserPrincipal();
-    if (principal != null) {
-        User user = userService.findByEmail(principal.getName());
-        List<Notification> notifications = notificationService.findAllByUserId(user);
-        return new ResponseEntity<>(notifications, HttpStatus.OK);
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            List<Notification> notifications = notificationService.findAllByUser(user);
+            return new ResponseEntity<>(notifications, HttpStatus.OK);
+
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
     }
-    return ResponseEntity.notFound().build();
-    
-}
 }

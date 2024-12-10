@@ -1,4 +1,5 @@
-import { CardInfo } from "src/app/home/card/CardInfo";
+import { CardInfo } from "src/app/homePage/components/Card/card/CardInfo";
+
 
 export class CardEvent extends CardInfo {
     private _tabsDisplay: number;
@@ -13,15 +14,15 @@ export class CardEvent extends CardInfo {
     }
 
 
-    get tabDisplay():number {
+    get tabDisplay(): number {
         return this._tabsDisplay
     }
 
-    get isValid():boolean {
+    get isValid(): boolean {
         return this._isValid
     }
 
-    get eventId():boolean {
+    get eventId(): boolean {
         return this._eventId
     }
 }

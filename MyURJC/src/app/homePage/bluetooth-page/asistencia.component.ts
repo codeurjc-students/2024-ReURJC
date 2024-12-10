@@ -1,0 +1,88 @@
+import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { ApiAuthService } from 'src/app/services/AuthService/api-auth-service.service';
+import { SubjectServiceService } from 'src/app/services/SubjectService/subject-service.service';
+import { TeacherService } from 'src/app/services/TeacherService/teacher.service';
+import { ApiUserService } from 'src/app/services/UserService/api.user.service';
+import { Attendance } from 'src/app/services/UserService/Attendance';
+import { SubjectInfo } from 'src/app/services/UserService/SubjectInfo';
+
+@Component({
+  selector: 'app-asistencia',
+  templateUrl: './asistencia.component.html',
+  styleUrls: ['./asistencia.component.scss'],
+})
+export class AsistenciaComponent implements OnInit {
+  subjects: SubjectInfo[] = [];
+  selectedSubjectId: number | null = null;
+  attendanceCode: string = '';
+  isLoading: boolean = false;
+  attendances : Attendance[] =[]
+  showUsers: { [attendanceCode: string]: boolean } = {};
+
+  ngOnInit() {
+    this.getAsisttances()
+  }
+
+  constructor(
+    private subjectService: SubjectServiceService,
+    private apiUserService: ApiUserService,
+    private teacherService: TeacherService,
+    private apiAuthService: ApiAuthService,
+    private toastController: ToastController
+  ) {
+  }
+
+  toggleUsers(attendance: Attendance) {
+    this.showUsers[attendance.code] = !this.showUsers[attendance.code];
+  }
+
+  isTeacher(): boolean | undefined {
+    return this.apiAuthService.isTeacher();
+  }
+
+  isLoggedIn(): boolean | undefined {
+    return this.apiAuthService.isLoggedIn();
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      color,
+      duration: 2000,
+      position: 'top',
+    });
+    await toast.present();
+  }
+
+  createAttendance(): void {
+    if (this.selectedSubjectId) {
+      this.teacherService.createAttendance(this.selectedSubjectId).subscribe({
+        next: () => {console.log('Asistencia creada correctamente'); this.getAsisttances()},
+        error: (err) => console.error('Error al crear la asistencia:', err),
+      });
+    } else {
+      console.error('Debes seleccionar una materia.');
+    }
+  }
+
+  joinAttendance(): void {
+    if (this.attendanceCode) {
+      this.apiUserService.joinAttendance(this.attendanceCode).subscribe({
+        next: () => {
+          this.presentToast('Registrado en la asistencia correctamente', 'success');
+        },
+        error: () => {
+          this.presentToast('Error al registrarse en la asistencia', 'danger');
+        },
+      });
+    } else {
+      this.presentToast('Debes ingresar un código de asistencia', 'warning');
+    }
+  }
+
+  getAsisttances() {
+    this.teacherService.getAllAttendances().subscribe( (attendances: Attendance[]) => { this.attendances = attendances})
+
+  }
+}

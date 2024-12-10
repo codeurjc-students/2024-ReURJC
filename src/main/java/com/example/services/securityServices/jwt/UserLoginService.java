@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import com.example.services.UserService;
+
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,8 +33,11 @@ public class UserLoginService {
 	@Autowired
 	private JwtCookieManager cookieUtil;
 
+	@Autowired
+	private UserService userService;
+
 	public ResponseEntity<AuthResponse> login(LoginRequest loginRequest, String encryptedAccessToken,
-			String encryptedRefreshToken) {
+			String encryptedRefreshToken ) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

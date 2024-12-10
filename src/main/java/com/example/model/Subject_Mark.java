@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +16,7 @@ public class Subject_Mark {
     private Long subjectMarkId;
 
     @ManyToOne
+    @JsonIgnore
     private User studentId;
 
     @ManyToOne
@@ -30,9 +33,9 @@ public class Subject_Mark {
         this.nameMark = nameMark;
     }
 
-    public Subject_Mark() {}
+    public Subject_Mark() {
+    }
 
-    
     public Long getSubjectMarkId() {
         return subjectMarkId;
     }
@@ -42,11 +45,9 @@ public class Subject_Mark {
         this.mark = mark;
     }
 
-
     public String getNameMark() {
         return nameMark;
     }
-
 
     public User getStudentId() {
         return studentId;
@@ -64,6 +65,4 @@ public class Subject_Mark {
         return convocatory;
     }
 
-    
-    
 }

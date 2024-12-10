@@ -1,0 +1,9 @@
+<div *ngIf="getCarnetUrl()">
+  <img [src]="getCarnetUrl()" alt="Carnet del usuario" />
+</div>
+<div *ngIf="!getCarnetUrl() && getIsLoggedIn()">
+  <p>Cargando carnet...</p>
+</div>
+<div *ngIf="!getIsLoggedIn()">
+  <p>Inicia sesión para ver tu carnet.</p>
+</div>

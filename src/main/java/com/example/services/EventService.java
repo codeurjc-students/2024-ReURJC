@@ -31,27 +31,26 @@ public class EventService {
     }
 
     public boolean isBecomeCandidateEvent() {
-        
         for (Event event : getEvents()) {
             if (event instanceof BecomeDelegateEvent) {
                 return true;
             }
-            
+
         }
         return false;
-        
+
     }
 
     public boolean isVoteDelegatesEvent() {
-        
+
         for (Event event : getEvents()) {
             if (event instanceof VoteDelegates) {
                 return true;
             }
-            
+
         }
         return false;
-        
+
     }
 
     public Event getVoteDelegatesEvent() {
@@ -59,7 +58,6 @@ public class EventService {
             if (event instanceof VoteDelegateEvent) {
                 return event;
             }
-            
         }
         return null;
     }
@@ -71,4 +69,3 @@ public class EventService {
         }
     }
 }
-

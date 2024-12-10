@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mis Notas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let subjectTitle of getSubjectTitles()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="color: #CB0017;">{{ subjectTitle }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="convocatorias">
+          <div *ngFor="let convocatory of getConvocatories(subjectTitle)" class="convocatoria">
+            <h4>{{ convocatory }}</h4>
+            <ion-list>
+              <ion-item *ngFor="let grade of grades[subjectTitle][convocatory]">
+                <ion-label>{{ grade.nameMark }}: {{ grade.mark }}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

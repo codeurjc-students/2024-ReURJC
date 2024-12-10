@@ -21,18 +21,18 @@ public class Festive {
     @Nullable
     private String local;
 
-
-    public Festive() {}
+    public Festive() {
+    }
 
     public Festive(int day, int month, int year, String color, int daysAgo) {
-        this(day,month,year,color);
+        this(day, month, year, color);
         startedXDaysAgo = daysAgo;
     }
 
     public Festive(int day, int month, int year, String color, String local) {
-        this(day,month,year,color);
+        this(day, month, year, color);
         this.local = local;
-        
+
     }
 
     public Festive(int day, int month, int year, String color) {
@@ -68,11 +68,4 @@ public class Festive {
         return local;
     }
 
-    
-
-    
-
-    
-
-    
 }

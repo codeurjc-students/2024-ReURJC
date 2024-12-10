@@ -16,15 +16,13 @@ public class NotificationService {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    @Autowired
-    private UserService userservice;
-
-    public void newNote(long userId, String subject, String evaluatedItem, String mark, String convocatory) {
-        notificationRepository.save(new Notification(userservice.findById(userId), "Nueva nota en ".concat(subject), "Se ha evaluado "  + evaluatedItem + " con una nota de " + mark+". Convocatoria: "+ convocatory)); 
+    public void newNote(User user, String subject, String evaluatedItem, String mark, String convocatory) {
+        notificationRepository.save(new Notification(user, "Nueva nota en ".concat(subject),
+                "Se ha evaluado " + evaluatedItem + " con una nota de " + mark + ". Convocatoria: " + convocatory));
     }
 
-    public List<Notification> findAllByUserId(User user) {
+    public List<Notification> findAllByUser(User user) {
         return notificationRepository.findFirst10ByStudentOrderByNotificationIdDesc(user);
     }
-    
+
 }

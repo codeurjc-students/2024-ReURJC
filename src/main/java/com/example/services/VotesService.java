@@ -29,11 +29,11 @@ public class VotesService {
 
     }
 
-     public boolean hasUserAlreadyVoted(User voter, Long event) {
+    public boolean hasUserAlreadyVoted(User voter, Long event) {
         return votesRepository.existsByVoterAndEvent(voter, eventRepository.getReferenceById(event));
     }
 
-    public void createVote(User voter, Long voted, Long event) {
+    public Long createVote(User voter, Long voted, Long event) {
         if (hasUserAlreadyVoted(voter, event)) {
             throw new IllegalStateException("El usuario ya ha votado en este evento.");
         }
@@ -42,6 +42,7 @@ public class VotesService {
         vote.setVoted(userService.findById(voted));
         vote.setEvent((VoteDelegateEvent) eventRepository.getReferenceById(event));
         votesRepository.save(vote);
+        return vote.getId();
     }
-    
+
 }

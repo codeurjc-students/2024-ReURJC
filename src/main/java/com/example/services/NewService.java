@@ -15,9 +15,8 @@ public class NewService {
     @Autowired
     private NewsRepository repository;
 
-
     public List<News> getAllNewer(int pageNumber) {
         return repository.findAllNewer(PageRequest.of(pageNumber, 9)).getContent();
     }
-    
+
 }

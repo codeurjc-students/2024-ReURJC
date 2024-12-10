@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón de volver -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Exámenes finales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="subjects.length > 0; else noData">
+    <ion-card *ngFor="let subject of subjects" class="subject-card">
+      <ion-card-header>
+        <ion-card-title style="color: #CB0017;">{{ subject.title }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div *ngIf="subject.convocatory.length > 0; else noConvocatory">
+          <ion-list>
+            <ion-item *ngFor="let convocatory of subject.convocatory" lines="none">
+              <ion-label>
+                <h2>
+                  <ion-text>
+                    Convocatoria:
+                    {{ convocatory.convocatory === 1 ? 'Septiembre' : convocatory.convocatory === 2 ? 'Mayo' :
+                    convocatory.convocatory === 3 ? 'Junio' : 'Desconocido' }}
+                  </ion-text>
+                </h2>
+                <p>Fecha: {{ convocatory.date }}</p>
+                <p>Aula: {{ convocatory.classroom }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+        <ng-template #noConvocatory>
+          <p class="no-data-text">No hay convocatorias para esta asignatura.</p>
+        </ng-template>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #noData>
+    <ion-card class="empty-card">
+      <ion-card-header>
+        <ion-card-title>Sin datos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>No hay datos de asignaturas disponibles en este momento.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

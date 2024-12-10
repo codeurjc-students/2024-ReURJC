@@ -4,10 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Schedule {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ScheduleId;
@@ -17,6 +18,8 @@ public class Schedule {
     private int endHour;
     private String classRoom;
 
+    @ManyToOne
+    private Subject subject; // Nueva propiedad para relacionar con la clase Subject
 
 
     public Schedule(int dayOfWeek, int startHour, int endHour, String classRoom) {
