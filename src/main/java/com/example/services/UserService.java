@@ -40,7 +40,6 @@ public class UserService {
 
 	public void setToken(User user, String fcmToken) {
 		if (fcmToken != null && !fcmToken.isEmpty()) {
-			System.out.println("El token es: " + fcmToken);
 			user.addFcmToken(fcmToken);
 			repository.save(user);
 		}

@@ -74,6 +74,11 @@ public Attendance() {}
         return usersPresent;
     }
 
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    
     
 
     

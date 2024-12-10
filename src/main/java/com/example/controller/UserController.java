@@ -82,34 +82,30 @@ public class UserController {
     private AttendanceService attendanceService;
 
     @GetMapping("/me/subjects")
-    public ResponseEntity<?> getMethodName(HttpServletRequest request) {
+    public ResponseEntity<?> subjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
             return ResponseEntity.ok(user.getSubjects());
-        } else {
-            ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/setDeviceToken")
-    public ResponseEntity<URI> postMethodName(HttpServletRequest request,
+    public ResponseEntity<URI> setDeviceToken(HttpServletRequest request,
             @RequestParam(name = "fcmToken", required = false) String fcmToken) {
         Principal principal = request.getUserPrincipal();
-        System.out.println("El token es: " + fcmToken);
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
             userService.setToken(user, fcmToken);
             URI location = URI.create(request.getRequestURI() + "/" + user.getId());
             return ResponseEntity.created(location).build();
-        } else {
-            ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("No tienes permiso para realizar esta acción.");
         }
+            
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        
 
-        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/login")
@@ -125,18 +121,6 @@ public class UserController {
             } else {
                 return ResponseEntity.notFound().build();
             }
-        }
-    }
-
-    @GetMapping("/me")
-    public ResponseEntity<User> get_me(HttpServletRequest request) throws IOException {
-        Principal principal = request.getUserPrincipal();
-        if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
-            user.setPassword(null);
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
@@ -422,8 +406,7 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
         } else {
-            ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("No tienes permiso para realizar esta acción.");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         return ResponseEntity.badRequest().build();

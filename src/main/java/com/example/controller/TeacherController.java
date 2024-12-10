@@ -46,18 +46,14 @@ public class TeacherController {
 
                 URI location = URI.create(request.getRequestURI() + "/" + attendance.getCode());
                 return ResponseEntity.created(location).build();
-            } else {
-                ResponseEntity.status(HttpStatus.FORBIDDEN)
-                        .body("No tienes permiso para realizar esta acción.");
-
+            } else { 
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    
             }
-        } else {
-            ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("No tienes permiso para realizar esta acción.");
+        } 
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
-        }
-
-        return ResponseEntity.notFound().build();
+        
     }
 
     @GetMapping("/attendances")
@@ -70,19 +66,20 @@ public class TeacherController {
 
 
                 return ResponseEntity.ok(attendanceService.getAllAttendances(user));
-            } else {
-                ResponseEntity.status(HttpStatus.FORBIDDEN)
-                        .body("No tienes permiso para realizar esta acción.");
-
-            }
-        } else {
-            ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("No tienes permiso para realizar esta acción.");
+            
+        } else { 
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
         }
+    }
 
-        return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
+        
+
+        
     }
 
 
 }
+

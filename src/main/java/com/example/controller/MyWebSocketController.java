@@ -19,7 +19,7 @@ public class MyWebSocketController {
 
     public ResponseEntity<Subject_Mark> sendUpdate() throws Exception {
         Subject_Mark lastSubjectMark = subjectMarkService.getLastSubjectMarkAdded();
-        template.convertAndSend("/topic/newGrade", lastSubjectMark); // Envía el mensaje al topic "/topic/newGrade"
+        template.convertAndSend("/topic/newGrade", lastSubjectMark);
         return ResponseEntity.ok(lastSubjectMark);
     }
 }
