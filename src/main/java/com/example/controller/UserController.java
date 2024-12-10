@@ -410,9 +410,13 @@ public class UserController {
             User user = userService.findByEmail(principal.getName());
             Attendance attendance = attendanceService.getAttendanceEvent(code);
             if (attendance != null) {
-                attendanceService.adduser(attendance, user);
-                URI location = URI.create(request.getRequestURI() + "/" + user.getId());
-                return ResponseEntity.created(location).build();
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime fiveMinutesAgo = now.minusMinutes(5);
+                if (attendance.getDateTime().isAfter(fiveMinutesAgo)) {
+                    attendanceService.adduser(attendance, user);
+                    URI location = URI.create(request.getRequestURI() + "/" + user.getId());
+                    return ResponseEntity.created(location).build();
+                }
                 
             } else {
                 return ResponseEntity.notFound().build();

@@ -10,8 +10,6 @@ import com.example.controller.Responses.SubjectScheduleResponse;
 import com.example.model.Subject;
 import com.example.model.User;
 import com.example.services.UserService;
-import com.example.services.securityServices.jwt.AuthResponse;
-import com.example.services.securityServices.jwt.AuthResponse.Status;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -48,12 +46,16 @@ public class SubjectsController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<Collection<Subject>> getSubjects(HttpServletRequest request) {
+    public ResponseEntity<List<Subject>> getSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
+            List<Subject> response = new ArrayList<Subject>();
+            for (Subject subjectElem : user.getSubjects()) {
+                response.add(subjectElem);
+            }
 
-            return ResponseEntity.ok(user.getSubjects());
+            return ResponseEntity.ok(response);
 
         }
 

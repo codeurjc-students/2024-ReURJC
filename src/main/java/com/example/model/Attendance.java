@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Attendance {
     @JsonIgnore
     private Long id;
 
-    private LocalDate dateTime;
+    private LocalDateTime dateTime;
 
     @ManyToOne
     private User creator;
@@ -43,7 +44,7 @@ private String code;
     public Attendance(User user, Subject subject) {
         this.creator = user;
         this.subject = subject;
-        dateTime = LocalDate.now();
+        dateTime = LocalDateTime.now();
         this.code = UUID.randomUUID().toString();
     }
 
@@ -61,7 +62,7 @@ public Attendance() {}
         return code;
     }
 
-    public LocalDate getDateTime() {
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 

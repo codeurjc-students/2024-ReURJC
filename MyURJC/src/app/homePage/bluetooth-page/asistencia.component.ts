@@ -22,6 +22,7 @@ export class AsistenciaComponent implements OnInit {
 
   ngOnInit() {
     this.getAsisttances()
+    this.getAllSubjects();
   }
 
   constructor(
@@ -84,5 +85,10 @@ export class AsistenciaComponent implements OnInit {
   getAsisttances() {
     this.teacherService.getAllAttendances().subscribe( (attendances: Attendance[]) => { this.attendances = attendances})
 
+  }
+
+  getAllSubjects() {
+    console.log("si o si")
+    this.subjectService.getSubjects().subscribe( (subjects: SubjectInfo[]) => {console.log(subjects); this.subjects = subjects})
   }
 }

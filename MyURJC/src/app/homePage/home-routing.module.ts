@@ -9,11 +9,11 @@ import { SubjectScheduleComponent } from './subject-schedule/subject-schedule.co
 import { PostulateAsDelegateComponent } from './postulate-as-delegate/postulate-as-delegate.component';
 import { EventGuard } from '../services/EventService/event-guard.guard';
 import { VoteDelegatesComponent } from './vote-delegates/vote-delegates.component';
-import { voteDelegateGuardGuard } from '../services/EventService/vote-delegate-guard.guard';
 import { FinalMarksComponent } from './final-marks/final-marks.component';
 import { CalendarWithClickComponent } from './components/calendar/calendarWithClick/calendar-with-click/calendar-with-click.component';
 import { NewsComponent } from './news/news.component';
 import { AsistenciaComponent } from './bluetooth-page/asistencia.component';
+import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
 
 const routes: Routes = [
   {
@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'voteDelegate',
     component: VoteDelegatesComponent,
-    canActivate: [AuthGuard, voteDelegateGuardGuard]
+    canActivate: [AuthGuard, voteDelegateGuard]
   },
 
   {
