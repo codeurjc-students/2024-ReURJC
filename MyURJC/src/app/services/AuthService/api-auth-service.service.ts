@@ -76,4 +76,8 @@ export class ApiAuthService {
   isTeacher() {
     return this.user && this.user.roles.indexOf('TEACHER') !== -1;
   }
+
+  getUser():User | undefined {
+    return this.user
+  }
 }

@@ -16,5 +16,8 @@ docker push jesussmariscal/reurjc
 docker logs myurjc     
 
 #Para abrir el frontend en un dispositivo android
-npx cap syncnpx cap copy androidnpx cap open android
+npx cap sync
+npx cap copy android
+npx cap open android
+
 

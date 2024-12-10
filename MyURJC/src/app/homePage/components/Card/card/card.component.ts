@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Optional } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardInfo } from './CardInfo';
+import { ApiAuthService } from 'src/app/services/AuthService/api-auth-service.service';
 
 @Component({
   selector: 'app-card',
@@ -10,17 +11,13 @@ import { CardInfo } from './CardInfo';
 export class CardComponent {
 
   @Input() isSubtitleFirst: boolean = false;
-  @Input() card: CardInfo = new CardInfo("", "", "", "");
+  @Input() card: CardInfo = new CardInfo('', '', '', '');
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiAuthService: ApiAuthService) { }
 
   navigate(path: string | undefined) {
     if (path !== undefined) {
-      this.router.navigate([path])
-
+      this.router.navigate([path]);
     }
   }
-
-
-
 }

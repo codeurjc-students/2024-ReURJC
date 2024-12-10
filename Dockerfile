@@ -8,6 +8,9 @@ COPY /MyURJC/package.json /MyURJC/package-lock.json /MyURJC/angular.json /MyURJC
 # Instalar dependencias y CLI de Angular e Ionic
 RUN npm install -g @angular/cli @ionic/cli 
 
+RUN npm config set @capawesome-team:registry https://npm.registry.capawesome.io
+RUN npm config set //npm.registry.capawesome.io/:_authToken POLAR-ED6832C2-542C-4C72-A029-7226BA937FC1
+
 RUN npm install 
 
 ENTRYPOINT [“ionic”]
