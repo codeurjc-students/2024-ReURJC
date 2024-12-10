@@ -7,7 +7,7 @@
 - Applicación para el personal docente, administrativo y estudiantil de la universidad Rey Juan Carlos que sirve para poder acceder a servicios ofertados por esta.
 
 ##Diagrama de base de datos
-El diagrama se puede encontrar haciendo click [aquí]([https://github.com/codeurjc-students/2024-ReURJC/blob/main/DB-schema.svg?short_path=3f32352](https://github.com/codeurjc-students/2024-ReURJC/blob/main/DB-SCHEMA-tfgdb.svg))
+El diagrama se puede encontrar haciendo click [aquí](https://github.com/codeurjc-students/2024-ReURJC/blob/main/DB-SCHEMA-tfgdb.svg)
 
 ###Entidades
 - User: Esta clase representa los usuarios de la aplicacion y contiene toda su informacion relevante. Como los token de los dispositivos sincronizados, sus datos personales y su rol dentro de la universidad.
