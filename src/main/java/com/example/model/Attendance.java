@@ -1,0 +1,80 @@
+package com.example.model;
+
+
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.OneToMany;
+
+@Entity
+public class Attendance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
+    private Long id;
+
+    private LocalDate dateTime;
+
+    @ManyToOne
+    private User creator;
+
+    @ManyToOne
+    private Subject subject;
+
+    @Column(unique = true)
+private String code;
+
+
+    @OneToMany(mappedBy = "attendance")
+    private List<UserAttendance> usersPresent = new ArrayList<UserAttendance>();
+
+    public Attendance(User user, Subject subject) {
+        this.creator = user;
+        this.subject = subject;
+        dateTime = LocalDate.now();
+        this.code = UUID.randomUUID().toString();
+    }
+
+public Attendance() {}
+    
+
+  
+    
+
+    public void addUser(UserAttendance user) {
+        this.usersPresent.add(user);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public LocalDate getDateTime() {
+        return dateTime;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public List<UserAttendance> getUsersPresent() {
+        return usersPresent;
+    }
+
+    
+
+    
+}
+
