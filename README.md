@@ -6,10 +6,10 @@
 ## Descripción de la aplicación web
 - Applicación para el personal docente, administrativo y estudiantil de la universidad Rey Juan Carlos que sirve para poder acceder a servicios ofertados por esta.
 
-##Diagrama de base de datos
+## Diagrama de base de datos
 El diagrama se puede encontrar haciendo click [aquí](https://github.com/codeurjc-students/2024-ReURJC/blob/main/DB-SCHEMA-tfgdb.svg)
 
-###Entidades
+### Entidades
 - User: Esta clase representa los usuarios de la aplicacion y contiene toda su informacion relevante. Como los token de los dispositivos sincronizados, sus datos personales y su rol dentro de la universidad.
 - Subject: Esta clase representa las asignaturas de la universidad. Se vale de tablas intermedias para aportar informacion relevante como las convocatorias, los usuarios que pertenecen a las asignaturas, el horario de las asignaturas, las notas de las diferentes tareas de estas...
 - Convocatory: Las convocatorias a los exámenes finales de las asignaturas.
@@ -21,5 +21,39 @@ El diagrama se puede encontrar haciendo click [aquí](https://github.com/codeurj
 - SportReservation: Entidad que almacena las reservas realizadas por los usuarios para utilizar alguna pista deportiva de la universidad.
 - Festive: Entidad que representa los días no laborables de la universidad, ideada para representa run día o una secuencia de días
 - News: Entidad que representan las noticiás de la universidad
+
+### Usuarios
+- Anónimo
+- Estudiante
+- Personal docente
+- Personal Administrativo
+
+### Permisos de usuario
+- Anónimo:
+  - Ver las noticias
+  - Ver el calendario académico
+
+- Estudiante:
+  - Todos los permisos de Anónimo
+  - Ver sus calificaciones finales
+  - Ver su carnet de estudiante
+  - Ver su horario académico
+  - Ver la información de los exámenes finales
+  - Ver sus alertas
+  - Reservas pistas deportivas
+  - Postularse como delegado
+  - Votar a un delegado
+  - Registrar asistencia
+
+- Personal docente (por definir):
+  - Todos los permisos de Anónimo
+  - Todos los permisos de estudiante menos registrar asistencia
+  - Crear asistencia
+  
+- Personal Administrativo (Por definir)
+
+## Diagrama de navegacion
+
+
 
 
