@@ -6,6 +6,14 @@
 ## Descripción de la aplicación web
 - Aplicación para el personal docente, administrativo y estudiantil de la Universidad Rey Juan Carlos que sirve para acceder a los servicios ofertados por esta.
 
+## Cómo ejecutar la Aplicación
+
+1. Instalar docker [aqui](https://www.docker.com/get-started/)
+2. Una vez instalado, asegurase de que el docker engine se encuentra en ejecucion
+3. Situarse en la raíz de este repositorio
+4. Ejecutar el siguiente comando "docker-compose -p myurjc up -d"
+5. La aplicacion se encontrará ejecutandose en el purto 8080 de su máquina. 
+
 ## Diagrama de base de datos
 El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc-students/2024-ReURJC/blob/main/DB_Schema.pdf).
 
