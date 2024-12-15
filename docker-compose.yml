@@ -19,12 +19,12 @@ services:
     container_name: myurjc-DB
     image: mysql:8.3.0
     ports:
-      - "3307:3306"  # Cambiado aquí para utilizar un puerto diferente
+      - "3307:3306" 
     environment:
       - MYSQL_DATABASE=tfgdb
       - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATA_DIR=/var/lib/mysql  # Asegúrate de que apunta al directorio correcto
     volumes:
-      - ./mysql:/var/lib/mysql
-
+      - mis_datos_mysql:/var/lib/mysql  # Solo un montaje 
 volumes:
-  mysql:
+  mis_datos_mysql: 

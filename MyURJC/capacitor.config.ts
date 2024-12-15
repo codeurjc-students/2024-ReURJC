@@ -5,16 +5,14 @@ const config: CapacitorConfig = {
   appName: 'MyURJC',
   webDir: 'www',
   server: {
-    url: 'http://192.168.1.17:8080',
+    url: 'http://192.168.1.14:8080',
     cleartext: true
   },
-  cordova: {
-    preferences: {
-      bluetooth_restore_state: "true",
-      accessBackgroundLocation: "false",
+  plugins: {
+    PushNotifications: {
+      presentationOptions: ["badge", "sound", "alert"],
     },
-  
-},
+  },
 }
 
 export default config;

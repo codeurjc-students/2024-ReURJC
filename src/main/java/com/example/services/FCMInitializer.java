@@ -11,27 +11,31 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class FCMInitializer {
+    private static final String FIREBASE_CONFIG_FILE = "tfgurjc-e9e62-firebase-adminsdk-4maw1-65899bf37b.json";
 
-    @Value("${app.firebase-configuration-file}")
-    private String firebaseConfigPath;
     Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
 
     @PostConstruct
     public void initialize() {
-        try {
+        try (InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(FIREBASE_CONFIG_FILE)) {
+            if (serviceAccount == null) {
+                throw new IOException("Firebase configuration file not found: " + FIREBASE_CONFIG_FILE);
+            }
+
             FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(
-                            GoogleCredentials.fromStream(new ClassPathResource(firebaseConfigPath).getInputStream()))
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
+
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
                 logger.info("Firebase application initialized");
             }
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Failed to initialize Firebase", e);
         }
     }
 }

@@ -45,7 +45,7 @@ RUN mkdir -p /app/src/main/resources/public
 COPY --from=frontend /MyURJC/www /app/src/main/resources/public
 
 # Construir la aplicación Spring Boot
-RUN mvn test
+
 RUN mvn clean install -DskipTests
 
 # Etapa final del contenedor

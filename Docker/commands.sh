@@ -18,6 +18,6 @@ docker logs myurjc
 #Para abrir el frontend en un dispositivo android
 npx cap sync
 npx cap copy android
-npx cap open android
+ionic capacitor run android -l --external
 
 
