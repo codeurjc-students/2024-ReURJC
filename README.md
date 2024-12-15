@@ -53,15 +53,18 @@ El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc
   - Votar a un delegado.
   - Registrar asistencia.
 
-- **Personal docente (por definir)**:
+- **Personal docente**:
   - Todos los permisos de Anónimo.
-  - Todos los permisos de estudiante menos registrar asistencia.
+  - Todos los permisos de estudiante menos ver sus calificaciones finales, ver la información de exámenes finales, ver sus alertas, postularse y votar delegados, registrar asistencia.
   - Crear asistencias.
 
-- **Personal administrativo (por definir)**.
+- **Personal administrativo**:
+- Todos los permisos de anónimo.
+- Ver las reservas activas.
+- Ver el historial y los resultados de los eventos de votaciónes de delegados.
 
 ## Diagrama de navegación
-El diagrama representa la secuencia de pantallas disponibles, teniendo en cuenta los permisos de los usuarios. Las flechas verdes indican pantallas disponibles únicamente para el personal docente, las grises para todos los usuarios (incluyendo anónimos) y las negras para cualquier usuario logueado. La pantalla de logueo aparece al intentar acceder a funcionalidades restringidas sin estar logueado.
+El diagrama representa la secuencia de pantallas disponibles, teniendo en cuenta los permisos de los usuarios. Las flechas verdes indican pantallas disponibles únicamente para los estudiantes, las grises para todos los usuarios (incluyendo anónimos),  las moradas para cualquier usuario perteneciente a alumnos o profesores y las rojas para los administradores. La pantalla de logueo aparece al intentar acceder a funcionalidades restringidas sin estar logueado o al pulsar sobre el botón login al acceder a la app.
 
 El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc-students/2024-ReURJC/blob/main/NAVEGACION-SCHEMA.pdf).
 
@@ -71,6 +74,8 @@ El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc
   - **Pantalla "Votar delegados"**: Permite votar a los candidatos en el proceso de elección. Solo está disponible cuando el evento está activo.
   - **Pantalla "Postularse como delegado"**: Permite a los usuarios postularse como delegados. Solo está disponible cuando el evento está activo.
   - **Pantalla "Gestión de asistencias"**: Los profesores pueden crear nuevas asistencias, generando un código válido durante 5 minutos. También pueden consultar las últimas 10 asistencias creadas. Los alumnos, por su parte, solo pueden introducir códigos. Si el código es correcto y se introduce a tiempo, se muestra una notificación de éxito. En caso contrario, se muestra un error.
+  - **Pantalla "Eventos"**: en esta pantalla los administradores puedne consultar el historial de eventos y los resultados de las votaciones
+  - **Pantalla "Historial de reserva de pistas"**: En esta pantalla los administradores pueden consultar las reservas activas de todos los usuarios. 
 
 - **Pantalla "Alertas"**: Muestra al usuario en tiempo real los cambios realizados por los profesores en el aula virtual sobre sus notas.
 
