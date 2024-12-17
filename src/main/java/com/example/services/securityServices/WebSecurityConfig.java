@@ -65,7 +65,7 @@ return http.build();
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:4200", "http://10.0.2.16:4200", "http://192.168.1.17:8100")); // URL del
+                Arrays.asList("http://localhost:4200", "http://10.0.2.16:4200", "http://192.168.1.17:8100", "http://mymoodle")); // URL del
                                                                                                               // frontend
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));

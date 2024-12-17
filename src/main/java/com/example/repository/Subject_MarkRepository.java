@@ -3,6 +3,8 @@ package com.example.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.model.Subject;
 import com.example.model.Subject_Mark;
@@ -17,5 +19,6 @@ public interface Subject_MarkRepository extends JpaRepository<Subject_Mark, Long
 
     List<Subject_Mark> findByStudentId(User studentId);
 
-    Subject_Mark findFirstByOrderBySubjectMarkIdDesc();
+    Subject_Mark findTopByStudentIdOrderBySubjectMarkIdDesc(User user);
+
 }

@@ -17,7 +17,6 @@ public abstract class Event {
     private String title;
     private String description;
     private String apiCaller;
-    @JsonIgnore
     private String endDate;
     private int tabDisplay;
 

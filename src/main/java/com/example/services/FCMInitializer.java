@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 @Service
 public class FCMInitializer {
-    private static final String FIREBASE_CONFIG_FILE = "tfgurjc-e9e62-firebase-adminsdk-4maw1-65899bf37b.json";
+    private static final String FIREBASE_CONFIG_FILE = "tfgurjc-e9e62-firebase-adminsdk-4maw1-24427767f2.json";
 
     Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
 

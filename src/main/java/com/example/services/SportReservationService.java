@@ -59,4 +59,8 @@ public class SportReservationService {
         sportReservationrepository.save(reserve);
 
     }
+
+    public List<SportReservation> getAllActiveReservations() {
+        return sportReservationrepository.findByDate(LocalDateTime.now());
+    }
 }

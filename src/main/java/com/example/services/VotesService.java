@@ -45,4 +45,8 @@ public class VotesService {
         return vote.getId();
     }
 
+    public List<Object[]> getAllVotesByIdAndEvent(Long eventId) {
+        return votesRepository.countVotesByVotedAndEvenet(eventRepository.findById(eventId).get());
+    }
+
 }

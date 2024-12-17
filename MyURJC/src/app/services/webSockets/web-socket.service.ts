@@ -1,45 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Client } from '@stomp/stompjs'; // Importa el cliente STOMP
-import * as SockJS from 'sockjs-client'; // Importa SockJS
-import { SubjectMark } from '../UserService/SubjectMark';
-
+import { fromEvent, map, Observable, Subject } from 'rxjs';
+import { Client, Stomp } from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
+import { SubjectMark } from '../UserService/SubjectMark'; // Adjust path as needed
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
 
-  private stompClient: Client | null = null;
-  private notifications = new Subject<SubjectMark>();
+  private notificationSubject = new Subject<any>();
+  notifications$ = this.notificationSubject.asObservable();
 
-  notifications$ = this.notifications.asObservable();
 
-  connect(): void {
-    const socket = new SockJS('http://localhost:8080/newGrade');
-    this.stompClient = new Client({
-      webSocketFactory: () => socket,
-      debug: (str) => console.log(str),
-    });
 
-    this.stompClient.onConnect = () => {
-      console.log('Conectado al WebSocket');
-      this.stompClient?.subscribe('/topic/newGrade', (message) => {
-        const notification: SubjectMark = JSON.parse(message.body);
-        this.notifications.next(notification);
-      });
-    };
 
-    this.stompClient.onStompError = (frame) => {
-      console.error('Error en STOMP:', frame);
-    };
+  
+    connect() {
+    const socket = new SockJS('http://localhost:8080/grades');
+    const stompClient = Stomp.over(socket);
 
-    this.stompClient.activate();
+    stompClient.connect(
+      {},
+      (frame: string) => {
+        console.log('Connected: ' + frame);
+
+        // Suscripción al tópico
+        stompClient.subscribe('/user/topic/private-messages', (message) => {
+          const response = JSON.parse(message.body);
+          console.log(response.content);
+
+          // Emitimos la notificación
+          this.notificationSubject.next(response.content);
+        });
+      },
+      { withCredentials: true }
+    );
   }
 
-  disconnect(): void {
-    if (this.stompClient?.connected) {
-      this.stompClient.deactivate();
-    }
-  }
+  
 }

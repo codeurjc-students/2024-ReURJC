@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import com.example.controller.MoodleController;
-import com.example.controller.MyWebSocketController;
 import com.example.model.NotificationRequest;
 import com.example.model.Subject;
 import com.example.model.Subject_Mark;
@@ -34,9 +33,6 @@ public class MoodleControllerTests {
 
     @Mock
     private SubjectService subjectService;
-
-    @Mock
-    private MyWebSocketController webSocketController;
 
     @Mock
     private NotificationService notificationService;

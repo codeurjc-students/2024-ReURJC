@@ -8,16 +8,29 @@
         </ion-toolbar>
       </ion-header>
       <ion-content [fullscreen]="true" class="ion-padding">
-        <app-card *ngFor="let card of servicesTabCards" [card]="card" [isSubtitleFirst]="true">
-        </app-card>
-
-        <app-card *ngFor="let event of temporalEvents[1]" [card]="event" [isSubtitleFirst]="true">
-        </app-card>
+        <div *ngFor="let card of servicesTabCards">
+        <app-card 
+                [card]="card" 
+                [isSubtitleFirst]="true"
+                *ngIf="canShowCard(card)"> 
+      </app-card>
+    </div>
+      <div *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()">
+      <app-card *ngFor="let event of temporalEvents[1]" 
+                [card]="event" 
+                [isSubtitleFirst]="true"
+                > 
+      </app-card>
+    </div>
+      <div *ngIf="!isLoggedIn()">
+        Inicia sesión para poder acceder a las funcionalidades
+        <ion-button (click)="login()">Iniciar sesión</ion-button>
+      </div>
       </ion-content>
     </div>
   </ion-tab>
 
-  <ion-tab tab="alerts">
+  <ion-tab  *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()" tab="alerts">
     <div id="alerts-page">
       <ion-header>
         <ion-toolbar>
@@ -51,11 +64,20 @@
         </ion-toolbar>
       </ion-header>
       <ion-content [fullscreen]="true" class="ion-padding">
-        <app-card *ngFor="let card of schedulesTabCards" [card]="card" [isSubtitleFirst]="false">
+        <div *ngFor="let card of schedulesTabCards">
+          <app-card 
+                  [card]="card" 
+                  [isSubtitleFirst]="true"
+                  *ngIf="canShowCard(card)"> 
         </app-card>
-
-        <app-card *ngFor="let event of temporalEvents[2]" [card]="event" [isSubtitleFirst]="false">
+      </div>
+        <div *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()">
+        <app-card *ngFor="let event of temporalEvents[2]" 
+                  [card]="event" 
+                  [isSubtitleFirst]="true"
+                  > 
         </app-card>
+      </div>
       </ion-content>
     </div>
   </ion-tab>
@@ -69,11 +91,20 @@
       </ion-header>
       <ion-content [fullscreen]="true" class="ion-padding">
         <app-carnet></app-carnet>
-        <app-card *ngFor="let card of profileTabCards" [card]="card" [isSubtitleFirst]="false">
+        <div *ngFor="let card of profileTabCards">
+          <app-card 
+                  [card]="card" 
+                  [isSubtitleFirst]="true"
+                  *ngIf="canShowCard(card)"> 
         </app-card>
-
-        <app-card *ngFor="let event of temporalEvents[3]" [card]="event" [isSubtitleFirst]="false">
+      </div>
+        <div *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()">
+        <app-card *ngFor="let event of temporalEvents[3]" 
+                  [card]="event" 
+                  [isSubtitleFirst]="true"
+                  > 
         </app-card>
+      </div>
       </ion-content>
     </div>
   </ion-tab>
@@ -83,7 +114,7 @@
       <ion-icon name="briefcase-outline"></ion-icon>
       Servicios
     </ion-tab-button>
-    <ion-tab-button tab="alerts" (click)="hideNotificationBadge()">
+    <ion-tab-button *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()"  tab="alerts" (click)="hideNotificationBadge()">
       <ion-icon name="notifications-outline"></ion-icon>
       Alertas
       <ion-badge *ngIf="showNotificationBadge" color="danger"></ion-badge>

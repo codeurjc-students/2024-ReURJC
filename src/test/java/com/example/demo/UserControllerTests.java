@@ -13,6 +13,7 @@ import java.security.Principal;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -569,6 +570,7 @@ void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Ex
         // Simula el usuario
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
         "123"); 
+        user.setRoles(Arrays.asList("USER"));
         when(userService.findByEmail("test@example.com")).thenReturn(user);
 
         ResponseEntity<?> response = userController.getCarnet(request);
@@ -585,6 +587,39 @@ void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Ex
 
         assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
+
+    @Test
+void testGet_me_whenUserIsAuthenticated() throws IOException {
+    // Arrange
+    MockHttpServletRequest request = new MockHttpServletRequest();
+    Principal principal = mock(Principal.class);
+    request.setUserPrincipal(principal);
+    when(principal.getName()).thenReturn("test@example.com");
+
+    User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
+        "123"); 
+    when(userService.findByEmail("test@example.com")).thenReturn(user);
+
+    // Act
+    ResponseEntity<User> response = userController.get_me(request);
+
+    // Assert
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertEquals(user, response.getBody()); 
+}
+
+@Test
+void testGet_me_whenUserIsNotAuthenticated() throws IOException {
+    // Arrange
+    MockHttpServletRequest request = new MockHttpServletRequest(); 
+    // No principal is set in the request
+
+    // Act
+    ResponseEntity<User> response = userController.get_me(request);
+
+    // Assert
+    assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+}
 
 
    

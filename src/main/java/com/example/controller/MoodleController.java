@@ -1,14 +1,22 @@
 package com.example.controller;
 
 import java.net.URI;
+import java.security.Principal;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
 
 import com.example.model.NotificationRequest;
 import com.example.model.Subject;
@@ -19,6 +27,10 @@ import com.example.services.NotificationService;
 import com.example.services.SubjectMarkService;
 import com.example.services.SubjectService;
 import com.example.services.UserService;
+import com.example.services.securityServices.WebSocket.Message;
+import com.example.services.securityServices.WebSocket.ResponseMessage;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/moodle")
@@ -34,13 +46,13 @@ public class MoodleController {
     private SubjectService subjectService;
 
     @Autowired
-    private MyWebSocketController webSocketController;
-
-    @Autowired
     private NotificationService notificationService;
 
     @Autowired
     private FCMService fcmService;
+
+    @Autowired
+private SimpMessagingTemplate messagingTemplate;
 
     @PostMapping("/updateGrade")
     public ResponseEntity<URI> miEndpoint(@RequestBody Map<String, Object> datos) throws Exception {
@@ -65,22 +77,21 @@ public class MoodleController {
                 } else {
                     idCreated = updateExistingMark(student, subject, mark, assignmentName);
                 }
-
-                webSocketController.sendUpdate(); // Llama al método sendUpdate
                 notificationService.newNote(student, subject.getTitle(), assignmentName, String.valueOf(mark),
                         "Ordinaria");
                 for (String token : student.getFcmToken()) {
                     NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(),
-                            "Se ha evaluado: " + assignmentName + "con una nota de " + mark, token);
+                            ".Se ha evaluado: " + assignmentName + " con una nota de " + mark, token);
                     fcmService.sendMessageToToken(request);
                 }
                     URI location = URI.create("/api/events/" + idCreated);
+                    messagingTemplate.convertAndSendToUser(student.getEmail(), "/topic/private-messages", 
+                    Map.of("content", subjectMarkService.getLastSubjectMarkAdded(student)));
                         return ResponseEntity.created(location).build();
             }
         } catch (NumberFormatException e) {
-            return ResponseEntity.notFound().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
+        
         }
         return ResponseEntity.notFound().build();
 
@@ -93,4 +104,24 @@ public class MoodleController {
         return subjectMarkService.save(existingMark);
     }
 
+    @MessageMapping("/private-message")
+    @SendToUser("/topic/private-messages")
+    public void getPrivateMessage(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        User user = userService.findByEmail(principal.getName());
+        if (user != null) {
+            Subject_Mark lastSubjectMark = subjectMarkService.getLastSubjectMarkAdded(user);
+            Map<String, Subject_Mark> message = new HashMap<>();
+            message.put("content",  lastSubjectMark);
+            messagingTemplate.convertAndSendToUser(user.getEmail(), "/topic/private-messages", message);
+
+            
+        } 
+    }
 }
+
+
+    
+
+    
+

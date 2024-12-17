@@ -412,4 +412,17 @@ public class UserController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<User> get_me(HttpServletRequest request) throws IOException {
+        Principal principal = request.getUserPrincipal();
+        if (principal != null) {
+            User user = userService.findByEmail(principal.getName());
+            user.setPassword(null);
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
+
+
 }

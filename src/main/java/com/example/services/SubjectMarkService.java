@@ -39,7 +39,7 @@ public class SubjectMarkService {
         return subjectMarkRepository.findByStudentId(student);
     }
 
-    public Subject_Mark getLastSubjectMarkAdded() {
-        return subjectMarkRepository.findFirstByOrderBySubjectMarkIdDesc();
+    public Subject_Mark getLastSubjectMarkAdded(User user) {
+        return subjectMarkRepository.findTopByStudentIdOrderBySubjectMarkIdDesc(user);
     }
 }

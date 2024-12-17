@@ -10,13 +10,18 @@ import { Nfc, NfcUtils, NfcTagTechType } from '@capawesome-team/capacitor-nfc';
 })
 export class CarnetComponent implements OnInit {
   private carnetUrl: string | null = null;
-  public isNfcActive: boolean = false; // Estado para el indicador NFC
+  public isNfcActive: boolean = false; 
   datos = "Escribir en NFC"
+  isNfcSupported: boolean = false;
+  isNfcEnabled: boolean = false;
 
   constructor(
     private userService: ApiUserService, 
     private apiAuthService: ApiAuthService
-  ) {}
+  ) {
+    this.checkNfcSupport();
+    this.checkNfcEnabled();
+  }
 
   ngOnInit(): void {
     this.apiAuthService.loggedIn$.subscribe((loggedIn) => {
@@ -41,40 +46,59 @@ export class CarnetComponent implements OnInit {
     return this.carnetUrl;
   }
 
-  async writeNfcTag() {
-    this.isNfcActive = true; // Activa el indicador NFC
-    try {
-      const user = this.apiAuthService.getUser();
-      if (!user) {
-        console.error('No user data found.');
-        this.isNfcActive = false;
-        return;
+  async checkNfcSupport() {
+    const { isSupported } = await Nfc.isSupported();
+    this.isNfcSupported = isSupported;
+  }
+
+  async checkNfcEnabled() {
+    const { isEnabled } = await Nfc.isEnabled();
+    this.isNfcEnabled = isEnabled;
+  }
+
+  createNdefTextRecord() {
+    const utils = new NfcUtils();
+    if (this.apiAuthService.isLoggedIn()) {
+      const userId = this.apiAuthService.getUser()?.id;
+      if (userId !== undefined) {
+          this.datos = userId.toString();
       }
+  }
+    const { record } = utils.createNdefTextRecord({ text: this.datos });
+    return record;
+  }
 
-      const utils = new NfcUtils();
-      const emailRecord = utils.createNdefTextRecord({ text: `Email: ${user.email}` });
-      const nameRecord = utils.createNdefTextRecord({ text: `Name: ${user.name}` });
 
-      console.log('Esperando tag NFC...');
-      await Nfc.startScanSession();
-      this.datos = "sesion empezada"
-
-      Nfc.addListener('nfcTagScanned', async (event) => {
-        try {
-          console.log('Tag NFC detectado:', event);
-          await Nfc.connect({ techType: NfcTagTechType.NfcA });
-          await Nfc.write({ message: { records: [emailRecord.record, nameRecord.record] } });
-          console.log('Datos escritos exitosamente en el NFC!');
-        } catch (writeError) {
-          console.error('Error escribiendo en el tag NFC:', writeError);
-        } finally {
-          await Nfc.stopScanSession();
-          this.isNfcActive = false; // Desactiva el indicador NFC
-        }
-      });
-    } catch (error) {
-      console.error('Error durante la operación NFC:', error);
-      this.isNfcActive = false;
+  async writeNfcTag() {
+    if (!this.isNfcSupported || !this.isNfcEnabled) {
+      await Nfc.openSettings();
+      return;
     }
+    // Crear el registro NFC
+    const record = this.createNdefTextRecord();
+  
+    Nfc.addListener('nfcTagScanned', async () => {
+      try {
+        await Nfc.write({ message: { records: [record] } });
+        await Nfc.stopScanSession();
+        alert('Etiqueta escrita con éxito.');
+      } catch (error) {
+        console.error('Error escribiendo la etiqueta NFC:', error);
+        alert('Error escribiendo la etiqueta.');
+      }
+    });
+  
+    // Iniciar la sesión NFC
+    Nfc.startScanSession();
+  
+    // Terminar la sesión después de 10 segundos
+    setTimeout(async () => {
+      try {
+        await Nfc.stopScanSession();
+        console.log('Sesión NFC terminada después de 10 segundos.');
+      } catch (error) {
+        console.error('Error al terminar la sesión NFC:', error);
+      }
+    }, 10000); // 10000 milisegundos = 10 segundos
   }
 }

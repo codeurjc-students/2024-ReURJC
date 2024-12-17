@@ -23,4 +23,8 @@ public interface SportReservationrepository extends JpaRepository<SportReservati
 
     @Query("SELECT sr FROM SportReservation sr WHERE sr.studentId.studentId = :studentId")
     Optional<SportReservation> findByStudentId(@Param("studentId") Long studentId);
+
+    @Query("SELECT sr FROM SportReservation sr WHERE sr.date >= :startDate")
+List<SportReservation> findByDate( 
+        @Param("startDate") LocalDateTime startDate);
 }

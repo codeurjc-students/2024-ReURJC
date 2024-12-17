@@ -52,7 +52,7 @@ public class DataLoader {
     @PostConstruct
     public void init() throws IOException, URISyntaxException {
         // Crear asignaturas de ejemplo
-        Subject subject1 = new Subject(10L, "Historia");
+        Subject subject1 = new Subject(2L, "Historia");
         Subject subject2 = new Subject(23L, "Matemáticas");
         Subject subject3 = new Subject(30L, "Historia de la filología moderna");
 
@@ -80,14 +80,17 @@ public class DataLoader {
                 passwordEncoder.encode("123"));
         // Interconexión después de guardar las asignaturas
         user1.getSubjects().addAll(List.of(subject1, subject2));
+        user2.getSubjects().addAll(List.of(subject1, subject2));
+        user3.getSubjects().addAll(List.of(subject1, subject2));
+        user4.getSubjects().addAll(List.of(subject1, subject2));
         user2.getSubjects().add(subject3);
 
         // ROLES ASSIGN
-        user1.setRoles(List.of("TEACHER"));
+        user1.setRoles(List.of("USER"));
 
         user2.setRoles(List.of("USER"));
-        user3.setRoles(List.of("USER"));
-        user4.setRoles(List.of("USER"));
+        user3.setRoles(List.of("TEACHER"));
+        user4.setRoles(List.of("ADMIN"));
 
         // Guardar usuarios
         userRepository.saveAll(List.of(user1, user2, user3, user4));

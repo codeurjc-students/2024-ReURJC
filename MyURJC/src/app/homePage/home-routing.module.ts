@@ -14,6 +14,8 @@ import { CalendarWithClickComponent } from './components/calendar/calendarWithCl
 import { NewsComponent } from './news/news.component';
 import { AsistenciaComponent } from './bluetooth-page/asistencia.component';
 import { voteDelegateGuard } from '../services/EventService/vote-delegate-guard.guard';
+import { VoteEventsPage } from './admin-vote-event/admin-vote-event.component';
+import { AdminSportReservationComponent } from './admin-sport-reservation/admin-sport-reservation.component';
 
 const routes: Routes = [
   {
@@ -63,7 +65,24 @@ const routes: Routes = [
   {
     path: 'asistencia',
     component: AsistenciaComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  
+  },
+
+  {
+    path: 'admin/adminEvents',
+    component: VoteEventsPage,
+    canActivate: [AuthGuard],
+    data: { isAdmin: true }
+  
+  },
+
+  {
+    path: 'admin/reservationEvents',
+    component: AdminSportReservationComponent,
+    canActivate: [AuthGuard],
+    data: { isAdmin: true }
+  
   },
 ];
 

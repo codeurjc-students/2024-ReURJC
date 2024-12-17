@@ -3,12 +3,14 @@ export class CardInfo {
   private _title: string;
   private _description: string;
   private _apiCaller?: string;
+  private _Available?:number[]
 
-  constructor(subtitle: string, title: string, description: string, apiCaller: string) {
+  constructor(subtitle: string, title: string, description: string, apiCaller: string, available?:number[]) {
     this._subtitle = subtitle;
     this._title = title;
     this._description = description;
     this._apiCaller = apiCaller;
+    this._Available = available
 
   }
 
@@ -26,6 +28,10 @@ export class CardInfo {
 
   get description(): string {
     return this._description;
+  }
+
+  get available(): number[] | undefined {
+    return this._Available;
   }
 
 

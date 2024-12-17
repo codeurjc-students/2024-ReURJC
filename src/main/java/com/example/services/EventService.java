@@ -1,5 +1,6 @@
 package com.example.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,5 +68,15 @@ public class EventService {
             user.setCandidate(false);
             userService.save(user);
         }
+    }
+
+    public List<VoteDelegateEvent> getAllEvents() {
+        List<VoteDelegateEvent> events = new ArrayList<>();
+        for (Event event : eventRepository.findAll()) {
+            if (event instanceof VoteDelegateEvent) {
+               events.add((VoteDelegateEvent) event);
+            }
+        }
+        return events;
     }
 }
