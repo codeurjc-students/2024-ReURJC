@@ -28,6 +28,8 @@ npx cap sync
 npx cap copy android
 npx cap open android
 
+Nota: En esta versión descargada las notificaciones push no están disponibles al necesitar una cuenta de servicio en GCP. 
+
 Hay varios usuarios de prueba con distintos roles.
 
 ### Usuarios Creadidos
