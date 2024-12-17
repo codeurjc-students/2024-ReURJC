@@ -12,7 +12,31 @@
 2. Una vez instalado, asegurase de que el docker engine se encuentra en ejecucion
 3. Situarse en la raíz de este repositorio
 4. Ejecutar el siguiente comando "docker-compose -p myurjc up -d"
-5. La aplicacion se encontrará ejecutandose en el purto 8080 de su máquina. 
+5. Si en el navegador introducimos "localhost", navegaremos hasta el aula virtual de Moodle, en esta seccion seguirmos el instalador para terminar de configurarlo
+6. TRas haber hecho esto, con el usuario de administrador nos iremos a: Site administration > Server > Web Services > Manage protocols. Y activaremos los protocolos pulsandooslo sobre el icono del ojo tachado.
+7. Tras esto podremos crear usuarios en Site administration > Users > Add a new user.
+8. Luego podremos crear cursos en My courses > Create course
+9. Por último, tendremos que inscribir a los usuarios entrandoselo en el curso creado > Participants > Enrol User
+
+Nota: El id del usuario es el id de la app, por lo que para hacerlos coincidir hay que modificar los ID en la base de datos. 
+
+11. La aplicacion se encontrará ejecutandose en el endpoint http://localhost:8080 de su máquina.
+
+Hay varios usuarios de prueba con distintos roles.
+
+### Usuarios Creadidos
+
+A continuación, se detallan los usuarios que se crean por defecto y sus roles correspondientes:
+
+| Nombre      | Apellido | Segundo Apellido |         DNI         |             Email             | Contraseña (sin cifrar) |    Roles     |
+| :---------- | :------- | :-------------- | :-----------------: | :---------------------------: | :---------------------: | :----------: |
+| John        | Doe      | Smith           |      12345678A      | mariscalalonso16@icloud.com  |           123           |    USER    |
+| Jane        | Doe      | Smith           |      87654321B      | yaovi@icloud.com             |           123           |    USER    |
+| lolazo      | Doe      | Smith           |      87654321B      | yaovi123@icloud.com          |           123           |  TEACHER   |
+| lolazo123   | Doe      | Smith           |      87654321B      | yaovi1234@icloud.com         |           123           |   ADMIN    |
+
+
+
 
 ## Diagrama de base de datos
 El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc-students/2024-ReURJC/blob/main/DB_Schema.pdf).
