@@ -22,13 +22,15 @@ Nota: El id del usuario es el id de la app, por lo que para hacerlos coincidir h
 
 11. La aplicacion se encontrará ejecutandose en el endpoint http://localhost:8080 de su máquina.
 
-12. Si se desea utilizar la App Móvil, habría que tener instalado [Android studio](https://developer.android.com/studio/install?hl=fr) y ejecutar los siguientes comandos en el repertorio "MyURJC":
+12. Si se desea utilizar la App Móvil, habría que tener instalado [Android studio](https://developer.android.com/studio/install?hl=fr)
+13. Escribir en terminal "ifconfig" o "ipconfig" y seleccionar nuestra IP privada 192.x.x.x
+14. Modificar el archivo MyURJC > capacitor.config.ts con la IP privada
+15. Ejecutar los siguientes comandos en el repertorio "MyURJC":
 
 npx cap sync
 npx cap copy android
 npx cap open android
 
-Nota: En esta versión descargada las notificaciones push no están disponibles al necesitar una cuenta de servicio en GCP. 
 
 Hay varios usuarios de prueba con distintos roles.
 
