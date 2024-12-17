@@ -22,6 +22,12 @@ Nota: El id del usuario es el id de la app, por lo que para hacerlos coincidir h
 
 11. La aplicacion se encontrará ejecutandose en el endpoint http://localhost:8080 de su máquina.
 
+12. Si se desea utilizar la App Móvil, habría que tener instalado [Android studio](https://developer.android.com/studio/install?hl=fr) y ejecutar los siguientes comandos en el repertorio "2024-REURJC":
+
+npx cap sync
+npx cap copy android
+npx cap open android
+
 Hay varios usuarios de prueba con distintos roles.
 
 ### Usuarios Creadidos
