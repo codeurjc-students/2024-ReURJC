@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -22,13 +21,11 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import com.example.controller.SubjectsController;
 import com.example.controller.UserController;
 import com.example.model.Attendance;
 import com.example.model.SportReservation;
@@ -85,7 +82,7 @@ public class UserControllerTests {
 
         // Simula el User
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
+                "123");
         Subject subject1 = new Subject(10L, "Historia");
         Subject subject2 = new Subject(23L, "Matemáticas");
         user.getSubjects().addAll(List.of(subject1, subject2));
@@ -99,7 +96,7 @@ public class UserControllerTests {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(user.getSubjects(), response.getBody());
 
-    } 
+    }
 
     @Test
     void testSubjectWithInvalidUser() {
@@ -107,13 +104,12 @@ public class UserControllerTests {
         Principal principal = null;
         when(request.getUserPrincipal()).thenReturn(principal);
 
-
         ResponseEntity<?> response = userController.subjects(request);
 
         // Verifica la respuesta
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
-    } 
+    }
 
     @Test
     void testSetDeviceToken() {
@@ -125,21 +121,20 @@ public class UserControllerTests {
 
         // Simula el User
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
+                "123");
         when(userService.findByEmail("mariscalalonso16@icloud.com")).thenReturn(user);
         doAnswer(invocation -> {
             user.addFcmToken("123");
-    return null; // setToken es void, por lo que se devuelve null
-}).when(userService).setToken(user, "123");
+            return null; // setToken es void, por lo que se devuelve null
+        }).when(userService).setToken(user, "123");
 
-        ResponseEntity<?> response = userController.setDeviceToken(request,"123");
+        ResponseEntity<?> response = userController.setDeviceToken(request, "123");
 
         // Verifica la respuesta
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals("123", user.getFcmToken().get(0));
 
     }
-    
 
     @Test
     void testsetFcmTokenWithInvalidUser() {
@@ -147,13 +142,12 @@ public class UserControllerTests {
         Principal principal = null;
         when(request.getUserPrincipal()).thenReturn(principal);
 
-
-        ResponseEntity<?> response = userController.setDeviceToken(request,"123");
+        ResponseEntity<?> response = userController.setDeviceToken(request, "123");
 
         // Verifica la respuesta
         assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
 
-    } 
+    }
 
     @Test
     void testLoginWithExistingUser() {
@@ -233,7 +227,7 @@ public class UserControllerTests {
         HttpServletRequest request = mock(HttpServletRequest.class);
         Principal principal = mock(Principal.class);
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
+                "123");
         user.setCandidate(true); // El usuario es inicialmente candidato
 
         when(request.getUserPrincipal()).thenReturn(principal);
@@ -291,7 +285,6 @@ public class UserControllerTests {
         Principal principal = mock(Principal.class);
         User user = new User();
         Event voteDelegateEvent = new VoteDelegateEvent();
-        
 
         when(request.getUserPrincipal()).thenReturn(principal);
         when(principal.getName()).thenReturn("test@example.com");
@@ -349,8 +342,8 @@ public class UserControllerTests {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
-    // ... (Añade tests similares para cuando el usuario no está autenticado y para 
-    //      casos de error en el formato de la fecha)
+    // ... (Añade tests similares para cuando el usuario no está autenticado y para
+    // casos de error en el formato de la fecha)
 
     @Test
     void testGetReservations() {
@@ -386,7 +379,6 @@ public class UserControllerTests {
         assertEquals(true, response.getBody());
     }
 
-
     @Test
     void testDeletereservation_whenUserIsAuthenticated() throws Exception {
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -402,7 +394,6 @@ public class UserControllerTests {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         verify(sportReservationService).deleteReservation(user); // Verifica que se llama a deleteReservation
     }
-
 
     @Test
     void testGetUserReservation_whenUserIsAuthenticated() throws Exception {
@@ -422,22 +413,21 @@ public class UserControllerTests {
         assertEquals(reservation, response.getBody());
     }
 
-
     @Test
     void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsValid() throws Exception {
         HttpServletRequest request = mock(HttpServletRequest.class);
         Principal principal = mock(Principal.class);
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
+                "123");
         User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
-        Attendance attendance = new Attendance(creator,new Subject());
+                "123");
+        Attendance attendance = new Attendance(creator, new Subject());
 
         when(request.getUserPrincipal()).thenReturn(principal);
         when(principal.getName()).thenReturn("test@example.com");
         when(userService.findByEmail("test@example.com")).thenReturn(user);
         when(attendanceService.getAttendanceEvent("testCode")).thenReturn(attendance);
-        when(request.getRequestURI()).thenReturn("/api/users/newAttendance"); 
+        when(request.getRequestURI()).thenReturn("/api/users/newAttendance");
 
         ResponseEntity<URI> response = userController.newAttendance(request, "testCode");
 
@@ -446,45 +436,46 @@ public class UserControllerTests {
     }
 
     @Test
-void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsInvalid() throws Exception {
-    HttpServletRequest request = mock(HttpServletRequest.class);
-    Principal principal = mock(Principal.class);
-    User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-    "123");
+    void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsInvalid() throws Exception {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        Principal principal = mock(Principal.class);
+        User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
+                "123");
 
-    when(request.getUserPrincipal()).thenReturn(principal);
-    when(principal.getName()).thenReturn("test@example.com");
-    when(userService.findByEmail("test@example.com")).thenReturn(user);
-    when(attendanceService.getAttendanceEvent("invalidCode")).thenReturn(null); // Código inválido
+        when(request.getUserPrincipal()).thenReturn(principal);
+        when(principal.getName()).thenReturn("test@example.com");
+        when(userService.findByEmail("test@example.com")).thenReturn(user);
+        when(attendanceService.getAttendanceEvent("invalidCode")).thenReturn(null); // Código inválido
 
-    ResponseEntity<URI> response = userController.newAttendance(request, "invalidCode");
+        ResponseEntity<URI> response = userController.newAttendance(request, "invalidCode");
 
-    assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode()); // Verifica que la respuesta es NOT_FOUND
-}
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode()); // Verifica que la respuesta es NOT_FOUND
+    }
 
-@Test
-void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Exception {
-    HttpServletRequest request = mock(HttpServletRequest.class);
-    Principal principal = mock(Principal.class);
-    User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-    "123");
-    User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-    "123");
-    Attendance attendance = new Attendance(creator, new Subject());
-    // Simula una fecha de asistencia que ya ha expirado (más de 5 minutos en el pasado)
-    LocalDateTime expiredDateTime = LocalDateTime.now().minusMinutes(6); 
-    attendance.setDateTime(expiredDateTime);
+    @Test
+    void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Exception {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        Principal principal = mock(Principal.class);
+        User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
+                "123");
+        User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
+                "123");
+        Attendance attendance = new Attendance(creator, new Subject());
+        // Simula una fecha de asistencia que ya ha expirado (más de 5 minutos en el
+        // pasado)
+        LocalDateTime expiredDateTime = LocalDateTime.now().minusMinutes(6);
+        attendance.setDateTime(expiredDateTime);
 
-    when(request.getUserPrincipal()).thenReturn(principal);
-    when(principal.getName()).thenReturn("test@example.com");
-    when(userService.findByEmail("test@example.com")).thenReturn(user);
-    when(attendanceService.getAttendanceEvent("testCode")).thenReturn(attendance);
-    when(request.getRequestURI()).thenReturn("/api/users/newAttendance");
+        when(request.getUserPrincipal()).thenReturn(principal);
+        when(principal.getName()).thenReturn("test@example.com");
+        when(userService.findByEmail("test@example.com")).thenReturn(user);
+        when(attendanceService.getAttendanceEvent("testCode")).thenReturn(attendance);
+        when(request.getRequestURI()).thenReturn("/api/users/newAttendance");
 
-    ResponseEntity<URI> response = userController.newAttendance(request, "testCode");
+        ResponseEntity<URI> response = userController.newAttendance(request, "testCode");
 
-    assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode()); // Verifica que la respuesta es BAD_REQUEST
-}
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode()); // Verifica que la respuesta es BAD_REQUEST
+    }
 
     @Test
     void testHasVoted_whenUserIsNotAuthenticated() throws Exception {
@@ -555,7 +546,7 @@ void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Ex
 
         ResponseEntity<?> response = userController.newAttendance(request, "testCode");
 
-        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode()); 
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 
     @Test
@@ -569,7 +560,7 @@ void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Ex
 
         // Simula el usuario
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123"); 
+                "123");
         user.setRoles(Arrays.asList("USER"));
         when(userService.findByEmail("test@example.com")).thenReturn(user);
 
@@ -589,40 +580,36 @@ void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Ex
     }
 
     @Test
-void testGet_me_whenUserIsAuthenticated() throws IOException {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest();
-    Principal principal = mock(Principal.class);
-    request.setUserPrincipal(principal);
-    when(principal.getName()).thenReturn("test@example.com");
+    void testGet_me_whenUserIsAuthenticated() throws IOException {
+        // Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        Principal principal = mock(Principal.class);
+        request.setUserPrincipal(principal);
+        when(principal.getName()).thenReturn("test@example.com");
 
-    User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123"); 
-    when(userService.findByEmail("test@example.com")).thenReturn(user);
+        User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
+                "123");
+        when(userService.findByEmail("test@example.com")).thenReturn(user);
 
-    // Act
-    ResponseEntity<User> response = userController.get_me(request);
+        // Act
+        ResponseEntity<User> response = userController.get_me(request);
 
-    // Assert
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-    assertEquals(user, response.getBody()); 
-}
+        // Assert
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(user, response.getBody());
+    }
 
-@Test
-void testGet_me_whenUserIsNotAuthenticated() throws IOException {
-    // Arrange
-    MockHttpServletRequest request = new MockHttpServletRequest(); 
-    // No principal is set in the request
+    @Test
+    void testGet_me_whenUserIsNotAuthenticated() throws IOException {
+        // Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        // No principal is set in the request
 
-    // Act
-    ResponseEntity<User> response = userController.get_me(request);
+        // Act
+        ResponseEntity<User> response = userController.get_me(request);
 
-    // Assert
-    assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
-}
+        // Assert
+        assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
+    }
 
-
-   
-
-    
 }

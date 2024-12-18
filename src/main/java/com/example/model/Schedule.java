@@ -21,7 +21,6 @@ public class Schedule {
     @ManyToOne
     private Subject subject; // Nueva propiedad para relacionar con la clase Subject
 
-
     public Schedule(int dayOfWeek, int startHour, int endHour, String classRoom) {
         this.dayOfWeek = dayOfWeek;
         this.startHour = startHour;

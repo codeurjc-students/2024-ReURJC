@@ -1,7 +1,5 @@
 package com.example.demo;
 
-
-
 import com.example.controller.AdminController;
 import com.example.model.SportReservation;
 import com.example.model.User;
@@ -59,8 +57,8 @@ class AdminControllerTests {
     void getAllReservations_adminUser_returnsReservations() {
         // Arrange
         User adminUser = new User();
-        adminUser.setRoles(Arrays.asList("USER", "ADMIN")); 
-        List<SportReservation> reservations = new ArrayList<>(); 
+        adminUser.setRoles(Arrays.asList("USER", "ADMIN"));
+        List<SportReservation> reservations = new ArrayList<>();
 
         when(request.getUserPrincipal()).thenReturn(principal);
         when(principal.getName()).thenReturn("admin@example.com");
@@ -79,7 +77,7 @@ class AdminControllerTests {
     void getAllReservations_nonAdminUser_returnsForbidden() {
         // Arrange
         User nonAdminUser = new User();
-        nonAdminUser.setRoles(Arrays.asList("USER")); 
+        nonAdminUser.setRoles(Arrays.asList("USER"));
 
         when(request.getUserPrincipal()).thenReturn(principal);
         when(principal.getName()).thenReturn("user@example.com");

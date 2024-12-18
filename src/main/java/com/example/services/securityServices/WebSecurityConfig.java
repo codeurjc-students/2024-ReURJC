@@ -9,11 +9,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -47,12 +45,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        .cors().and() 
-        .csrf().disable()
-        .authorizeRequests()
-            .anyRequest().permitAll()  // Permite acceso a TODO
+                .cors().and()
+                .csrf().disable()
+                .authorizeRequests()
+                .anyRequest().permitAll()
         ;
-return http.build();
+        return http.build();
     }
 
     @Bean
@@ -65,8 +63,9 @@ return http.build();
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:4200", "http://10.0.2.16:4200", "http://192.168.1.17:8100", "http://mymoodle")); // URL del
-                                                                                                              // frontend
+                Arrays.asList("http://localhost:4200", "http://10.0.2.16:4200", "http://192.168.1.17:8100",
+                        "http://mymoodle")); // URL del
+        // frontend
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
         configuration.setAllowCredentials(true); // Habilita credenciales

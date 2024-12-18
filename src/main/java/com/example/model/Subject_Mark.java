@@ -39,7 +39,6 @@ public class Subject_Mark {
     public Long getSubjectMarkId() {
         return subjectMarkId;
     }
-    
 
     public void setMark(int mark) {
         this.mark = mark;

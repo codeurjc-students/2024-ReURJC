@@ -13,18 +13,18 @@ import com.example.model.User;
 
 public interface SportReservationrepository extends JpaRepository<SportReservation, Long> {
 
-    List<SportReservation> findByStudentIdOrderBySportReservationIdDesc(User user);
+        List<SportReservation> findByStudentIdOrderBySportReservationIdDesc(User user);
 
-    @Query("SELECT sr FROM SportReservation sr WHERE sr.date BETWEEN :startOfDay AND :endOfDay AND sr.pista = :pista")
-    List<SportReservation> findByDateAndPista(
-            @Param("startOfDay") LocalDateTime startOfDay,
-            @Param("endOfDay") LocalDateTime endOfDay,
-            @Param("pista") int pista);
+        @Query("SELECT sr FROM SportReservation sr WHERE sr.date BETWEEN :startOfDay AND :endOfDay AND sr.pista = :pista")
+        List<SportReservation> findByDateAndPista(
+                        @Param("startOfDay") LocalDateTime startOfDay,
+                        @Param("endOfDay") LocalDateTime endOfDay,
+                        @Param("pista") int pista);
 
-    @Query("SELECT sr FROM SportReservation sr WHERE sr.studentId.studentId = :studentId")
-    Optional<SportReservation> findByStudentId(@Param("studentId") Long studentId);
+        @Query("SELECT sr FROM SportReservation sr WHERE sr.studentId.studentId = :studentId")
+        Optional<SportReservation> findByStudentId(@Param("studentId") Long studentId);
 
-    @Query("SELECT sr FROM SportReservation sr WHERE sr.date >= :startDate")
-List<SportReservation> findByDate( 
-        @Param("startDate") LocalDateTime startDate);
+        @Query("SELECT sr FROM SportReservation sr WHERE sr.date >= :startDate")
+        List<SportReservation> findByDate(
+                        @Param("startDate") LocalDateTime startDate);
 }

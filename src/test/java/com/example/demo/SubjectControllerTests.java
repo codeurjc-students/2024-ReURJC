@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.controller.Responses.SubjectScheduleResponse;
 import com.example.controller.SubjectsController;
-import com.example.model.Schedule;
 import com.example.model.Subject;
 import com.example.model.User;
 import com.example.services.UserService;
@@ -52,8 +51,9 @@ public class SubjectControllerTests {
         ResponseEntity<List<SubjectScheduleResponse>> response = subjectsController.getSchedule(request);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        // Verifica que la respuesta contiene la información de las asignaturas y sus horarios
-        assertEquals(2, response.getBody().size()); 
+        // Verifica que la respuesta contiene la información de las asignaturas y sus
+        // horarios
+        assertEquals(2, response.getBody().size());
     }
 
     @Test
@@ -85,7 +85,7 @@ public class SubjectControllerTests {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         // Verifica que la respuesta contiene la información de las asignaturas
-        assertEquals(2, response.getBody().size()); 
+        assertEquals(2, response.getBody().size());
     }
 
     @Test

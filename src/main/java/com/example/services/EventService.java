@@ -74,7 +74,7 @@ public class EventService {
         List<VoteDelegateEvent> events = new ArrayList<>();
         for (Event event : eventRepository.findAll()) {
             if (event instanceof VoteDelegateEvent) {
-               events.add((VoteDelegateEvent) event);
+                events.add((VoteDelegateEvent) event);
             }
         }
         return events;

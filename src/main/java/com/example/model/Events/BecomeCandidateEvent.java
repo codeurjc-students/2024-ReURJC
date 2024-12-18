@@ -5,9 +5,9 @@ import com.example.model.Events.interfaces.BecomeDelegateEvent;
 import jakarta.persistence.Entity;
 
 @Entity
-public class BecomeCandidateEvent extends Event implements BecomeDelegateEvent{
+public class BecomeCandidateEvent extends Event implements BecomeDelegateEvent {
 
-    public BecomeCandidateEvent(String category, String title, String description , String endDate, int tabDisplay){
+    public BecomeCandidateEvent(String category, String title, String description, String endDate, int tabDisplay) {
         super(category, title, description, "/becomeDelegate", endDate);
     }
 
@@ -15,6 +15,7 @@ public class BecomeCandidateEvent extends Event implements BecomeDelegateEvent{
         super(category, title, description, "/becomeDelegate", endDate, 1);
     }
 
-    public BecomeCandidateEvent() {}
-    
+    public BecomeCandidateEvent() {
+    }
+
 }

@@ -1,7 +1,5 @@
 package com.example.services.securityServices.WebSocket;
 
-
-
 public class ResponseMessage {
     private String content;
 

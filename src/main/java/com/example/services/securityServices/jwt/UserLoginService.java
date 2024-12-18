@@ -37,7 +37,7 @@ public class UserLoginService {
 	private UserService userService;
 
 	public ResponseEntity<AuthResponse> login(LoginRequest loginRequest, String encryptedAccessToken,
-			String encryptedRefreshToken ) {
+			String encryptedRefreshToken) {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

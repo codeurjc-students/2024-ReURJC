@@ -23,7 +23,7 @@ public class UserAttendance {
     private Attendance attendance;
 
     public UserAttendance(User user, Attendance attendance) {
-        this.user=user;
+        this.user = user;
         this.attendance = attendance;
     }
 
@@ -31,8 +31,7 @@ public class UserAttendance {
         return user;
     }
 
-    public UserAttendance() {}
-
-    
+    public UserAttendance() {
+    }
 
 }

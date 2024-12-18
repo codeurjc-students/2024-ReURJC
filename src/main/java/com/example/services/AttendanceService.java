@@ -21,8 +21,8 @@ public class AttendanceService {
     @Autowired
     private UserAttendanceRepository userAttendanceRepository;
 
-    public Attendance newAttendance(User user, Subject subject){
-        Attendance attendance = new Attendance(user,subject);
+    public Attendance newAttendance(User user, Subject subject) {
+        Attendance attendance = new Attendance(user, subject);
         attendanceRepository.save(attendance);
         return attendance;
 
@@ -35,12 +35,12 @@ public class AttendanceService {
         attendanceRepository.save(attendance);
     }
 
-    public List<Attendance> getAllAttendances(User user){
+    public List<Attendance> getAllAttendances(User user) {
         return attendanceRepository.findTop10ByCreatorOrderByIdDesc(user);
     }
 
     public Attendance getAttendanceEvent(String code) {
         return attendanceRepository.findByCode(code);
     }
-    
+
 }

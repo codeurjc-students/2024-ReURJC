@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import jakarta.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,7 +41,7 @@ public class EventsControllerTests {
 
     @Test
     void testGetEvents() {
-    
+
         List<Event> events = new ArrayList<>();
         events.add(new BecomeCandidateEvent());
         when(eventService.getEvents()).thenReturn(events);
@@ -78,7 +77,7 @@ public class EventsControllerTests {
         HttpServletRequest request = mock(HttpServletRequest.class);
         Principal principal = mock(Principal.class);
         User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
+                "123");
         VoteDelegateEvent voteDelegateEvent = new VoteDelegateEvent();
 
         when(request.getUserPrincipal()).thenReturn(principal);
@@ -86,7 +85,7 @@ public class EventsControllerTests {
         when(eventService.isVoteDelegatesEvent()).thenReturn(true);
         when(userService.findByEmail("test@example.com")).thenReturn(user);
         User user2 = new User(2L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-        "123");
+                "123");
         when(userService.findById(2L)).thenReturn(user2);
         user2.setCandidate(true);
         when(eventService.getVoteDelegatesEvent()).thenReturn(voteDelegateEvent);
@@ -103,7 +102,7 @@ public class EventsControllerTests {
         Principal principal = mock(Principal.class);
 
         when(request.getUserPrincipal()).thenReturn(principal);
-        when(eventService.isVoteDelegatesEvent()).thenReturn(false); 
+        when(eventService.isVoteDelegatesEvent()).thenReturn(false);
 
         ResponseEntity<String> response = eventsController.vote(request, 1L);
 

@@ -1,6 +1,5 @@
 package com.example.model;
 
-
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,7 @@ public class Attendance {
     private Subject subject;
 
     @Column(unique = true)
-private String code;
-
+    private String code;
 
     @OneToMany(mappedBy = "attendance")
     private List<UserAttendance> usersPresent = new ArrayList<UserAttendance>();
@@ -48,11 +45,8 @@ private String code;
         this.code = UUID.randomUUID().toString();
     }
 
-public Attendance() {}
-    
-
-  
-    
+    public Attendance() {
+    }
 
     public void addUser(UserAttendance user) {
         this.usersPresent.add(user);
@@ -78,9 +72,4 @@ public Attendance() {}
         this.dateTime = dateTime;
     }
 
-    
-    
-
-    
 }
-

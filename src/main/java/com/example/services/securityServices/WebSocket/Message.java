@@ -1,6 +1,5 @@
 package com.example.services.securityServices.WebSocket;
 
-
 public class Message {
     private String messageContent;
 

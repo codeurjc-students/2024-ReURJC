@@ -33,7 +33,8 @@ public class ApiKeyAuthenticationFilter extends OncePerRequestFilter {
 
             if (apiKey != null && apiKey.equals(API_KEY)) {
                 // API Key válida, crea un contexto de seguridad
-                Authentication authentication = new UsernamePasswordAuthenticationToken("API_USER", null, Collections.emptyList());
+                Authentication authentication = new UsernamePasswordAuthenticationToken("API_USER", null,
+                        Collections.emptyList());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
                 // API Key inválida, devuelve un error 401
