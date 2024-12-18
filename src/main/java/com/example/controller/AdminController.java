@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.SportReservation;
 import com.example.model.User;
-import com.example.model.Events.Event;
 import com.example.model.Events.VoteDelegateEvent;
 import com.example.services.EventService;
 import com.example.services.SportReservationService;
@@ -68,7 +67,6 @@ public class AdminController {
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
-
 
     @GetMapping("/events")
     public ResponseEntity<List<VoteDelegateEvent>> getAllEvents(HttpServletRequest request) {

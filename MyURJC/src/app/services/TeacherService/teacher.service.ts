@@ -10,8 +10,8 @@ export class TeacherService {
 
   private apiUrl = '/api/teacher';
 
-  constructor(private http: HttpClient) {}
-  
+  constructor(private http: HttpClient) { }
+
   createAttendance(subjectId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/newAttendance?subjectId=${subjectId}`, null, { withCredentials: true });
   }

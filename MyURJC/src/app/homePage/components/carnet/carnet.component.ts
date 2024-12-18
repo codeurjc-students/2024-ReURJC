@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiAuthService } from 'src/app/services/AuthService/api-auth-service.service';
 import { ApiUserService } from 'src/app/services/UserService/api.user.service';
-import { Nfc, NfcUtils, NfcTagTechType } from '@capawesome-team/capacitor-nfc';
+import { Nfc, NfcUtils } from '@capawesome-team/capacitor-nfc';
 
 @Component({
   selector: 'app-carnet',
@@ -10,14 +10,14 @@ import { Nfc, NfcUtils, NfcTagTechType } from '@capawesome-team/capacitor-nfc';
 })
 export class CarnetComponent implements OnInit {
   private carnetUrl: string | null = null;
-  public isNfcActive: boolean = false; 
+  public isNfcActive: boolean = false;
   datos = "Escribir en NFC"
   isNfcSupported: boolean = false;
   isNfcEnabled: boolean = false;
   showMenu = false;
 
   constructor(
-    private userService: ApiUserService, 
+    private userService: ApiUserService,
     private apiAuthService: ApiAuthService
   ) {
     this.checkNfcSupport();
@@ -62,9 +62,9 @@ export class CarnetComponent implements OnInit {
     if (this.apiAuthService.isLoggedIn()) {
       const userId = this.apiAuthService.getUser()?.id;
       if (userId !== undefined) {
-          this.datos = userId.toString();
+        this.datos = userId.toString();
       }
-  }
+    }
     const { record } = utils.createNdefTextRecord({ text: this.datos });
     return record;
   }
@@ -79,7 +79,7 @@ export class CarnetComponent implements OnInit {
     // Crear el registro NFC
     const record = this.createNdefTextRecord();
     this.showMenu = true
-  
+
     Nfc.addListener('nfcTagScanned', async () => {
       try {
         await Nfc.write({ message: { records: [record] } });
@@ -90,15 +90,14 @@ export class CarnetComponent implements OnInit {
         alert('Error escribiendo la etiqueta.');
       }
     });
-  
+
     // Iniciar la sesión NFC
     Nfc.startScanSession();
-  
+
     // Terminar la sesión después de 10 segundos
     setTimeout(async () => {
       try {
         await Nfc.stopScanSession();
-        console.log('Sesión NFC terminada después de 10 segundos.');
         this.showMenu = false;
       } catch (error) {
         console.error('Error al terminar la sesión NFC:', error);

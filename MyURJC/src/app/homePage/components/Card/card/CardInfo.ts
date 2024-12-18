@@ -3,9 +3,9 @@ export class CardInfo {
   private _title: string;
   private _description: string;
   private _apiCaller?: string;
-  private _Available?:number[]
+  private _Available?: number[]
 
-  constructor(subtitle: string, title: string, description: string, apiCaller: string, available?:number[]) {
+  constructor(subtitle: string, title: string, description: string, apiCaller: string, available?: number[]) {
     this._subtitle = subtitle;
     this._title = title;
     this._description = description;

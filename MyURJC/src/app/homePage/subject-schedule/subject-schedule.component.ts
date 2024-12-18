@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SubjectScheduleResponse } from 'src/app/services/SubjectService/ResponseInfo/SubjectScheduleResponse';
 import { SubjectServiceService } from 'src/app/services/SubjectService/subject-service.service';
 import { CardInfo } from '../components/Card/card/CardInfo';
@@ -82,7 +82,7 @@ export class SubjectScheduleComponent {
       schedule.title,
       `${schedule.startHour}:00 - ${schedule.endHour}:00`,
       schedule.classRoom.toString(), // Convertir classRoom a string
-      "" // No necesitas apiCaller en este caso
+      ""
     );
   }
 

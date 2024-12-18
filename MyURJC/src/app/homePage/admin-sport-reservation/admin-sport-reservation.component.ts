@@ -1,4 +1,4 @@
-// admin-sport-reservation.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/AdminService/admin.service';
 import { SportReservation } from 'src/app/services/UserService/SportReservation';
@@ -17,7 +17,7 @@ export class AdminSportReservationComponent implements OnInit {
     2: 'Pista de fútbol (Móstoles)'
   };
 
-  constructor(private adminService: AdminService) { } // Inyecta el servicio AdminService
+  constructor(private adminService: AdminService) { } 
 
   ngOnInit(): void {
     this.adminService.getAllReservations().subscribe(
@@ -28,13 +28,12 @@ export class AdminSportReservationComponent implements OnInit {
       (error) => {
         console.error('Error al obtener las reservas:', error);
         this.loading = false;
-        // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje al usuario
       }
     );
 
 
 
-    
+
   }
 
   traducirPista(numeroPista: number): string {

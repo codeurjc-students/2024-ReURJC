@@ -28,7 +28,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +37,6 @@ import com.example.model.Attendance;
 import com.example.model.SportReservation;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
-import com.example.model.UserAttendance;
 import com.example.services.AttendanceService;
 import com.example.services.EventService;
 import com.example.services.SportReservationService;
@@ -102,9 +100,8 @@ public class UserController {
             URI location = URI.create(request.getRequestURI() + "/" + user.getId());
             return ResponseEntity.created(location).build();
         }
-            
+
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        
 
     }
 
@@ -300,7 +297,7 @@ public class UserController {
             User user = userService.findByEmail(principal.getName());
 
             try {
-                // Construct the date-time string, adding a leading zero to the day
+
                 String año = SportRervationInfo.get("año").toString();
                 String mes = SportRervationInfo.get("mes").toString();
                 String dia = SportRervationInfo.get("fecha").toString();
@@ -318,7 +315,7 @@ public class UserController {
                 }
 
                 String dateTimeString = año + "-" + mes + "-" + dia + " " + hora + ":00:00.000000";
-                // Parse the date-time string using the correct format
+                // Parseamos la fecha en el formato correcto
                 LocalDateTime fechaHora = LocalDateTime.parse(
                         dateTimeString,
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"));
@@ -329,7 +326,7 @@ public class UserController {
                 return ResponseEntity.created(location).build();
 
             } catch (DateTimeParseException e) {
-                // Handle the exception, e.g., log the error and return an error response
+
                 return ResponseEntity.badRequest().build();
             }
         }
@@ -401,7 +398,7 @@ public class UserController {
                     URI location = URI.create(request.getRequestURI() + "/" + user.getId());
                     return ResponseEntity.created(location).build();
                 }
-                
+
             } else {
                 return ResponseEntity.notFound().build();
             }
@@ -423,6 +420,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
-
 
 }

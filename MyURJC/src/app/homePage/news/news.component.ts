@@ -34,7 +34,7 @@ export class NewsComponent implements OnInit {
       news.title,
       news.date,
       `${news.description}`,
-      "" // No necesitas apiCaller en este caso
+      ""
     );
   }
 

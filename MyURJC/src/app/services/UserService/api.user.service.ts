@@ -56,7 +56,8 @@ export class ApiUserService {
   }
 
   vote(candidate: number): Observable<string> {
-    return this.http.post<string>("/api/events/vote", candidate, { withCredentials: true })}
+    return this.http.post<string>("/api/events/vote", candidate, { withCredentials: true })
+  }
 
   hasVoted(): Observable<boolean> {
     return this.http.get<boolean>('/api/users/me/hasVoted', { withCredentials: true });

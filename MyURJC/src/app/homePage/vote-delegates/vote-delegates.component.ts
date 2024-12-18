@@ -35,10 +35,10 @@ export class VoteDelegatesComponent implements OnInit {
   }
 
   voteForCandidate(candidate: number) {
-    this.userService.vote(candidate).subscribe( (data) => {
+    this.userService.vote(candidate).subscribe((data) => {
       this.userService.hasVoted().subscribe((status) => { this.userVoted = status })
     })
-    
+
   }
 
   getUserVoted(): boolean {

@@ -27,24 +27,24 @@ public class FestiveInfo {
         // Crear la fecha final (el día del festivo especificado)
         Calendar endDate = Calendar.getInstance();
         endDate.set(festive.getYear(), festive.getMonth() - 1, festive.getDay());
-        
+
         // Calcular la fecha de inicio restando los xdaysAgo
         Calendar startDate = (Calendar) endDate.clone();
         startDate.add(Calendar.DAY_OF_MONTH, -festive.getStartedXDaysAgo());
-        
+
         // Iterar desde la fecha de inicio hasta la fecha final
         Calendar currentDate = (Calendar) startDate.clone();
         while (!currentDate.after(endDate)) {
             // Crear un nuevo objeto FestiveInfo para cada día
             festiveList.add(new FestiveInfo(
-                currentDate.get(Calendar.DAY_OF_MONTH),
-                currentDate.get(Calendar.MONTH) + 1, // Ajustar el mes al rango 1-12
-                currentDate.get(Calendar.YEAR),
-                festive.getColor(), // Usar el mismo color
-                festive.getStartedXDaysAgo(),
-                festive.getLocal() // Usar la misma localidad
+                    currentDate.get(Calendar.DAY_OF_MONTH),
+                    currentDate.get(Calendar.MONTH) + 1, // Ajustar el mes al rango 1-12
+                    currentDate.get(Calendar.YEAR),
+                    festive.getColor(), // Usar el mismo color
+                    festive.getStartedXDaysAgo(),
+                    festive.getLocal() // Usar la misma localidad
             ));
-            
+
             // Avanzar un día
             currentDate.add(Calendar.DAY_OF_MONTH, 1);
         }

@@ -14,7 +14,7 @@ export class VoteEventsPage implements OnInit {
   votesByEvent: { [key: number]: { userId: number, count: number }[] } = {};
   showDetails: { [key: number]: boolean } = {};
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.loadEvents();
@@ -62,5 +62,5 @@ export class VoteEventsPage implements OnInit {
       );
     }
   }
-  
+
 }

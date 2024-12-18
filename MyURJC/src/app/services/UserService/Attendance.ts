@@ -8,6 +8,6 @@ export interface Attendance {
     subject: SubjectInfo;
     code: string;
     usersPresent: UserAttendance[];
-  
+
 
 }

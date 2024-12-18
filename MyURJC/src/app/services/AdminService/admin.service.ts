@@ -16,7 +16,7 @@ export class AdminService {
     return this.http.get<SportReservation[]>('/api/admin/reservations', { withCredentials: true });
   }
 
-  getAllVotes(eventId: number): Observable<Object[]> { 
+  getAllVotes(eventId: number): Observable<Object[]> {
     const params = { eventId: eventId.toString() };
     return this.http.get<Object[]>('/api/admin/votes', { withCredentials: true, params });
   }

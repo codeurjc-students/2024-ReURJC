@@ -21,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/teacher")
@@ -42,18 +41,17 @@ public class TeacherController {
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
             if (user.getRoles().contains("TEACHER")) {
-               Attendance attendance  = attendanceService.newAttendance(user, subjectService.getSubject(subjectId));
+                Attendance attendance = attendanceService.newAttendance(user, subjectService.getSubject(subjectId));
 
                 URI location = URI.create(request.getRequestURI() + "/" + attendance.getCode());
                 return ResponseEntity.created(location).build();
-            } else { 
+            } else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-    
-            }
-        } 
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
-        
+            }
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
     }
 
     @GetMapping("/attendances")
@@ -61,25 +59,18 @@ public class TeacherController {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
-            if (user.getRoles().contains("TEACHER"))  {
-                
-
+            if (user.getRoles().contains("TEACHER")) {
 
                 return ResponseEntity.ok(attendanceService.getAllAttendances(user));
-            
-        } else { 
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
+            }
         }
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
     }
-
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-
-        
-
-        
-    }
-
 
 }
-

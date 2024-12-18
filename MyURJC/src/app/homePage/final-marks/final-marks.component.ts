@@ -32,7 +32,7 @@ export class FinalMarksComponent implements OnInit {
 
   private processGrades(grades: SubjectMark[]) {
     for (const grade of grades) {
-      const subjectTitle = grade.subjectId.title; // Usa el título de la asignatura como clave
+      const subjectTitle = grade.subjectId.title; // Usar el título de la asignatura como clave
       if (!this.grades[subjectTitle]) {
         this.grades[subjectTitle] = {};
       }

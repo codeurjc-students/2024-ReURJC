@@ -15,16 +15,16 @@ export class HomePage implements OnInit {
   showNotificationBadge = false
   previousTab: string | undefined;
   servicesTabCards: CardInfo[] = [
-    new CardInfo("Escolar", "Asistencia Bluetooth", "Este servicio permite confirmar tu asistencia a una clase", "/asistencia",[1]),
-    new CardInfo("Ocio", "Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC", "/reservations", [1,2]),
+    new CardInfo("Escolar", "Asistencia Bluetooth", "Este servicio permite confirmar tu asistencia a una clase", "/asistencia", [1]),
+    new CardInfo("Ocio", "Reserva de cancha", "Este servicio permite realizar reservas de las pistas deportivas de la URJC", "/reservations", [1, 2]),
     new CardInfo("Ocio", "Reservas de cancha", "Este servicio permite revisar las reservas activas hechas por los usuarios", "/admin/reservationEvents", [3]),
     new CardInfo("Escolar", "Eventos de votos", "Este servicio permite revisar los votos de los usuarios en los eventos", "/admin/adminEvents", [3]),
     new CardInfo("Escolar", "Crear asistencia", "Este servicio permite crear une vento de asistencia", "/asistencia", [2])
   ];
 
   schedulesTabCards: CardInfo[] = [
-    new CardInfo("", "Calendario", "Consulta los días lectivos, vacaciones y festivos del curso académico actual", "/calendar", [0,1,2,3]),
-    new CardInfo("", "Horario", "Consulta tu horario académico diario y semanal", "/schedule", [1,2]),
+    new CardInfo("", "Calendario", "Consulta los días lectivos, vacaciones y festivos del curso académico actual", "/calendar", [0, 1, 2, 3]),
+    new CardInfo("", "Horario", "Consulta tu horario académico diario y semanal", "/schedule", [1, 2]),
     new CardInfo("", "Exámenes finales", "Consulta toda la información relacionada con los exámenes finales", "/me/subjects", [1])
   ];
 
@@ -92,7 +92,7 @@ export class HomePage implements OnInit {
     this.showNotificationBadge = false;
   }
 
-  canShowCard(card : CardInfo): boolean | undefined {
+  canShowCard(card: CardInfo): boolean | undefined {
     if (this.isLoggedIn()) {
       if (this.isAdmin()) {
         return card.available?.includes(3)
@@ -108,26 +108,26 @@ export class HomePage implements OnInit {
     } else {
       return card.available?.includes(0);
     }
-    
+
   }
 
-  isTeacher():boolean | undefined {
+  isTeacher(): boolean | undefined {
     return this.apiAuthService.isTeacher();
   }
 
-  isAdmin():boolean | undefined {
+  isAdmin(): boolean | undefined {
     return this.apiAuthService.isAdmin();
   }
 
 
 
-  isLoggedIn():boolean | undefined {
+  isLoggedIn(): boolean | undefined {
     return this.apiAuthService.getUser() !== undefined;
   }
 
   login() {
     this.router.navigate(['/login']);
-    }
+  }
 
 
 

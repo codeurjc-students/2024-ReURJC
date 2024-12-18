@@ -17,7 +17,7 @@ export class AsistenciaComponent implements OnInit {
   selectedSubjectId: number | null = null;
   attendanceCode: string = '';
   isLoading: boolean = false;
-  attendances : Attendance[] =[]
+  attendances: Attendance[] = []
   showUsers: { [attendanceCode: string]: boolean } = {};
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class AsistenciaComponent implements OnInit {
   }
 
   toggleUsers(attendance: Attendance) {
-   this.getAsisttances();
+    this.getAsisttances();
     this.showUsers[attendance.code] = !this.showUsers[attendance.code];
   }
 
@@ -60,7 +60,7 @@ export class AsistenciaComponent implements OnInit {
   createAttendance(): void {
     if (this.selectedSubjectId) {
       this.teacherService.createAttendance(this.selectedSubjectId).subscribe({
-        next: () => {console.log('Asistencia creada correctamente'); this.getAsisttances()},
+        next: () => { this.getAsisttances() },
         error: (err) => console.error('Error al crear la asistencia:', err),
       });
     } else {
@@ -84,12 +84,12 @@ export class AsistenciaComponent implements OnInit {
   }
 
   getAsisttances() {
-    this.teacherService.getAllAttendances().subscribe( (attendances: Attendance[]) => { this.attendances = attendances})
+    this.teacherService.getAllAttendances().subscribe((attendances: Attendance[]) => { this.attendances = attendances })
 
   }
 
   getAllSubjects() {
-    console.log("si o si")
-    this.subjectService.getSubjects().subscribe( (subjects: SubjectInfo[]) => {console.log(subjects); this.subjects = subjects})
+
+    this.subjectService.getSubjects().subscribe((subjects: SubjectInfo[]) => { this.subjects = subjects })
   }
 }

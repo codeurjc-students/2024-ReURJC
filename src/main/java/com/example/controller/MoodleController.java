@@ -8,16 +8,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.HtmlUtils;
-
 import com.example.model.NotificationRequest;
 import com.example.model.Subject;
 import com.example.model.Subject_Mark;
@@ -27,8 +23,6 @@ import com.example.services.NotificationService;
 import com.example.services.SubjectMarkService;
 import com.example.services.SubjectService;
 import com.example.services.UserService;
-import com.example.services.securityServices.WebSocket.Message;
-import com.example.services.securityServices.WebSocket.ResponseMessage;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -52,7 +46,7 @@ public class MoodleController {
     private FCMService fcmService;
 
     @Autowired
-private SimpMessagingTemplate messagingTemplate;
+    private SimpMessagingTemplate messagingTemplate;
 
     @PostMapping("/updateGrade")
     public ResponseEntity<URI> miEndpoint(@RequestBody Map<String, Object> datos) throws Exception {
@@ -73,7 +67,8 @@ private SimpMessagingTemplate messagingTemplate;
                 Long idCreated = null;
                 if (!subjectMarkService.existsByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName)) {
                     ;
-                    idCreated = subjectMarkService.save(new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
+                    idCreated = subjectMarkService
+                            .save(new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
                 } else {
                     idCreated = updateExistingMark(student, subject, mark, assignmentName);
                 }
@@ -84,14 +79,14 @@ private SimpMessagingTemplate messagingTemplate;
                             "Se ha evaluado: " + assignmentName + " con una nota de " + mark, token);
                     fcmService.sendMessageToToken(request);
                 }
-                    URI location = URI.create("/api/events/" + idCreated);
-                    messagingTemplate.convertAndSendToUser(student.getEmail(), "/topic/private-messages", 
-                    Map.of("content", subjectMarkService.getLastSubjectMarkAdded(student)));
-                        return ResponseEntity.created(location).build();
+                URI location = URI.create("/api/events/" + idCreated);
+                messagingTemplate.convertAndSendToUser(student.getEmail(), "/topic/private-messages",
+                        Map.of("content", subjectMarkService.getLastSubjectMarkAdded(student)));
+                return ResponseEntity.created(location).build();
             }
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
-        
+
         }
         return ResponseEntity.notFound().build();
 
@@ -112,16 +107,9 @@ private SimpMessagingTemplate messagingTemplate;
         if (user != null) {
             Subject_Mark lastSubjectMark = subjectMarkService.getLastSubjectMarkAdded(user);
             Map<String, Subject_Mark> message = new HashMap<>();
-            message.put("content",  lastSubjectMark);
+            message.put("content", lastSubjectMark);
             messagingTemplate.convertAndSendToUser(user.getEmail(), "/topic/private-messages", message);
 
-            
-        } 
+        }
     }
 }
-
-
-    
-
-    
-
