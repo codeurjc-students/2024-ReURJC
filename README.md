@@ -103,36 +103,66 @@ El diagrama representa la secuencia de pantallas disponibles, teniendo en cuenta
 El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc-students/2024-ReURJC/blob/main/NAVEGACION-SCHEMA.pdf).
 
 ### Descripción de las pantallas
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Servicios.png)
+
 - **Pantalla "Servicios"**: Permite a los usuarios acceder a los distintos servicios de la URJC:
+
+ ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Servicios.png)
+
+  - **Pantalla "Reserva de cancha"**: Permite al usuario reservar pistas deportivas seleccionando el tipo de pista, fecha y hora. Solo se permiten reservas con al menos 24 horas de antelación. Si un horario ya está reservado, no aparece en la lista. Si el usuario tiene una reserva activa, esta se muestra junto con la opción de cancelarla. Al cancelar, el horario se libera para otros usuarios:
+ 
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/ReservaCancha.png)
-  - **Pantalla "Reserva de cancha"**: Permite al usuario reservar pistas deportivas seleccionando el tipo de pista, fecha y hora. Solo se permiten reservas con al menos 24 horas de antelación. Si un horario ya está reservado, no aparece en la lista. Si el usuario tiene una reserva activa, esta se muestra junto con la opción de cancelarla. Al cancelar, el horario se libera para otros usuarios.
+
+  - **Pantalla "Votar delegados"**: Permite votar a los candidatos en el proceso de elección. Solo está disponible cuando el evento está activo:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/VotarDelegados.png)
-  - **Pantalla "Votar delegados"**: Permite votar a los candidatos en el proceso de elección. Solo está disponible cuando el evento está activo.
+
+  - **Pantalla "Postularse como delegado"**: Permite a los usuarios postularse como delegados. Solo está disponible cuando el evento está activo:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/PostularDelegados.png)
-  - **Pantalla "Postularse como delegado"**: Permite a los usuarios postularse como delegados. Solo está disponible cuando el evento está activo.
+
+  - **Pantalla "Gestión de asistencias"**: Los profesores pueden crear nuevas asistencias, generando un código válido durante 5 minutos. También pueden consultar las últimas 10 asistencias creadas. Los alumnos, por su parte, solo pueden introducir códigos. Si el código es correcto y se introduce a tiempo, se muestra una notificación de éxito. En caso contrario, se muestra un error:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Asistencia.png)
-  - **Pantalla "Gestión de asistencias"**: Los profesores pueden crear nuevas asistencias, generando un código válido durante 5 minutos. También pueden consultar las últimas 10 asistencias creadas. Los alumnos, por su parte, solo pueden introducir códigos. Si el código es correcto y se introduce a tiempo, se muestra una notificación de éxito. En caso contrario, se muestra un error.
+
+   - **Pantalla "Eventos"**: en esta pantalla los administradores puedne consultar el historial de eventos y los resultados de las votaciones:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Eventos.png)
-   - **Pantalla "Eventos"**: en esta pantalla los administradores puedne consultar el historial de eventos y los resultados de las votaciones
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/HistorialReservas.png)
-   - **Pantalla "Historial de reserva de pistas"**: En esta pantalla los administradores pueden consultar las reservas activas de todos los usuarios. 
+
+   - **Pantalla "Historial de reserva de pistas"**: En esta pantalla los administradores pueden consultar las reservas activas de todos los usuarios:
+
+![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/HistorialReservas.png) 
+
+- **Pantalla "Alertas"**: Muestra al usuario en tiempo real los cambios realizados por los profesores en el aula virtual sobre sus notas:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Alertas.png)
-- **Pantalla "Alertas"**: Muestra al usuario en tiempo real los cambios realizados por los profesores en el aula virtual sobre sus notas.
+
+- **Pantalla "Noticias"**: Permite al usuario leer las noticias de la universidad:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Noticias.png)
-- **Pantalla "Noticias"**: Permite al usuario leer las noticias de la universidad.
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Tiempos.png)
+
 - **Pantalla "Tiempos"**: Incluye funcionalidades relacionadas con los tiempos de la universidad:
+
+![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Tiempos.png)
+
+  - **Pantalla "Calendario"**: Muestra el calendario académico con colores que indican días lectivos, fines de semana y días no lectivos:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Calendario.png)
-  - **Pantalla "Calendario"**: Muestra el calendario académico con colores que indican días lectivos, fines de semana y días no lectivos.
+
+  - **Pantalla "Exámenes finales"**: Muestra información sobre los exámenes finales de cada asignatura:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/ExamenesFinales.png)
-  - **Pantalla "Exámenes finales"**: Muestra información sobre los exámenes finales de cada asignatura.
+
+  - **Pantalla "Horario semanal"**: Muestra el horario semanal con información sobre las asignaturas del usuario:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Horario.png)
-  - **Pantalla "Horario semanal"**: Muestra el horario semanal con información sobre las asignaturas del usuario.
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Perfil.png)
+
 - **Pantalla "Perfil"**: Permite consultar las calificaciones finales y acceder al carnet de estudiante. Al seleccionar el carnet, se activa el NFC para compartir datos con dispositivos compatibles:
+
+![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Perfil.png)
+
+  - **Pantalla "Calificaciones finales"**: Muestra las calificaciones obtenidas en cada asignatura, desglosadas por tareas:
+
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/CalificacionesFinales.png)
-  - **Pantalla "Calificaciones finales"**: Muestra las calificaciones obtenidas en cada asignatura, desglosadas por tareas.
  
 ## Vídeos de funcionalidad:
 
