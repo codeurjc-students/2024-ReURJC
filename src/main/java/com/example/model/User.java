@@ -43,6 +43,7 @@ public class User {
     @JsonIgnore
     private String password;
     @JsonIgnore
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> fcmToken = new ArrayList<String>();
 
     @ManyToMany(fetch = FetchType.EAGER)

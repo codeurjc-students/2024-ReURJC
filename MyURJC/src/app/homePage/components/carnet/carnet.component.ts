@@ -14,6 +14,7 @@ export class CarnetComponent implements OnInit {
   datos = "Escribir en NFC"
   isNfcSupported: boolean = false;
   isNfcEnabled: boolean = false;
+  showMenu = false;
 
   constructor(
     private userService: ApiUserService, 
@@ -70,12 +71,14 @@ export class CarnetComponent implements OnInit {
 
 
   async writeNfcTag() {
-    if (!this.isNfcSupported || !this.isNfcEnabled) {
+    await this.checkNfcEnabled();
+    if (this.isNfcSupported && !this.isNfcEnabled) {
       await Nfc.openSettings();
       return;
     }
     // Crear el registro NFC
     const record = this.createNdefTextRecord();
+    this.showMenu = true
   
     Nfc.addListener('nfcTagScanned', async () => {
       try {
@@ -96,6 +99,7 @@ export class CarnetComponent implements OnInit {
       try {
         await Nfc.stopScanSession();
         console.log('Sesión NFC terminada después de 10 segundos.');
+        this.showMenu = false;
       } catch (error) {
         console.error('Error al terminar la sesión NFC:', error);
       }

@@ -1,6 +1,6 @@
 <div *ngIf="getCarnetUrl()">
   <img  id="open-modal" expand="block" (click)="writeNfcTag()" [src]="getCarnetUrl()" alt="Carnet del usuario" />
-  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]" *ngIf="isNfcSupported && showMenu">
     <ng-template>
       <ion-content>
         <div id="content-placeholder">

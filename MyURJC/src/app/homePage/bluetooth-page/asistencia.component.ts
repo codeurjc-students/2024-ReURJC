@@ -35,6 +35,7 @@ export class AsistenciaComponent implements OnInit {
   }
 
   toggleUsers(attendance: Attendance) {
+   this.getAsisttances();
     this.showUsers[attendance.code] = !this.showUsers[attendance.code];
   }
 

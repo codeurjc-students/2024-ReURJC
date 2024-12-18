@@ -81,7 +81,7 @@ private SimpMessagingTemplate messagingTemplate;
                         "Ordinaria");
                 for (String token : student.getFcmToken()) {
                     NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(),
-                            ".Se ha evaluado: " + assignmentName + " con una nota de " + mark, token);
+                            "Se ha evaluado: " + assignmentName + " con una nota de " + mark, token);
                     fcmService.sendMessageToToken(request);
                 }
                     URI location = URI.create("/api/events/" + idCreated);
