@@ -40,6 +40,10 @@ Si deseas acceder al aula virtual:
 
 **Nota:** La correspondencia entre cursos y usuarios entre la app y el aula virtual es su ID.
 
+## Documentación API:
+
+Una vez inicializada la App, acceder al (siguiente enlace)[http://localhost:8080/swagger-ui/index.html]
+
 ## Usuarios creados
 
 A continuación, se detallan los usuarios que se crean por defecto y sus roles correspondientes:
