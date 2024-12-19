@@ -42,7 +42,7 @@ Si deseas acceder al aula virtual:
 
 ## Documentación API:
 
-Una vez inicializada la App, acceder al (siguiente enlace)[http://localhost:8080/swagger-ui/index.html]
+Una vez inicializada la App, acceder al [siguiente enlace](http://localhost:8080/swagger-ui/index.html)
 
 ## Usuarios creados
 
