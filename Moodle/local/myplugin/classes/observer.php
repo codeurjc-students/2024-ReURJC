@@ -47,7 +47,7 @@ class observer {
         
     
         // 3. Construir la solicitud POST
-        $url = 'http://myurjc:8080/api/moodle/updateGrade';
+        $url = 'http://myurjc:8080/api/v1/moodle/updateGrade';
         $postData = json_encode([
             'userid' => $userid,
             'courseid' => $courseid,
@@ -113,7 +113,7 @@ class observer {
      * @param int $courseid
      */
     private static function send_grade_data($userid, $courseid) {
-        $url = 'http://myurjc:8080/api/moodle/newGradeItem';
+        $url = 'http://myurjc:8080/v1/moodle/newGradeItem';
 
         $postData = json_encode([
             'userid' => $userid,

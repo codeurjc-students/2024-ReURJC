@@ -1,23 +1,24 @@
-#Situarte en el directorio con dockerfile
-#Borrar la caché
-docker builder prune --all --force
 
-#Reconstruir la imagen
-docker build -t jesussmariscal/reurjc .
-
-#Subirla
-docker push jesussmariscal/reurjc
-
-
-#Construirla
- docker-compose -p myurjc up -d
-
-#logs
-docker logs myurjc     
-
-#Para abrir el frontend en un dispositivo android
 npx cap sync
 npx cap copy android
 ionic capacitor run android -l --external
+
+
+
+--
+
+Nueva verison:
+
+cd 2024-reurjc 
+docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
+docker push jesussmariscal/reurjc
+docker build -t jesussmariscal/mymoodle -f ./Docker/Moodle/Dockerfile .
+docker push jesussmariscal/mymoodle
+
+Construirla:
+
+ cd Docker/App 
+ docker-compose -p myurjc up -d
+
 
 
