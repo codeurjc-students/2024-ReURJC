@@ -30,8 +30,16 @@ Si deseas ejecutar la App en Android:
 4. Ejecutar: npx cap copy android
 5. Ejecutar: npx cap run android
 
+Si deseas acceder al Aula virtual:
 
-### Usuarios Creadidos
+1. Ejecutar localhost, se te rederigirá automaticamente
+2. LLevar a cabo los pasos de configuracion cuando se entra por primera vez
+3. Ir a Site Administration > Server > Web Services > Manage protocols
+4. Activar todos los protocolos y guardar cambios.
+
+**Nota: La correspondencia entre cursos y usuarios entre la app y el av es su ID**
+
+### Usuarios Creados
 
 A continuación, se detallan los usuarios que se crean por defecto y sus roles correspondientes:
 
