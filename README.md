@@ -6,33 +6,30 @@
 ## Descripción de la aplicación web
 - Aplicación para el personal docente, administrativo y estudiantil de la Universidad Rey Juan Carlos que sirve para acceder a los servicios ofertados por esta.
 
-## Cómo ejecutar la Aplicación
+## Cómo construir las Imágenes:
 
-1. Instalar docker [aqui](https://www.docker.com/get-started/)
-2. Una vez instalado, asegurase de que el docker engine se encuentra en ejecucion
-3. Situarse en la raíz de este repositorio
-4. Ejecutar el siguiente comando "docker-compose -p myurjc up -d"
-5. Si en el navegador introducimos "localhost", navegaremos hasta el aula virtual de Moodle, en esta seccion seguirmos el instalador para terminar de configurarlo
-6. TRas haber hecho esto, con el usuario de administrador nos iremos a: Site administration > Server > Web Services > Manage protocols. Y activaremos los protocolos pulsandooslo sobre el icono del ojo tachado.
-7. Tras esto podremos crear usuarios en Site administration > Users > Add a new user.
-8. Luego podremos crear cursos en My courses > Create course
-9. Por último, tendremos que inscribir a los usuarios entrandoselo en el curso creado > Participants > Enrol User
+1. Situarse en el directorio raíz de este repositorio
+2. Tener docker abierto
+3.  Ejecutar: docker build -t <tuUsuario>/reurjc -f ./Docker/App/Dockerfile .
+4.  Ejecutar: docker push <tuUsuario>/reurjc
+5.  Ejecutar: docker build -t <tuUsuario>/mymoodle -f ./Docker/Moodle/Dockerfile .
+6.  Ejecutar: docker push <tuUsuario>/mymoodle
+**Nota: Si ejecutas la app desde tu propia imagen no podrás acceder a la funcionalidad de Notificaciones push**
 
-Nota: El id del usuario es el id de la app, por lo que para hacerlos coincidir hay que modificar los ID en la base de datos. 
+## Cómo ejecutar la App :
 
-11. La aplicacion se encontrará ejecutandose en el endpoint http://localhost:8080 de su máquina.
+1. Ejecutar docker
+2. Situarte en el directorio raíz del repositorio y ejecutar:  cd Docker/App
+3. Ejecutar: docker-compose -p myurjc up -d
 
-12. Si se desea utilizar la App Móvil, habría que tener instalado [Android studio](https://developer.android.com/studio/install?hl=fr)
-13. Escribir en terminal "ifconfig" o "ipconfig" y seleccionar nuestra IP privada 192.x.x.x
-14. Modificar el archivo MyURJC > capacitor.config.ts con la IP privada
-15. Ejecutar los siguientes comandos en el repertorio "MyURJC":
+Si deseas ejecutar la App en Android:
 
-npx cap sync
-npx cap copy android
-npx cap open android
+1. Asegurarse de tene rinstalado Android studio
+2. Situarse en el directorio Frontend de este repositorio: cd Frontend/ 
+3. Ejecutar: npx cap sync
+4. Ejecutar: npx cap copy android
+5. Ejecutar: npx cap run android
 
-
-Hay varios usuarios de prueba con distintos roles.
 
 ### Usuarios Creadidos
 
