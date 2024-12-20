@@ -90,7 +90,7 @@ public class TeacherControllerTests {
     }
 
     @Test
-    void testGetAllaTTENDANCES_whenUserIsAuthenticatedAndIsTeacher() {
+    void testGetAllAttendances_whenUserIsAuthenticatedAndIsTeacher() {
         HttpServletRequest request = mock(HttpServletRequest.class);
         Principal principal = mock(Principal.class);
         User user = new User();
@@ -102,14 +102,14 @@ public class TeacherControllerTests {
         when(userService.findByEmail("test@example.com")).thenReturn(user);
         when(attendanceService.getAllAttendances(user)).thenReturn(attendances);
 
-        ResponseEntity<List<Attendance>> response = teacherController.getAllaTTENDANCES(request);
+        ResponseEntity<List<Attendance>> response = teacherController.getAllAttendances(request);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(attendances, response.getBody());
     }
 
     @Test
-    void testGetAllaTTENDANCES_whenUserIsAuthenticatedAndIsNotTeacher() {
+    void testGetAllAttendances_whenUserIsAuthenticatedAndIsNotTeacher() {
         HttpServletRequest request = mock(HttpServletRequest.class);
         Principal principal = mock(Principal.class);
         User user = new User();
@@ -119,17 +119,17 @@ public class TeacherControllerTests {
         when(principal.getName()).thenReturn("test@example.com");
         when(userService.findByEmail("test@example.com")).thenReturn(user);
 
-        ResponseEntity<List<Attendance>> response = teacherController.getAllaTTENDANCES(request);
+        ResponseEntity<List<Attendance>> response = teacherController.getAllAttendances(request);
 
         assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }
 
     @Test
-    void testGetAllaTTENDANCES_whenUserIsNotAuthenticated() {
+    void testGetAllAttendances_whenUserIsNotAuthenticated() {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getUserPrincipal()).thenReturn(null); // Usuario no autenticado
 
-        ResponseEntity<List<Attendance>> response = teacherController.getAllaTTENDANCES(request);
+        ResponseEntity<List<Attendance>> response = teacherController.getAllAttendances(request);
 
         assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
     }

@@ -167,7 +167,7 @@ class AdminControllerTests {
     }
 
     @Test
-    void getUser_adminUser_returnsUser() {
+    void getUserById_adminUser_returnsUser() {
         // Arrange
         User adminUser = new User();
         adminUser.setRoles(Arrays.asList("USER", "ADMIN"));
@@ -180,7 +180,7 @@ class AdminControllerTests {
         when(userService.findById(userId)).thenReturn(retrievedUser);
 
         // Act
-        ResponseEntity<User> response = adminController.getAllEvents(request, userId);
+        ResponseEntity<User> response = adminController.getUserById(request, userId);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -188,7 +188,7 @@ class AdminControllerTests {
     }
 
     @Test
-    void getUser_nonAdminUser_returnsForbidden() {
+    void getUserById_nonAdminUser_returnsForbidden() {
         // Arrange
         User nonAdminUser = new User();
         nonAdminUser.setRoles(Arrays.asList("USER"));
@@ -199,7 +199,7 @@ class AdminControllerTests {
         when(userService.findByEmail("user@example.com")).thenReturn(nonAdminUser);
 
         // Act
-        ResponseEntity<User> response = adminController.getAllEvents(request, userId);
+        ResponseEntity<User> response = adminController.getUserById(request, userId);
 
         // Assert
         assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());

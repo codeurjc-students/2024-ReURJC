@@ -342,19 +342,6 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Candidatura cancelada correctamente", content = @Content),
             @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content)
     })
-
-    /**
-     * Cancela la candidatura a delegado del usuario autenticado.
-     *
-     * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la ubicación del recurso actualizado o un estado de error si no está autenticado.
-     * @throws IOException Si hay un error de entrada/salida.
-     */
-    @Operation(summary = "Cancelar candidatura a delegado", description = "Cancela la candidatura a delegado del usuario autenticado.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Candidatura cancelada correctamente", content = @Content),
-            @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content)
-    })
     @PutMapping("/me/cancelCandidacy")
     public ResponseEntity<URI> cancelCandidacy(HttpServletRequest request) throws IOException {
         Principal principal = request.getUserPrincipal();

@@ -1,0 +1,82 @@
+{
+    "info": {
+      "_postman_id": "generated-id-for-admins",
+      "name": "Admins",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get All Reservations",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "https://localhost:8443/api/v1/admin/reservations",
+            "protocol": "https",
+            "host": ["localhost"],
+            "port": "8443",
+            "path": ["api", "v1", "admin", "reservations"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get All Votes By Event",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "https://localhost:8443/api/v1/admin/votes?eventId=1",
+            "protocol": "https",
+            "host": ["localhost"],
+            "port": "8443",
+            "path": ["api", "v1", "admin", "votes"],
+            "query": [
+              {
+                "key": "eventId",
+                "value": "1"
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get All Events",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "https://localhost:8443/api/v1/admin/events",
+            "protocol": "https",
+            "host": ["localhost"],
+            "port": "8443",
+            "path": ["api", "v1", "admin", "events"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get User By ID",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "https://localhost:8443/api/v1/admin/user?userId=1",
+            "protocol": "https",
+            "host": ["localhost"],
+            "port": "8443",
+            "path": ["api", "v1", "admin", "user"],
+            "query": [
+              {
+                "key": "userId",
+                "value": "1"
+              }
+            ]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  

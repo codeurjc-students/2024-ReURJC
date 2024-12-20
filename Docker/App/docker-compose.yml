@@ -4,25 +4,25 @@ services:
     container_name: myurjc
     image: jesussmariscal/reurjc
     ports:
+      - "8443:8443"
       - "8080:8080"
     depends_on:
       - myurjc-DB
-      - moodle-app  # Dependencia de Moodle
-    command: ["/bin/sh", "-c", "./wait-for-it.sh myurjc-DB:3306 moodle-app:80 -- && java -jar /app/demo-0.0.1-SNAPSHOT.jar"]
+      - moodle-app
+    command: ["/bin/sh", "-c", "until curl -sSf http://moodle-app > /dev/null; do echo 'Waiting for Moodle...'; sleep 5; done; java -jar /app/app.jar"]
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://myurjc-DB:3306/tfgdb
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
       - RUNNING_IN_DOCKER=true
-      - MOODLE_HOST=moodle-app  # URL de Moodle para comunicación interna
-      - MOODLE_PORT=80          # Puerto de Moodle
-      - MOODLE_DB_HOST=moodle-db  # Host de la BD de Moodle
-      - MOODLE_DB_NAME=moodle    # Nombre de la BD de Moodle
-      - MOODLE_DB_USER=moodleuser  # Usuario de la BD de Moodle
-      - MOODLE_DB_PASSWORD=moodlepass  # Contraseña de la BD de Moodle
+      - MOODLE_HOST=moodle-app
+      - MOODLE_PORT=80
+      - MOODLE_DB_HOST=moodle-db
+      - MOODLE_DB_NAME=moodle
+      - MOODLE_DB_USER=moodleuser
+      - MOODLE_DB_PASSWORD=moodlepass
     volumes:
-      - ./wait-for-it.sh:/wait-for-it.sh
-
+      - ./wait-for-it.sh:/wait-for-it.sh 
   myurjc-DB:
     container_name: myurjc-DB
     image: mysql:8.3.0
@@ -34,9 +34,9 @@ services:
 
   moodle-app:
     container_name: moodle
-    image: jesussmariscal/mymoodle:latest # Tu imagen de Moodle
+    image: jesussmariscal/mymoodle:latest
     ports:
-      - "80:80"  # Moodle accesible en el puerto 80
+      - "80:80"
     depends_on:
       - moodle-db
     environment:
@@ -45,7 +45,7 @@ services:
       - MOODLE_DB_NAME=moodle
       - MOODLE_DB_USER=moodleuser
       - MOODLE_DB_PASSWORD=moodlepass
-      - MOODLE_WWWROOT=http://localhost # URL externa para acceder a Moodle
+      - MOODLE_WWWROOT=http://localhost
     volumes:
       - moodle_data:/var/www/html/moodledata
 

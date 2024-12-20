@@ -14,6 +14,7 @@ RUN npm install
 
 # Construir la aplicación Angular/Ionic
 RUN ionic build --prod
+
 # Etapa 2: Construcción del backend
 FROM maven:3.8.4-openjdk-17 AS backend
 
@@ -24,6 +25,9 @@ ENV RUNNING_IN_DOCKER=true
 # Copiar archivos necesarios para la construcción
 COPY ./Backend/pom.xml ./
 COPY ./Backend/src ./src
+
+# Copiar el keystore a una ubicación temporal
+COPY ./Backend/src/main/resources/keystore.p12 /app/temp/keystore.p12
 
 # Crear la carpeta "public" y copiar los archivos generados del frontend
 RUN mkdir -p /app/src/main/resources/public
@@ -40,7 +44,13 @@ WORKDIR /app
 # Copiar el archivo JAR generado al contenedor
 COPY --from=backend /app/target/*.jar /app/app.jar
 
+# Copiar el keystore desde la ubicación temporal a la ubicación final
+COPY --from=backend /app/temp/keystore.p12 /app/certs/keystore.p12
+
 # Descargar e incluir el script wait-for-it.sh
 RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /app/wait-for-it.sh
+
+# Exponer el puerto HTTPS
+EXPOSE 8443
 
 ENTRYPOINT ["/app/wait-for-it.sh", "moodle-app:80", "--", "java", "-jar", "/app/app.jar"]
