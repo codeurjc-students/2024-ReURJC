@@ -185,6 +185,10 @@ El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc
 
 ![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Backend_Schema.png)
 
+## Esquema del Frontend
+
+![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/frontend_schema.png)
+
 ## Vídeos de funcionalidad:
 
 - **Usuarios Anónimos**: [Click aquí](https://youtu.be/fJMaB_9Y7fs)
