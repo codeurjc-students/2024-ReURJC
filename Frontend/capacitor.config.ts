@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'MyURJC',
   webDir: 'www',
   server: {
-    url: 'http://192.168.1.14:8080',
+    url: 'https://192.168.1.14:443',
     cleartext: true
   },
   plugins: {

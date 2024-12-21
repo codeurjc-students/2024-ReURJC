@@ -13,7 +13,7 @@ export class CardComponent {
   @Input() isSubtitleFirst: boolean = false;
   @Input() card: CardInfo = new CardInfo('', '', '', '');
 
-  constructor(private router: Router, private apiAuthService: ApiAuthService) { }
+  constructor(private router: Router) { }
 
   navigate(path: string | undefined) {
     if (path !== undefined) {
