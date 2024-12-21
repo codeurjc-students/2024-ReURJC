@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@angular-devkit/build-angular": "^18.2.11",
+<<<<<<< HEAD
+=======
+    "@capacitor-firebase/messaging": "^6.2.0",
+>>>>>>> origin/feature/reservations
+    "@ionic/angular-toolkit": "^12.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "eslint": "^9.14.0",
+<<<<<<< HEAD
+=======
+    "firebase": "^10.14.1",
+>>>>>>> origin/feature/reservations
+    "http-proxy-middleware": "^3.0.3"
+  },
+  "devDependencies": {
+    "@angular/compiler": "^18.2.11",
+    "@angular/compiler-cli": "^18.2.11",
+    "@angular/core": "^18.2.11"
+  }
+}

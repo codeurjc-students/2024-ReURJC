@@ -1,0 +1,66 @@
+version: "3.8"
+services:
+  myurjc-app:
+    container_name: myurjc
+    image: jesussmariscal/reurjc
+    ports:
+      - "443:8443" 
+      - "8080:8080"
+    depends_on:
+      - myurjc-DB
+      - moodle-app
+    command: ["/bin/sh", "-c", "until curl -sSf http://moodle-app > /dev/null; do echo 'Waiting for Moodle...'; sleep 5; done; java -jar /app/app.jar"]
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://myurjc-DB:3306/tfgdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - RUNNING_IN_DOCKER=true
+      - MOODLE_HOST=moodle-app
+      - MOODLE_PORT=80
+      - MOODLE_DB_HOST=moodle-db
+      - MOODLE_DB_NAME=moodle
+      - MOODLE_DB_USER=moodleuser
+      - MOODLE_DB_PASSWORD=moodlepass
+    volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh 
+  myurjc-DB:
+    container_name: myurjc-DB
+    image: mysql:8.3.0
+    environment:
+      - MYSQL_DATABASE=tfgdb
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - mis_datos_mysql:/var/lib/mysql
+
+  moodle-app:
+    container_name: moodle
+    image: jesussmariscal/mymoodle:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - moodle-db
+    environment:
+      - MOODLE_DB_TYPE=mysqli
+      - MOODLE_DB_HOST=moodle-db
+      - MOODLE_DB_NAME=moodle
+      - MOODLE_DB_USER=moodleuser
+      - MOODLE_DB_PASSWORD=moodlepass
+      - MOODLE_WWWROOT=http://localhost
+    volumes:
+      - moodle_data:/var/www/html/moodledata
+
+  moodle-db:
+    container_name: moodle-db
+    image: mysql:8.3.0
+    environment:
+      - MYSQL_DATABASE=moodle
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_USER=moodleuser
+      - MYSQL_PASSWORD=moodlepass
+    volumes:
+      - moodle_db_data:/var/lib/mysql
+
+volumes:
+  mis_datos_mysql:
+  moodle_data:
+  moodle_db_data:

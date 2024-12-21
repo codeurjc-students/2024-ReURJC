@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón de volver -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recuento de votos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let event of voteEvents">
+      <ion-label>
+        <h2>{{ event.title }}</h2>
+        <p>{{ event.description }}</p>
+        <p><strong>Fecha de fin:</strong> {{ event.endDate | date: 'dd-MM-yyyy' }}</p>
+      </ion-label>
+      <ion-button expand="block" (click)="toggleDetails(event.eventId)">
+        {{ showDetails[event.eventId] ? 'Mostrar menos' : 'Mostrar más' }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div *ngFor="let event of voteEvents">
+    <ion-card *ngIf="showDetails[event.eventId]">
+      <ion-card-header>
+        <ion-card-title>Detalles del Evento</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let vote of votesByEvent[event.eventId]">
+            <ion-label>
+              Usuario ID: {{ vote.userId }}<br />
+              Votos: {{ vote.count }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

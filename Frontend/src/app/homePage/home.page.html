@@ -1,0 +1,136 @@
+<ion-tabs (ionTabsDidChange)="onTabChange($event)">
+
+  <ion-tab tab="services">
+    <div id="services-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Servicios</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <div *ngFor="let card of servicesTabCards">
+        <app-card 
+                [card]="card" 
+                [isSubtitleFirst]="true"
+                *ngIf="canShowCard(card)"> 
+      </app-card>
+    </div>
+      <div *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()">
+      <app-card *ngFor="let event of temporalEvents[1]" 
+                [card]="event" 
+                [isSubtitleFirst]="true"
+                > 
+      </app-card>
+    </div>
+      <div *ngIf="!isLoggedIn()">
+        Inicia sesión para poder acceder a las funcionalidades
+        <ion-button (click)="login()">Iniciar sesión</ion-button>
+      </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab  *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()" tab="alerts">
+    <div id="alerts-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Alertas</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+        <app-notification (notificationChange)="showNotificationBadge = $event"></app-notification>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab tab="news">
+    <div id="news-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Noticias</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true">
+        <app-news></app-news>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab tab="schedules">
+    <div id="profile-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Tiempos</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <div *ngFor="let card of schedulesTabCards">
+          <app-card 
+                  [card]="card" 
+                  [isSubtitleFirst]="true"
+                  *ngIf="canShowCard(card)"> 
+        </app-card>
+      </div>
+        <div *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()">
+        <app-card *ngFor="let event of temporalEvents[2]" 
+                  [card]="event" 
+                  [isSubtitleFirst]="true"
+                  > 
+        </app-card>
+      </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab tab="profile">
+    <div id="schedules-page">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Perfil</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <app-carnet></app-carnet>
+        <div *ngFor="let card of profileTabCards">
+          <app-card 
+                  [card]="card" 
+                  [isSubtitleFirst]="true"
+                  *ngIf="canShowCard(card)"> 
+        </app-card>
+      </div>
+        <div *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()">
+        <app-card *ngFor="let event of temporalEvents[3]" 
+                  [card]="event" 
+                  [isSubtitleFirst]="true"
+                  > 
+        </app-card>
+      </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="services">
+      <ion-icon name="briefcase-outline"></ion-icon>
+      Servicios
+    </ion-tab-button>
+    <ion-tab-button *ngIf="isLoggedIn() && !isAdmin() && !isTeacher()"  tab="alerts" (click)="hideNotificationBadge()">
+      <ion-icon name="notifications-outline"></ion-icon>
+      Alertas
+      <ion-badge *ngIf="showNotificationBadge" color="danger"></ion-badge>
+    </ion-tab-button>
+    <ion-tab-button tab="news">
+      <ion-icon name="newspaper-outline"></ion-icon>
+      Noticias
+    </ion-tab-button>
+    <ion-tab-button tab="schedules">
+      <ion-icon name="time-outline"></ion-icon>
+      Tiempos
+    </ion-tab-button>
+    <ion-tab-button tab="profile">
+      <ion-icon name="person-outline"></ion-icon>
+      Perfil
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>
