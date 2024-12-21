@@ -14,7 +14,7 @@ export class VoteDelegatesComponent implements OnInit {
   candidates: User[] = []
   private userVoted: boolean = false
 
-  constructor(private userService: ApiUserService, private eventService: EventServiceService) { }
+  constructor(private userService: ApiUserService) { }
 
   ngOnInit() {
     this.userService.getCandidates().subscribe(response => {

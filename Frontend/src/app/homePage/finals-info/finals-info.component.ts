@@ -12,7 +12,7 @@ export class FinalsInfoComponent implements OnInit {
   // Variable para almacenar los datos recibidos
   subjects: SubjectInfo[] = [];
 
-  constructor(private router: Router, private apiService: ApiUserService) { }
+  constructor( private apiService: ApiUserService) { }
 
   ngOnInit() {
     this.apiService.getAllUserSubjects().subscribe({
