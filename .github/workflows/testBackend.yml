@@ -44,9 +44,11 @@ jobs:
 
       - name: Dockerize application
         run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose-plugin
           docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
           cd ./Docker/App
-          docker-compose -p myurjc up -d
+          docker compose -p myurjc up -d
 
       - name: Stop Docker Compose
         if: always()
