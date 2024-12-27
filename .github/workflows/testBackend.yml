@@ -30,15 +30,15 @@ jobs:
 
     - name: Download wait-for-it
       run: |
-        wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O ./wait-for-it.sh
-        chmod +x ./wait-for-it.sh
+        wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O ./Backend/wait-for-it.sh
+        chmod +x ./Backend/wait-for-it.sh
 
     - name: Build and Test with Maven
       run: |
         cd ./Backend
         # Espera a que MySQL esté listo
         echo "--- Waiting for MySQL to be ready ---"
-        /home/runner/work/2024-ReURJC/2024-ReURJC/Backend/wait-for-it.sh mysql:3306 -t 60
+        ./wait-for-it.sh mysql:3306 -t 60
         # Ejecutar Maven
         mvn clean install -DskipTests
         mvn test -Dspring.profiles.active=test
