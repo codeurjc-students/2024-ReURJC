@@ -9,31 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1
-      with:
-        mysql version: '8.0'
-        mysql database: 'tfgdb'
-        mysql user: 'root'
-        mysql password: 'password'
-        mysql port: 3306
-
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
+    - uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Start MySQL
+      uses: mysql/mysql-server-action@v2
+      with:
+        mysql root password: password
+        mysql database: tfgdb
+
     - name: Build and Test with Maven
       run: |
         cd ./Backend
-        # Espera a que MySQL esté listo
-        echo "--- Waiting for MySQL to be ready ---"
-        sleep 10
-        # Ejecutar Maven
         mvn clean install -DskipTests
         mvn test -Dspring.profiles.active=test
 
