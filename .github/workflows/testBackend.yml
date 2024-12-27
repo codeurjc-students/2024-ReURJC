@@ -12,6 +12,7 @@ jobs:
         image: mysql:8.0.31
         env:
           MYSQL_DATABASE: tfgdb
+          MYSQL_ALLOW_EMPTY_PASSWORD
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -26,10 +27,6 @@ jobs:
           distribution: 'temurin'
 
       - name: Build and Test with Maven
-        env:
-          DB_DATABASE: tfgdb
-          DB_USER: root
-          DB_PASSWORD: 12345678
         run: |
           cd ./Backend
           mvn clean install -DskipTests
@@ -41,10 +38,6 @@ jobs:
           docker logs ${{ job.services.mysql.id }}
 
       - name: Dockerize application
-        env:
-          DB_DATABASE: tfgdb
-          DB_USER: root
-          DB_PASSWORD: 12345678
         run: |
           docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
           cd ./Docker/App
