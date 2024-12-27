@@ -1,4 +1,4 @@
-name: CI Backend
+name: CI/CD Backend
 
 on:
   push:
@@ -12,11 +12,11 @@ jobs:
       mysql:
         image: mysql:8.0.31
         env:
-          MYSQL_ROOT_PASSWORD: 12345678
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: tfgdb
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=15s --health-timeout=10s --health-retries=5 --network-alias=mysql  --entrypoint=""
+        options: --health-cmd="mysqladmin ping" --health-interval=15s --health-timeout=10s --health-retries=5 --network-alias=mysql --command="mysqld --default-authentication-plugin=mysql_native_password --general-log=1 --general-log-file=/var/log/mysql/general.log"
 
     steps:
     - name: Checkout code
@@ -30,18 +30,29 @@ jobs:
 
     - name: Download wait-for-it
       run: |
-        wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O ./Backend/wait-for-it.sh
-        chmod +x ./Backend/wait-for-it.sh
+        wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O ./wait-for-it.sh
+        chmod +x ./wait-for-it.sh
+
+    - name: Verify wait-for-it
+      run: |
+        ls -l ./wait-for-it.sh
+        test -x ./wait-for-it.sh && echo "wait-for-it.sh is executable" || echo "wait-for-it.sh is NOT executable"
 
     - name: Build and Test with Maven
       run: |
         cd ./Backend
         # Espera a que MySQL esté listo
         echo "--- Waiting for MySQL to be ready ---"
-        ./wait-for-it.sh mysql:3306 -t 15
+        /home/runner/work/2024-ReURJC/2024-ReURJC/wait-for-it.sh mysql:3306 -t 60
         # Ejecutar Maven
         mvn clean install -DskipTests
         mvn test -Dspring.profiles.active=test
+
+    - name: Show MySQL logs
+      if: failure()
+      run: |
+        docker ps -a
+        docker logs $(docker ps -aqf "ancestor=mysql:8.0.31")
 
     - name: Dockerize application
       run: |
