@@ -7,41 +7,44 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
-    env:
-    DB_DATABASE: tfgdb
-    DB_USER: root
-    DB_PASSWORD: 12345678
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    - name: Build and Test with Maven
-      run: |
-        cd ./Backend
-        mvn clean install -DskipTests
-        mvn test -Dspring.profiles.active=test
+      - name: Build and Test with Maven
+        env:
+          DB_DATABASE: tfgdb
+          DB_USER: root
+          DB_PASSWORD: 12345678
+        run: |
+          cd ./Backend
+          mvn clean install -DskipTests
+          mvn test -Dspring.profiles.active=test
 
-    - name: Show MySQL logs
-      if: failure()
-      run: |
-        docker ps -a
-        docker logs $(docker ps -aqf "ancestor=mysql:8.0.31")
+      - name: Show MySQL logs
+        if: failure()
+        run: |
+          docker ps -a
+          docker logs $(docker ps -aqf "ancestor=mysql:8.0.31")
 
-    - name: Dockerize application
-      run: |
-        docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
-        cd ./Docker/App
-        docker-compose -p myurjc up -d
+      - name: Dockerize application
+        env:
+          DB_DATABASE: tfgdb
+          DB_USER: root
+          DB_PASSWORD: 12345678
+        run: |
+          docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
+          cd ./Docker/App
+          docker-compose -p myurjc up -d
 
-    - name: Stop Docker Compose
-      if: always()
-      run: |
-        cd ./Docker/App
-        docker-compose -p myurjc down
+      - name: Stop Docker Compose
+        if: always()
+        run: |
+          cd ./Docker/App
+          docker-compose -p myurjc down
