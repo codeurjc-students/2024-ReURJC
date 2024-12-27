@@ -19,10 +19,10 @@ jobs:
         distribution: 'temurin'
 
     - name: Build and Test with Maven
-      run: | 
+      run: |
         cd ./Backend
         mvn clean install -DskipTests
-        mvn test
+        mvn test -Dspring.profiles.active=test
 
     - name: Dockerize application
       run: |

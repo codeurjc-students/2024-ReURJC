@@ -1,2 +1,10 @@
+com/example/demo/NewsControllerTests.class
+com/example/demo/TeacherControllerTests.class
+com/example/demo/MoodleControllerTests.class
 com/example/demo/AdminControllerTests.class
+com/example/demo/EventsControllerTests.class
+com/example/demo/SubjectMarkControllerTests.class
 com/example/demo/DemoApplicationTests.class
+com/example/demo/UserControllerTests.class
+com/example/demo/FestivesControllerTests.class
+com/example/demo/SubjectControllerTests.class

@@ -124,6 +124,8 @@ public class MoodleControllerTests {
         when(subjectMarkService.findByStudentIdAndSubjectIdAndNameMark(student, subject, "Exam 1"))
                 .thenReturn(Optional.of(existingMark));
         when(subjectMarkService.save(any(Subject_Mark.class))).thenReturn(10L);
+        Subject_Mark newSubjectMark = new Subject_Mark(student, subject, 8, "Ordinaria", "Exam 1");
+        when(subjectMarkService.getLastSubjectMarkAdded(student)).thenReturn(newSubjectMark);
 
         ResponseEntity<URI> response = moodleController.updateGrade(data);
 
