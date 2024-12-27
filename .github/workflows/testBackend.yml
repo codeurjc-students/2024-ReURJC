@@ -1,22 +1,22 @@
 name: CI/CD Backend
 
 on:
-  push: # Se ejecuta en cada push a cualquier rama
-  workflow_dispatch: # Permite ejecutar el workflow manualmente
+  push:
+  workflow_dispatch:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     services:
       mysql:
-        image: mysql:8.0.31 
+        image: mysql:8.0.31
         env:
-          MYSQL_ROOT_PASSWORD: 12345678 
-          MYSQL_DATABASE: tfgdb      
+          MYSQL_ROOT_PASSWORD: 12345678
+          MYSQL_DATABASE: tfgdb
         ports:
-          - 3306:3306 
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=15s --health-timeout=10s --health-retries=5
 
     steps:
     - name: Checkout code
@@ -28,9 +28,18 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Download wait-for-it
+      run: |
+        wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O ./wait-for-it.sh
+        chmod +x ./wait-for-it.sh
+
     - name: Build and Test with Maven
       run: |
         cd ./Backend
+        # Espera a que MySQL esté listo
+        echo "--- Waiting for MySQL to be ready ---"
+        /home/runner/work/2024-ReURJC/2024-ReURJC/Backend/wait-for-it.sh mysql:3306 -t 60
+        # Ejecutar Maven
         mvn clean install -DskipTests
         mvn test -Dspring.profiles.active=test
 
