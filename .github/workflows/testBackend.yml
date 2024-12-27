@@ -8,19 +8,17 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:8.0.31
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: tfgdb
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=15s --health-timeout=10s --health-retries=5 --network-alias=mysql
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Set up MySQL
+      uses: mirromutth/mysql-action@v1
+      with:
+        mysql version: '8.0'
+        mysql database: 'tfgdb'
+        mysql root password: 'password'
+        mysql port: 3306
 
     - name: Set up JDK 17
       uses: actions/setup-java@v3
@@ -28,31 +26,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Download wait-for-it
-      run: |
-        wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -O ./wait-for-it.sh
-        chmod +x ./wait-for-it.sh
-
-    - name: Verify wait-for-it
-      run: |
-        ls -l ./wait-for-it.sh
-        test -x ./wait-for-it.sh && echo "wait-for-it.sh is executable" || echo "wait-for-it.sh is NOT executable"
-
     - name: Build and Test with Maven
       run: |
         cd ./Backend
         # Espera a que MySQL esté listo
         echo "--- Waiting for MySQL to be ready ---"
-        /home/runner/work/2024-ReURJC/2024-ReURJC/wait-for-it.sh mysql:3306 -t 60
+        sleep 10
         # Ejecutar Maven
         mvn clean install -DskipTests
         mvn test -Dspring.profiles.active=test
-
-    - name: Show MySQL logs
-      if: failure()
-      run: |
-        docker ps -a
-        docker logs $(docker ps -aqf "ancestor=mysql:8.0.31")
 
     - name: Dockerize application
       run: |
