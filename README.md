@@ -15,8 +15,6 @@
 5. Ejecutar: `docker build -t <tuUsuario>/mymoodle -f ./Docker/Moodle/Dockerfile .`
 6. Ejecutar: `docker push <tuUsuario>/mymoodle`
 
-**Nota:** Si ejecutas la app desde tu propia imagen, no podrás acceder a la funcionalidad de notificaciones push.
-
 ## Cómo ejecutar la app:
 
 1. Ejecutar Docker.

@@ -8,21 +8,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class FCMInitializer {
-    private static final String FIREBASE_CONFIG_FILE = "tfgurjc-e9e62-firebase-adminsdk-4maw1-24427767f2.json";
 
     Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
 
     @PostConstruct
     public void initialize() {
-        try (InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(FIREBASE_CONFIG_FILE)) {
-            if (serviceAccount == null) {
-                throw new IOException("Firebase configuration file not found: " + FIREBASE_CONFIG_FILE);
-            }
+        try {
+            String firebaseCredentials = System.getenv("FIREBASE_SERVICEACCOUNT");
+            InputStream serviceAccount = new ByteArrayInputStream(firebaseCredentials.getBytes(StandardCharsets.UTF_8));
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -33,7 +33,7 @@ public class FCMInitializer {
                 logger.info("Firebase application initialized");
             }
         } catch (IOException e) {
-            logger.error("Failed to initialize Firebase", e);
+            logger.error("Error initializing Firebase", e);
         }
     }
 }
