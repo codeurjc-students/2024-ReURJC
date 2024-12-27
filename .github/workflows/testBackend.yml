@@ -26,8 +26,17 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
       - name: Build and Test with Maven
+        env:
+          DB_DATABASE: tfgdb
+          DB_USER: root
+          DB_PASSWORD: 12345678
+          DB_HOST: ${{ env.MYSQL_IP }}
+        run: |
+          cd ./Backend
+          mvn clean install -DskipTests
+          mvn test -Dspring.profiles.active=test
+
         run: |
           cd ./Backend
           mvn clean install -DskipTests
