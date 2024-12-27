@@ -46,7 +46,11 @@ jobs:
         run: |
           sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
+          docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}"
           docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
+          docker push jesussmariscal/reurjc
+          docker build -t jesussmariscal/mymoodle -f ./Docker/Moodle/Dockerfile .
+          docker push jesussmariscal/mymoodle
           cd ./Docker/App
           docker compose -p myurjc up -d
 
