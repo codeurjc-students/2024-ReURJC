@@ -17,7 +17,8 @@ jobs:
       with:
         mysql version: '8.0'
         mysql database: 'tfgdb'
-        mysql root password: 'password'
+        mysql user: 'root'
+        mysql password: 'password'
         mysql port: 3306
 
     - name: Set up JDK 17
