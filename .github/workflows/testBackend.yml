@@ -37,11 +37,6 @@ jobs:
           mvn clean install -DskipTests
           mvn test -Dspring.profiles.active=test
 
-        run: |
-          cd ./Backend
-          mvn clean install -DskipTests
-          mvn test -Dspring.profiles.active=test
-
       - name: Show MySQL logs
         if: failure()
         run: |
