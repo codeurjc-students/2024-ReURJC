@@ -36,7 +36,7 @@ public class Attendance {
     public Attendance(User user, Subject subject, String code) {
         this.creator = user;
         this.subject = subject;
-        dateTime = LocalDateTime.now();
+        dateTime = LocalDateTime.now().plusHours(1);
         this.code = code;
 
     }

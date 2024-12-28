@@ -603,7 +603,7 @@ public class UserController {
             Attendance attendance = attendanceService.getAttendanceEvent(code);
             if (attendance != null) {
                 LocalDateTime now = LocalDateTime.now();
-                LocalDateTime fiveMinutesAgo = now.minusMinutes(5);
+                LocalDateTime fiveMinutesAgo = now.minusMinutes(5).plusHours(1);
                 if (attendance.getDateTime().isAfter(fiveMinutesAgo)) {
                     attendanceService.adduser(attendance, user);
                     URI location = URI.create(request.getRequestURI() + "/" + user.getId());
