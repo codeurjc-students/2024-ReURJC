@@ -115,10 +115,15 @@ export class AsistenciaComponent implements OnInit {
 
   getTimeRemaining(dateTime: Date): number {
     const FIVE_MINUTES_IN_MS = 5 * 60 * 1000; // 5 minutos en milisegundos
+    console.log(FIVE_MINUTES_IN_MS)
     const createdTime = new Date(dateTime).getTime(); // Fecha de creación en ms
+    console.log(createdTime)
     const currentTime = new Date().getTime(); // Hora actual en ms
+    console.log(currentTime)
     const timeElapsed = currentTime - createdTime; // Diferencia en ms
+    console.log(timeElapsed)
     const timeRemaining = FIVE_MINUTES_IN_MS - timeElapsed; // Tiempo restante
+    console.log(timeRemaining)
 
     return timeRemaining > 0 ? timeRemaining : 0; // Retorna 0 si ya expiró
   }
