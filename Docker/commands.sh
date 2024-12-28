@@ -1,4 +1,4 @@
-
+ionic build
 npx cap sync
 npx cap copy android
 ionic capacitor run android -l --external
@@ -19,6 +19,13 @@ Construirla:
 
  cd Docker/App 
  docker-compose -p myurjc up -d
+
+ Si moodle deja de responder:
+
+ docker exec -it moodle bash
+chown -R www-data:www-data /var/www/html/moodledata
+chmod -R 0770 /var/www/html/moodledata
+
 
 
 

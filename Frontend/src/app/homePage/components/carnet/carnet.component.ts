@@ -15,14 +15,15 @@ export class CarnetComponent implements OnInit {
   isNfcSupported: boolean = false;
   isNfcEnabled: boolean = false;
   showMenu = false;
-  presentAlert = false;
   countdown: number = 10;
+
+  private countdownInterval: any; // Variable para almacenar el ID del intervalo
+
   public alertButtons = [
     {
-      text: 'Cabcelar',
+      text: 'Cancelar',
       role: 'cancel',
       handler: () => {
-        this.presentAlert = false;
         
       },
     },
@@ -31,7 +32,6 @@ export class CarnetComponent implements OnInit {
       role: 'confirm',
       handler: async () => {
         await Nfc.openSettings();
-        this.presentAlert = false;
         
       },
     },
@@ -67,15 +67,20 @@ export class CarnetComponent implements OnInit {
   }
 
   startCountdown() {
-    const interval = setInterval(() => {
+    clearInterval(this.countdownInterval); 
+    this.countdown = 10;
+
+    this.countdownInterval = setInterval(() => {
       if (this.countdown > 0) {
         this.countdown--;
       } else {
-        clearInterval(interval);
+        clearInterval(this.countdownInterval);
         this.closeModal();
+        this.countdown = 10;
       }
     }, 1000);
   }
+
   closeModal() {
     this.showMenu = false; // Cierra el modal al terminar el contador
   }
@@ -92,6 +97,9 @@ export class CarnetComponent implements OnInit {
   async checkNfcEnabled() {
     const { isEnabled } = await Nfc.isEnabled();
     this.isNfcEnabled = isEnabled;
+    if (!isEnabled) { 
+    } else { 
+    }
   }
 
   createNdefTextRecord() {
@@ -106,11 +114,9 @@ export class CarnetComponent implements OnInit {
     return record;
   }
 
-
   async writeNfcTag() {
     await this.checkNfcEnabled();
     if (this.isNfcSupported && !this.isNfcEnabled) {
-      this.presentAlert = true;
       return;
     }
     // Crear el registro NFC

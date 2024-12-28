@@ -102,9 +102,17 @@ export class AsistenciaComponent implements OnInit {
 
   addTimeToAttendance(attendanceId: number) {
     this.teacherService.addTimeToAttendance(attendanceId).subscribe({
-      next: () => {
-        this.presentToast('Tiempo añadido correctamente', 'success');
-        this.getAsisttances(); // Actualizar la lista de asistencias
+      next: (success: boolean) => {
+        if (success) {
+          this.presentToast('Tiempo añadido correctamente', 'success');
+          const attendanceIndex = this.attendances.findIndex(a => a.id === attendanceId);
+          if (attendanceIndex > -1) {
+            // No necesitas usar 'response.newDateTime', ya que ahora solo estás trabajando con un booleano
+            this.getAsisttances(); // Actualiza las asistencias para refrescar la vista
+          }
+        } else {
+          this.presentToast('Error al añadir tiempo', 'danger');
+        }
       },
       error: (error) => {
         console.error('Error al añadir tiempo:', error);
@@ -112,6 +120,7 @@ export class AsistenciaComponent implements OnInit {
       }
     });
   }
+  
 
   getTimeRemaining(dateTime: Date): number {
     const FIVE_MINUTES_IN_MS = 5 * 60 * 1000; // 5 minutos en milisegundos

@@ -124,7 +124,7 @@ public class TeacherController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
     })
     @PutMapping("/attendances/{id}/add-time")
-    public ResponseEntity<Void> addTimeToAttendance(@PathVariable Long id, HttpServletRequest request) {
+    public ResponseEntity<Boolean> addTimeToAttendance(@PathVariable Long id, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -143,12 +143,15 @@ public class TeacherController {
             }
 
             if (attendanceService.addTime(id)) {
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok().body(true);
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+        
+
+        
     }
 }

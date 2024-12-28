@@ -20,7 +20,7 @@ export class TeacherService {
     return this.http.get<Attendance[]>(`${this.API_BASE_URL}/attendances`, { withCredentials: true });
   }
 
-  addTimeToAttendance(attendanceId: number): Observable<void> {
-    return this.http.put<void>(`${this.API_BASE_URL}/attendances/${attendanceId}/add-time`, null, { withCredentials: true });
+  addTimeToAttendance(attendanceId: number): Observable<boolean> {
+    return this.http.put<boolean>(`${this.API_BASE_URL}/attendances/${attendanceId}/add-time`, null, { withCredentials: true });
   }
 }

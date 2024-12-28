@@ -33,12 +33,9 @@ RUN apt-get update && apt-get install -y \
 # Copy Moodle files from the Moodle directory
 COPY ./../Moodle /var/www/html/
 
-# Create moodledata directory and set permissions
-RUN mkdir -p /var/www/moodledata && \
-    chown -R www-data:www-data /var/www/moodledata && \
-    chmod -R 0770 /var/www/moodledata
+# ELIMINA la creación de moodledata aquí
 
-# Adjust permissions for Moodle
+# Adjust permissions for Moodle (Esto se puede mantener o mover al entrypoint)
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
@@ -53,8 +50,15 @@ RUN a2enmod rewrite
 COPY ./../Moodle/moodle.conf /etc/apache2/sites-available/moodle.conf
 RUN a2ensite moodle.conf
 
+# Create entrypoint script
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port 80 for web traffic
 EXPOSE 80
+
+# Use entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Default command to start Apache
 CMD ["apache2-foreground"]

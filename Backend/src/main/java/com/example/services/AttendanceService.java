@@ -1,6 +1,7 @@
 package com.example.services;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
@@ -54,7 +55,10 @@ public class AttendanceService {
     }
 
     public boolean addTime(Long id) {
-        this.attendanceRepository.findById(id).get().moreTime();
+        Attendance attendance = this.attendanceRepository.findById(id).get();
+        attendance.setDateTime(LocalDateTime.now().plusHours(1));
+        attendanceRepository.save(attendance);
+
         return true;
 
     }

@@ -25,9 +25,10 @@ Si deseas ejecutar la app en Android:
 
 1. Asegurarse de tener instalado Android Studio.
 2. Situarse en el directorio Frontend de este repositorio: `cd Frontend/`
-3. Ejecutar: `npx cap sync`
-4. Ejecutar: `npx cap copy android`
-5. Ejecutar: `npx cap run android`
+3. Ejecutar: `ionic build`
+4. Ejecutar: `npx cap sync`
+5. Ejecutar: `npx cap copy android`
+6. Ejecutar: `npx cap run android`
 
 Si deseas acceder al aula virtual:
 

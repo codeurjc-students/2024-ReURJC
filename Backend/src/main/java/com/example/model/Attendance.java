@@ -68,10 +68,6 @@ public class Attendance {
         this.dateTime = dateTime;
     }
 
-    public void moreTime() {
-        dateTime = LocalDateTime.now();
-    }
-
     public User getCreator() {
         return creator;
     }
@@ -79,5 +75,7 @@ public class Attendance {
     public long getId() {
         return id;
     }
+
+    
 
 }

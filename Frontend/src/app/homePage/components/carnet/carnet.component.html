@@ -32,9 +32,8 @@
   <p>Inicia sesión para ver tu carnet.</p>
 </div>
 
-<ion-button *ngIf="presentAlert" id="present-alert">Click Me</ion-button>
-<ion-alert
-  trigger="present-alert"
+<ion-alert *ngIf="isNfcSupported && !showMenu"
+  trigger="open-modal"
   header="Activar NFC para acceder a esta función."
   [buttons]="alertButtons"
 ></ion-alert>
