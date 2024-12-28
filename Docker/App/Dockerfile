@@ -30,16 +30,20 @@ RUN mvn clean install -DskipTests
 # Etapa 3: Imagen final
 FROM amazoncorretto:17 AS final
 
-ARG FCM_PRIVATE_KEY
-
 WORKDIR /app
 
+# Copia el JAR construido en la etapa anterior
 COPY --from=backend /app/target/*.jar /app/app.jar
+
+# Copia el archivo de la cuenta de servicio de Firebase y el keystore
+COPY ./Docker/App/firebase-service-account.json /app/firebase-service-account.json
 COPY ./Backend/src/main/resources/keystore.p12 /app/certs/keystore.p12
 
+# Descarga y hace ejecutable wait-for-it.sh
 RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /app/wait-for-it.sh
 
-ENTRYPOINT ["/bin/sh", "-c", "echo \"$FCM_PRIVATE_KEY\" > /app/firebase-service-account.json && /app/wait-for-it.sh moodle-app:80 -- java -jar /app/app.jar"]
+# ENTRYPOINT simplificado
+ENTRYPOINT ["/app/wait-for-it.sh", "moodle-app:80", "--", "java", "-jar", "/app/app.jar"]
 
 # Exponer el puerto HTTPS
 EXPOSE 8443
