@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { interval } from 'rxjs';
 import { ApiAuthService } from 'src/app/services/AuthService/api-auth-service.service';
 import { SubjectServiceService } from 'src/app/services/SubjectService/subject-service.service';
 import { TeacherService } from 'src/app/services/TeacherService/teacher.service';
@@ -32,6 +33,12 @@ export class AsistenciaComponent implements OnInit {
     private apiAuthService: ApiAuthService,
     private toastController: ToastController
   ) {
+    // Inicia un observable que actualiza los temporizadores cada segundo
+    interval(1000).subscribe(() => {
+      if (this.isTeacher()) {
+        this.attendances.forEach(attendance => this.getTimeRemaining(attendance.dateTime));
+      }
+    });
   }
 
   toggleUsers(attendance: Attendance) {
@@ -104,6 +111,16 @@ export class AsistenciaComponent implements OnInit {
         this.presentToast('Error al añadir tiempo', 'danger');
       }
     });
+  }
+
+  getTimeRemaining(dateTime: Date): number {
+    const FIVE_MINUTES_IN_MS = 5 * 60 * 1000; // 5 minutos en milisegundos
+    const createdTime = new Date(dateTime).getTime(); // Fecha de creación en ms
+    const currentTime = new Date().getTime(); // Hora actual en ms
+    const timeElapsed = currentTime - createdTime; // Diferencia en ms
+    const timeRemaining = FIVE_MINUTES_IN_MS - timeElapsed; // Tiempo restante
+
+    return timeRemaining > 0 ? timeRemaining : 0; // Retorna 0 si ya expiró
   }
 
 }

@@ -1,91 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <!-- Botón de volver -->
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Registro de asistencias</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
-
-  <!-- Mostrar opciones según el rol del usuario -->
-
-  <!-- Sección para creación de eventos (Profesor) -->
-  <div *ngIf="isTeacher()">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="calendar-outline"></ion-icon> Crear Evento de Asistencia
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-          <ion-label>Seleccionar Materia</ion-label>
-          <ion-select [(ngModel)]="selectedSubjectId" placeholder="Elige una materia">
-            <ion-select-option *ngFor="let subject of subjects" [value]="subject.id">
-              {{ subject.title }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-        <ion-button expand="block" (click)="createAttendance()">
-          Crear Asistencia
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <!-- Separador visual -->
-  <div class="section-divider" *ngIf="isTeacher()"></div>
-
-  <!-- Historial de reservas (Profesor) -->
-  <div *ngIf="isTeacher()">
-    <h2 class="section-title">Historial de Asistencias</h2>
-    <ion-card *ngFor="let attendance of attendances">
-      <ion-card-header>
-        <ion-card-title>
-          {{ attendance.subject.title }} - {{ attendance.dateTime | date: 'shortDate' }}
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>Código:</strong> {{ attendance.code }}</p>
-        <div class="button-container">
-          <ion-button expand="block" (click)="toggleUsers(attendance)">
-            {{ showUsers[attendance.code] ? 'Mostrar menos' : 'Mostrar más' }}
-          </ion-button>
-          <ion-button expand="block" (click)="addTimeToAttendance(attendance.id)" color="success">
-            Aumentar tiempo
-          </ion-button>
-        </div>
-        <ion-list *ngIf="showUsers[attendance.code]">
-          <ion-item *ngFor="let userAttendance of attendance.usersPresent">
-            {{ userAttendance.user.name }} {{ userAttendance.user.surname1 }}: {{ userAttendance.user.dni }}
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <!-- Separador visual -->
-  <div class="section-divider" *ngIf="!isTeacher() && isLoggedIn()"></div>
-
-  <!-- Sección para registrar asistencia (Usuarios) -->
-  <div *ngIf="!isTeacher() && isLoggedIn()">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="log-in-outline"></ion-icon> Registrar Asistencia
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item>
-        
-          <ion-input [(ngModel)]="attendanceCode" placeholder="Introduce el código"></ion-input>
-        </ion-item>
-        <ion-button expand="block" (click)="joinAttendance()">Registrar</ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
-</ion-content>
+<ion-card *ngFor="let attendance of attendances">
+  <ion-card-header>
+    <ion-card-title>
+      {{ attendance.subject.title }} - {{ attendance.dateTime | date: 'shortDate' }}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p><strong>Código:</strong> {{ attendance.code }}</p>
+    <p *ngIf="isTeacher()">
+      <strong>Tiempo restante:</strong>
+      <span *ngIf="getTimeRemaining(attendance.dateTime) > 0; else expired">
+        {{ getTimeRemaining(attendance.dateTime) | date:'mm:ss':'UTC' }}
+      </span>
+      <ng-template #expired>Expirado</ng-template>
+    </p>
+    <div class="button-container">
+      <ion-button expand="block" (click)="toggleUsers(attendance)">
+        {{ showUsers[attendance.code] ? 'Mostrar menos' : 'Mostrar más' }}
+      </ion-button>
+      <ion-button expand="block" (click)="addTimeToAttendance(attendance.id)" color="success">
+        Aumentar tiempo
+      </ion-button>
+    </div>
+    <ion-list *ngIf="showUsers[attendance.code]">
+      <ion-item *ngFor="let userAttendance of attendance.usersPresent">
+        {{ userAttendance.user.name }} {{ userAttendance.user.surname1 }}: {{ userAttendance.user.dni }}
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
