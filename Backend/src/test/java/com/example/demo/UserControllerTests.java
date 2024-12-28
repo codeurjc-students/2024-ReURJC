@@ -421,7 +421,7 @@ public class UserControllerTests {
                 "123");
         User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
                 "123");
-        Attendance attendance = new Attendance(creator, new Subject());
+        Attendance attendance = new Attendance(creator, new Subject(),"123");
 
         when(request.getUserPrincipal()).thenReturn(principal);
         when(principal.getName()).thenReturn("test@example.com");
@@ -460,7 +460,7 @@ public class UserControllerTests {
                 "123");
         User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
                 "123");
-        Attendance attendance = new Attendance(creator, new Subject());
+        Attendance attendance = new Attendance(creator, new Subject(),"123");
         // Simula una fecha de asistencia que ya ha expirado (más de 5 minutos en el
         // pasado)
         LocalDateTime expiredDateTime = LocalDateTime.now().minusMinutes(6);
