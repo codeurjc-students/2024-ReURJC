@@ -1,4 +1,3 @@
-// notification.component.ts
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NotificationService } from 'src/app/services/NotificationService/notification.service';
 import { NotificationInfo } from 'src/app/services/NotificationService/NotificationInfo';
