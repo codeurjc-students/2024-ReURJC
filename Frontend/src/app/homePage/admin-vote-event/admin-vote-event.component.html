@@ -32,7 +32,7 @@
           <ion-item *ngFor="let vote of votesByEvent[event.eventId]">
             <ion-label>
               Usuario ID: {{ vote.userId }}<br />
-              Nombre Usuario: {{ users[vote.userId]?.name }} {{ users[vote.userId]?.surname1 }}<br />
+              Nombre Usuario: {{ users[vote.userId].name }} {{ users[vote.userId].surname1 }}<br />
               Votos: {{ vote.count }}
             </ion-label>
           </ion-item>
