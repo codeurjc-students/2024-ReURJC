@@ -1,9 +1,5 @@
 package com.example.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.services.AttendanceService;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
