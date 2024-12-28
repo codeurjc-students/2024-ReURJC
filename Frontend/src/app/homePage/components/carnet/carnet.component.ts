@@ -16,6 +16,7 @@ export class CarnetComponent implements OnInit {
   isNfcEnabled: boolean = false;
   showMenu = false;
   presentAlert = false;
+  countdown: number = 10;
   public alertButtons = [
     {
       text: 'Cabcelar',
@@ -63,6 +64,20 @@ export class CarnetComponent implements OnInit {
 
   public getIsLoggedIn(): boolean {
     return this.apiAuthService.isLoggedIn();
+  }
+
+  startCountdown() {
+    const interval = setInterval(() => {
+      if (this.countdown > 0) {
+        this.countdown--;
+      } else {
+        clearInterval(interval);
+        this.closeModal();
+      }
+    }, 1000);
+  }
+  closeModal() {
+    this.showMenu = false; // Cierra el modal al terminar el contador
   }
 
   public getCarnetUrl(): string | null {
@@ -115,6 +130,7 @@ export class CarnetComponent implements OnInit {
 
     // Iniciar la sesión NFC
     Nfc.startScanSession();
+    this.startCountdown();
 
     // Terminar la sesión después de 10 segundos
     setTimeout(async () => {
