@@ -21,6 +21,7 @@ services:
       - MOODLE_DB_NAME=moodle
       - MOODLE_DB_USER=moodleuser
       - MOODLE_DB_PASSWORD=moodlepass
+      - FIREBASE_SERVICEACCOUNT=${FIREBASE_SERVICEACCOUNT}
     volumes:
       - ./wait-for-it.sh:/wait-for-it.sh 
   myurjc-DB:
