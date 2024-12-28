@@ -53,8 +53,9 @@ jobs:
 
       - name: Create Firebase service account file
         run: |
-          echo "${{ secrets.FIREBASE_SERVICEACCOUNT }}" > ./Backend/src/main/resources/firebase-service-account.json
-          
+          echo "${{ secrets.FIREBASE_SERVICEACCOUNT }}" | tr -d '\r' > ./Docker/App/firebase-service-account.json
+          cat ./Docker/App/firebase-service-account.json
+              
       - name: Build and push Docker image for Backend
         uses: docker/build-push-action@v4
         with:
