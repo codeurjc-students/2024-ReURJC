@@ -19,4 +19,8 @@ export class TeacherService {
   getAllAttendances(): Observable<Attendance[]> {
     return this.http.get<Attendance[]>(`${this.API_BASE_URL}/attendances`, { withCredentials: true });
   }
+
+  addTimeToAttendance(attendanceId: number): Observable<void> {
+    return this.http.put<void>(`${this.API_BASE_URL}/attendances/${attendanceId}/add-time`, null, { withCredentials: true });
+  }
 }

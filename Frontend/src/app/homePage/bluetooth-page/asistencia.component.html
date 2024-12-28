@@ -51,9 +51,14 @@
       </ion-card-header>
       <ion-card-content>
         <p><strong>Código:</strong> {{ attendance.code }}</p>
-        <ion-button expand="block" (click)="toggleUsers(attendance)">
-          {{ showUsers[attendance.code] ? 'Mostrar menos' : 'Mostrar más' }}
-        </ion-button>
+        <div class="button-container">
+          <ion-button expand="block" (click)="toggleUsers(attendance)">
+            {{ showUsers[attendance.code] ? 'Mostrar menos' : 'Mostrar más' }}
+          </ion-button>
+          <ion-button expand="block" (click)="addTimeToAttendance(attendance.id)" color="success">
+            Aumentar tiempo
+          </ion-button>
+        </div>
         <ion-list *ngIf="showUsers[attendance.code]">
           <ion-item *ngFor="let userAttendance of attendance.usersPresent">
             {{ userAttendance.user.name }} {{ userAttendance.user.surname1 }}: {{ userAttendance.user.dni }}

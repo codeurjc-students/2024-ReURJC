@@ -24,7 +24,6 @@ import jakarta.persistence.OneToMany;
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private Long id;
 
     private LocalDateTime dateTime;
@@ -99,6 +98,10 @@ public class Attendance {
 
     public User getCreator() {
         return creator;
+    }
+
+    public long getId() {
+        return id;
     }
 
 }

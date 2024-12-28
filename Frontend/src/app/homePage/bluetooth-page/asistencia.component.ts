@@ -92,4 +92,18 @@ export class AsistenciaComponent implements OnInit {
 
     this.subjectService.getSubjects().subscribe((subjects: SubjectInfo[]) => { this.subjects = subjects })
   }
+
+  addTimeToAttendance(attendanceId: number) {
+    this.teacherService.addTimeToAttendance(attendanceId).subscribe({
+      next: () => {
+        this.presentToast('Tiempo añadido correctamente', 'success');
+        this.getAsisttances(); // Actualizar la lista de asistencias
+      },
+      error: (error) => {
+        console.error('Error al añadir tiempo:', error);
+        this.presentToast('Error al añadir tiempo', 'danger');
+      }
+    });
+  }
+
 }
