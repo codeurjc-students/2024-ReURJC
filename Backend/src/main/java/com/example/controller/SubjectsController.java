@@ -82,7 +82,7 @@ public class SubjectsController {
             }),
             @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content)
     })
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Subject>> getSubjects(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
