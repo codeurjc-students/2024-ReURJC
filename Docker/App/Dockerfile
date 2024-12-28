@@ -3,16 +3,13 @@ FROM node:20.12.2 AS frontend
 
 WORKDIR /app
 
-# Copiar los archivos necesarios para instalar dependencias
 COPY ./Frontend ./
 
-# Instalar dependencias y CLI de Angular e Ionic
 RUN npm install -g @angular/cli @ionic/cli 
 RUN npm config set @capawesome-team:registry https://npm.registry.capawesome.io
 RUN npm config set //npm.registry.capawesome.io/:_authToken POLAR-ED6832C2-542C-4C72-A029-7226BA937FC1
 RUN npm install
 
-# Construir la aplicación Angular/Ionic
 RUN ionic build --prod
 
 # Etapa 2: Construcción del backend
@@ -22,41 +19,28 @@ WORKDIR /app
 
 ENV RUNNING_IN_DOCKER=true
 
-# Copiar archivos necesarios para la construcción
 COPY ./Backend/pom.xml ./
 COPY ./Backend/src ./src
 
-# Crear la carpeta "public" y copiar los archivos generados del frontend
 RUN mkdir -p /app/src/main/resources/public
 COPY --from=frontend /app/www /app/src/main/resources/public
 
-# Construir la aplicación Spring Boot
 RUN mvn clean install -DskipTests
 
 # Etapa 3: Imagen final
 FROM amazoncorretto:17 AS final
 
-# Definir el ARG para recibir la clave (antes del FROM)
 ARG FCM_PRIVATE_KEY
 
 WORKDIR /app
 
-# Copiar el archivo JAR generado al contenedor
 COPY --from=backend /app/target/*.jar /app/app.jar
-
-# Copiar el keystore desde la ubicación temporal a la ubicación final
 COPY ./Backend/src/main/resources/keystore.p12 /app/certs/keystore.p12
 
-# Descargar e incluir el script wait-for-it.sh
 RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /app/wait-for-it.sh
 
-# Crear el archivo JSON con la clave privada
-RUN echo "$FCM_PRIVATE_KEY" > /app/firebase-service-account.json
-
-# Declarar la variable de entorno para la clave FCM (sin valor por defecto)
-ENV FCM_PRIVATE_KEY=""
+# Crear el archivo JSON al ejecutar el contenedor
+ENTRYPOINT ["/bin/sh", "-c", "echo \"$FCM_PRIVATE_KEY\" > /app/firebase-service-account.json && /app/wait-for-it.sh moodle-app:80 -- java -jar /app/app.jar"]
 
 # Exponer el puerto HTTPS
 EXPOSE 8443
-
-ENTRYPOINT ["/app/wait-for-it.sh", "moodle-app:80", "--", "java", "-jar", "/app/app.jar"]
