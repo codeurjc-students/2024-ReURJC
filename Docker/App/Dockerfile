@@ -36,6 +36,9 @@ RUN mvn clean install -DskipTests
 # Etapa 3: Imagen final
 FROM amazoncorretto:17 AS final
 
+# Definir el ARG para recibir la clave (antes del FROM)
+ARG FCM_PRIVATE_KEY
+
 WORKDIR /app
 
 # Copiar el archivo JAR generado al contenedor
@@ -46,6 +49,9 @@ COPY ./Backend/src/main/resources/keystore.p12 /app/certs/keystore.p12
 
 # Descargar e incluir el script wait-for-it.sh
 RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /app/wait-for-it.sh
+
+# Crear el archivo JSON con la clave privada
+RUN echo "$FCM_PRIVATE_KEY" > /app/firebase-service-account.json
 
 # Declarar la variable de entorno para la clave FCM (sin valor por defecto)
 ENV FCM_PRIVATE_KEY=""
