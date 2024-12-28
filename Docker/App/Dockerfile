@@ -36,7 +36,7 @@ WORKDIR /app
 COPY --from=backend /app/target/*.jar /app/app.jar
 
 # Copia el archivo de la cuenta de servicio de Firebase y el keystore
-COPY ./Docker/App/firebase-service-account.json /app/firebase-service-account.json
+COPY ./Backend/src/main/resources/firebase-service-account.json /app/firebase-service-account.json
 RUN cat /app/firebase-service-account.json
 COPY ./Backend/src/main/resources/keystore.p12 /app/certs/keystore.p12
 
