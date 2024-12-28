@@ -3,6 +3,7 @@ services:
   myurjc-app:
     container_name: myurjc
     image: jesussmariscal/reurjc
+    platform: linux/amd64
     ports:
       - "443:8443" 
       - "8080:8080"
@@ -24,9 +25,11 @@ services:
       - FIREBASE_SERVICEACCOUNT=${FIREBASE_SERVICEACCOUNT}
     volumes:
       - ./wait-for-it.sh:/wait-for-it.sh 
+
   myurjc-DB:
     container_name: myurjc-DB
-    image: mysql:8.3.0
+    image: mysql:8.0
+    platform: linux/amd64
     environment:
       - MYSQL_DATABASE=tfgdb
       - MYSQL_ROOT_PASSWORD=password
@@ -36,6 +39,7 @@ services:
   moodle-app:
     container_name: moodle
     image: jesussmariscal/mymoodle:latest
+    platform: linux/amd64
     ports:
       - "80:80"
     depends_on:
@@ -52,7 +56,8 @@ services:
 
   moodle-db:
     container_name: moodle-db
-    image: mysql:8.3.0
+    image: mysql:8.0
+    platform: linux/amd64
     environment:
       - MYSQL_DATABASE=moodle
       - MYSQL_ROOT_PASSWORD=rootpass

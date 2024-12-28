@@ -39,7 +39,6 @@ COPY ./Backend/src/main/resources/keystore.p12 /app/certs/keystore.p12
 
 RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /app/wait-for-it.sh
 
-# Crear el archivo JSON al ejecutar el contenedor
 ENTRYPOINT ["/bin/sh", "-c", "echo \"$FCM_PRIVATE_KEY\" > /app/firebase-service-account.json && /app/wait-for-it.sh moodle-app:80 -- java -jar /app/app.jar"]
 
 # Exponer el puerto HTTPS

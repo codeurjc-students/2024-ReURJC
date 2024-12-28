@@ -54,17 +54,19 @@ jobs:
       - name: Build and push Docker image for Backend
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./Docker/App/Dockerfile
-          push: true
-          tags: jesussmariscal/reurjc:latest
-          build-args: |
-            FCM_PRIVATE_KEY=${{ secrets.FIREBASE_SERVICEACCOUNT }}
-
+            context: .
+            file: ./Docker/App/Dockerfile
+            push: true
+            platforms: linux/amd64,linux/arm64
+            tags: jesussmariscal/reurjc:latest
+            build-args: |
+              FCM_PRIVATE_KEY=${{ secrets.FIREBASE_SERVICEACCOUNT }}
+  
       - name: Build Moodle image and push
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Docker/Moodle/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: jesussmariscal/mymoodle:latest
