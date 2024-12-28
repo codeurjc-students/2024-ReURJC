@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class FCMService {
-        /*private Logger logger = LoggerFactory.getLogger(FCMService.class);
+        private Logger logger = LoggerFactory.getLogger(FCMService.class);
 
         public void sendMessageToToken(NotificationRequest request)
                         throws InterruptedException, ExecutionException {
@@ -59,5 +59,5 @@ public class FCMService {
                 return Message.builder()
                                 .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig)
                                 .setNotification(notification);
-        }**/
+        }
 }
