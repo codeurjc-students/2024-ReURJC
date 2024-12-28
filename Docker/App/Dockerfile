@@ -26,9 +26,6 @@ ENV RUNNING_IN_DOCKER=true
 COPY ./Backend/pom.xml ./
 COPY ./Backend/src ./src
 
-# Copiar el keystore a una ubicación temporal
-COPY ./Backend/src/main/resources/keystore.p12 /app/temp/keystore.p12
-
 # Crear la carpeta "public" y copiar los archivos generados del frontend
 RUN mkdir -p /app/src/main/resources/public
 COPY --from=frontend /app/www /app/src/main/resources/public
@@ -45,10 +42,13 @@ WORKDIR /app
 COPY --from=backend /app/target/*.jar /app/app.jar
 
 # Copiar el keystore desde la ubicación temporal a la ubicación final
-COPY --from=backend /app/temp/keystore.p12 /app/certs/keystore.p12
+COPY ./Backend/src/main/resources/keystore.p12 /app/certs/keystore.p12
 
 # Descargar e incluir el script wait-for-it.sh
 RUN curl -LJO https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /app/wait-for-it.sh
+
+# Declarar la variable de entorno para la clave FCM (sin valor por defecto)
+ENV FCM_PRIVATE_KEY=""
 
 # Exponer el puerto HTTPS
 EXPOSE 8443

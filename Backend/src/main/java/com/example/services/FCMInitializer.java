@@ -21,7 +21,19 @@ public class FCMInitializer {
     @PostConstruct
     public void initialize() {
         try {
-            String firebaseCredentials = System.getenv("FIREBASE_SERVICEACCOUNT");
+            // Lee la variable de entorno FCM_PRIVATE_KEY
+            String firebaseCredentials = System.getenv("FCM_PRIVATE_KEY");
+
+            // Si la variable no está definida, puedes lanzar una excepción o usar una configuración por defecto
+            if (firebaseCredentials == null || firebaseCredentials.isEmpty()) {
+                logger.error("FCM_PRIVATE_KEY environment variable not set.");
+                // Puedes lanzar una excepción aquí si la clave es obligatoria:
+                // throw new RuntimeException("FCM_PRIVATE_KEY environment variable not set.");
+                // O usar una configuración por defecto (menos recomendado):
+                // firebaseCredentials = "{\"type\": \"service_account\", ... }"; 
+                return; // Puedes simplemente salir si no quieres hacer nada si la variable no está configurada.
+            }
+
             InputStream serviceAccount = new ByteArrayInputStream(firebaseCredentials.getBytes(StandardCharsets.UTF_8));
 
             FirebaseOptions options = new FirebaseOptions.Builder()
