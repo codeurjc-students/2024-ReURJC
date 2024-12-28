@@ -1,4 +1,4 @@
-package com.example.services;
+/*package com.example.services;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -21,7 +21,7 @@ public class FCMInitializer {
 
     //@PostConstruct
     public void initialize() {
-        /*try {
+        try {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(
                             GoogleCredentials.fromStream(new ClassPathResource(firebaseConfigPath).getInputStream()))
@@ -32,6 +32,6 @@ public class FCMInitializer {
             }
         } catch (IOException e) {
             logger.error(e.getMessage());
-        }**/
+        }
     }
-}
+}*/

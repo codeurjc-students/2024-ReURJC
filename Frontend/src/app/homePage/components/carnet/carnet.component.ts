@@ -15,6 +15,28 @@ export class CarnetComponent implements OnInit {
   isNfcSupported: boolean = false;
   isNfcEnabled: boolean = false;
   showMenu = false;
+  presentAlert = false;
+  public alertButtons = [
+    {
+      text: 'Cabcelar',
+      role: 'cancel',
+      handler: () => {
+        this.presentAlert = false;
+        
+      },
+    },
+    {
+      text: 'Ir a ajustes',
+      role: 'confirm',
+      handler: async () => {
+        await Nfc.openSettings();
+        this.presentAlert = false;
+        
+      },
+    },
+  ];
+
+  
 
   constructor(
     private userService: ApiUserService,
@@ -73,7 +95,7 @@ export class CarnetComponent implements OnInit {
   async writeNfcTag() {
     await this.checkNfcEnabled();
     if (this.isNfcSupported && !this.isNfcEnabled) {
-      await Nfc.openSettings();
+      this.presentAlert = true;
       return;
     }
     // Crear el registro NFC

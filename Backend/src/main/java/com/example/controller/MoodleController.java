@@ -105,7 +105,7 @@ public class MoodleController {
                 for (String token : student.getFcmToken()) {
                     NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(),
                             "Se ha evaluado: " + assignmentName + " con una nota de " + mark, token);
-                    fcmService.sendMessageToToken(request);
+                    //fcmService.sendMessageToToken(request);
                 }
                 URI location = URI.create("/api/v1/events/" + idCreated);
                 messagingTemplate.convertAndSendToUser(student.getEmail(), "/topic/private-messages",
