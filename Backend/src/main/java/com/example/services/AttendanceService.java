@@ -43,4 +43,18 @@ public class AttendanceService {
         return attendanceRepository.findByCode(code);
     }
 
+    public boolean isCodeUsed(String code) {
+        return this.attendanceRepository.existsByCode(code);
+    }
+
+    public boolean addTime(Long id) {
+        this.attendanceRepository.findById(id).get().moreTime();
+        return true;
+
+    }
+
+    public Attendance getAttendanceById(Long id) {
+        return attendanceRepository.findById(id).get();
+    }
+
 }
