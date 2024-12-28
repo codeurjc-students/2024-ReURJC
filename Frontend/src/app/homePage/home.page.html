@@ -23,8 +23,7 @@
       </app-card>
     </div>
       <div *ngIf="!isLoggedIn()">
-        Inicia sesión para poder acceder a las funcionalidades
-        <ion-button (click)="login()">Iniciar sesión</ion-button>
+        <app-auth-form></app-auth-form>
       </div>
       </ion-content>
     </div>

@@ -21,6 +21,7 @@ import { NewsComponent } from './news/news.component';
 import { AsistenciaComponent } from './bluetooth-page/asistencia.component';
 import { VoteEventsPage } from './admin-vote-event/admin-vote-event.component';
 import { AdminSportReservationComponent } from './admin-sport-reservation/admin-sport-reservation.component';
+import { AuthFormComponent } from './auth-form/auth-form.component';
 
 
 @NgModule({
@@ -31,6 +32,6 @@ import { AdminSportReservationComponent } from './admin-sport-reservation/admin-
     HomePageRoutingModule,
 
   ],
-  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent, NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent, CarnetComponent, AsistenciaComponent, VoteEventsPage, AdminSportReservationComponent ]
+  declarations: [HomePage, CardComponent, FinalsInfoComponent, CalendarComponent, NewsComponent, SubjectScheduleComponent, PostulateAsDelegateComponent, VoteDelegatesComponent, FinalMarksComponent, NotificationComponent, CalendarWithClickComponent, CarnetComponent, AsistenciaComponent, VoteEventsPage, AdminSportReservationComponent, AuthFormComponent ]
 })
 export class HomePageModule { }
