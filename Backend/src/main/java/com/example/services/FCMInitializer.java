@@ -10,16 +10,19 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class FCMInitializer {
+    private static final String FIREBASE_CONFIG_FILE = "firebase-service-account.json";
     private static final Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
 
     @PostConstruct
     public void initialize() {
-        try {
-            // Modificación aquí: Usar FileInputStream para leer desde la raíz del contenedor
-            FileInputStream serviceAccount = new FileInputStream("./firebase-service-account.json");
+        try (InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream(FIREBASE_CONFIG_FILE)) {
+            if (serviceAccount == null) {
+                throw new IOException("Firebase configuration file not found: " + FIREBASE_CONFIG_FILE);
+            }
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -30,7 +33,7 @@ public class FCMInitializer {
                 logger.info("Firebase application initialized");
             }
         } catch (IOException e) {
-            logger.error("Error initializing Firebase: {}", e.getMessage());
+            logger.error("Failed to initialize Firebase", e);
         }
     }
 }
