@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Clonar el repositorio completo
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -35,7 +33,6 @@ jobs:
           DB_PASSWORD: 12345678
           DB_HOST: ${{ env.MYSQL_IP }}
         run: |
-          -v # Activar salida detallada
           cd ./Backend
           mvn clean install -DskipTests
           mvn test -Dspring.profiles.active=test
@@ -56,7 +53,6 @@ jobs:
 
       - name: Create Firebase service account file
         run: |
-          -v # Activar salida detallada
           echo "${{ secrets.FIREBASE_SERVICEACCOUNT }}" > ./Docker/App/firebase-service-account.json
           
       - name: Build and push Docker image for Backend

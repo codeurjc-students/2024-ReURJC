@@ -19,7 +19,7 @@ public class FCMInitializer {
     Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
 
     @Value("${firebase.service-account-file}")
-    private String serviceAccountFile;
+    private String serviceAccountFile = "";
 
     @PostConstruct
     public void initialize() {
@@ -37,14 +37,14 @@ public class FCMInitializer {
                 logger.info("Firebase Admin SDK initialized using classpath service account file: " + serviceAccountFile);
             }
 
-            FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            /*FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream("hola"))
                     .build();
 
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
                 logger.info("Firebase application initialized");
-            }
+            }*/
         } catch (IOException e) {
             logger.error("Error initializing Firebase", e);
         }
