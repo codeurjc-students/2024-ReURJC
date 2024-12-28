@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/AdminService/admin.service';
 import { VoteDelegateEvent } from 'src/app/services/UserService/VoteDelegateEvent';
+import { User } from 'src/app/services/UserService/user.model';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class VoteEventsPage implements OnInit {
   voteEvents: VoteDelegateEvent[] = [];
   votesByEvent: { [key: number]: { userId: number, count: number }[] } = {};
   showDetails: { [key: number]: boolean } = {};
+  users: { [userId: number]: User } = {};
 
   constructor(private adminService: AdminService) { }
 
@@ -47,10 +49,13 @@ export class VoteEventsPage implements OnInit {
           if (Array.isArray(votes)) {
             this.votesByEvent[eventId] = votes.map((vote: any) => {
               const [userId, count] = vote;
-              return {
-                userId: userId as number,
-                count: count as number,
-              };
+              const userNumberId = userId as number;
+              const voteCount = count as number;
+              // **Añadir usuario al mapa si no existe**
+              if (!this.users[userNumberId]) {
+                this.getUser(userNumberId);
+              }
+              return { userId: userNumberId, count: voteCount };
             });
           } else {
             console.error(`Unexpected format for votes data: `, votes);
@@ -61,6 +66,12 @@ export class VoteEventsPage implements OnInit {
         }
       );
     }
+  }
+
+  getUser(numberId: number) {
+    this.adminService.getUser(numberId).subscribe((user: User) => {
+      this.users[numberId] = user; // **Almacenar el usuario en el mapa**
+    });
   }
 
 }

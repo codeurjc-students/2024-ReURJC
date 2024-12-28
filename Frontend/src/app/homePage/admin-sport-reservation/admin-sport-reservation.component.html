@@ -18,7 +18,8 @@
     <ion-item *ngFor="let reservation of reservations">
       <ion-label>
         <h2>ID Reserva: {{ reservation.sportReservationId }}</h2>
-        <h2>ID Usuario: {{ reservation.studentId.id }}</h2>
+        <h2>Nombre Usuario: {{ reservation.studentId.name }} {{ reservation.studentId.surname1 }} {{ reservation.studentId.surname2 }}</h2>
+        <p>ID Usuario: {{ reservation.studentId.id }}</p>
         <p>DNI Estudiante: {{ reservation.studentId.dni }}</p>
         <p>Fecha: {{ reservation.date | date:'dd/MM/yyyy HH:mm' }}</p>
         <p>Pista: {{ traducirPista(reservation.pista) }}</p>
