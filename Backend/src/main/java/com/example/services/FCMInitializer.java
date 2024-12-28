@@ -15,13 +15,13 @@ import java.io.IOException;
 @Service
 public class FCMInitializer {
 
-    @Value("${app.firebase-configuration-file}")
-    private String firebaseConfigPath;
-    Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
+    //@Value("${app.firebase-configuration-file}")
+    //private String firebaseConfigPath;
+    //Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
 
-    @PostConstruct
+    //@PostConstruct
     public void initialize() {
-        try {
+        /*try {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(
                             GoogleCredentials.fromStream(new ClassPathResource(firebaseConfigPath).getInputStream()))
@@ -32,6 +32,6 @@ public class FCMInitializer {
             }
         } catch (IOException e) {
             logger.error(e.getMessage());
-        }
+        }**/
     }
 }
