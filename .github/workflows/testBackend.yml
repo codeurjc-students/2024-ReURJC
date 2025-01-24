@@ -2,6 +2,11 @@ name: CI/CD Backend
 
 on:
   push:
+    branches:
+      - main  # CD se lanzará al hacer push a main
+  pull_request:
+    branches:
+      - develop  # CI se lanzará en PR hacia develop
   workflow_dispatch:
 
 jobs:
@@ -57,6 +62,7 @@ jobs:
           cat ./Backend/src/main/resources/firebase-service-account.json
               
       - name: Build and push Docker image for Backend
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v4
         with:
             context: .

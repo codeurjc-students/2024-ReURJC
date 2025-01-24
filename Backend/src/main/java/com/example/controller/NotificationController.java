@@ -52,7 +52,7 @@ public class NotificationController {
             }),
             @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content)
     })
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Notification>> getAllNotifications(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
