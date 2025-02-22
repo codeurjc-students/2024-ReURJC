@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
 import java.security.Principal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -45,6 +50,7 @@ import com.example.model.Attendance;
 import com.example.model.SportReservation;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
+import com.example.model.UserDto;
 import com.example.services.AttendanceService;
 import com.example.services.EventService;
 import com.example.services.SportReservationService;
@@ -64,8 +70,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controlador REST para la gestión de usuarios y sus funcionalidades asociadas.
- * Proporciona endpoints para la autenticación, consulta de información del usuario,
- * gestión de candidaturas a delegado, votaciones, reservas deportivas, asistencias y más.
+ * Proporciona endpoints para la autenticación, consulta de información del
+ * usuario,
+ * gestión de candidaturas a delegado, votaciones, reservas deportivas,
+ * asistencias y más.
  */
 @Tag(name = "Usuarios", description = "API para la gestión de usuarios y sus funcionalidades asociadas")
 @RestController
@@ -93,11 +101,18 @@ public class UserController {
     @Autowired
     private AttendanceService attendanceService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${attendance.service.url}")
+    private String attendanceServiceUrl;
+
     /**
      * Obtiene las asignaturas del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity que contiene la lista de asignaturas del usuario o un estado de error si no está autenticado.
+     * @return Una ResponseEntity que contiene la lista de asignaturas del usuario o
+     *         un estado de error si no está autenticado.
      */
     @Operation(summary = "Obtener asignaturas del usuario", description = "Devuelve las asignaturas del usuario autenticado.")
     @ApiResponses(value = {
@@ -146,8 +161,10 @@ public class UserController {
      * @param accessToken  Token de acceso (opcional, desde cookie).
      * @param refreshToken Token de refresco (opcional, desde cookie).
      * @param request      La solicitud HTTP actual.
-     * @param loginRequest La solicitud de inicio de sesión con las credenciales del usuario.
-     * @return Una ResponseEntity con la respuesta de autenticación o un estado de error si las credenciales son inválidas.
+     * @param loginRequest La solicitud de inicio de sesión con las credenciales del
+     *                     usuario.
+     * @return Una ResponseEntity con la respuesta de autenticación o un estado de
+     *         error si las credenciales son inválidas.
      */
     @Operation(summary = "Iniciar sesión", description = "Autentica a un usuario y devuelve un token de acceso.")
     @ApiResponses(value = {
@@ -177,8 +194,9 @@ public class UserController {
      * Genera y devuelve el carnet de estudiante del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la imagen del carnet de estudiante o un estado de error si el usuario no está autenticado.
-     * @throws IOException Si hay un error de entrada/salida.
+     * @return Una ResponseEntity con la imagen del carnet de estudiante o un estado
+     *         de error si el usuario no está autenticado.
+     * @throws IOException  Si hay un error de entrada/salida.
      * @throws SQLException Si hay un error de SQL.
      */
     @Operation(summary = "Obtener carnet de estudiante", description = "Genera y devuelve el carnet de estudiante del usuario autenticado.")
@@ -213,7 +231,8 @@ public class UserController {
 
             // Definir el nuevo tamaño objetivo para la imagen del usuario
             int targetWidth = 150; // Nuevo ancho deseado
-            int targetHeight = (targetWidth * profilePic.getHeight()) / profilePic.getWidth(); // Calcular altura proporcional
+            int targetHeight = (targetWidth * profilePic.getHeight()) / profilePic.getWidth(); // Calcular altura
+                                                                                               // proporcional
 
             // Dibujar la primera imagen reescalada en el lienzo
             g2d.drawImage(profilePic, 10, 10, targetWidth, targetHeight, null);
@@ -247,12 +266,14 @@ public class UserController {
 
             // Fecha de nacimiento
             g2d.setFont(new Font("Arial", Font.PLAIN, 14));
-            g2d.drawString("DNI: " + user.getDni().toString(), textX, textY + 30); // Espaciado de 30 píxeles hacia abajo
+            g2d.drawString("DNI: " + user.getDni().toString(), textX, textY + 30); // Espaciado de 30 píxeles hacia
+                                                                                   // abajo
 
             g2d.drawString("ROL: " + ((user.getRoles().get(0).equals("USER")) ? "Estudiante" : "Empleado"), textX,
                     textY + 60); // Espaciado de 30 píxeles hacia abajo
 
-            g2d.drawString("ID: " + user.getStudentId().toString(), textX, textY + 90); // Espaciado de 30 píxeles hacia abajo
+            g2d.drawString("ID: " + user.getStudentId().toString(), textX, textY + 90); // Espaciado de 30 píxeles hacia
+                                                                                        // abajo
 
             // Añadir el lema de la universidad a la derecha de la segunda imagen
             g2d.setFont(new Font("Arial", Font.ITALIC | Font.BOLD, 16)); // Cursiva y negrita
@@ -283,7 +304,8 @@ public class UserController {
      * Verifica si el usuario autenticado es candidato a delegado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con el estado de la candidatura del usuario o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con el estado de la candidatura del usuario o un
+     *         estado de error si no está autenticado.
      * @throws IOException Si hay un error de entrada/salida.
      */
     @Operation(summary = "Verificar si el usuario es candidato a delegado", description = "Verifica si el usuario autenticado es candidato a delegado.")
@@ -308,7 +330,8 @@ public class UserController {
      * Permite al usuario autenticado postularse como candidato a delegado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la ubicación del recurso actualizado o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con la ubicación del recurso actualizado o un
+     *         estado de error si no está autenticado.
      * @throws IOException Si hay un error de entrada/salida.
      */
     @Operation(summary = "Postularse como candidato a delegado", description = "Permite al usuario autenticado postularse como candidato a delegado.")
@@ -334,7 +357,8 @@ public class UserController {
      * Cancela la candidatura a delegado del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la ubicación del recurso actualizado o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con la ubicación del recurso actualizado o un
+     *         estado de error si no está autenticado.
      * @throws IOException Si hay un error de entrada/salida.
      */
     @Operation(summary = "Cancelar candidatura a delegado", description = "Cancela la candidatura a delegado del usuario autenticado.")
@@ -360,7 +384,8 @@ public class UserController {
      * Obtiene la lista de candidatos a delegado, excluyendo al usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la lista de candidatos o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con la lista de candidatos o un estado de error si
+     *         no está autenticado.
      * @throws IOException Si hay un error de entrada/salida.
      */
     @Operation(summary = "Obtener candidatos a delegado", description = "Obtiene la lista de candidatos a delegado, excluyendo al usuario autenticado.")
@@ -382,10 +407,12 @@ public class UserController {
     }
 
     /**
-     * Verifica si el usuario autenticado ha votado en el evento actual de votación de delegados.
+     * Verifica si el usuario autenticado ha votado en el evento actual de votación
+     * de delegados.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con el resultado de la verificación o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con el resultado de la verificación o un estado de
+     *         error si no está autenticado.
      * @throws IOException Si hay un error de entrada/salida.
      */
     @Operation(summary = "Verificar si el usuario ha votado", description = "Verifica si el usuario autenticado ha votado en el evento actual de votación de delegados.")
@@ -411,7 +438,8 @@ public class UserController {
      * Obtiene las calificaciones del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la lista de calificaciones del usuario o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con la lista de calificaciones del usuario o un
+     *         estado de error si no está autenticado.
      */
     @Operation(summary = "Obtener calificaciones del usuario", description = "Obtiene las calificaciones del usuario autenticado.")
     @ApiResponses(value = {
@@ -433,9 +461,10 @@ public class UserController {
     /**
      * Crea una nueva reserva de pista deportiva para el usuario autenticado.
      *
-     * @param request             La solicitud HTTP actual.
+     * @param request              La solicitud HTTP actual.
      * @param sportReservationInfo Mapa con la información de la reserva.
-     * @return Una ResponseEntity con la ubicación del recurso creado o un estado de error si no está autenticado o si los datos son inválidos.
+     * @return Una ResponseEntity con la ubicación del recurso creado o un estado de
+     *         error si no está autenticado o si los datos son inválidos.
      */
     @Operation(summary = "Crear una nueva reserva de pista deportiva", description = "Crea una nueva reserva de pista deportiva para el usuario autenticado.")
     @ApiResponses(value = {
@@ -491,7 +520,8 @@ public class UserController {
      * @param año   Año de la reserva.
      * @param mes   Mes de la reserva.
      * @param dia   Día de la reserva.
-     * @return Una ResponseEntity con la lista de reservas o un estado de error si los parámetros son inválidos.
+     * @return Una ResponseEntity con la lista de reservas o un estado de error si
+     *         los parámetros son inválidos.
      */
     @Operation(summary = "Obtener reservas de pistas deportivas", description = "Obtiene las reservas de pistas deportivas para una fecha y pista específicas.")
     @ApiResponses(value = {
@@ -514,7 +544,8 @@ public class UserController {
      * Verifica si el usuario autenticado tiene una reserva activa.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con el resultado de la verificación o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con el resultado de la verificación o un estado de
+     *         error si no está autenticado.
      */
     @Operation(summary = "Verificar si el usuario tiene una reserva activa", description = "Verifica si el usuario autenticado tiene una reserva activa.")
     @ApiResponses(value = {
@@ -537,7 +568,8 @@ public class UserController {
      * Elimina la reserva activa del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity que indica si la operación se realizó correctamente o un estado de error si no está autenticado.
+     * @return Una ResponseEntity que indica si la operación se realizó
+     *         correctamente o un estado de error si no está autenticado.
      */
     @Operation(summary = "Eliminar reserva activa", description = "Elimina la reserva activa del usuario autenticado.")
     @ApiResponses(value = {
@@ -559,7 +591,8 @@ public class UserController {
      * Obtiene la reserva activa del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la reserva del usuario o un estado de error si no está autenticado o no tiene reserva.
+     * @return Una ResponseEntity con la reserva del usuario o un estado de error si
+     *         no está autenticado o no tiene reserva.
      */
     @Operation(summary = "Obtener reserva activa del usuario", description = "Obtiene la reserva activa del usuario autenticado.")
     @ApiResponses(value = {
@@ -584,7 +617,8 @@ public class UserController {
      *
      * @param request La solicitud HTTP actual.
      * @param code    El código del evento de asistencia.
-     * @return Una ResponseEntity con la ubicación del recurso creado o un estado de error si no está autenticado o si el código es inválido.
+     * @return Una ResponseEntity con la ubicación del recurso creado o un estado de
+     *         error si no está autenticado o si el código es inválido.
      */
     @Operation(summary = "Registrar asistencia a un evento", description = "Registra la asistencia del usuario autenticado a un evento de asistencia.")
     @ApiResponses(value = {
@@ -597,32 +631,57 @@ public class UserController {
     public ResponseEntity<URI> newAttendance(
             HttpServletRequest request,
             @Parameter(description = "Código del evento de asistencia", required = true) @RequestParam String code) {
+
         Principal principal = request.getUserPrincipal();
-        if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
-            Attendance attendance = attendanceService.getAttendanceEvent(code);
-            if (attendance != null) {
-                LocalDateTime now = LocalDateTime.now();
-                LocalDateTime fiveMinutesAgo = now.minusMinutes(5).plusHours(1);
-                if (attendance.getDateTime().isAfter(fiveMinutesAgo)) {
-                    attendanceService.adduser(attendance, user);
-                    URI location = URI.create(request.getRequestURI() + "/" + user.getId());
-                    return ResponseEntity.created(location).build();
-                }
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } else {
+        if (principal == null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        return ResponseEntity.badRequest().build();
+
+        User user = userService.findByEmail(principal.getName());
+
+        // 1. Construye la URL del microservicio de asistencia
+        String url = attendanceServiceUrl + "/attendance/newAttendance?code=" + code;
+
+        // 2. Crea el DTO del usuario
+        UserDto userDto = new UserDto();
+        userDto.setStudentId(user.getStudentId());
+        userDto.setDni(user.getDni());
+        userDto.setName(user.getName());
+        userDto.setSurname1(user.getSurname1());
+        System.out.println("Enviando usuario con ID: " + user.getStudentId() + " DNI: " + user.getDni());
+
+
+
+        // 3. Crea los encabezados (headers)
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // 4. Crea la entidad de la petición (cuerpo + encabezados)
+        HttpEntity<UserDto> requestEntity = new HttpEntity<>(userDto, headers);
+
+        // 5. Realiza la petición POST
+        try {
+            ResponseEntity<URI> response = restTemplate.postForEntity( // Usa postForEntity
+                    url,
+                    requestEntity,
+                    URI.class // Esperamos un URI como respuesta
+            );
+            // No necesitamos hacer mas comprobaciones. Devolvemos lo que nos llegue.
+            return response;
+
+        } catch (RestClientException e) {
+            System.err.println("Error al llamar al microservicio de asistencia: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // O un código de error más
+                                                                                    // específico
+        }
     }
 
     /**
      * Obtiene la información del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la información del usuario autenticado o un estado de error si no está autenticado.
+     * @return Una ResponseEntity con la información del usuario autenticado o un
+     *         estado de error si no está autenticado.
      * @throws IOException Si hay un error de entrada/salida.
      */
     @Operation(summary = "Obtener información del usuario autenticado", description = "Obtiene la información del usuario autenticado.")
