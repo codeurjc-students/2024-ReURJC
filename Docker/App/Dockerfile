@@ -7,7 +7,7 @@ COPY ./Frontend ./
 
 RUN npm install -g @angular/cli @ionic/cli 
 RUN npm config set @capawesome-team:registry https://npm.registry.capawesome.io
-RUN npm config set //npm.registry.capawesome.io/:_authToken POLAR-ED6832C2-542C-4C72-A029-7226BA937FC1
+RUN npm config set //npm.registry.capawesome.io/:_authToken POLAR-BDDF0AC1-3CAF-4BBB-BC2E-34BB53DBCFC5
 RUN npm install
 
 RUN ionic build --prod
