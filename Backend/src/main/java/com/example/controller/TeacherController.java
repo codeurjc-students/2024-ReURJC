@@ -10,8 +10,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.model.Attendance;
+import com.example.model.AttendanceDto;
+import com.example.model.Subject;
+import com.example.model.SubjectDto;
 import com.example.model.User;
 import com.example.services.AttendanceService;
 import com.example.services.SubjectService;
@@ -24,7 +29,13 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +61,16 @@ public class TeacherController {
     @Autowired
     private SubjectService subjectService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value("${attendance.service.url}")
+    private String attendanceServiceUrl;
+
+    public SubjectDto convertToDto(Subject subject) {
+    return new SubjectDto(subject.getId(), subject.getTitle());
+}
+
     /**
      * Crea un nuevo registro de asistencia para una asignatura.
      *
@@ -71,9 +92,22 @@ public class TeacherController {
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
             if (user.getRoles().contains("TEACHER")) {
-                Attendance attendance = attendanceService.newAttendance(user, subjectService.getSubject(subjectId));
-                URI location = URI.create(request.getRequestURI() + "/" + attendance.getCode());
-                return ResponseEntity.created(location).build();
+                String url = attendanceServiceUrl + "/attendance/new?id=" + user.getStudentId();
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<SubjectDto> requestEntity = new HttpEntity<>(convertToDto(subjectService.getSubject(subjectId)), headers);
+                ResponseEntity<Attendance> response = restTemplate.exchange(
+                url,       // URL del microservicio de asistencia
+                HttpMethod.POST,  // Método HTTP
+                requestEntity,  // La entidad de la petición
+                Attendance.class // El tipo de dato de la respuesta esperada
+                );
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    return response; // Devuelve la respuesta del microservicio de asistencia
+                } else {
+                    // Maneja errores (4xx, 5xx)
+                     return ResponseEntity.status(response.getStatusCode()).build();
+                }
             }
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -94,15 +128,45 @@ public class TeacherController {
             @ApiResponse(responseCode = "403", description = "Acceso denegado", content = @Content)
     })
     @GetMapping("/attendances")
-    public ResponseEntity<List<Attendance>> getAllAttendances(HttpServletRequest request) {
+    public ResponseEntity<List<AttendanceDto>> getAllAttendances(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
-        if (principal != null) {
-            User user = userService.findByEmail(principal.getName());
-            if (user.getRoles().contains("TEACHER")) {
-                return ResponseEntity.ok(attendanceService.getAllAttendances(user));
-            }
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+
+        User user = userService.findByEmail(principal.getName());
+        if (!user.getRoles().contains("TEACHER")) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        // 1. Construye la URL del microservicio de asistencia.
+        String url = attendanceServiceUrl + "/attendance/attendances?id=" + user.getStudentId();
+
+        // 2. Realiza la petición GET usando restTemplate.exchange (o getForEntity).
+
+        try {
+
+            ResponseEntity<List<AttendanceDto>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null, // No hay cuerpo en la petición GET
+                new ParameterizedTypeReference<List<AttendanceDto>>() {} // Usa ParameterizedTypeReference para listas
+            );
+
+
+
+            // 3. Procesa la respuesta.
+            if (response.getStatusCode().is2xxSuccessful()) {
+                return ResponseEntity.ok(response.getBody()); // Devuelve la lista de asistencias
+            } else {
+                // Maneja errores (4xx, 5xx).
+                return ResponseEntity.status(response.getStatusCode()).build();
+            }
+        } catch (RestClientException e) {
+            // Captura excepciones de RestTemplate (errores de red, timeouts, etc.).
+            System.err.println("Error al llamar al microservicio de asistencia: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     /**
@@ -123,35 +187,42 @@ public class TeacherController {
             @ApiResponse(responseCode = "404", description = "Registro de asistencia no encontrado", content = @Content),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor", content = @Content)
     })
-    @PutMapping("/attendances/{id}/add-time")
-    public ResponseEntity<Boolean> addTimeToAttendance(@PathVariable Long id, HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        if (principal == null) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
+    // En TeacherController (Microservicio Principal)
 
-        User user = userService.findByEmail(principal.getName());
-        if (!user.getRoles().contains("TEACHER")) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        try {
-            Attendance attendance = attendanceService.getAttendanceById(id);
-
-            if (!attendance.getCreator().equals(user)) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            }
-
-            if (attendanceService.addTime(id)) {
-                return ResponseEntity.ok().body(true);
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-        
-
-        
+@PutMapping("/attendances/{id}/add-time")
+public ResponseEntity<Boolean> addTimeToAttendance(@PathVariable Long id, HttpServletRequest request) {
+    Principal principal = request.getUserPrincipal();
+    if (principal == null) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
+
+    User user = userService.findByEmail(principal.getName());
+    if (!user.getRoles().contains("TEACHER")) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    }
+
+    // 1. Construye la URL  --  ¡AÑADE EL ID DEL CREADOR!
+    String url = attendanceServiceUrl + "/attendance/attendances/" + id + "/add-time?id=" + user.getStudentId();
+
+    // 2. Crea la entidad de la petición (encabezados si son necesarios)
+    HttpHeaders headers = new HttpHeaders();
+    // headers.setContentType(MediaType.APPLICATION_JSON); // No es necesario en este caso
+    HttpEntity<?> requestEntity = new HttpEntity<>(headers);
+
+    // 3. Realiza la petición PUT
+    try {
+        ResponseEntity<Boolean> response = restTemplate.exchange(
+            url,
+            HttpMethod.PUT,
+            requestEntity,
+            Boolean.class
+        );
+
+        return response; // Devuelve la respuesta
+
+    } catch (RestClientException e) {
+        System.err.println("Error: " + e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
 }
