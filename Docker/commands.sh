@@ -14,9 +14,11 @@ docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
 docker push jesussmariscal/reurjc
 docker build -t jesussmariscal/mymoodle -f ./Docker/Moodle/Dockerfile .
 docker push jesussmariscal/mymoodle
+cd Microservice/Asistance
+docker build -t jesussmariscal/attendance -f ./Microservice/Asistance/Dockerfile  .  
 
 Construirla:
-
+cd ../../
  cd Docker/App 
  docker-compose -p myurjc up -d
 

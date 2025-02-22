@@ -9,6 +9,7 @@ services:
     depends_on:
       - myurjc-DB
       - moodle-app
+      - attendance-service 
     command: ["/bin/sh", "-c", "until curl -sSf http://moodle-app > /dev/null; do echo 'Waiting for Moodle...'; sleep 5; done; java -jar /app/app.jar"]
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://myurjc-DB:3306/tfgdb
@@ -21,8 +22,12 @@ services:
       - MOODLE_DB_NAME=moodle
       - MOODLE_DB_USER=moodleuser
       - MOODLE_DB_PASSWORD=moodlepass
+      - ATTENDANCE_SERVICE_URL=http://attendance-service:8081 
     volumes:
-      - ./wait-for-it.sh:/wait-for-it.sh 
+      - ./wait-for-it.sh:/wait-for-it.sh
+      - ../../Backend/src/main/resources/firebase-service-account.json:/app/firebase-service-account.json 
+      - ../../Backend/src/main/resources/keystore.p12:/app/certs/keystore.p12 
+
   myurjc-DB:
     container_name: myurjc-DB
     image: mysql:8.3.0
@@ -60,7 +65,30 @@ services:
     volumes:
       - moodle_db_data:/var/lib/mysql
 
+  attendance-service:
+    container_name: attendance
+    image: jesussmariscal/attendance
+    ports:
+      - "8081:8081"
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_DATASOURCE_URL=jdbc:mysql://attendance-db:3306/attendancedb
+      - SPRING_DATASOURCE_USERNAME=root  
+      - SPRING_DATASOURCE_PASSWORD=password 
+    depends_on:
+      - attendance-db  
+
+  attendance-db: 
+    container_name: attendance-db
+    image: mysql:8.3.0  
+    environment:
+      - MYSQL_DATABASE=attendancedb 
+      - MYSQL_ROOT_PASSWORD=password  
+    volumes:
+      - attendance_db_data:/var/lib/mysql  
+
 volumes:
   mis_datos_mysql:
   moodle_data:
   moodle_db_data:
+  attendance_db_data:
