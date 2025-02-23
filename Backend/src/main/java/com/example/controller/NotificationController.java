@@ -1,7 +1,9 @@
 package com.example.controller;
 
+import java.net.URI;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -10,18 +12,27 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.model.Notification;
 import com.example.model.User;
 import com.example.services.NotificationService;
 import com.example.services.UserService;
+import com.google.api.client.util.Value;
+import org.springframework.web.client.RestTemplate;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * Controlador REST para la gestión de notificaciones.
@@ -37,6 +48,7 @@ public class NotificationController {
 
     @Autowired
     private UserService userService;
+
 
     /**
      * Obtiene todas las notificaciones de un usuario autenticado.
@@ -57,9 +69,32 @@ public class NotificationController {
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
             User user = userService.findByEmail(principal.getName());
-            List<Notification> notifications = notificationService.findAllByUser(user);
-            return new ResponseEntity<>(notifications, HttpStatus.OK);
+            if (user != null) {
+                try {
+                    String urlBase = "http://notifications:8082/notifications/notifications";  // Aquí defines la URL fija que quieras usar
+
+URI uri = UriComponentsBuilder.fromHttpUrl(urlBase)
+                            .queryParam("user", user.getId())
+                            .build()
+                            .toUri();
+
+RestTemplate restTemplate = new RestTemplate();
+ResponseEntity<List<Notification>> response = restTemplate.exchange(
+                            uri,
+                            HttpMethod.GET,
+                            null,
+                            new ParameterizedTypeReference<List<Notification>>() {}
+                    );
+
+                    return new ResponseEntity<>(response.getBody(), HttpStatus.OK);
+                } catch (HttpClientErrorException | HttpServerErrorException e) {
+                    return ResponseEntity.status(e.getStatusCode()).build();
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
+    
 }
