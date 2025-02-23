@@ -3,7 +3,6 @@ package com.example.controller;
 import java.net.URI;
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,13 +24,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.model.Notification;
 import com.example.model.User;
-import com.example.services.NotificationService;
 import com.example.services.UserService;
-import com.google.api.client.util.Value;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -43,19 +39,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api/v1/notifications")
 public class NotificationController {
 
-    @Autowired
-    private NotificationService notificationService;
 
     @Autowired
     private UserService userService;
 
 
     /**
-     * Obtiene todas las notificaciones de un usuario autenticado.
+     * Obtiene todas las notificaciones de un usuario autenticado, realizando una petición a otro microservicio.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity que contiene la lista de notificaciones del usuario
-     *         si la autenticación es exitosa, o un estado de error 403 si no lo es.
+     * @return Una ResponseEntity que contiene la lista de notificaciones del usuario obtenidas del microservicio de notificaciones,
+     * o un estado de error apropiado si la autenticación falla, el usuario no se encuentra, o hay un problema con la petición al microservicio.
      */
     @Operation(summary = "Obtener todas las notificaciones de un usuario", description = "Devuelve una lista de todas las notificaciones asociadas al usuario autenticado.")
     @ApiResponses(value = {

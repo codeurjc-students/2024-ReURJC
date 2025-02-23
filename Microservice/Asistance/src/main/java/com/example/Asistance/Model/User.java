@@ -1,6 +1,5 @@
 package com.example.Asistance.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

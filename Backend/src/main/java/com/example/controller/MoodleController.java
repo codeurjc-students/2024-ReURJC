@@ -1,12 +1,10 @@
 package com.example.controller;
 
-import java.net.URI;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -20,12 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.model.NotificationRequest;
 import com.example.model.Subject;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
-import com.example.services.FCMService;
-import com.example.services.NotificationService;
 import com.example.services.SubjectMarkService;
 import com.example.services.SubjectService;
 import com.example.services.UserService;
@@ -52,19 +47,16 @@ public class MoodleController {
     private SubjectService subjectService;
 
     @Autowired
-    private NotificationService notificationService;
-
-    @Autowired
-    private FCMService fcmService;
-
-    @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
     /**
-     * Actualiza la calificación de un estudiante en una asignatura específica.
+     * Actualiza la calificación de un estudiante en una asignatura específica,
+     * o la crea si no existe.
+     * Envía una notificación al estudiante a través de WebSockets.
      *
-     * @param datos Datos de la calificación a actualizar.
-     * @return Una ResponseEntity con la URI del recurso actualizado.
+     * @param datos Datos de la calificación a actualizar (userid, courseid, grade, assignmentname).
+     * @return ResponseEntity con un mapa que contiene información sobre la calificación actualizada y el usuario,
+     *         o un error si los datos son incorrectos o el usuario/asignatura no se encuentran.
      * @throws Exception Si ocurre algún error durante el proceso.
      */
     @Operation(summary = "Actualizar calificación", description = "Actualiza la calificación de un estudiante en una asignatura.")
@@ -130,9 +122,8 @@ public ResponseEntity<Map<String, Object>> updateGrade(@RequestBody Map<String, 
     }
 
     /**
-     * Recibe un mensaje privado a través de WebSockets y lo reenvía al usuario
-     * destinatario.
-     *
+     *  Recibe la solicitud para reenviar el último mensaje, obtiene al usuario actual,
+     *  busca su última calificación añadida y la envía a través de WebSockets.
      * @param request La solicitud HTTP actual.
      */
     @Operation(summary = "Recibir mensaje privado", description = "Recibe un mensaje privado a través de WebSockets y lo reenvía al usuario destinatario.")
