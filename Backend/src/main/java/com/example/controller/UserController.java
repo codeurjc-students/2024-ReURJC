@@ -51,7 +51,6 @@ import com.example.model.SportReservation;
 import com.example.model.Subject_Mark;
 import com.example.model.User;
 import com.example.model.UserDto;
-import com.example.services.AttendanceService;
 import com.example.services.EventService;
 import com.example.services.SportReservationService;
 import com.example.services.SubjectMarkService;
@@ -97,9 +96,6 @@ public class UserController {
 
     @Autowired
     private SportReservationService sportReservationService;
-
-    @Autowired
-    private AttendanceService attendanceService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -611,14 +607,14 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
-
-    /**
-     * Registra la asistencia del usuario autenticado a un evento de asistencia.
+ /**
+     * Registra la asistencia del usuario autenticado a un evento de asistencia, delegando la operación a un microservicio de asistencia.
      *
      * @param request La solicitud HTTP actual.
      * @param code    El código del evento de asistencia.
-     * @return Una ResponseEntity con la ubicación del recurso creado o un estado de
-     *         error si no está autenticado o si el código es inválido.
+     * @return Una ResponseEntity con la respuesta del microservicio de asistencia (normalmente, la URI del recurso creado),
+     *  un estado 403 Forbidden si el usuario no está autenticado, un 400 Bad Request si la solicitud es incorrecta, o un estado 404 si el evento no se encuentra.
+     *  Si hay un error de comunicación con el microservicio, devuelve 500 Internal Server Error.
      */
     @Operation(summary = "Registrar asistencia a un evento", description = "Registra la asistencia del usuario autenticado a un evento de asistencia.")
     @ApiResponses(value = {
@@ -676,13 +672,12 @@ public class UserController {
         }
     }
 
-    /**
-     * Obtiene la información del usuario autenticado.
+   /**
+     * Obtiene la información completa del usuario autenticado.
      *
      * @param request La solicitud HTTP actual.
-     * @return Una ResponseEntity con la información del usuario autenticado o un
-     *         estado de error si no está autenticado.
-     * @throws IOException Si hay un error de entrada/salida.
+     * @return  Una ResponseEntity que contiene la información del usuario, o un estado 403 Forbidden si el usuario no está autenticado.
+     * La contraseña se establece a null por razones de seguridad antes de enviar la respuesta.
      */
     @Operation(summary = "Obtener información del usuario autenticado", description = "Obtiene la información del usuario autenticado.")
     @ApiResponses(value = {
@@ -702,5 +697,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
-
 }
