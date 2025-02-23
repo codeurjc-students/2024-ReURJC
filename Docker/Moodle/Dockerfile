@@ -51,7 +51,7 @@ COPY ./../Moodle/moodle.conf /etc/apache2/sites-available/moodle.conf
 RUN a2ensite moodle.conf
 
 # Create entrypoint script
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./Docker/Moodle/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Expose port 80 for web traffic

@@ -87,8 +87,33 @@ services:
     volumes:
       - attendance_db_data:/var/lib/mysql  
 
+  notifications-service:
+    container_name: notifications
+    image: jesussmariscal/notifications
+    ports:
+      - "8082:8082"
+    environment:
+      - SERVER_PORT=8082
+      - SPRING_DATASOURCE_URL=jdbc:mysql://notifications-db:3306/attendances
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - MICROSERVICE_PRINCIPAL_URL=http://myurjc-app:8080
+    depends_on:
+      - notifications-db
+      - myurjc-app
+
+  notifications-db:
+    container_name: notifications-db
+    image: mysql:8.3.0
+    environment:
+      - MYSQL_DATABASE=attendances
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - notifications_db_data:/var/lib/mysql
+
 volumes:
   mis_datos_mysql:
   moodle_data:
   moodle_db_data:
   attendance_db_data:
+  notifications_db_data:

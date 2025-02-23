@@ -74,48 +74,44 @@ public class MoodleController {
             @ApiResponse(responseCode = "404", description = "Usuario o asignatura no encontrados", content = @Content)
     })
     @PostMapping("/updateGrade")
-    public ResponseEntity<URI> updateGrade(
-            @Parameter(description = "Datos de la calificación a actualizar", required = true) @RequestBody Map<String, Object> datos)
-            throws Exception {
+public ResponseEntity<Map<String, Object>> updateGrade(@RequestBody Map<String, Object> datos) throws Exception {
+    try {
+        Long userId = Long.parseLong(datos.get("userid").toString());
+        if (userId != -1) {
+            Long courseId = Long.parseLong(datos.get("courseid").toString());
+            int mark = Integer.parseInt(datos.get("grade").toString());
+            String assignmentName = datos.get("assignmentname").toString();
 
-        try {
-            // Obtener los datos de la solicitud
-            Long userId = Long.parseLong(datos.get("userid").toString());
-            if (userId != -1) {
-                Long courseId = Long.parseLong(datos.get("courseid").toString());
-                int mark = Integer.parseInt(datos.get("grade").toString());
-                String assignmentName = datos.get("assignmentname").toString();
+            User student = userService.findById(userId);
+            Subject subject = subjectService.getSubject(courseId);
 
-                // Buscar el usuario y la asignatura
-                User student = userService.findById(userId);
-                Subject subject = subjectService.getSubject(courseId);
-
-                // Crear una nueva nota o actualizarla si existe
-                Long idCreated = null;
-                if (!subjectMarkService.existsByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName)) {
-                    idCreated = subjectMarkService
-                            .save(new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
-                } else {
-                    idCreated = updateExistingMark(student, subject, mark, assignmentName);
-                }
-                // Notificar al usuario
-                notificationService.newNote(student, subject.getTitle(), assignmentName, String.valueOf(mark),
-                        "Ordinaria");
-                for (String token : student.getFcmToken()) {
-                    NotificationRequest request = new NotificationRequest("Nueva Nota en " + subject.getTitle(),
-                            "Se ha evaluado: " + assignmentName + " con una nota de " + mark, token);
-                    fcmService.sendMessageToToken(request);
-                }
-                URI location = URI.create("/api/v1/events/" + idCreated);
-                messagingTemplate.convertAndSendToUser(student.getEmail(), "/topic/private-messages",
-                        Map.of("content", subjectMarkService.getLastSubjectMarkAdded(student)));
-                return ResponseEntity.created(location).build();
+            Long idCreated;
+            if (!subjectMarkService.existsByStudentIdAndSubjectIdAndNameMark(student, subject, assignmentName)) {
+                idCreated = subjectMarkService.save(new Subject_Mark(student, subject, mark, "Ordinaria", assignmentName));
+            } else {
+                idCreated = updateExistingMark(student, subject, mark, assignmentName);
             }
-        } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().build();
+
+            // Crear respuesta con datos necesarios para la notificación
+            Map<String, Object> response = Map.of(
+                    "subjectTitle", subject.getTitle(),
+                    "finalMark", mark,
+                    "userId", student.getId(),
+                    "email", student.getEmail(),
+                    "fcmTokens", student.getFcmToken() // Lista de tokens de notificación
+            );
+            System.out.println("Respuesta preparada para el microservicio de notificaciones: " + response);
+            messagingTemplate.convertAndSendToUser(student.getEmail(), "/topic/private-messages",
+                        Map.of("content", subjectMarkService.getLastSubjectMarkAdded(student)));
+
+            return ResponseEntity.ok(response);
         }
-        return ResponseEntity.notFound().build();
+    } catch (NumberFormatException e) {
+        return ResponseEntity.badRequest().build();
     }
+    return ResponseEntity.notFound().build();
+}
+
 
     /**
      * Actualiza una nota existente.

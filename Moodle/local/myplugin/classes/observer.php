@@ -47,7 +47,7 @@ class observer {
         
     
         // 3. Construir la solicitud POST
-        $url = 'http://myurjc:8080/api/v1/moodle/updateGrade';
+        $url = 'http://notifications:8082/notifications/updateGrade';
         $postData = json_encode([
             'userid' => $userid,
             'courseid' => $courseid,

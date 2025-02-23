@@ -1,2 +1,3 @@
 Backend/src/main/resources/firebase-service-account.json
 Backend/target/classes/firebase-service-account.json
+Microservice/Notifications/src/main/resources/firebase-service-account.json
