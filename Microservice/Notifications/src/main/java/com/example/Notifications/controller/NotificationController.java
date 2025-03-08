@@ -31,6 +31,9 @@ public class NotificationController {
     @Autowired
     private FCMService fcmService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     // URL base del microservicio principal, inyectada desde application.properties.
     @Value("${microservice.principal.url}")
     private String principalServiceUrl;
@@ -72,11 +75,10 @@ public class NotificationController {
                 return ResponseEntity.badRequest().build();
             }
             // 1. Llamada al microservicio principal para actualizar la nota.
-            RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<Map> response = restTemplate.postForEntity(
-                    principalServiceUrl + "/api/v1/moodle/updateGrade",
-                    datos,
-                    Map.class);
+                principalServiceUrl + "/api/v1/moodle/updateGrade",
+                datos,
+                Map.class);
 
             // 2. Si la actualización en el microservicio principal fue exitosa...
             if (response.getStatusCode().is2xxSuccessful()) {

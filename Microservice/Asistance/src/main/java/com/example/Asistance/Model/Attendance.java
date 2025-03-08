@@ -74,4 +74,8 @@ public class Attendance {
         return id;
     }
 
+    public void setId(Long attendanceId) {
+        this.id = attendanceId;
+    }
+
 }
