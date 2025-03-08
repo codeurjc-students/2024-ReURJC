@@ -1,6 +1,4 @@
 com/example/demo/NewsControllerTests.class
-com/example/demo/TeacherControllerTests.class
-com/example/demo/MoodleControllerTests.class
 com/example/demo/AdminControllerTests.class
 com/example/demo/EventsControllerTests.class
 com/example/demo/SubjectMarkControllerTests.class

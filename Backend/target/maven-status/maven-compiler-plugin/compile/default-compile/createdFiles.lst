@@ -13,7 +13,6 @@ com/example/model/Attendance.class
 com/example/services/securityServices/jwt/LoginRequest.class
 com/example/services/securityServices/RepositoryUserDetailsService.class
 com/example/model/SportReservation.class
-com/example/services/FCMInitializer.class
 com/example/repository/AttendanceRepository.class
 com/example/services/securityServices/CSRFHandlerInterceptor.class
 com/example/controller/MoodleController.class
@@ -44,7 +43,6 @@ com/example/model/Festive.class
 com/example/model/Subject_Mark.class
 com/example/services/NewService.class
 com/example/repository/EventRepository.class
-com/example/services/FCMService.class
 com/example/services/VotesService.class
 com/example/services/securityServices/jwt/JwtRequestFilter.class
 com/example/model/Events/interfaces/BecomeDelegateEvent.class
@@ -55,7 +53,6 @@ com/example/model/Vote.class
 com/example/controller/EventsController.class
 com/example/model/Schedule.class
 com/example/services/securityServices/jwt/SecurityCipher.class
-com/example/services/NotificationService.class
 com/example/model/NotificationRequest.class
 com/example/controller/NotificationController.class
 com/example/services/EventService.class
@@ -73,7 +70,6 @@ com/example/services/securityServices/CSRFHandlerConfiguration.class
 com/example/controller/NewsController.class
 com/example/repository/SubjectRepository.class
 com/example/controller/Responses/VoteInfo.class
-com/example/services/AttendanceService.class
 com/example/repository/ScheduleRepository.class
 com/example/services/securityServices/jwt/AuthResponse.class
 com/example/services/securityServices/WebSocket/Message.class

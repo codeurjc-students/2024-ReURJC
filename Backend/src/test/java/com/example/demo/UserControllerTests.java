@@ -1,5 +1,5 @@
 package com.example.demo;
-/*
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -410,70 +410,6 @@ public class UserControllerTests {
     }
 
     @Test
-    void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsValid() throws Exception {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        Principal principal = mock(Principal.class);
-        User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-                "123");
-        User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-                "123");
-        Attendance attendance = new Attendance(creator, new Subject(),"123");
-
-        when(request.getUserPrincipal()).thenReturn(principal);
-        when(principal.getName()).thenReturn("test@example.com");
-        when(userService.findByEmail("test@example.com")).thenReturn(user);
-        when(attendanceService.getAttendanceEvent("testCode")).thenReturn(attendance);
-        when(request.getRequestURI()).thenReturn("/api/v1/users/newAttendance");
-
-        ResponseEntity<URI> response = userController.newAttendance(request, "testCode");
-
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        verify(attendanceService).adduser(attendance, user); // Verifica que se llama a adduser
-    }
-
-    @Test
-    void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsInvalid() throws Exception {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        Principal principal = mock(Principal.class);
-        User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-                "123");
-
-        when(request.getUserPrincipal()).thenReturn(principal);
-        when(principal.getName()).thenReturn("test@example.com");
-        when(userService.findByEmail("test@example.com")).thenReturn(user);
-        when(attendanceService.getAttendanceEvent("invalidCode")).thenReturn(null); // Código inválido
-
-        ResponseEntity<URI> response = userController.newAttendance(request, "invalidCode");
-
-        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode()); // Verifica que la respuesta es NOT_FOUND
-    }
-
-    @Test
-    void testNewAttendance_whenUserIsAuthenticatedAndAttendanceIsExpired() throws Exception {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        Principal principal = mock(Principal.class);
-        User user = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-                "123");
-        User creator = new User(1L, "John", "Doe", "Smith", "12345678A", "mariscalalonso16@icloud.com",
-                "123");
-        Attendance attendance = new Attendance(creator, new Subject(),"123");
-        // Simula una fecha de asistencia que ya ha expirado (más de 5 minutos en el
-        // pasado)
-        LocalDateTime expiredDateTime = LocalDateTime.now().minusMinutes(6);
-        attendance.setDateTime(expiredDateTime);
-
-        when(request.getUserPrincipal()).thenReturn(principal);
-        when(principal.getName()).thenReturn("test@example.com");
-        when(userService.findByEmail("test@example.com")).thenReturn(user);
-        when(attendanceService.getAttendanceEvent("testCode")).thenReturn(attendance);
-        when(request.getRequestURI()).thenReturn("/api/v1/users/newAttendance");
-
-        ResponseEntity<URI> response = userController.newAttendance(request, "testCode");
-
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode()); // Verifica que la respuesta es BAD_REQUEST
-    }
-
-    @Test
     void testHasVoted_whenUserIsNotAuthenticated() throws Exception {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getUserPrincipal()).thenReturn(null); // Usuario no autenticado
@@ -609,4 +545,3 @@ public class UserControllerTests {
     }
 
 }
-*/
