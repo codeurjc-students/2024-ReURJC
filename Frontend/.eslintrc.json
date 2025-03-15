@@ -5,7 +5,7 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["./MyURJC/tsconfig.json"],
+        "project": ["/Users/jesussmariscal/2024-ReURJC/Frontend/tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
