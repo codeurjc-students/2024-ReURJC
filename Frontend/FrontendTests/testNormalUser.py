@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import re
+import datetime
 
 # Fixture to manage the WebDriver lifecycle
 @pytest.fixture(scope="function")  # CRUCIAL CHANGE: scope="function"
@@ -371,7 +372,7 @@ def test_court_reservation(driver):
     select_court_type(driver, "Pista de fútbol (Móstoles)")
 
     # 4. Select the date
-    select_date(driver, 2025, 3, 16)  # Year, Month, Day
+    select_date(driver, 2025, 3, datetime.datetime.now().day)  # Year, Month, Day
 
     # 5. Select the time (triggers the POST request automatically)
     select_time(driver, 9, 0)  # 9:00 - 11:00
