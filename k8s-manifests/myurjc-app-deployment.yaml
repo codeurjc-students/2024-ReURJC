@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myurjc-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myurjc-app
+  template:
+    metadata:
+      labels:
+        app: myurjc-app
+    spec:
+      containers:
+      - name: myurjc-app
+        image: gcr.io/tfgurjc-e9e62/reurjc:latest
+        ports:
+        - containerPort: 8080
+        - containerPort: 8443
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://myurjc-db-service:3306/tfgdb"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "password"
+        - name: RUNNING_IN_DOCKER
+          value: "true"
+        - name: MOODLE_HOST
+          value: "moodle-app-service"
+        - name: MOODLE_PORT
+          value: "80"
+        - name: MOODLE_DB_HOST
+          value: "moodle-db-service"
+        - name: MOODLE_DB_NAME
+          value: "moodle"
+        - name: MOODLE_DB_USER
+          value: "moodleuser"
+        - name: MOODLE_DB_PASSWORD
+          value: "moodlepass"
+        - name: ATTENDANCE_SERVICE_URL
+          value: "http://attendance-service-service:8081"
+        volumeMounts:
+        - name: firebase-volume
+          mountPath: /app/firebase-service-account.json
+          subPath: firebase-service-account.json
+        - name: keystore-volume
+          mountPath: /app/certs/keystore.p12
+          subPath: keystore.p12
+      volumes:
+      - name: firebase-volume
+        secret:
+          secretName: firebase-secret
+      - name: keystore-volume
+        secret:
+          secretName: keystore-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myurjc-app-service
+spec:
+  selector:
+    app: myurjc-app
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  - name: https
+    protocol: TCP
+    port: 8443
+    targetPort: 8443
+  type: LoadBalancer

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myurjc-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myurjc-db
+  template:
+    metadata:
+      labels:
+        app: myurjc-db
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.3.0
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_DATABASE
+          value: "tfgdb"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: myurjc-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myurjc-db-service
+spec:
+  selector:
+    app: myurjc-db
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myurjc-db-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
