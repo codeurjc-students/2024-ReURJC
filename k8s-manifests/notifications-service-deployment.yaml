@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifications-service
+  template:
+    metadata:
+      labels:
+        app: notifications-service
+    spec:
+      containers:
+      - name: notifications
+        image: gcr.io/tfgurjc-e9e62/notifications:latest
+        ports:
+        - containerPort: 8082
+        env:
+        - name: SERVER_PORT
+          value: "8082"
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://notifications-db-service:3306/attendances"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "root"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "password"
+        - name: MICROSERVICE_PRINCIPAL_URL
+          value: "http://myurjc-app-service:8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-service-service
+spec:
+  selector:
+    app: notifications-service
+  ports:
+  - protocol: TCP
+    port: 8082
+    targetPort: 8082
+  type: ClusterIP

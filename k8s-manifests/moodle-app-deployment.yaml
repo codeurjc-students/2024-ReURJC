@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moodle-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moodle-app
+  template:
+    metadata:
+      labels:
+        app: moodle-app
+    spec:
+      containers:
+      - name: moodle
+        image: gcr.io/tfgurjc-e9e62/mymoodle:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: MOODLE_DB_TYPE
+          value: "mysqli"
+        - name: MOODLE_DB_HOST
+          value: "moodle-db-service"
+        - name: MOODLE_DB_NAME
+          value: "moodle"
+        - name: MOODLE_DB_USER
+          value: "moodleuser"
+        - name: MOODLE_DB_PASSWORD
+          value: "moodlepass"
+        - name: MOODLE_WWWROOT
+          value: "http://localhost"
+        volumeMounts:
+        - name: moodle-data
+          mountPath: /var/www/html/moodledata
+      volumes:
+      - name: moodle-data
+        persistentVolumeClaim:
+          claimName: moodle-data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moodle-app-service
+spec:
+  selector:
+    app: moodle-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: moodle-data-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
