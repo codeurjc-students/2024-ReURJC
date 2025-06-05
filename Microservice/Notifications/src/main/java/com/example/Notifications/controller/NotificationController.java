@@ -20,7 +20,6 @@ import com.example.Notifications.model.NotificationRequest;
 import com.example.Notifications.service.FCMService;
 import com.example.Notifications.service.NotificationService;
 
-
 @RestController
 @RequestMapping("/notifications")
 public class NotificationController {
@@ -31,15 +30,15 @@ public class NotificationController {
     @Autowired
     private FCMService fcmService;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     // URL base del microservicio principal, inyectada desde application.properties.
     @Value("${microservice.principal.url}")
     private String principalServiceUrl;
 
-
-
+    public NotificationController() {
+        this.restTemplate = new RestTemplate();
+    }
 
     /**
      * Obtiene todas las notificaciones asociadas a un usuario específico.
@@ -54,7 +53,7 @@ public class NotificationController {
     }
 
     /**
-     * Actualiza la calificación de un estudiante en una asignatura.  Este método
+     * Actualiza la calificación de un estudiante en una asignatura. Este método
      * actúa como intermediario: primero, llama al microservicio principal para
      * actualizar la nota; luego, si la actualización es exitosa, crea una
      * notificación local y envía notificaciones push a través de FCM.
@@ -62,8 +61,7 @@ public class NotificationController {
      * @param datos Mapa que contiene los datos de la calificación (userid,
      *              subjectTitle, finalMark, etc.).
      * @return ResponseEntity con estado OK si todo va bien, Bad Request si el
-     *         formato de los datos
-     *         es incorrecto, o Not Found si no se puede actualizar la nota.
+     *         formato de los datos es incorrecto, o Not Found si no se puede actualizar la nota.
      * @throws Exception Si ocurre algún error durante el proceso.
      */
     @PostMapping("/updateGrade")
@@ -82,7 +80,6 @@ public class NotificationController {
 
             // 2. Si la actualización en el microservicio principal fue exitosa...
             if (response.getStatusCode().is2xxSuccessful()) {
-
                 // 3. Extraer los datos de la respuesta del microservicio principal.
                 Map<String, Object> updatedData = response.getBody();
                 String subjectTitle = updatedData.get("subjectTitle").toString();
@@ -114,5 +111,4 @@ public class NotificationController {
         // Si el microservicio principal no devuelve un 2xx, se llega aquí.
         return ResponseEntity.notFound().build();
     }
-
 }

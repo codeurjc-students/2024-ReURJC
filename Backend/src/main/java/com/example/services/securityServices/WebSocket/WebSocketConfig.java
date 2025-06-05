@@ -19,8 +19,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/grades") // Cambiar a un endpoint fijo
-                .setAllowedOrigins("http://localhost:4200", "http://localhost:8080")
+        registry.addEndpoint("/grades")
+                // Permitir el origen de tu app desplegada y mantener localhost para desarrollo
+                .setAllowedOrigins("http://34.60.163.73:8080", "http://localhost:4200", "http://localhost:8080")
                 .withSockJS();
     }
 

@@ -65,7 +65,7 @@ public class NotificationController {
             User user = userService.findByEmail(principal.getName());
             if (user != null) {
                 try {
-                    String urlBase = "http://notifications:8082/notifications/notifications";  // Aquí defines la URL fija que quieras usar
+                    String urlBase = "http://notifications-service-service:8082/notifications/notifications";  // Aquí defines la URL fija que quieras usar
 
 URI uri = UriComponentsBuilder.fromHttpUrl(urlBase)
                             .queryParam("user", user.getId())
