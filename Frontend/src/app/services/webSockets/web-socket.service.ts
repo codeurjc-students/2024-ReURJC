@@ -16,7 +16,7 @@ export class WebSocketService {
 
   
     connect() {
-    const socket = new SockJS('http://localhost:8080/grades');
+    const socket = new SockJS('http://34.60.163.73/grades');
     const stompClient = Stomp.over(socket);
 
     stompClient.connect(

@@ -1,3 +1,4 @@
+# Deployment for the notifications-service application
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,38 +7,59 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: notifications-service
+      app: notifications-service # Selector used by the Service below
   template:
     metadata:
       labels:
-        app: notifications-service
+        app: notifications-service # Label applied to Pods created by this Deployment
     spec:
       containers:
       - name: notifications
         image: gcr.io/tfgurjc-e9e62/notifications:latest
         ports:
-        - containerPort: 8082
+        - containerPort: 8082 # Port the application listens on inside the container
         env:
         - name: SERVER_PORT
           value: "8082"
         - name: SPRING_DATASOURCE_URL
+          # Make sure 'notifications-db-service' is the correct Kubernetes Service name for your database
           value: "jdbc:mysql://notifications-db-service:3306/attendances"
         - name: SPRING_DATASOURCE_USERNAME
           value: "root"
         - name: SPRING_DATASOURCE_PASSWORD
+          # It's highly recommended to manage passwords using Kubernetes Secrets instead of plain text here
           value: "password"
         - name: MICROSERVICE_PRINCIPAL_URL
+          # Make sure 'myurjc-app-service' is the correct Kubernetes Service name for the principal microservice
           value: "http://myurjc-app-service:8080"
----
+        volumeMounts:
+        - name: firebase-volume
+          mountPath: "/app/firebase-service-account.json"
+          subPath: "firebase-service-account.json" # Mounts only this specific key from the secret
+      volumes:
+      - name: firebase-volume
+        secret:
+          # Ensure a Secret named 'firebase-secret' exists in your cluster
+          # and contains a key named 'firebase-service-account.json' with the file content
+          secretName: firebase-secret
+
+--- # Separator between Kubernetes objects in the same file
+
+# Service to expose the notifications-service within the cluster
 apiVersion: v1
 kind: Service
 metadata:
+  # This is the name other pods will use to connect (e.g., http://notifications-service-service:8082)
   name: notifications-service-service
 spec:
+  # This selector finds the Pods managed by the Deployment above
   selector:
     app: notifications-service
   ports:
-  - protocol: TCP
-    port: 8082
-    targetPort: 8082
+    - protocol: TCP
+      # Port the Service listens on within the cluster
+      port: 8082
+      # Port on the Pod/Container where the application is actually listening
+      targetPort: 8082
+  # Type ClusterIP makes the service reachable only from within the Kubernetes cluster
   type: ClusterIP

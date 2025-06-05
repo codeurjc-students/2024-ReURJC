@@ -4,8 +4,14 @@ npx cap copy android
 ionic capacitor run android -l --external
 
 --
+Subir imagenes al repo de gcp: 
+
+docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/reurjc:latest -f ./Docker/App/Dockerfile .
+docker push gcr.io/tfgurjc-e9e62/reurjc:latest
 
 Nueva verison:
+
+
 
 docker build -t jesussmariscal/reurjc -f ./Docker/App/Dockerfile .
 docker push jesussmariscal/reurjc
@@ -34,7 +40,8 @@ chmod -R 0770 /var/www/html/moodledata
 
 Comandos Kubernetes:
 
-
+gcloud auth login
+cd 2024-ReURJC/
 gcloud container clusters create myurjc-cluster \
     --num-nodes=2 \
     --machine-type=e2-medium \
@@ -50,18 +57,34 @@ kubectl apply -f attendance-db-deployment.yaml
 kubectl apply -f notifications-db-deployment.yaml
 
 - Esperar a que se pongan en running
+kubectl get pods
+
+sleep 10
 kubectl apply -f moodle-app-deployment.yaml
 kubectl apply -f attendance-service-deployment.yaml
 kubectl apply -f notifications-service-deployment.yaml
+sleep 10
 
 - esperar a que se pongan en running:
+kubectl get pods
 
 kubectl apply -f myurjc-app-deployment.yaml
 
+
 - obtenedlasr la ip de la app: 
-
+sleep 10
 kubectl get services myurjc-app-service
+kubectl get svc moodle-app-service
 
+- Actualiza WWWROOT De moodle con la ip externa
+
+kubectl apply -f moodle-app-deployment.yaml
+
+- Actualiza el WebSocketconfig.Java y el web-socket-service.js con la ip pública de myurjc
+docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/reurjc:latest -f ./Docker/App/Dockerfile .
+docker push gcr.io/tfgurjc-e9e62/reurjc:latest
+
+- Borrar el pod de MyURJC
 
 - Borrar todo: 
 

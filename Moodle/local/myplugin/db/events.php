@@ -8,10 +8,4 @@ $observers = [
         'includefile' => '/local/myplugin/classes/observer.php',
         'internal' => false,
     ],
-    [
-        'eventname' => '\core\event\grade_item_updated',
-        'callback' => 'local_myplugin\observer::grade_item_updated_handler',
-        'includefile' => '/local/myplugin/classes/observer.php',
-        'internal' => false,
-    ],
 ];

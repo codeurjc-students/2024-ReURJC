@@ -29,7 +29,7 @@ spec:
         - name: MOODLE_DB_PASSWORD
           value: "moodlepass"
         - name: MOODLE_WWWROOT
-          value: "http://localhost"
+          value: "http://34.9.143.248"
         volumeMounts:
         - name: moodle-data
           mountPath: /var/www/html/moodledata
@@ -49,7 +49,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
-  type: ClusterIP
+  type: LoadBalancer
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
