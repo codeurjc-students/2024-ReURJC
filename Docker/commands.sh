@@ -59,11 +59,11 @@ kubectl apply -f notifications-db-deployment.yaml
 - Esperar a que se pongan en running
 kubectl get pods
 
-sleep 10
+sleep 50
 kubectl apply -f moodle-app-deployment.yaml
 kubectl apply -f attendance-service-deployment.yaml
 kubectl apply -f notifications-service-deployment.yaml
-sleep 10
+sleep 50
 
 - esperar a que se pongan en running:
 kubectl get pods
@@ -72,7 +72,7 @@ kubectl apply -f myurjc-app-deployment.yaml
 
 
 - obtenedlasr la ip de la app: 
-sleep 10
+sleep 50
 kubectl get services myurjc-app-service
 kubectl get svc moodle-app-service
 
@@ -81,6 +81,7 @@ kubectl get svc moodle-app-service
 kubectl apply -f moodle-app-deployment.yaml
 
 - Actualiza el WebSocketconfig.Java y el web-socket-service.js con la ip pública de myurjc
+cd ../
 docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/reurjc:latest -f ./Docker/App/Dockerfile .
 docker push gcr.io/tfgurjc-e9e62/reurjc:latest
 
@@ -89,6 +90,7 @@ docker push gcr.io/tfgurjc-e9e62/reurjc:latest
 - Borrar todo: 
 
 kubectl delete deployment --all -n default
+kubectl delete pods --all -n default
 
 
 

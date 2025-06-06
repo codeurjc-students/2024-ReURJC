@@ -29,7 +29,7 @@ spec:
         - name: MOODLE_DB_PASSWORD
           value: "moodlepass"
         - name: MOODLE_WWWROOT
-          value: "http://34.9.143.248"
+          value: "http://34.42.119.102"
         volumeMounts:
         - name: moodle-data
           mountPath: /var/www/html/moodledata
