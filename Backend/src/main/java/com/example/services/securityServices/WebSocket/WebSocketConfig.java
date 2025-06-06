@@ -21,7 +21,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/grades")
                 // Permitir el origen de tu app desplegada y mantener localhost para desarrollo
-                .setAllowedOrigins("http://34.60.163.73:8080", "http://localhost:4200", "http://localhost:8080")
+                .setAllowedOrigins("http://34.42.119.102 :8080", "http://localhost:4200", "http://localhost:8080")
                 .withSockJS();
     }
 
