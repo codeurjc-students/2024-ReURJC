@@ -6,7 +6,7 @@
 ## Descripción de la aplicación web
 - Aplicación para el personal docente, administrativo y estudiantil de la Universidad Rey Juan Carlos que sirve para acceder a los servicios ofertados por esta.
 
-## Cómo construir las imágenes
+## Cómo construir las imágenes (para Docker Hub - Opcional)
 
 1. Situarse en el directorio raíz de este repositorio.
 2. Tener Docker abierto.
@@ -15,9 +15,9 @@
 5. Ejecutar: `docker build -t <tuUsuario>/mymoodle -f ./Docker/Moodle/Dockerfile .`
 6. Ejecutar: `docker push <tuUsuario>/mymoodle`
 
-**(Nota: Los demás microservicios siguen un patrón de construcción similar al de `reurjc`)**
+**(Nota: Los demás microservicios siguen un patrón de construcción similar)**
 
-## Cómo ejecutar la app (Entorno Local)
+## Cómo ejecutar la app (Entorno Local con Docker Compose)
 
 1. Ejecutar Docker.
 2. Situarse en el directorio raíz del repositorio y ejecutar: `cd Docker/App`
@@ -39,15 +39,61 @@
 3. Ir a **Site Administration > Server > Web Services > Manage protocols**.
 4. Activar todos los protocolos y guardar cambios.
 
-**Nota:** La correspondencia entre cursos y usuarios entre la app y el aula virtual es su ID.
+**Nota:** La correspondencia entre cursos y usuarios entre la app y el aula virtual es su ID. Para la comunicación entre el plugin de Moodle y los microservicios en el entorno de Docker Compose, el archivo `observer.php` del plugin `myplugin` está configurado para apuntar al nombre del contenedor `notifications`. Para un despliegue en Kubernetes, esta URL tendría que ser modificada para apuntar al nombre del servicio de Kubernetes correspondiente.
+
+## Prerrequisitos para el Despliegue en Kubernetes
+
+Antes de aplicar los manifiestos de Kubernetes, es necesario construir todas las imágenes Docker de la aplicación y subirlas a Google Container Registry (GCR).
+
+1.  **Habilitar servicios y configurar la autenticación (si es la primera vez):**
+    Asegúrate de haberte autenticado y configurado tu proyecto de GCP:
+    ```bash
+    gcloud auth login
+    gcloud config set project tfgurjc-e9e62 # Reemplaza con tu ID de Proyecto si es diferente
+    ```
+    Habilita las APIs necesarias:
+    ```bash
+    gcloud services enable container.googleapis.com containerregistry.googleapis.com
+    ```
+
+2.  **Configurar la Autenticación de Docker:**
+    Este comando configura el cliente de Docker para que pueda autenticarse con GCR. Es un paso fundamental antes de poder subir imágenes.
+    ```bash
+    gcloud auth configure-docker gcr.io
+    ```
+
+3.  **Construir y Subir todas las imágenes a Google Container Registry (GCR):**
+    A continuación, se muestran los comandos para construir cada imagen con la plataforma `linux/amd64`, etiquetarla correctamente para `gcr.io` y subirla. **Ejecuta estos comandos desde el directorio raíz del proyecto (`2024-ReURJC/`).**
+
+    * **Aplicación Principal (ReURJC):**
+        ```bash
+        docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/reurjc:latest -f ./Docker/App/Dockerfile .
+        docker push gcr.io/tfgurjc-e9e62/reurjc:latest
+        ```
+
+    * **Moodle:**
+        ```bash
+        docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/mymoodle:latest -f ./Docker/Moodle/Dockerfile .
+        docker push gcr.io/tfgurjc-e9e62/mymoodle:latest
+        ```
+
+    * **Microservicio de Asistencias:**
+        ```bash
+        docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/attendance:latest -f ./Microservice/Asistance/Dockerfile .
+        docker push gcr.io/tfgurjc-e9e62/attendance:latest
+        ```
+
+    * **Microservicio de Notificaciones:**
+        ```bash
+        docker build --platform linux/amd64 -t gcr.io/tfgurjc-e9e62/notifications:latest -f ./Microservice/Notifications/Dockerfile .
+        docker push gcr.io/tfgurjc-e9e62/notifications:latest
+        ```
 
 ## Despliegue en Kubernetes (Google Cloud Platform)
 
-1.  **Autenticarse en Google Cloud:**
-    ```bash
-    gcloud auth login
-    ```
-2.  **Crear el clúster de GKE:** (Ajustar zona y tipo de máquina según sea necesario)
+Una vez que todas las imágenes estén subidas a GCR, puedes proceder con el despliegue:
+
+1.  **Crear el clúster de GKE (si no se ha hecho):**
     ```bash
     cd 2024-ReURJC/
     gcloud container clusters create myurjc-cluster \
@@ -55,16 +101,16 @@
         --machine-type=e2-medium \
         --zone=us-central1-a
     ```
-3.  **Obtener las credenciales del clúster:**
+2.  **Obtener las credenciales del clúster:**
     ```bash
     gcloud container clusters get-credentials myurjc-cluster --zone us-central1-a
     ```
-4.  **Crear los secretos necesarios:** (Desde el directorio raíz del repositorio)
+3.  **Crear los secretos necesarios:** (Desde el directorio raíz del repositorio)
     ```bash
     kubectl create secret generic firebase-secret --from-file=firebase-service-account.json=./Backend/src/main/resources/firebase-service-account.json
     kubectl create secret generic keystore-secret --from-file=keystore.p12=./Backend/src/main/resources/keystore.p12
     ```
-5.  **Aplicar los manifiestos de Kubernetes en orden:**
+4.  **Aplicar los manifiestos de Kubernetes en orden:**
     ```bash
     cd k8s-manifests 
 
@@ -92,7 +138,7 @@
     # 3. Desplegar la aplicación principal
     kubectl apply -f myurjc-app-deployment.yaml
     ```
-6.  **Obtener IPs externas y actualizar configuraciones:**
+5.  **Obtener IPs externas y actualizar configuraciones:**
     ```bash
     # Esperar un poco a que los LoadBalancers asignen las IPs
     sleep 60 
@@ -101,10 +147,14 @@
     kubectl get services myurjc-app-service
     kubectl get svc moodle-app-service
 
-    # NOTA MUY IMPORTANTE: Se deben actualizar manualmente los siguientes archivos con las IPs obtenidas:
+    # NOTA MUY IMPORTANTE: Se deben actualizar manualmente los siguientes archivos con las IPs obtenidas y los nombres de servicio de Kubernetes:
     #   - Moodle: Actualizar la variable MOODLE_WWWROOT en `moodle-app-deployment.yaml` con la IP externa de `moodle-app-service` y reaplicar con `kubectl apply -f moodle-app-deployment.yaml`.
-    #   - Notificaciones y WebSockets: Actualizar las URLs en los siguientes archivos para que apunten a los servicios de Kubernetes:
-    #       - `WebSocketConfig.java` y `web-socket-service.ts` (en el frontend y backend para la IP externa del `myurjc-app-service`).
+    #   - Notificaciones y WebSockets: Actualizar las URLs en los siguientes archivos para que apunten a los servicios de Kubernetes.
+    #       - `observer.php` (en el plugin de Moodle).
+    #       - `WebSocketConfig.java` (en el backend).
+    #       - `web-socket-service.ts` (en el frontend).
+    #     En el entorno de Kubernetes, estas URLs deben apuntar a los nombres de servicio de Kubernetes (ej. `http://notifications-service-service:8082`), mientras que para el entorno local de Docker Compose, apuntan a los nombres de contenedor (ej. `http://notifications:8082`).
+    #
     #     Una vez actualizados, es necesario reconstruir y subir las imágenes Docker correspondientes y reiniciar los pods de Kubernetes para que tomen los cambios.
     ```
 
