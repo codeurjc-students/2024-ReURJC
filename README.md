@@ -6,7 +6,7 @@
 ## Descripción de la aplicación web
 - Aplicación para el personal docente, administrativo y estudiantil de la Universidad Rey Juan Carlos que sirve para acceder a los servicios ofertados por esta.
 
-## Cómo construir las imágenes:
+## Cómo construir las imágenes
 
 1. Situarse en el directorio raíz de este repositorio.
 2. Tener Docker abierto.
@@ -15,31 +15,100 @@
 5. Ejecutar: `docker build -t <tuUsuario>/mymoodle -f ./Docker/Moodle/Dockerfile .`
 6. Ejecutar: `docker push <tuUsuario>/mymoodle`
 
-## Cómo ejecutar la app:
+**(Nota: Los demás microservicios siguen un patrón de construcción similar al de `reurjc`)**
+
+## Cómo ejecutar la app (Entorno Local)
 
 1. Ejecutar Docker.
 2. Situarse en el directorio raíz del repositorio y ejecutar: `cd Docker/App`
 3. Ejecutar: `docker-compose -p myurjc up -d`
 
-Si deseas ejecutar la app en Android:
+### Si deseas ejecutar la app en Android:
 
 1. Asegurarse de tener instalado Android Studio.
-2. Situarse en el directorio Frontend de este repositorio: `cd Frontend/`
+2. Situarse en el directorio `Frontend` de este repositorio: `cd Frontend/`
 3. Ejecutar: `ionic build`
 4. Ejecutar: `npx cap sync`
 5. Ejecutar: `npx cap copy android`
 6. Ejecutar: `npx cap run android`
 
-Si deseas acceder al aula virtual:
+### Si deseas acceder al aula virtual (Moodle) en local:
 
-1. Ejecutar localhost, se te redirigirá automáticamente.
+1. Ejecutar `localhost`, se te redirigirá automáticamente.
 2. Llevar a cabo los pasos de configuración cuando se entra por primera vez.
 3. Ir a **Site Administration > Server > Web Services > Manage protocols**.
 4. Activar todos los protocolos y guardar cambios.
 
 **Nota:** La correspondencia entre cursos y usuarios entre la app y el aula virtual es su ID.
 
-## Documentación API:
+## Despliegue en Kubernetes (Google Cloud Platform)
+
+1.  **Autenticarse en Google Cloud:**
+    ```bash
+    gcloud auth login
+    ```
+2.  **Crear el clúster de GKE:** (Ajustar zona y tipo de máquina según sea necesario)
+    ```bash
+    cd 2024-ReURJC/
+    gcloud container clusters create myurjc-cluster \
+        --num-nodes=2 \
+        --machine-type=e2-medium \
+        --zone=us-central1-a
+    ```
+3.  **Obtener las credenciales del clúster:**
+    ```bash
+    gcloud container clusters get-credentials myurjc-cluster --zone us-central1-a
+    ```
+4.  **Crear los secretos necesarios:** (Desde el directorio raíz del repositorio)
+    ```bash
+    kubectl create secret generic firebase-secret --from-file=firebase-service-account.json=./Backend/src/main/resources/firebase-service-account.json
+    kubectl create secret generic keystore-secret --from-file=keystore.p12=./Backend/src/main/resources/keystore.p12
+    ```
+5.  **Aplicar los manifiestos de Kubernetes en orden:**
+    ```bash
+    cd k8s-manifests 
+
+    # 1. Desplegar todas las bases de datos primero
+    kubectl apply -f myurjc-db-deployment.yaml
+    kubectl apply -f moodle-db-deployment.yaml
+    kubectl apply -f attendance-db-deployment.yaml
+    kubectl apply -f notifications-db-deployment.yaml
+
+    # Esperar a que las bases de datos estén en estado 'Running'
+    echo "Esperando a que las bases de datos se inicien..."
+    kubectl get pods -w
+    # (Pulsar Ctrl+C cuando todos los pods de las BBDD estén en estado 'Running')
+
+    # 2. Desplegar los servicios dependientes
+    kubectl apply -f moodle-app-deployment.yaml
+    kubectl apply -f attendance-service-deployment.yaml
+    kubectl apply -f notifications-service-deployment.yaml
+
+    # Esperar a que estos servicios se inicien
+    echo "Esperando a que los servicios intermedios se inicien..."
+    kubectl get pods -w
+    # (Pulsar Ctrl+C cuando los pods estén en estado 'Running')
+
+    # 3. Desplegar la aplicación principal
+    kubectl apply -f myurjc-app-deployment.yaml
+    ```
+6.  **Obtener IPs externas y actualizar configuraciones:**
+    ```bash
+    # Esperar un poco a que los LoadBalancers asignen las IPs
+    sleep 60 
+
+    # Obtener IPs externas
+    kubectl get services myurjc-app-service
+    kubectl get svc moodle-app-service
+
+    # NOTA MUY IMPORTANTE: Se deben actualizar manualmente los siguientes archivos con las IPs obtenidas:
+    #   - Moodle: Actualizar la variable MOODLE_WWWROOT en `moodle-app-deployment.yaml` con la IP externa de `moodle-app-service` y reaplicar con `kubectl apply -f moodle-app-deployment.yaml`.
+    #   - Notificaciones y WebSockets: Actualizar las URLs en los siguientes archivos para que apunten a los servicios de Kubernetes:
+    #       - `WebSocketConfig.java` y `web-socket-service.ts` (en el frontend y backend para la IP externa del `myurjc-app-service`).
+    #     Una vez actualizados, es necesario reconstruir y subir las imágenes Docker correspondientes y reiniciar los pods de Kubernetes para que tomen los cambios.
+    ```
+
+## Documentación API
 
 Una vez inicializada la App, acceder al [siguiente enlace](http://localhost:8080/swagger-ui/index.html)
 
@@ -122,71 +191,71 @@ El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc
 
 - **Pantalla "Servicios"**: Permite a los usuarios acceder a los distintos servicios de la URJC:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Servicios.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Servicios.png)
 
   - **Pantalla "Reserva de cancha"**: Permite al usuario reservar pistas deportivas seleccionando el tipo de pista, fecha y hora. Solo se permiten reservas con al menos 24 horas de antelación. Si un horario ya está reservado, no aparece en la lista. Si el usuario tiene una reserva activa, esta se muestra junto con la opción de cancelarla. Al cancelar, el horario se libera para otros usuarios:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/ReservaCancha.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/ReservaCancha.png)
 
   - **Pantalla "Votar delegados"**: Permite votar a los candidatos en el proceso de elección. Solo está disponible cuando el evento está activo:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/VotarDelegados.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/VotarDelegados.png)
 
   - **Pantalla "Postularse como delegado"**: Permite a los usuarios postularse como delegados. Solo está disponible cuando el evento está activo:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/PostularDelegados.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/PostularDelegados.png)
 
   - **Pantalla "Gestión de asistencias"**: Los profesores pueden crear nuevas asistencias, generando un código válido durante 5 minutos. También pueden consultar las últimas 10 asistencias creadas. Los alumnos, por su parte, solo pueden introducir códigos. Si el código es correcto y se introduce a tiempo, se muestra una notificación de éxito. En caso contrario, se muestra un error:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Asistencia.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Asistencia.png)
 
   - **Pantalla "Eventos"**: En esta pantalla los administradores pueden consultar el historial de eventos y los resultados de las votaciones:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Eventos.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Eventos.png)
 
   - **Pantalla "Historial de reserva de pistas"**: En esta pantalla los administradores pueden consultar las reservas activas de todos los usuarios:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/HistorialReservas.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/HistorialReservas.png)
 
 - **Pantalla "Alertas"**: Muestra al usuario en tiempo real los cambios realizados por los profesores en el aula virtual sobre sus notas:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Alertas.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Alertas.png)
 
 - **Pantalla "Noticias"**: Permite al usuario leer las noticias de la universidad:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Noticias.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Noticias.png)
 
 - **Pantalla "Tiempos"**: Incluye funcionalidades relacionadas con los tiempos de la universidad:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Tiempos.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Tiempos.png)
 
   - **Pantalla "Calendario"**: Muestra el calendario académico con colores que indican días lectivos, fines de semana y días no lectivos:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Calendario.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Calendario.png)
 
   - **Pantalla "Exámenes finales"**: Muestra información sobre los exámenes finales de cada asignatura:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/ExamenesFinales.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/ExamenesFinales.png)
 
   - **Pantalla "Horario semanal"**: Muestra el horario semanal con información sobre las asignaturas del usuario:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Horario.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Horario.png)
 
 - **Pantalla "Perfil"**: Permite consultar las calificaciones finales y acceder al carnet de estudiante. Al seleccionar el carnet, se activa el NFC para compartir datos con dispositivos compatibles:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/Perfil.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/Perfil.png)
 
   - **Pantalla "Calificaciones finales"**: Muestra las calificaciones obtenidas en cada asignatura, desglosadas por tareas:
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Assets/CalificacionesFinales.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Assets/CalificacionesFinales.png)
 
 ## Esquema del Backend
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/Backend_Schema.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/Backend_Schema.png)
 
 ## Esquema del Frontend
 
-![image](https://github.com/codeurjc-students/2024-ReURJC/blob/main/frontend_schema.png)
+![image](https://raw.githubusercontent.com/codeurjc-students/2024-ReURJC/main/frontend_schema.png)
 
 ## Vídeos de funcionalidad:
 
@@ -195,4 +264,3 @@ El diagrama se puede encontrar haciendo clic [aquí](https://github.com/codeurjc
 - **Usuarios Profesores**: [Click aquí](https://youtu.be/nyHwXWa0Ikg)
 - **Usuarios Administrador**: [Click aquí](https://youtu.be/PX_lZXzBQG4)
 - **Funcionalidades móvil**: [Click aquí](https://youtu.be/MEm8OAh4PgI)
-
